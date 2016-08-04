@@ -29,11 +29,7 @@ public class HoleFragment extends Fragment implements HoleView {
 
     private HoleViewModel viewModel;
 
-    private Hole hole;
-
     public HoleFragment(int holeNum) {
-        hole = new Hole();
-
         this.holeNum = holeNum;
     }
 
@@ -81,7 +77,13 @@ public class HoleFragment extends Fragment implements HoleView {
 
         bindViewModelElements();
 
-        viewModel.getOnePutt().setText("One");
+        viewModel.getOnePutt().setText(R.string.onePutt);
+        viewModel.getTwoPutt().setText(R.string.twoPutt);
+        viewModel.getThreePutt().setText(R.string.threePutt);
+        viewModel.getFourPutt().setText(R.string.fourPutt);
+        viewModel.getGreenCheck().setText("GIR");
+        viewModel.getFairwayCheck().setText("Fairway");
+        viewModel.getUpAndDownCheck().setText("Up and Down");
 
         viewModel.getScoreSelect().setMinValue(1);
         viewModel.getScoreSelect().setMaxValue(10);
@@ -93,9 +95,15 @@ public class HoleFragment extends Fragment implements HoleView {
         viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hole.setScore(viewModel.getScoreSelect().getValue());
-                hole.setPar(viewModel.getParForHole());
-                hole.setPutts(getNumberOfPutts());
+                Hole hole = new Hole.Builder()
+                        .score(viewModel.getScoreForHole())
+                        .par(viewModel.getParForHole())
+                        .putts(viewModel.getNumberOfPutts())
+                        .green(viewModel.getGreenStat())
+                        .fairway(viewModel.getFairwayStat())
+                        .upAndDown(viewModel.getUpAndDownStat())
+                        .scoreToPar(viewModel.getScoreRelativeToPar())
+                        .build();
 
                 if (holeNum < 9) {
                     Round.getFrontNine().addHole(hole, holeNum - 1);
@@ -133,86 +141,125 @@ public class HoleFragment extends Fragment implements HoleView {
         viewModel.setTitle("Hole " + holeNum);
         viewModel.setPuttTv("Putts");
 
-        viewModel.getOnePutt().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    viewModel.getTwoPutt().setChecked(false);
-                    viewModel.getThreePutt().setChecked(false);
-                    viewModel.getFourPutt().setChecked(false);
+        for(int i=1; i<5; i++) {
+            setPuttOnClickListener(i);
+        }
+    }
 
-                    viewModel.getParSelect().setEnabled(false);
-                    viewModel.getScoreSelect().setEnabled(false);
+    private void loadFinishRound() {
 
-                    predictStats(1);
-                } else {
-                    viewModel.getGreenCheck().setChecked(false);
-                    viewModel.getParSelect().setEnabled(true);
-                    viewModel.getScoreSelect().setEnabled(true);
-                }
+    }
+
+    private void loadNextHole(int nextHoleNum) {
+        Log.d("Hole " + holeNum, "" + Round.getFrontNine().getHoles()[holeNum - 1].toString());
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        HoleFragment hole = new HoleFragment(nextHoleNum);
+        fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
+        fragmentTransaction.commit();
+    }
+
+    private void loadAtTheTurn() {
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        StatFragment stat = new StatFragment();
+//        fragmentTransaction.add(R.id.content_view, stat, "STAT");
+        fragmentTransaction.commit();
+    }
+
+    private void setPuttOnClickListener(int puttNum) {
+        switch (puttNum) {
+            case 1: {
+                viewModel.getOnePutt().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
+                            viewModel.getTwoPutt().setChecked(false);
+                            viewModel.getThreePutt().setChecked(false);
+                            viewModel.getFourPutt().setChecked(false);
+
+                            viewModel.getParSelect().setEnabled(false);
+                            viewModel.getScoreSelect().setEnabled(false);
+
+                            predictStats(1);
+                        } else {
+                            viewModel.getGreenCheck().setChecked(false);
+                            viewModel.getParSelect().setEnabled(true);
+                            viewModel.getScoreSelect().setEnabled(true);
+                        }
+                    }
+                });
+                break;
             }
-        });
+            case 2: {
+                viewModel.getTwoPutt().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
+                            viewModel.getOnePutt().setChecked(false);
+                            viewModel.getThreePutt().setChecked(false);
+                            viewModel.getFourPutt().setChecked(false);
 
-        viewModel.getTwoPutt().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    viewModel.getOnePutt().setChecked(false);
-                    viewModel.getThreePutt().setChecked(false);
-                    viewModel.getFourPutt().setChecked(false);
+                            viewModel.getParSelect().setEnabled(false);
+                            viewModel.getScoreSelect().setEnabled(false);
 
-                    viewModel.getParSelect().setEnabled(false);
-                    viewModel.getScoreSelect().setEnabled(false);
-
-                    predictStats(2);
-                } else {
-                    viewModel.getGreenCheck().setChecked(false);
-                    viewModel.getParSelect().setEnabled(true);
-                    viewModel.getScoreSelect().setEnabled(true);
-                }
+                            predictStats(2);
+                        } else {
+                            viewModel.getGreenCheck().setChecked(false);
+                            viewModel.getParSelect().setEnabled(true);
+                            viewModel.getScoreSelect().setEnabled(true);
+                        }
+                    }
+                });
+                break;
             }
-        });
+            case 3: {
+                viewModel.getThreePutt().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
+                            viewModel.getOnePutt().setChecked(false);
+                            viewModel.getTwoPutt().setChecked(false);
+                            viewModel.getFourPutt().setChecked(false);
 
-        viewModel.getThreePutt().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    viewModel.getOnePutt().setChecked(false);
-                    viewModel.getTwoPutt().setChecked(false);
-                    viewModel.getFourPutt().setChecked(false);
+                            viewModel.getParSelect().setEnabled(false);
+                            viewModel.getScoreSelect().setEnabled(false);
 
-                    viewModel.getParSelect().setEnabled(false);
-                    viewModel.getScoreSelect().setEnabled(false);
-
-                    predictStats(3);
-                } else {
-                    viewModel.getGreenCheck().setChecked(false);
-                    viewModel.getParSelect().setEnabled(true);
-                    viewModel.getScoreSelect().setEnabled(true);
-                }
+                            predictStats(3);
+                        } else {
+                            viewModel.getGreenCheck().setChecked(false);
+                            viewModel.getParSelect().setEnabled(true);
+                            viewModel.getScoreSelect().setEnabled(true);
+                        }
+                    }
+                });
+                break;
             }
-        });
+            case 4: {
+                viewModel.getFourPutt().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
+                            viewModel.getOnePutt().setChecked(false);
+                            viewModel.getTwoPutt().setChecked(false);
+                            viewModel.getThreePutt().setChecked(false);
 
-        viewModel.getFourPutt().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    viewModel.getOnePutt().setChecked(false);
-                    viewModel.getTwoPutt().setChecked(false);
-                    viewModel.getThreePutt().setChecked(false);
+                            viewModel.getParSelect().setEnabled(false);
+                            viewModel.getScoreSelect().setEnabled(false);
 
-                    viewModel.getParSelect().setEnabled(false);
-                    viewModel.getScoreSelect().setEnabled(false);
-
-                    predictStats(4);
-                } else {
-                    viewModel.getGreenCheck().setChecked(false);
-                    viewModel.getParSelect().setEnabled(true);
-                    viewModel.getScoreSelect().setEnabled(true);
-                }
+                            predictStats(4);
+                        } else {
+                            viewModel.getGreenCheck().setChecked(false);
+                            viewModel.getParSelect().setEnabled(true);
+                            viewModel.getScoreSelect().setEnabled(true);
+                        }
+                    }
+                });
+                break;
             }
-        });
-
+        }
     }
 
     private void predictStats(int puttNum) {
@@ -246,43 +293,4 @@ public class HoleFragment extends Fragment implements HoleView {
             }
         }
     }
-
-    private void loadFinishRound() {
-    }
-
-    private void loadNextHole(int nextHoleNum) {
-        Log.d("Hole " + holeNum, "" + Round.getFrontNine().getHoles()[holeNum - 1].toString());
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        HoleFragment hole = new HoleFragment(nextHoleNum);
-        fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
-        fragmentTransaction.commit();
-    }
-
-    private void loadAtTheTurn() {
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        StatFragment stat = new StatFragment();
-//        fragmentTransaction.add(R.id.content_view, stat, "STAT");
-        fragmentTransaction.commit();
-    }
-
-    private int getNumberOfPutts() {
-        int retval = 0;
-
-        if (viewModel.getOnePutt().isChecked()) {
-            retval = 1;
-        } else if (viewModel.getTwoPutt().isChecked()) {
-            retval = 2;
-        } else if (viewModel.getThreePutt().isChecked()) {
-            retval = 3;
-        } else if (viewModel.getFourPutt().isChecked()) {
-            retval = 4;
-        }
-
-        return retval;
-    }
-
 }

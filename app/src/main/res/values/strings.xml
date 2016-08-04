@@ -3,4 +3,8 @@
     <string name="start_round">Start Round</string>
     <string name="next_hole">Next Hole</string>
     <string name="at_the_turn">At The Turn</string>
+    <string name="onePutt">One</string>
+    <string name="twoPutt">Two</string>
+    <string name="threePutt">Three</string>
+    <string name="fourPutt">Four</string>
 </resources>
