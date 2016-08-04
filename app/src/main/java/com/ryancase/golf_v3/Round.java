@@ -6,22 +6,21 @@ package com.ryancase.golf_v3;
 
 public class Round {
 
-    private Nine frontNine;
-    private Nine backNine;
+    private static Nine _frontNine;
+    private static Nine _backNine;
 
-    public Nine getFrontNine() {
-        return frontNine;
+    public static Nine getFrontNine() {
+        return _frontNine;
     }
 
-    public void setFrontNine(Nine frontNine) {
-        this.frontNine = frontNine;
+    public static void setFrontNine(Nine frontNine) { _frontNine = frontNine;
     }
 
-    public Nine getBackNine() {
-        return backNine;
+    public static Nine getBackNine() {
+        return _backNine;
     }
 
-    public void setBackNine(Nine backNine) {
-        this.backNine = backNine;
+    public static void setBackNine(Nine backNine) {
+        _backNine = backNine;
     }
 }

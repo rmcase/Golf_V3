@@ -62,29 +62,88 @@
             </TableRow>
 
             <TableRow
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/puttTv"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.puttTv}" />
+            </TableRow>
+
+            <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
 
                 <CheckBox
+                    android:id="@+id/onePutt"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/onePutt" />
+                    android:layout_weight="2"
+                    android:text="@{viewModel.onePutt.getText()}" />
 
                 <CheckBox
+                    android:id="@+id/greenCheck"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/twoPutt" />
+                    android:layout_weight="2"
+                    android:text="@{viewModel.greenCheck.getText()}"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
 
                 <CheckBox
+                    android:id="@+id/twoPutt"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/threePutt" />
+                    android:text="@{viewModel.twoPutt.getText()}" />
 
                 <CheckBox
+                    android:id="@+id/fairwayCheck"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/fourPutt" />
+                    android:text="@{viewModel.fairwayCheck.getText()}"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <CheckBox
+                    android:id="@+id/threePutt"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.threePutt.getText()}" />
+
+                <CheckBox
+                    android:id="@+id/upAndDownCheck"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.upAndDownCheck.getText()}"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <CheckBox
+                    android:id="@+id/fourPutt"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.fourPutt.getText()}" />
             </TableRow>
 
             <Button

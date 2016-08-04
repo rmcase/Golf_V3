@@ -1,9 +1,12 @@
 package com.ryancase.golf_v3;
 
+import lombok.ToString;
+
 /**
  * File description here...
  */
 
+@ToString
 public class Hole {
     private int score;
     private int par;

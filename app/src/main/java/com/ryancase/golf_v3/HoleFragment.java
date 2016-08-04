@@ -11,10 +11,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 
 import com.ryancase.golf_v3.databinding.FragmentHoleBinding;
-
-import java.util.Arrays;
 
 
 /**
@@ -25,20 +24,15 @@ public class HoleFragment extends Fragment implements HoleView {
 
     private final String FRAGMENT_TAG = "HOLE";
 
-    private final Hole[] holes = new Hole[9];
-
     private int holeNum;
     private FragmentHoleBinding binding;
 
     private HoleViewModel viewModel;
 
-    private Round round;
     private Hole hole;
 
-    public HoleFragment(int holeNum, Round round) {
+    public HoleFragment(int holeNum) {
         hole = new Hole();
-
-        this.round = round;
 
         this.holeNum = holeNum;
     }
@@ -85,34 +79,34 @@ public class HoleFragment extends Fragment implements HoleView {
         }
         binding.setViewModel(viewModel);
 
+        bindViewModelElements();
 
-        viewModel.setTitle("Hole " + holeNum);
+        viewModel.getOnePutt().setText("One");
 
-        viewModel.setScoreSelect(binding.scoreSelector);
         viewModel.getScoreSelect().setMinValue(1);
         viewModel.getScoreSelect().setMaxValue(10);
 
-        viewModel.setParSelect(binding.parSelector);
         viewModel.getParSelect().setMinValue(3);
         viewModel.getParSelect().setMaxValue(5);
 
-        viewModel.setNextHoleButton(binding.nextHole);
         viewModel.getNextHoleButton().setText(R.string.next_hole);
         viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hole.setScore(viewModel.getScoreSelect().getValue());
-                hole.setPar(viewModel.getParSelect().getValue());
-                hole.setPutts(getPutts());
+                hole.setPar(viewModel.getParForHole());
+                hole.setPutts(getNumberOfPutts());
 
                 if (holeNum < 9) {
+                    Round.getFrontNine().addHole(hole, holeNum - 1);
 
                 } else if (holeNum >= 9) {
+                    Round.getBackNine().addHole(hole, holeNum - 1);
                 }
 
-
                 int nextHole = holeNum + 1;
-                if (nextHole < 10) {
+
+                if (nextHole < 10 || (nextHole > 10 && nextHole < 19)) {
                     loadNextHole(nextHole);
                 } else if (nextHole == 10) {
                     loadAtTheTurn();
@@ -125,37 +119,157 @@ public class HoleFragment extends Fragment implements HoleView {
         return retval;
     }
 
+    private void bindViewModelElements() {
+        viewModel.setUpAndDownCheck(binding.upAndDownCheck);
+        viewModel.setFairwayCheck(binding.fairwayCheck);
+        viewModel.setGreenCheck(binding.greenCheck);
+        viewModel.setNextHoleButton(binding.nextHole);
+        viewModel.setParSelect(binding.parSelector);
+        viewModel.setScoreSelect(binding.scoreSelector);
+        viewModel.setOnePutt(binding.onePutt);
+        viewModel.setTwoPutt(binding.twoPutt);
+        viewModel.setThreePutt(binding.threePutt);
+        viewModel.setFourPutt(binding.fourPutt);
+        viewModel.setTitle("Hole " + holeNum);
+        viewModel.setPuttTv("Putts");
+
+        viewModel.getOnePutt().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    viewModel.getTwoPutt().setChecked(false);
+                    viewModel.getThreePutt().setChecked(false);
+                    viewModel.getFourPutt().setChecked(false);
+
+                    viewModel.getParSelect().setEnabled(false);
+                    viewModel.getScoreSelect().setEnabled(false);
+
+                    predictStats(1);
+                } else {
+                    viewModel.getGreenCheck().setChecked(false);
+                    viewModel.getParSelect().setEnabled(true);
+                    viewModel.getScoreSelect().setEnabled(true);
+                }
+            }
+        });
+
+        viewModel.getTwoPutt().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    viewModel.getOnePutt().setChecked(false);
+                    viewModel.getThreePutt().setChecked(false);
+                    viewModel.getFourPutt().setChecked(false);
+
+                    viewModel.getParSelect().setEnabled(false);
+                    viewModel.getScoreSelect().setEnabled(false);
+
+                    predictStats(2);
+                } else {
+                    viewModel.getGreenCheck().setChecked(false);
+                    viewModel.getParSelect().setEnabled(true);
+                    viewModel.getScoreSelect().setEnabled(true);
+                }
+            }
+        });
+
+        viewModel.getThreePutt().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    viewModel.getOnePutt().setChecked(false);
+                    viewModel.getTwoPutt().setChecked(false);
+                    viewModel.getFourPutt().setChecked(false);
+
+                    viewModel.getParSelect().setEnabled(false);
+                    viewModel.getScoreSelect().setEnabled(false);
+
+                    predictStats(3);
+                } else {
+                    viewModel.getGreenCheck().setChecked(false);
+                    viewModel.getParSelect().setEnabled(true);
+                    viewModel.getScoreSelect().setEnabled(true);
+                }
+            }
+        });
+
+        viewModel.getFourPutt().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    viewModel.getOnePutt().setChecked(false);
+                    viewModel.getTwoPutt().setChecked(false);
+                    viewModel.getThreePutt().setChecked(false);
+
+                    viewModel.getParSelect().setEnabled(false);
+                    viewModel.getScoreSelect().setEnabled(false);
+
+                    predictStats(4);
+                } else {
+                    viewModel.getGreenCheck().setChecked(false);
+                    viewModel.getParSelect().setEnabled(true);
+                    viewModel.getScoreSelect().setEnabled(true);
+                }
+            }
+        });
+
+    }
+
+    private void predictStats(int puttNum) {
+        switch (puttNum) {
+            case 1: {
+                if (viewModel.getScoreRelativeToPar() >= 0) {
+                    viewModel.getGreenCheck().setChecked(false);
+                } else if (viewModel.getScoreRelativeToPar() <= 0) {
+                    viewModel.getGreenCheck().setChecked(true);
+                }
+                break;
+            }
+            case 2: {
+                if (viewModel.getScoreRelativeToPar() <= 0) {
+                    viewModel.getGreenCheck().setChecked(true);
+                } else if (viewModel.getScoreRelativeToPar() > 0) {
+                    viewModel.getGreenCheck().setChecked(false);
+                }
+                break;
+            }
+            case 3: {
+                if (viewModel.getScoreRelativeToPar() == 1 || (viewModel.getScoreRelativeToPar() == 0 && viewModel.getParForHole() > 3)) {
+                    viewModel.getGreenCheck().setChecked(true);
+                } else if (viewModel.getScoreRelativeToPar() > 1) {
+                    viewModel.getGreenCheck().setChecked(false);
+                }
+                break;
+            }
+            case 4: {
+                viewModel.getGreenCheck().setChecked(false);
+            }
+        }
+    }
+
     private void loadFinishRound() {
     }
 
     private void loadNextHole(int nextHoleNum) {
-        holes[holeNum] = hole;
+        Log.d("Hole " + holeNum, "" + Round.getFrontNine().getHoles()[holeNum - 1].toString());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        HoleFragment hole = new HoleFragment(nextHoleNum, round);
+        HoleFragment hole = new HoleFragment(nextHoleNum);
         fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
 
     private void loadAtTheTurn() {
-        round.getFrontNine().setHoles(holes);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //        StatFragment stat = new StatFragment();
 //        fragmentTransaction.add(R.id.content_view, stat, "STAT");
         fragmentTransaction.commit();
-
-        Log.d("FRont", "" + Arrays.toString(round.getFrontNine().getHoles()));
     }
 
-    private int getPutts() {
-        viewModel.setOnePutt(binding.onePutt);
-        viewModel.setTwoPutt(binding.twoPutt);
-        viewModel.setThreePutt(binding.threePutt);
-        viewModel.setFourPutt(binding.fourPutt);
-
+    private int getNumberOfPutts() {
         int retval = 0;
 
         if (viewModel.getOnePutt().isChecked()) {
@@ -171,8 +285,4 @@ public class HoleFragment extends Fragment implements HoleView {
         return retval;
     }
 
-    @Override
-    public Hole getHole(Hole hole) {
-        return hole;
-    }
 }

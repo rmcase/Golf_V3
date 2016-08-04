@@ -11,7 +11,6 @@ public class MainActivity extends AppCompatActivity {
 
     private final String FRAGMENT_TAG = "HOLE";
     private Button startButton;
-    private Round round;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +31,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadHoleFragment() {
-        round = new Round();
-        Nine front = new Nine(true);
-        Nine back = new Nine(false);
-        round.setFrontNine(front);
-        round.setBackNine(back);
+        Nine front = new Nine();
+        Nine back = new Nine();
+        Round.setFrontNine(front);
+        Round.setBackNine(back);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        HoleFragment hole = new HoleFragment(1, round);
+        HoleFragment hole = new HoleFragment(1);
         startButton.setVisibility(View.INVISIBLE);
         fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
         fragmentTransaction.commit();

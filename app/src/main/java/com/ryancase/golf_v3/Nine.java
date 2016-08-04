@@ -5,23 +5,33 @@ package com.ryancase.golf_v3;
  */
 
 public class Nine {
-    private Hole[] holes;
+    private static Hole[] holeList;
 
-    public Nine(boolean isFrontNine) {
-        holes = new Hole[9];
+    public Nine() {
+        holeList = new Hole[9];
     }
 
-    public Hole[] getHoles() {
-        return holes;
+    public static Hole[] getHoles() {
+        return holeList;
     }
 
-    public void setHoles(Hole[] holes) {
-        this.holes = holes;
+    public static void setHoles(Hole[] holes) {
+        holeList = holes;
     }
 
-    public void addHole(Hole hole, int pos) {
-        if (holes[pos] == null) {
-            holes[pos] = hole;
+    public static void addHole(Hole hole, int pos) {
+        if (holeList[pos] == null) {
+            holeList[pos] = hole;
         }
+    }
+
+    public int getPar() {
+        int retval = 0;
+
+        for(Hole hole: holeList) {
+            retval += hole.getPar();
+        }
+
+        return retval;
     }
 }

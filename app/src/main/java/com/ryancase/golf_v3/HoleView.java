@@ -6,5 +6,4 @@ package com.ryancase.golf_v3;
 
 public interface HoleView {
 
-    Hole getHole(Hole hole);
 }
