@@ -145,6 +145,36 @@ public class HoleViewModel extends BaseObservable {
         return retval;
     }
 
+    public int getGreenStat() {
+        int retval = 0;
+
+        if (greenCheck.isChecked()) {
+            retval = 1;
+        }
+
+        return retval;
+    }
+
+    public int getFairwayStat() {
+        int retval = 0;
+
+        if(fairwayCheck.isChecked()) {
+            retval = 1;
+        }
+
+        return retval;
+    }
+
+    public int getUpAndDownStat() {
+        int retval = 0;
+
+        if(upAndDownCheck.isChecked()) {
+            retval = 1;
+        }
+
+        return retval;
+    }
+
     public int getScoreRelativeToPar() {
         return scoreSelect.getValue() - parSelect.getValue();
     }
