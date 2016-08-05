@@ -1,9 +1,12 @@
 package com.ryancase.golf_v3;
 
+import lombok.ToString;
+
 /**
  * File description here...
  */
 
+@ToString
 public class Nine {
     private static Hole[] holeList;
 
@@ -30,6 +33,16 @@ public class Nine {
 
         for(Hole hole: holeList) {
             retval += hole.getPar();
+        }
+
+        return retval;
+    }
+
+    public int getScore() {
+        int retval = 0;
+
+        for(Hole hole: holeList) {
+            retval += hole.getScore();
         }
 
         return retval;

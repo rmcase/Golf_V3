@@ -36,64 +36,14 @@
                     android:textSize="22sp" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:gravity="center_horizontal">
+            <TableRow>
 
-                <NumberPicker
-                    android:id="@+id/scoreSelector"
+                <Button
+                    android:id="@+id/nextHole"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <NumberPicker
-                    android:id="@+id/parSelector"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3" />
-
+                    android:layout_gravity="center" />
             </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
-
-                <CheckBox
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/onePutt" />
-
-                <CheckBox
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/twoPutt" />
-
-                <CheckBox
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/threePutt" />
-
-                <CheckBox
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/fourPutt" />
-            </TableRow>
-
-            <Button
-                android:id="@+id/nextHole"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
-
         </TableLayout>
 
 

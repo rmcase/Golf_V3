@@ -77,6 +77,12 @@ public class HoleFragment extends Fragment implements HoleView {
 
         bindViewModelElements();
 
+        populateViewModelElements();
+
+        return retval;
+    }
+
+    private void populateViewModelElements() {
         viewModel.getOnePutt().setText(R.string.onePutt);
         viewModel.getTwoPutt().setText(R.string.twoPutt);
         viewModel.getThreePutt().setText(R.string.threePutt);
@@ -87,9 +93,10 @@ public class HoleFragment extends Fragment implements HoleView {
 
         viewModel.getScoreSelect().setMinValue(1);
         viewModel.getScoreSelect().setMaxValue(10);
-
+        viewModel.getScoreSelect().setValue(4);
         viewModel.getParSelect().setMinValue(3);
         viewModel.getParSelect().setMaxValue(5);
+        viewModel.getParSelect().setValue(4);
 
         viewModel.getNextHoleButton().setText(R.string.next_hole);
         viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
@@ -105,11 +112,11 @@ public class HoleFragment extends Fragment implements HoleView {
                         .scoreToPar(viewModel.getScoreRelativeToPar())
                         .build();
 
-                if (holeNum < 9) {
+                if (holeNum <= 9) {
                     Round.getFrontNine().addHole(hole, holeNum - 1);
 
-                } else if (holeNum >= 9) {
-                    Round.getBackNine().addHole(hole, holeNum - 1);
+                } else if (holeNum > 9) {
+                    Round.getBackNine().addHole(hole, holeNum - 10);
                 }
 
                 int nextHole = holeNum + 1;
@@ -123,8 +130,6 @@ public class HoleFragment extends Fragment implements HoleView {
                 }
             }
         });
-
-        return retval;
     }
 
     private void bindViewModelElements() {
@@ -141,17 +146,16 @@ public class HoleFragment extends Fragment implements HoleView {
         viewModel.setTitle("Hole " + holeNum);
         viewModel.setPuttTv("Putts");
 
-        for(int i=1; i<5; i++) {
+        for (int i = 1; i < 5; i++) {
             setPuttOnClickListener(i);
         }
     }
 
-    private void loadFinishRound() {
-
-    }
-
     private void loadNextHole(int nextHoleNum) {
-        Log.d("Hole " + holeNum, "" + Round.getFrontNine().getHoles()[holeNum - 1].toString());
+        if (nextHoleNum < 10)
+            Log.d("Hole " + holeNum, "" + Round.getFrontNine().getHoles()[holeNum - 1].toString());
+        else
+            Log.d("Hole " + holeNum, "" + Round.getBackNine().getHoles()[holeNum - 10].toString());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -161,11 +165,18 @@ public class HoleFragment extends Fragment implements HoleView {
     }
 
     private void loadAtTheTurn() {
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        StatFragment stat = new StatFragment();
-//        fragmentTransaction.add(R.id.content_view, stat, "STAT");
+        StatFragment stat = new StatFragment();
+        fragmentTransaction.add(R.id.content_view, stat, "STAT");
+        fragmentTransaction.commit();
+    }
+
+    private void loadFinishRound() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        StatFragment stat = new StatFragment(true);
+        fragmentTransaction.add(R.id.content_view, stat, "STAT");
         fragmentTransaction.commit();
     }
 
