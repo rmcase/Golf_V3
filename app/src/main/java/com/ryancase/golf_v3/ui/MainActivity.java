@@ -1,4 +1,4 @@
-package com.ryancase.golf_v3;
+package com.ryancase.golf_v3.ui;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -7,10 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.ryancase.golf_v3.Nine;
+import com.ryancase.golf_v3.R;
+import com.ryancase.golf_v3.Round;
+
 public class MainActivity extends AppCompatActivity {
 
     private final String FRAGMENT_TAG = "HOLE";
     private Button startButton;
+
+    @Override
+    public void onBackPressed() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         Nine back = new Nine();
         Round.setFrontNine(front);
         Round.setBackNine(back);
+        Round.setRoundId("r.c8700@gmail.com");
+        Round.setCourse("bear creek");
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

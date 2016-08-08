@@ -1,4 +1,4 @@
-package com.ryancase.golf_v3;
+package com.ryancase.golf_v3.ViewModels;
 
 import android.databinding.BaseObservable;
 import android.widget.Button;
@@ -7,10 +7,14 @@ import android.widget.TableLayout;
 
 public class StatViewModel extends BaseObservable {
     private String title;
-    private String score, scoreTv;
-    private String par, parTv;
-    private String scoreToPar, scoreToParTv;
+    private String score;
+    private String par;
+    private String putts;
+    private String greens;
+    private String fairways;
+    private String scoreToPar;
     private Button nextHoleButton;
+    private Button finishHoleButton;
     private TableLayout tableLayout;
 
     public StatViewModel() {
@@ -40,28 +44,12 @@ public class StatViewModel extends BaseObservable {
         this.score = score;
     }
 
-    public String getScoreTv() {
-        return scoreTv;
-    }
-
-    public void setScoreTv(String scoreTv) {
-        this.scoreTv = scoreTv;
-    }
-
     public String getPar() {
         return par;
     }
 
     public void setPar(String par) {
         this.par = par;
-    }
-
-    public String getParTv() {
-        return parTv;
-    }
-
-    public void setParTv(String parTv) {
-        this.parTv = parTv;
     }
 
     public String getScoreToPar() {
@@ -72,20 +60,44 @@ public class StatViewModel extends BaseObservable {
         this.scoreToPar = scoreToPar;
     }
 
-    public String getScoreToParTv() {
-        return scoreToParTv;
-    }
-
-    public void setScoreToParTv(String scoreToParTv) {
-        this.scoreToParTv = scoreToParTv;
-    }
-
     public TableLayout getTableLayout() {
         return tableLayout;
     }
 
     public void setTableLayout(TableLayout tableLayout) {
         this.tableLayout = tableLayout;
+    }
+
+    public String getPutts() {
+        return putts;
+    }
+
+    public void setPutts(String putts) {
+        this.putts = putts;
+    }
+
+    public String getGreens() {
+        return greens;
+    }
+
+    public void setGreens(String greens) {
+        this.greens = greens;
+    }
+
+    public String getFairways() {
+        return fairways;
+    }
+
+    public void setFairways(String fairways) {
+        this.fairways = fairways;
+    }
+
+    public Button getFinishHoleButton() {
+        return finishHoleButton;
+    }
+
+    public void setFinishHoleButton(Button finishHoleButton) {
+        this.finishHoleButton = finishHoleButton;
     }
 }
 

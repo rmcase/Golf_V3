@@ -1,5 +1,8 @@
 package com.ryancase.golf_v3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.ToString;
 
 /**
@@ -8,30 +11,30 @@ import lombok.ToString;
 
 @ToString
 public class Nine {
-    private static Hole[] holeList;
+    private List<Hole> holes;
 
     public Nine() {
-        holeList = new Hole[9];
+        holes = new ArrayList<>();
     }
 
-    public static Hole[] getHoles() {
-        return holeList;
+    public List<Hole> getHoles() {
+        return holes;
     }
 
-    public static void setHoles(Hole[] holes) {
-        holeList = holes;
+    public void setHoles(List<Hole> holes) {
+        this.holes = holes;
     }
 
-    public static void addHole(Hole hole, int pos) {
-        if (holeList[pos] == null) {
-            holeList[pos] = hole;
+    public void addHole(Hole hole) {
+        if (holes != null) {
+            holes.add(hole);
         }
     }
 
     public int getPar() {
         int retval = 0;
 
-        for(Hole hole: holeList) {
+        for (Hole hole : holes) {
             retval += hole.getPar();
         }
 
@@ -41,10 +44,100 @@ public class Nine {
     public int getScore() {
         int retval = 0;
 
-        for(Hole hole: holeList) {
+        for (Hole hole : holes) {
             retval += hole.getScore();
         }
 
+        return retval;
+    }
+
+    public int getScoreToPar() {
+        int retval = 0;
+
+        for (Hole hole : holes) {
+            retval += hole.getScoreToPar();
+        }
+
+        return retval;
+    }
+
+    public int getPutts() {
+        int retval = 0;
+
+        for (Hole hole : holes) {
+            retval += hole.getPutts();
+        }
+
+        return retval;
+    }
+
+    public int getGreens() {
+        int retval = 0;
+
+        for (Hole hole : holes) {
+            retval += hole.getGreen();
+        }
+
+        return retval;
+    }
+
+    public int getFairways() {
+        int retval = 0;
+
+        for (Hole hole : holes) {
+            retval += hole.getFairway();
+        }
+
+        return retval;
+    }
+
+    public String getFairwayPercentage() {
+        String retval;
+        float percent;
+        float numOfPossibleFairways = 0;
+
+        for (Hole hole : holes) {
+            if (hole.getPar() != 3) {
+                numOfPossibleFairways += 1;
+            }
+        }
+        float fairwaysHit = getFairways();
+        percent = fairwaysHit / numOfPossibleFairways;
+        percent *= 100;
+        retval = String.format("%.2f", percent);
+        retval = retval + "%";
+        return retval;
+    }
+
+    public String getGreenPercentage() {
+        String retval;
+        float percent;
+        float numOfPossibleGreens = 18;
+
+        float greensHit = getGreens();
+        percent = greensHit / numOfPossibleGreens;
+        percent *= 100;
+        retval = String.format("%.2f", percent);
+        retval = retval + "%";
+        return retval;
+    }
+
+    public String madePuttsPercentage() {
+        String retval;
+        float percent;
+        float puttsMade = 0;
+
+        for (Hole hole : holes) {
+            if (hole.getPutts() > 0) {
+                puttsMade += 1;
+            }
+        }
+
+        float numOfPutts = getPutts();
+        percent = puttsMade / numOfPutts;
+        percent *= 100;
+        retval = String.format("%.2f", percent);
+        retval = retval + "%";
         return retval;
     }
 }

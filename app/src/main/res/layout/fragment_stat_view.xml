@@ -5,14 +5,14 @@
 
         <variable
             name="viewModel"
-            type="com.ryancase.golf_v3.StatViewModel" />
+            type="com.ryancase.golf_v3.ViewModels.StatViewModel" />
     </data>
 
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
-        tools:context="com.ryancase.golf_v3.StatViewModel">
+        tools:context=".ViewModels.StatViewModel">
 
         <!--Android:gravity sets the gravity of the content of the View its used on.
             Android:layout_gravity sets the gravity of the View or Layout in its parent.-->
@@ -36,16 +36,7 @@
                     android:textSize="22sp" />
             </TableRow>
 
-            <TableRow>
-
-                <Button
-                    android:id="@+id/nextHole"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
-            </TableRow>
         </TableLayout>
-
 
     </RelativeLayout>
 </layout>
