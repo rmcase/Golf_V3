@@ -7,4 +7,6 @@
     <string name="twoPutt">Two</string>
     <string name="threePutt">Three</string>
     <string name="fourPutt">Four</string>
+    <string name="lastHole">19th Hole</string>
+    <string name="finish_round">Finish Round</string>
 </resources>

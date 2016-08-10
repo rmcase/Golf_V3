@@ -1,9 +1,11 @@
-package com.ryancase.golf_v3;
+package com.ryancase.golf_v3.ViewModels;
 
 import android.databinding.BaseObservable;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.NumberPicker;
+
+import com.ryancase.golf_v3.HoleView;
 
 
 public class HoleViewModel extends BaseObservable {

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "467985788864",
+    "firebase_url": "https://golf-v3.firebaseio.com",
+    "project_id": "golf-v3",
+    "storage_bucket": "golf-v3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467985788864:android:fa1b34411550f211",
+        "android_client_info": {
+          "package_name": "com.ryancase.golf_v3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "467985788864-6i0449he50pclb9hkpe9hta2j4e1prqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbq0IrtP8rCfybpZk6p3R2Sd2cNTGj610"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

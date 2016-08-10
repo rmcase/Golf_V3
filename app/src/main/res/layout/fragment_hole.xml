@@ -5,14 +5,14 @@
 
         <variable
             name="viewModel"
-            type="com.ryancase.golf_v3.HoleViewModel" />
+            type="com.ryancase.golf_v3.ViewModels.HoleViewModel" />
     </data>
 
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context="com.ryancase.golf_v3.HoleViewModel">
+        tools:context=".ViewModels.HoleViewModel">
 
         <!--Android:gravity sets the gravity of the content of the View its used on.
             Android:layout_gravity sets the gravity of the View or Layout in its parent.-->
@@ -37,15 +37,14 @@
             </TableRow>
 
             <TableRow
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:gravity="center_horizontal">
 
                 <NumberPicker
                     android:id="@+id/scoreSelector"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3" />
 
@@ -55,7 +54,6 @@
 
                 <NumberPicker
                     android:id="@+id/parSelector"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3" />
 
@@ -82,13 +80,17 @@
                 <CheckBox
                     android:id="@+id/onePutt"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:text="@{viewModel.onePutt.getText()}" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <CheckBox
                     android:id="@+id/greenCheck"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:text="@{viewModel.greenCheck.getText()}"/>
             </TableRow>
 
@@ -104,6 +106,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@{viewModel.twoPutt.getText()}" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <CheckBox
                     android:id="@+id/fairwayCheck"
@@ -124,6 +130,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@{viewModel.threePutt.getText()}" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <CheckBox
                     android:id="@+id/upAndDownCheck"

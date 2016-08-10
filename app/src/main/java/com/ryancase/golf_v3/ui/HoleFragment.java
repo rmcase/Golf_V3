@@ -1,4 +1,4 @@
-package com.ryancase.golf_v3;
+package com.ryancase.golf_v3.ui;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -13,8 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.ryancase.golf_v3.Hole;
+import com.ryancase.golf_v3.HoleView;
+import com.ryancase.golf_v3.R;
+import com.ryancase.golf_v3.Round;
+import com.ryancase.golf_v3.ViewModels.HoleViewModel;
 import com.ryancase.golf_v3.databinding.FragmentHoleBinding;
-
 
 /**
  * File description here...
@@ -77,6 +83,12 @@ public class HoleFragment extends Fragment implements HoleView {
 
         bindViewModelElements();
 
+        populateViewModelElements();
+
+        return retval;
+    }
+
+    private void populateViewModelElements() {
         viewModel.getOnePutt().setText(R.string.onePutt);
         viewModel.getTwoPutt().setText(R.string.twoPutt);
         viewModel.getThreePutt().setText(R.string.threePutt);
@@ -87,11 +99,16 @@ public class HoleFragment extends Fragment implements HoleView {
 
         viewModel.getScoreSelect().setMinValue(1);
         viewModel.getScoreSelect().setMaxValue(10);
-
+        viewModel.getScoreSelect().setValue(4);
         viewModel.getParSelect().setMinValue(3);
         viewModel.getParSelect().setMaxValue(5);
+        viewModel.getParSelect().setValue(4);
 
-        viewModel.getNextHoleButton().setText(R.string.next_hole);
+        if (holeNum == 18) {
+            viewModel.getNextHoleButton().setText("Finish Round");
+        } else {
+            viewModel.getNextHoleButton().setText(R.string.next_hole);
+        }
         viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,12 +122,7 @@ public class HoleFragment extends Fragment implements HoleView {
                         .scoreToPar(viewModel.getScoreRelativeToPar())
                         .build();
 
-                if (holeNum < 9) {
-                    Round.getFrontNine().addHole(hole, holeNum - 1);
-
-                } else if (holeNum >= 9) {
-                    Round.getBackNine().addHole(hole, holeNum - 1);
-                }
+                saveHole(hole);
 
                 int nextHole = holeNum + 1;
 
@@ -123,8 +135,15 @@ public class HoleFragment extends Fragment implements HoleView {
                 }
             }
         });
+    }
 
-        return retval;
+    private void saveHole(Hole hole) {
+        if (holeNum <= 9) {
+            Round.getFrontNine().addHole(hole);
+
+        } else if (holeNum > 9) {
+            Round.getBackNine().addHole(hole);
+        }
     }
 
     private void bindViewModelElements() {
@@ -141,17 +160,16 @@ public class HoleFragment extends Fragment implements HoleView {
         viewModel.setTitle("Hole " + holeNum);
         viewModel.setPuttTv("Putts");
 
-        for(int i=1; i<5; i++) {
+        for (int i = 1; i < 5; i++) {
             setPuttOnClickListener(i);
         }
     }
 
-    private void loadFinishRound() {
-
-    }
-
     private void loadNextHole(int nextHoleNum) {
-        Log.d("Hole " + holeNum, "" + Round.getFrontNine().getHoles()[holeNum - 1].toString());
+        if (nextHoleNum < 10)
+            Log.d("Hole " + holeNum, "" + Round.getFrontNine().getHoles().get(holeNum - 1).toString());
+        else
+            Log.d("Hole " + holeNum, "" + Round.getBackNine().getHoles().get(holeNum -1).toString());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -161,11 +179,18 @@ public class HoleFragment extends Fragment implements HoleView {
     }
 
     private void loadAtTheTurn() {
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        StatFragment stat = new StatFragment();
-//        fragmentTransaction.add(R.id.content_view, stat, "STAT");
+        StatFragment stat = new StatFragment();
+        fragmentTransaction.add(R.id.content_view, stat, "STAT");
+        fragmentTransaction.commit();
+    }
+
+    private void loadFinishRound() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        StatFragment stat = new StatFragment(true);
+        fragmentTransaction.add(R.id.content_view, stat, "STAT");
         fragmentTransaction.commit();
     }
 
@@ -281,7 +306,7 @@ public class HoleFragment extends Fragment implements HoleView {
                 break;
             }
             case 3: {
-                if (viewModel.getScoreRelativeToPar() == 1 || (viewModel.getScoreRelativeToPar() == 0 && viewModel.getParForHole() > 3)) {
+                if (viewModel.getScoreRelativeToPar() == 1 || (viewModel.getScoreRelativeToPar() == 0 && viewModel.getParForHole() > 4)) {
                     viewModel.getGreenCheck().setChecked(true);
                 } else if (viewModel.getScoreRelativeToPar() > 1) {
                     viewModel.getGreenCheck().setChecked(false);
