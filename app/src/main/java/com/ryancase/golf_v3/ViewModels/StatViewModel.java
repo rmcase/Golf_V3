@@ -18,6 +18,7 @@ public class StatViewModel extends BaseObservable {
     private TableLayout tableLayout;
 
     public StatViewModel() {
+
     }
 
     public String getTitle() {
