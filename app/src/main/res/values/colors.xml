@@ -17,6 +17,7 @@
     <item name="whiteOP" type="color">#A6FFFFFF</item>
     <item name="white50" type="color">#80FFFFFF</item>
     <item name="grey" type="color">#D1E0E0</item>
+    <item name="r_grey" type="color">#A9A9A9</item>
     <item name="grey55" type="color">#8CD1E0E0</item>
     <item name="grey75" type="color">#BFD1E0E0</item>
     <item name="green55" type="color">#8C669900</item>

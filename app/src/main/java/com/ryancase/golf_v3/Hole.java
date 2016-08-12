@@ -26,6 +26,10 @@ public class Hole {
         this.scoreToPar = scoreToPar;
     }
 
+    public Hole() {
+
+    }
+
     public int getScore() {
         return score;
     }

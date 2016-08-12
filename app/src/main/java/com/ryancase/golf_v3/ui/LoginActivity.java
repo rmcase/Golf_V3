@@ -16,11 +16,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.ryancase.golf_v3.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button loginButton, signUpButton, signInButton;
+    private Button signUpButton, signInButton;
     private EditText passwordText, emailText;
 
     private FirebaseAuth auth;
@@ -59,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (user != null) {
                     //Logged in
+
                     loadMainActivity();
                     Log.d("Already logged in", "");
                 } else {
@@ -95,7 +97,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(String email, String password) {
         if (!validateForm()) {
-            Log.d("Invalid form", "");
+            Toast.makeText(LoginActivity.this, "Login Failed",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -117,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void signUp(String email, String password) {
         if (!validateForm()) {
-            Log.d("Invalid form", "");
+            Toast.makeText(LoginActivity.this, "Login Failed",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
 

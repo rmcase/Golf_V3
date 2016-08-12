@@ -8,12 +8,13 @@
     <FrameLayout
         android:id="@+id/content_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/grey55"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start_round"
+        android:text="@string/new_round"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:id="@+id/startButton" />

@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ import com.ryancase.golf_v3.databinding.FragmentStatViewBinding;
  * File description here...
  */
 
-public class StatFragment extends Fragment implements HoleView {
+public class StatFragment extends Fragment {
 
     private final String FRAGMENT_TAG = "HOLE";
     private final int TEXTVIEW_TEXT_SIZE = 22;
@@ -76,7 +77,7 @@ public class StatFragment extends Fragment implements HoleView {
         }
         binding.setViewModel(viewModel);
 
-        roundModel = new RoundModel(Round.getFrontNine(), Round.getBackNine(), Round.getRoundId(), Round.getCourse());
+        roundModel = new RoundModel(Round.getFrontNine(), Round.getBackNine(), Round.getRoundId(), Round.getCourse(), Round.getDatePlayed());
 
         bindViewModelElements();
 
@@ -122,6 +123,7 @@ public class StatFragment extends Fragment implements HoleView {
             viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d("Saving round", "18");
                     reference.push().setValue(roundModel);
 
                     Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -133,6 +135,7 @@ public class StatFragment extends Fragment implements HoleView {
             viewModel.getFinishHoleButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d("Saving round", "9");
                     reference.push().setValue(roundModel);
 
                     Intent intent = new Intent(getActivity(), MainActivity.class);

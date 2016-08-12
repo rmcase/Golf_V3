@@ -13,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.ryancase.golf_v3.Hole;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
@@ -317,5 +315,15 @@ public class HoleFragment extends Fragment implements HoleView {
                 viewModel.getGreenCheck().setChecked(false);
             }
         }
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
+    }
+
+    @Override
+    public void setTitle(String title) {
+
     }
 }

@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class Round {
 
-    private static final String DATE_FORMAT = "dd/MM/YYYY";
+    private static final String DATE_FORMAT = "MM/dd/yyyy";
     private static Nine frontNine;
     private static Nine backnine;
     private static String roundId;

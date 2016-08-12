@@ -13,12 +13,26 @@ public class RoundModel {
     private Nine _backNine;
     private String roundId;
     private String course;
+    private String datePlayed;
 
-    public RoundModel(Nine _frontNine, Nine _backNine, String roundId, String course) {
+    public RoundModel(Nine _frontNine, Nine _backNine, String roundId, String course, String datePlayed) {
         this._frontNine = _frontNine;
         this._backNine = _backNine;
         this.roundId = roundId;
         this.course = course;
+        this.datePlayed = datePlayed;
+    }
+
+    public RoundModel() {
+
+    }
+
+    public String getDatePlayed() {
+        return datePlayed;
+    }
+
+    public void setDatePlayed(String datePlayed) {
+        this.datePlayed = datePlayed;
     }
 
     public String getCourse() {

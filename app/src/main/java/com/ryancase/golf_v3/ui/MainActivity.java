@@ -2,8 +2,10 @@ package com.ryancase.golf_v3.ui;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -36,7 +38,11 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
+            Log.d("Current User: ", "" + auth.getCurrentUser().getEmail());
             currentUser = auth.getCurrentUser();
+        } else {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
 
         startButton = (Button) findViewById(R.id.startButton);
@@ -47,23 +53,15 @@ public class MainActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadHoleFragment();
+                loadCourseSelectFragment();
             }
         });
     }
 
-    private void loadHoleFragment() {
-        Nine front = new Nine();
-        Nine back = new Nine();
-        Round.setFrontNine(front);
-        Round.setBackNine(back);
-        Round.setRoundId(currentUser.getUid());
-        Round.setCourse("bear creek");
-        Round.setDatePlayed(new Date());
-
+    private void loadCourseSelectFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        HoleFragment hole = new HoleFragment(1);
+        CourseSelectFragment hole = new CourseSelectFragment();
         startButton.setVisibility(View.INVISIBLE);
         fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
         fragmentTransaction.commit();
