@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -73,6 +74,7 @@ public class HoleFragment extends Fragment implements HoleView {
 
         binding = DataBindingUtil.bind(retval);
 
+        getActionBar().setTitle("Hole " + holeNum);
 
         if (viewModel == null) {
             viewModel = new HoleViewModel(this);
@@ -167,7 +169,7 @@ public class HoleFragment extends Fragment implements HoleView {
         if (nextHoleNum < 10)
             Log.d("Hole " + holeNum, "" + Round.getFrontNine().getHoles().get(holeNum - 1).toString());
         else
-            Log.d("Hole " + holeNum, "" + Round.getBackNine().getHoles().get(holeNum -1).toString());
+            Log.d("Hole " + holeNum, "" + Round.getBackNine().getHoles().get(holeNum - 1).toString());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -317,13 +319,7 @@ public class HoleFragment extends Fragment implements HoleView {
         }
     }
 
-    @Override
-    public String getTitle() {
-        return null;
-    }
-
-    @Override
-    public void setTitle(String title) {
-
+    private android.support.v7.app.ActionBar getActionBar() {
+        return ((AppCompatActivity) getActivity()).getSupportActionBar();
     }
 }

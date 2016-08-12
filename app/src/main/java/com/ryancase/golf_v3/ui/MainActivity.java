@@ -11,11 +11,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.ryancase.golf_v3.Nine;
 import com.ryancase.golf_v3.R;
-import com.ryancase.golf_v3.Round;
-
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 

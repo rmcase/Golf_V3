@@ -11,7 +11,7 @@
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/r_grey"
+        android:background="@color/lgray"
         tools:context=".ViewModels.HoleViewModel">
 
         <!--Android:gravity sets the gravity of the content of the View its used on.
@@ -21,21 +21,6 @@
             android:id="@+id/table"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@{viewModel.title}"
-                    android:layout_marginTop="10dp"
-                    android:textSize="22sp" />
-            </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
@@ -92,7 +77,7 @@
                     android:id="@+id/greenCheck"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@{viewModel.greenCheck.getText()}"/>
+                    android:text="@{viewModel.greenCheck.getText()}" />
             </TableRow>
 
             <TableRow
@@ -116,7 +101,7 @@
                     android:id="@+id/fairwayCheck"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@{viewModel.fairwayCheck.getText()}"/>
+                    android:text="@{viewModel.fairwayCheck.getText()}" />
             </TableRow>
 
             <TableRow
@@ -140,7 +125,7 @@
                     android:id="@+id/upAndDownCheck"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@{viewModel.upAndDownCheck.getText()}"/>
+                    android:text="@{viewModel.upAndDownCheck.getText()}" />
             </TableRow>
 
             <TableRow
@@ -161,7 +146,8 @@
                 android:id="@+id/nextHole"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:theme="@style/button_style"/>
 
 
         </TableLayout>

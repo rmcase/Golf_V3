@@ -1,30 +1,23 @@
 package com.ryancase.golf_v3.ViewModels;
 
+import java.util.List;
+
 /**
  * File description here...
  */
 
 public class CourseSelectViewModel {
-    private String title;
-    private static String courseName;
+    private List<String> courseList;
 
     public CourseSelectViewModel() {
 
     }
 
-    public String getCourseName() {
-        return courseName;
+    public List<String> getCourseList() {
+        return courseList;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCourseList(List<String> courseList) {
+        this.courseList = courseList;
     }
 }

@@ -9,14 +9,15 @@
         android:id="@+id/content_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey55"/>
+        android:background="@color/lgray" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/startButton"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:text="@string/new_round"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:id="@+id/startButton" />
+        android:layout_margin="60dp"
+        android:text="@string/new_round"
+        android:theme="@style/button_style" />
 
 </RelativeLayout>
