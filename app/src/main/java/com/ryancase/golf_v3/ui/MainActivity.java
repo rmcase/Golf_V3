@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
         Nine back = new Nine();
         Round.setFrontNine(front);
         Round.setBackNine(back);
-        Round.setRoundId(currentUser.getUid());
+//        Round.setRoundId(currentUser.getUid());
+        Round.setRoundId("r.c8700@gmail.com");
         Round.setCourse("bear creek");
         Round.setDatePlayed(new Date());
 

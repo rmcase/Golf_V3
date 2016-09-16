@@ -13,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.ryancase.golf_v3.Hole;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
@@ -89,14 +87,22 @@ public class HoleFragment extends Fragment implements HoleView {
     }
 
     private void populateViewModelElements() {
+        String[] ratingStrings = {"N/A", "A", "B", "C", "D"};
+
         viewModel.getOnePutt().setText(R.string.onePutt);
         viewModel.getTwoPutt().setText(R.string.twoPutt);
         viewModel.getThreePutt().setText(R.string.threePutt);
-        viewModel.getFourPutt().setText(R.string.fourPutt);
         viewModel.getGreenCheck().setText("GIR");
         viewModel.getFairwayCheck().setText("Fairway");
         viewModel.getUpAndDownCheck().setText("Up and Down");
+        viewModel.getClubToRate().setText("Driver");
 
+        setRatingOnClickListener();
+
+        viewModel.getRatingSelector().setMinValue(0);
+        viewModel.getRatingSelector().setMaxValue(4);
+        viewModel.getRatingSelector().setDisplayedValues(ratingStrings);
+        viewModel.getRatingSelector().setValue(1);
         viewModel.getScoreSelect().setMinValue(1);
         viewModel.getScoreSelect().setMaxValue(10);
         viewModel.getScoreSelect().setValue(4);
@@ -120,6 +126,10 @@ public class HoleFragment extends Fragment implements HoleView {
                         .fairway(viewModel.getFairwayStat())
                         .upAndDown(viewModel.getUpAndDownStat())
                         .scoreToPar(viewModel.getScoreRelativeToPar())
+                        .driverRating(viewModel.getDriverRating())
+                        .ironRating(viewModel.getIronRating())
+                        .approachRating(viewModel.getApproachRating())
+                        .puttRating(viewModel.getPuttRating())
                         .build();
 
                 saveHole(hole);
@@ -156,11 +166,14 @@ public class HoleFragment extends Fragment implements HoleView {
         viewModel.setOnePutt(binding.onePutt);
         viewModel.setTwoPutt(binding.twoPutt);
         viewModel.setThreePutt(binding.threePutt);
-        viewModel.setFourPutt(binding.fourPutt);
         viewModel.setTitle("Hole " + holeNum);
         viewModel.setPuttTv("Putts");
+        viewModel.setClubToRate(binding.clubToRateTv);
+        viewModel.setRatingSelector(binding.ratingSelector);
+        viewModel.setRatingConfirm(binding.ratingConfirm);
 
-        for (int i = 1; i < 5; i++) {
+
+        for (int i = 1; i < 4; i++) {
             setPuttOnClickListener(i);
         }
     }
@@ -169,7 +182,7 @@ public class HoleFragment extends Fragment implements HoleView {
         if (nextHoleNum < 10)
             Log.d("Hole " + holeNum, "" + Round.getFrontNine().getHoles().get(holeNum - 1).toString());
         else
-            Log.d("Hole " + holeNum, "" + Round.getBackNine().getHoles().get(holeNum -1).toString());
+            Log.d("Hole " + holeNum, "" + Round.getBackNine().getHoles().get(holeNum - 9).toString());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -194,6 +207,36 @@ public class HoleFragment extends Fragment implements HoleView {
         fragmentTransaction.commit();
     }
 
+    private void setRatingOnClickListener() {
+        viewModel.getRatingConfirm().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(viewModel.getClubToRate().getText() == "Driver") {
+                    viewModel.setDriverRating(viewModel.getRatingSelector().getValue());
+                    viewModel.getClubToRate().setText("Iron");
+                    viewModel.getRatingConfirm().setChecked(false);
+                } else if(viewModel.getClubToRate().getText() == "Iron") {
+                    viewModel.setIronRating(viewModel.getRatingSelector().getValue());
+                    viewModel.getClubToRate().setText("Approach");
+                    viewModel.getRatingConfirm().setChecked(false);
+                } else if(viewModel.getClubToRate().getText() == "Approach") {
+                    viewModel.setApproachRating(viewModel.getRatingSelector().getValue());
+                    viewModel.getClubToRate().setText("Putt");
+                    viewModel.getRatingConfirm().setChecked(false);
+                } else if(viewModel.getClubToRate().getText() == "Putt") {
+                    viewModel.setPuttRating(viewModel.getRatingSelector().getValue());
+                    viewModel.getClubToRate().setText("√");
+                    viewModel.getRatingConfirm().setEnabled(false);
+                } else {
+
+                }
+
+
+            }
+        });
+    }
+
     private void setPuttOnClickListener(int puttNum) {
         switch (puttNum) {
             case 1: {
@@ -203,7 +246,6 @@ public class HoleFragment extends Fragment implements HoleView {
                         if (((CheckBox) v).isChecked()) {
                             viewModel.getTwoPutt().setChecked(false);
                             viewModel.getThreePutt().setChecked(false);
-                            viewModel.getFourPutt().setChecked(false);
 
                             viewModel.getParSelect().setEnabled(false);
                             viewModel.getScoreSelect().setEnabled(false);
@@ -225,7 +267,6 @@ public class HoleFragment extends Fragment implements HoleView {
                         if (((CheckBox) v).isChecked()) {
                             viewModel.getOnePutt().setChecked(false);
                             viewModel.getThreePutt().setChecked(false);
-                            viewModel.getFourPutt().setChecked(false);
 
                             viewModel.getParSelect().setEnabled(false);
                             viewModel.getScoreSelect().setEnabled(false);
@@ -247,34 +288,11 @@ public class HoleFragment extends Fragment implements HoleView {
                         if (((CheckBox) v).isChecked()) {
                             viewModel.getOnePutt().setChecked(false);
                             viewModel.getTwoPutt().setChecked(false);
-                            viewModel.getFourPutt().setChecked(false);
 
                             viewModel.getParSelect().setEnabled(false);
                             viewModel.getScoreSelect().setEnabled(false);
 
                             predictStats(3);
-                        } else {
-                            viewModel.getGreenCheck().setChecked(false);
-                            viewModel.getParSelect().setEnabled(true);
-                            viewModel.getScoreSelect().setEnabled(true);
-                        }
-                    }
-                });
-                break;
-            }
-            case 4: {
-                viewModel.getFourPutt().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (((CheckBox) v).isChecked()) {
-                            viewModel.getOnePutt().setChecked(false);
-                            viewModel.getTwoPutt().setChecked(false);
-                            viewModel.getThreePutt().setChecked(false);
-
-                            viewModel.getParSelect().setEnabled(false);
-                            viewModel.getScoreSelect().setEnabled(false);
-
-                            predictStats(4);
                         } else {
                             viewModel.getGreenCheck().setChecked(false);
                             viewModel.getParSelect().setEnabled(true);
@@ -312,9 +330,6 @@ public class HoleFragment extends Fragment implements HoleView {
                     viewModel.getGreenCheck().setChecked(false);
                 }
                 break;
-            }
-            case 4: {
-                viewModel.getGreenCheck().setChecked(false);
             }
         }
     }

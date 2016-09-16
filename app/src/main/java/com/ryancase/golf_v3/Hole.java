@@ -15,8 +15,13 @@ public class Hole {
     private int putts;
     private int upAndDown;
     private int scoreToPar;
+    private int driverRating;
+    private int ironRating;
+    private int approachRating;
+    private int puttRating;
 
-    public Hole(int score, int par, int fairway, int green, int putts, int upAndDown, int scoreToPar) {
+    public Hole(int score, int par, int fairway, int green, int putts, int upAndDown, int scoreToPar, int driverRating,
+                int ironRating, int approachRating, int puttRating) {
         this.score = score;
         this.par = par;
         this.fairway = fairway;
@@ -24,6 +29,42 @@ public class Hole {
         this.putts = putts;
         this.upAndDown = upAndDown;
         this.scoreToPar = scoreToPar;
+        this.driverRating = driverRating;
+        this.ironRating = ironRating;
+        this.approachRating = approachRating;
+        this.puttRating = puttRating;
+    }
+
+    public int getDriverRating() {
+        return driverRating;
+    }
+
+    public void setDriverRating(int driverRating) {
+        this.driverRating = driverRating;
+    }
+
+    public int getIronRating() {
+        return ironRating;
+    }
+
+    public void setIronRating(int ironRating) {
+        this.ironRating = ironRating;
+    }
+
+    public int getApproachRating() {
+        return approachRating;
+    }
+
+    public void setApproachRating(int approachRating) {
+        this.approachRating = approachRating;
+    }
+
+    public int getPuttRating() {
+        return puttRating;
+    }
+
+    public void setPuttRating(int puttRating) {
+        this.puttRating = puttRating;
     }
 
     public int getScore() {
@@ -90,6 +131,30 @@ public class Hole {
         private int putts;
         private int upAndDown;
         private int scoreToPar;
+        private int driverRating;
+        private int ironRating;
+        private int approachRating;
+        private int puttRating;
+
+        public Builder driverRating(int rating) {
+            this.driverRating = rating;
+            return this;
+        }
+
+        public Builder ironRating(int rating) {
+            this.ironRating = rating;
+            return this;
+        }
+
+        public Builder approachRating(int rating) {
+            this.approachRating = rating;
+            return this;
+        }
+
+        public Builder puttRating(int rating) {
+            this.puttRating = rating;
+            return this;
+        }
 
         public Builder score(int score) {
             this.score = score;
@@ -127,7 +192,7 @@ public class Hole {
         }
 
         public Hole build() {
-            return new Hole(score, par, fairway, green, putts, upAndDown, scoreToPar);
+            return new Hole(score, par, fairway, green, putts, upAndDown, scoreToPar, driverRating, ironRating, approachRating, puttRating);
         }
     }
 }

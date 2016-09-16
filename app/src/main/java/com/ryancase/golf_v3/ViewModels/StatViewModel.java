@@ -13,12 +13,48 @@ public class StatViewModel extends BaseObservable {
     private String greens;
     private String fairways;
     private String scoreToPar;
+    private String driverRating;
+    private String ironRating;
+    private String approachRating;
+    private String puttRating;
     private Button nextHoleButton;
     private Button finishHoleButton;
     private TableLayout tableLayout;
 
     public StatViewModel() {
 
+    }
+
+    public String getPuttRating() {
+        return puttRating;
+    }
+
+    public void setPuttRating(String puttRating) {
+        this.puttRating = puttRating;
+    }
+
+    public String getApproachRating() {
+        return approachRating;
+    }
+
+    public void setApproachRating(String approachRating) {
+        this.approachRating = approachRating;
+    }
+
+    public String getIronRating() {
+        return ironRating;
+    }
+
+    public void setIronRating(String ironRating) {
+        this.ironRating = ironRating;
+    }
+
+    public String getDriverRating() {
+        return driverRating;
+    }
+
+    public void setDriverRating(String driverRating) {
+        this.driverRating = driverRating;
     }
 
     public String getTitle() {

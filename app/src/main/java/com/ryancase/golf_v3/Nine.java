@@ -135,9 +135,201 @@ public class Nine {
 
         float numOfPutts = getPutts();
         percent = puttsMade / numOfPutts;
+        if(Float.isNaN(percent)) {
+            return 0 + "%";
+        }
         percent *= 100;
         retval = String.format("%.2f", percent);
         retval = retval + "%";
+
         return retval;
     }
+
+    public String getAverageDriverRating() {
+        String retval;
+        float total = 0;
+        float drivingHoles = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getDriverRating() != 0) {
+                total += hole.getDriverRating();
+                drivingHoles++;
+            }
+        }
+
+        float average = total / drivingHoles;
+
+
+        retval = getLetterGrade(average);
+
+        //        if(average <= 1) {
+//            retval = "A";
+//        } else if(average > 1 && average <= 1.30) {
+//            retval = "A-";
+//        } else if(average > 1.30 && average <= 1.75) {
+//            retval = "B+";
+//        } else if(average > 1.75 && average <= 2) {
+//            retval = "B";
+//        } else if(average > 2  && average <= 2.30) {
+//            retval = "B-";
+//        } else if(average > 2.30 && average <= 2.75) {
+//            retval = "C+";
+//        } else if(average > 2.75 && average <= 3) {
+//            retval = "C";
+//        } else if(average > 3 && average <= 3.30) {
+//            retval = "C-";
+//        } else {
+//            retval = "D";
+//        }
+
+        return retval;
+    }
+
+    public float getAverageDriverRatingAsFloat() {
+        float total = 0;
+        float drivingHoles = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getDriverRating() != 0) {
+                total += hole.getDriverRating();
+                drivingHoles++;
+            }
+        }
+
+        float average = total / drivingHoles;
+
+        return average;
+    }
+
+    public String getAverageIronRating() {
+        String retval;
+        float total = 0;
+        float validHoles = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getIronRating() != 0) {
+                total += hole.getIronRating();
+                validHoles++;
+            }
+        }
+
+        float average = total / validHoles;
+
+        retval = getLetterGrade(average);
+
+        return retval;
+    }
+
+    public float getAverageIronRatingAsFloat() {
+        float total = 0;
+        float validHoles = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getIronRating() != 0) {
+                total += hole.getIronRating();
+                validHoles++;
+            }
+        }
+
+        float average = total / validHoles;
+
+        return average;
+    }
+
+    public String getAverageApproachRating() {
+        String retval;
+        float total = 0;
+        float validHoles = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getPuttRating() != 0) {
+                total += hole.getPuttRating();
+                validHoles++;
+            }
+        }
+
+        float average = total / validHoles;
+
+        retval = getLetterGrade(average);
+
+        return retval;
+    }
+
+    public float getAverageApproachRatingAsFloat() {
+        float total = 0;
+        float validHoles = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getApproachRating() != 0) {
+                total += hole.getApproachRating();
+                validHoles++;
+            }
+        }
+
+        float average = total / validHoles;
+
+        return average;
+    }
+
+    public String getAveragePuttRating() {
+        String retval;
+        float total = 0;
+        float validHoles = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getPuttRating() != 0) {
+                total += hole.getPuttRating();
+                validHoles++;
+            }
+        }
+
+        float average = total / validHoles;
+
+        retval = getLetterGrade(average);
+
+        return retval;
+    }
+
+    public float getAveragePuttRatingAsFloat() {
+        float total = 0;
+        float validHoles = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getPuttRating() != 0) {
+                total += hole.getPuttRating();
+                validHoles++;
+            }
+        }
+
+        float average = total / validHoles;
+
+        return average;
+    }
+
+    private String getLetterGrade(float average) {
+        String retval;
+
+        if(average <= 1) {
+            retval = "A";
+        } else if(average > 1 && average <= 1.30) {
+            retval = "A-";
+        } else if(average > 1.30 && average <= 1.75) {
+            retval = "B+";
+        } else if(average > 1.75 && average <= 2) {
+            retval = "B";
+        } else if(average > 2  && average <= 2.30) {
+            retval = "B-";
+        } else if(average > 2.30 && average <= 2.75) {
+            retval = "C+";
+        } else if(average > 2.75 && average <= 3) {
+            retval = "C";
+        } else if(average > 3 && average <= 3.30) {
+            retval = "C-";
+        } else {
+            retval = "D";
+        }
+
+        return retval;
+    }
+
 }

@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class Round {
 
-    private static final String DATE_FORMAT = "dd/MM/YYYY";
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static Nine frontNine;
     private static Nine backnine;
     private static String roundId;
@@ -83,5 +83,50 @@ public class Round {
 
     public static int getFairways() {
         return frontNine.getFairways() + backnine.getFairways();
+    }
+
+    public static String getRating(String shotToRate) {
+        switch (shotToRate) {
+            case "Driver": {
+                return getLetterGrade((frontNine.getAverageDriverRatingAsFloat() + backnine.getAverageDriverRatingAsFloat()) / 2f);
+            }
+            case "Iron": {
+                return getLetterGrade((frontNine.getAverageIronRatingAsFloat() + backnine.getAverageIronRatingAsFloat()) / 2f);
+            }
+            case "Approach": {
+                return getLetterGrade((frontNine.getAverageApproachRatingAsFloat() + backnine.getAverageApproachRatingAsFloat()) / 2f);
+            }
+            case "Putt": {
+                return getLetterGrade((frontNine.getAveragePuttRatingAsFloat() + backnine.getAveragePuttRatingAsFloat()) / 2f);
+            }
+            default:
+                return null;
+        }
+    }
+
+    private static String getLetterGrade(float average) {
+        String retval;
+
+        if(average <= 1) {
+            retval = "A";
+        } else if(average > 1 && average <= 1.30) {
+            retval = "A-";
+        } else if(average > 1.30 && average <= 1.75) {
+            retval = "B+";
+        } else if(average > 1.75 && average <= 2) {
+            retval = "B";
+        } else if(average > 2  && average <= 2.30) {
+            retval = "B-";
+        } else if(average > 2.30 && average <= 2.75) {
+            retval = "C+";
+        } else if(average > 2.75 && average <= 3) {
+            retval = "C";
+        } else if(average > 3 && average <= 3.30) {
+            retval = "C-";
+        } else {
+            retval = "D";
+        }
+
+        return retval;
     }
 }

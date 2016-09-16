@@ -76,7 +76,7 @@ public class StatFragment extends Fragment implements HoleView {
         }
         binding.setViewModel(viewModel);
 
-        roundModel = new RoundModel(Round.getFrontNine(), Round.getBackNine(), Round.getRoundId(), Round.getCourse());
+        roundModel = new RoundModel(Round.getFrontNine(), Round.getBackNine(), Round.getRoundId(), Round.getDatePlayed(), Round.getCourse());
 
         bindViewModelElements();
 
@@ -97,6 +97,10 @@ public class StatFragment extends Fragment implements HoleView {
             viewModel.setPutts(String.valueOf(Round.getPutts()));
             viewModel.setGreens(String.valueOf(Round.getGreens()));
             viewModel.setFairways(String.valueOf(Round.getFairways()));
+            viewModel.setDriverRating(String.valueOf(Round.getRating("Driver")));
+            viewModel.setIronRating(String.valueOf(Round.getRating("Iron")));
+            viewModel.setApproachRating(String.valueOf(Round.getRating("Approach")));
+            viewModel.setPuttRating(String.valueOf(Round.getRating("Putt")));
         } else {
             viewModel.setTitle(getActivity().getString(R.string.at_the_turn));
             viewModel.setScore(String.valueOf(Round.getFrontNine().getScore()));
@@ -105,6 +109,10 @@ public class StatFragment extends Fragment implements HoleView {
             viewModel.setPutts(String.valueOf(Round.getFrontNine().madePuttsPercentage()));
             viewModel.setGreens(String.valueOf(Round.getFrontNine().getGreens()));
             viewModel.setFairways(String.valueOf(Round.getFrontNine().getFairwayPercentage()));
+            viewModel.setDriverRating(Round.getFrontNine().getAverageDriverRating());
+            viewModel.setIronRating(Round.getFrontNine().getAverageIronRating());
+            viewModel.setApproachRating(Round.getFrontNine().getAverageApproachRating());
+            viewModel.setPuttRating(Round.getFrontNine().getAveragePuttRating());
         }
 
         viewModel.setFinishHoleButton(finishRound);
@@ -220,6 +228,42 @@ public class StatFragment extends Fragment implements HoleView {
         fairwaysTv.setText("Fairways:");
         fairwaysTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
 
+        TextView driverRating = new TextView(getActivity());
+        driverRating.setLayoutParams(params);
+        driverRating.setText(viewModel.getDriverRating());
+        driverRating.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
+        TextView driverRatingTv = new TextView(getActivity());
+        driverRatingTv.setLayoutParams(params);
+        driverRatingTv.setText("Driver Rating:");
+        driverRatingTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
+
+        TextView ironRating = new TextView(getActivity());
+        ironRating.setLayoutParams(params);
+        ironRating.setText(viewModel.getIronRating());
+        ironRating.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
+        TextView ironRatingTv = new TextView(getActivity());
+        ironRatingTv.setLayoutParams(params);
+        ironRatingTv.setText("Iron Rating:");
+        ironRatingTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
+
+        TextView approachRating = new TextView(getActivity());
+        approachRating.setLayoutParams(params);
+        approachRating.setText(viewModel.getApproachRating());
+        approachRating.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
+        TextView approachRatingTv = new TextView(getActivity());
+        approachRatingTv.setLayoutParams(params);
+        approachRatingTv.setText("Approach Rating:");
+        approachRatingTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
+
+        TextView puttRating = new TextView(getActivity());
+        puttRating.setLayoutParams(params);
+        puttRating.setText(viewModel.getPuttRating());
+        puttRating.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
+        TextView puttRatingTv = new TextView(getActivity());
+        puttRatingTv.setLayoutParams(params);
+        puttRatingTv.setText("Putt Rating:");
+        puttRatingTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
+
         TableRow tr = new TableRow(getActivity());
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
         nextHole.setLayoutParams(params);
@@ -238,6 +282,10 @@ public class StatFragment extends Fragment implements HoleView {
         viewModel.getTableLayout().addView(addTableRow(putts, puttsTv), tableParam);
         viewModel.getTableLayout().addView(addTableRow(greens, greensTv), tableParam);
         viewModel.getTableLayout().addView(addTableRow(fairways, fairwaysTv), tableParam);
+        viewModel.getTableLayout().addView(addTableRow(driverRating, driverRatingTv), tableParam);
+        viewModel.getTableLayout().addView(addTableRow(ironRating, ironRatingTv), tableParam);
+        viewModel.getTableLayout().addView(addTableRow(approachRating, approachRatingTv), tableParam);
+        viewModel.getTableLayout().addView(addTableRow(puttRating, puttRatingTv), tableParam);
         viewModel.getTableLayout().addView(tr, tableParam);
         viewModel.getTableLayout().addView(tRow, tableParam);
     }

@@ -1,5 +1,7 @@
 package com.ryancase.golf_v3;
 
+import java.util.Date;
+
 import lombok.ToString;
 
 /**
@@ -13,12 +15,22 @@ public class RoundModel {
     private Nine _backNine;
     private String roundId;
     private String course;
+    private String date;
 
-    public RoundModel(Nine _frontNine, Nine _backNine, String roundId, String course) {
+    public RoundModel(Nine _frontNine, Nine _backNine, String roundId, String date, String course) {
         this._frontNine = _frontNine;
         this._backNine = _backNine;
         this.roundId = roundId;
         this.course = course;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getCourse() {
