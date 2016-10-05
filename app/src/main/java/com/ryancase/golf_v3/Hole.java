@@ -20,6 +20,10 @@ public class Hole {
     private int approachRating;
     private int puttRating;
 
+    public Hole() {
+
+    }
+
     public Hole(int score, int par, int fairway, int green, int putts, int upAndDown, int scoreToPar, int driverRating,
                 int ironRating, int approachRating, int puttRating) {
         this.score = score;

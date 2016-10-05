@@ -11,6 +11,15 @@ import lombok.ToString;
 
 @ToString
 public class Nine {
+    private int par;
+    private int score;
+    private int scoreToPar;
+    private int putts;
+    private int greens;
+    private int fairways;
+    private String fairwayPercentage;
+    private String greenPercentage;
+
     private List<Hole> holes;
 
     public Nine() {
@@ -32,67 +41,91 @@ public class Nine {
     }
 
     public int getPar() {
-        int retval = 0;
+        par = 0;
 
         for (Hole hole : holes) {
-            retval += hole.getPar();
+            par += hole.getPar();
         }
 
-        return retval;
+        return par;
+    }
+
+    public void setPar(int par) {
+        this.par = par;
     }
 
     public int getScore() {
-        int retval = 0;
+        score = 0;
 
         for (Hole hole : holes) {
-            retval += hole.getScore();
+            score += hole.getScore();
         }
 
-        return retval;
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public int getScoreToPar() {
-        int retval = 0;
+        scoreToPar = 0;
 
         for (Hole hole : holes) {
-            retval += hole.getScoreToPar();
+            scoreToPar += hole.getScoreToPar();
         }
 
-        return retval;
+        return scoreToPar;
+    }
+
+    public void setScoreToPar(int scoreToPar) {
+        this.scoreToPar = scoreToPar;
     }
 
     public int getPutts() {
-        int retval = 0;
+        putts = 0;
 
         for (Hole hole : holes) {
-            retval += hole.getPutts();
+            putts += hole.getPutts();
         }
 
-        return retval;
+        return putts;
+    }
+
+    public void setPutts(int putts) {
+        this.putts = putts;
     }
 
     public int getGreens() {
-        int retval = 0;
+        greens = 0;
 
         for (Hole hole : holes) {
-            retval += hole.getGreen();
+            greens += hole.getGreen();
         }
 
-        return retval;
+        return greens;
+    }
+
+    public void setGreens(int greens) {
+        this.greens = greens;
     }
 
     public int getFairways() {
-        int retval = 0;
+        fairways = 0;
 
         for (Hole hole : holes) {
-            retval += hole.getFairway();
+            fairways += hole.getFairway();
         }
 
-        return retval;
+        return fairways;
+    }
+
+    public void setFairways(int fairways) {
+        this.fairways = fairways;
     }
 
     public String getFairwayPercentage() {
-        String retval;
+//        String retval;
         float percent;
         float numOfPossibleFairways = 0;
 
@@ -104,22 +137,30 @@ public class Nine {
         float fairwaysHit = getFairways();
         percent = fairwaysHit / numOfPossibleFairways;
         percent *= 100;
-        retval = String.format("%.2f", percent);
-        retval = retval + "%";
-        return retval;
+        fairwayPercentage = String.format("%.2f", percent);
+        fairwayPercentage = fairwayPercentage + "%";
+        return fairwayPercentage;
+    }
+
+    public void setFairwayPercentage(String fairwayPercentage) {
+        this.fairwayPercentage = fairwayPercentage;
     }
 
     public String getGreenPercentage() {
-        String retval;
+//        String retval;
         float percent;
         float numOfPossibleGreens = 18;
 
         float greensHit = getGreens();
         percent = greensHit / numOfPossibleGreens;
         percent *= 100;
-        retval = String.format("%.2f", percent);
-        retval = retval + "%";
-        return retval;
+        greenPercentage = String.format("%.2f", percent);
+        greenPercentage = greenPercentage + "%";
+        return greenPercentage;
+    }
+
+    public void setGreenPercentage(String greenPercentage) {
+        this.greenPercentage = greenPercentage;
     }
 
     public String madePuttsPercentage() {
@@ -331,5 +372,6 @@ public class Nine {
 
         return retval;
     }
+
 
 }

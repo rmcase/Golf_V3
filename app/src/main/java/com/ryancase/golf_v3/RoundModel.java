@@ -17,6 +17,10 @@ public class RoundModel {
     private String course;
     private String date;
 
+    public RoundModel() {
+
+    }
+
     public RoundModel(Nine _frontNine, Nine _backNine, String roundId, String date, String course) {
         this._frontNine = _frontNine;
         this._backNine = _backNine;

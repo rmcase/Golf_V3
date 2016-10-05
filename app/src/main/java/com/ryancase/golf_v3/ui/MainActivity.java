@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final String FRAGMENT_TAG = "HOLE";
     private Button startButton;
-    private Button logoutButton;
+    private Button historyButton;
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
 
@@ -50,6 +50,17 @@ public class MainActivity extends AppCompatActivity {
                 loadHoleFragment();
             }
         });
+
+
+        historyButton = (Button) findViewById(R.id.historyButton);
+
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadHistoryFragment();
+            }
+        });
+
     }
 
     private void loadHoleFragment() {
@@ -66,7 +77,18 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HoleFragment hole = new HoleFragment(1);
         startButton.setVisibility(View.INVISIBLE);
+        historyButton.setVisibility(View.INVISIBLE);
         fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
+        fragmentTransaction.commit();
+    }
+
+    private void loadHistoryFragment() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        HistoryFragment hist = new HistoryFragment();
+        startButton.setVisibility(View.INVISIBLE);
+        historyButton.setVisibility(View.INVISIBLE);
+        fragmentTransaction.add(R.id.content_view, hist, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
 
