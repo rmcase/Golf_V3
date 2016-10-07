@@ -125,7 +125,6 @@ public class Nine {
     }
 
     public String getFairwayPercentage() {
-//        String retval;
         float percent;
         float numOfPossibleFairways = 0;
 
@@ -136,9 +135,13 @@ public class Nine {
         }
         float fairwaysHit = getFairways();
         percent = fairwaysHit / numOfPossibleFairways;
-        percent *= 100;
-        fairwayPercentage = String.format("%.2f", percent);
-        fairwayPercentage = fairwayPercentage + "%";
+        if(Float.isNaN(percent)) {
+            fairwayPercentage = "0.00%";
+        } else {
+            percent *= 100;
+            fairwayPercentage = String.format("%.2f", percent);
+            fairwayPercentage = fairwayPercentage + "%";
+        }
         return fairwayPercentage;
     }
 
@@ -147,15 +150,18 @@ public class Nine {
     }
 
     public String getGreenPercentage() {
-//        String retval;
         float percent;
         float numOfPossibleGreens = 18;
 
         float greensHit = getGreens();
         percent = greensHit / numOfPossibleGreens;
-        percent *= 100;
-        greenPercentage = String.format("%.2f", percent);
-        greenPercentage = greenPercentage + "%";
+        if(Float.isNaN(percent)) {
+            greenPercentage = "0.00%";
+        } else {
+            percent *= 100;
+            greenPercentage = String.format("%.2f", percent);
+            greenPercentage = greenPercentage + "%";
+        }
         return greenPercentage;
     }
 
@@ -176,7 +182,7 @@ public class Nine {
 
         float numOfPutts = getPutts();
         percent = puttsMade / numOfPutts;
-        if(Float.isNaN(percent)) {
+        if (Float.isNaN(percent)) {
             return 0 + "%";
         }
         percent *= 100;
@@ -191,8 +197,8 @@ public class Nine {
         float total = 0;
         float drivingHoles = 0;
 
-        for(Hole hole : holes) {
-            if(hole.getDriverRating() != 0) {
+        for (Hole hole : holes) {
+            if (hole.getDriverRating() != 0) {
                 total += hole.getDriverRating();
                 drivingHoles++;
             }
@@ -230,15 +236,17 @@ public class Nine {
         float total = 0;
         float drivingHoles = 0;
 
-        for(Hole hole : holes) {
-            if(hole.getDriverRating() != 0) {
+        for (Hole hole : holes) {
+            if (hole.getDriverRating() != 0) {
                 total += hole.getDriverRating();
                 drivingHoles++;
             }
         }
 
         float average = total / drivingHoles;
-
+        if(Float.isNaN(average)) {
+            average = 0.0f;
+        }
         return average;
     }
 
@@ -247,8 +255,8 @@ public class Nine {
         float total = 0;
         float validHoles = 0;
 
-        for(Hole hole : holes) {
-            if(hole.getIronRating() != 0) {
+        for (Hole hole : holes) {
+            if (hole.getIronRating() != 0) {
                 total += hole.getIronRating();
                 validHoles++;
             }
@@ -265,15 +273,17 @@ public class Nine {
         float total = 0;
         float validHoles = 0;
 
-        for(Hole hole : holes) {
-            if(hole.getIronRating() != 0) {
+        for (Hole hole : holes) {
+            if (hole.getIronRating() != 0) {
                 total += hole.getIronRating();
                 validHoles++;
             }
         }
 
         float average = total / validHoles;
-
+        if(Float.isNaN(average)) {
+            average = 0.0f;
+        }
         return average;
     }
 
@@ -282,8 +292,8 @@ public class Nine {
         float total = 0;
         float validHoles = 0;
 
-        for(Hole hole : holes) {
-            if(hole.getPuttRating() != 0) {
+        for (Hole hole : holes) {
+            if (hole.getPuttRating() != 0) {
                 total += hole.getPuttRating();
                 validHoles++;
             }
@@ -300,15 +310,17 @@ public class Nine {
         float total = 0;
         float validHoles = 0;
 
-        for(Hole hole : holes) {
-            if(hole.getApproachRating() != 0) {
+        for (Hole hole : holes) {
+            if (hole.getApproachRating() != 0) {
                 total += hole.getApproachRating();
                 validHoles++;
             }
         }
 
         float average = total / validHoles;
-
+        if(Float.isNaN(average)) {
+            average = 0.0f;
+        }
         return average;
     }
 
@@ -317,8 +329,8 @@ public class Nine {
         float total = 0;
         float validHoles = 0;
 
-        for(Hole hole : holes) {
-            if(hole.getPuttRating() != 0) {
+        for (Hole hole : holes) {
+            if (hole.getPuttRating() != 0) {
                 total += hole.getPuttRating();
                 validHoles++;
             }
@@ -335,36 +347,38 @@ public class Nine {
         float total = 0;
         float validHoles = 0;
 
-        for(Hole hole : holes) {
-            if(hole.getPuttRating() != 0) {
+        for (Hole hole : holes) {
+            if (hole.getPuttRating() != 0) {
                 total += hole.getPuttRating();
                 validHoles++;
             }
         }
 
         float average = total / validHoles;
-
+        if(Float.isNaN(average)) {
+            average = 0.0f;
+        }
         return average;
     }
 
     private String getLetterGrade(float average) {
         String retval;
 
-        if(average <= 1) {
+        if (average <= 1) {
             retval = "A";
-        } else if(average > 1 && average <= 1.30) {
+        } else if (average > 1 && average <= 1.30) {
             retval = "A-";
-        } else if(average > 1.30 && average <= 1.75) {
+        } else if (average > 1.30 && average <= 1.75) {
             retval = "B+";
-        } else if(average > 1.75 && average <= 2) {
+        } else if (average > 1.75 && average <= 2) {
             retval = "B";
-        } else if(average > 2  && average <= 2.30) {
+        } else if (average > 2 && average <= 2.30) {
             retval = "B-";
-        } else if(average > 2.30 && average <= 2.75) {
+        } else if (average > 2.30 && average <= 2.75) {
             retval = "C+";
-        } else if(average > 2.75 && average <= 3) {
+        } else if (average > 2.75 && average <= 3) {
             retval = "C";
-        } else if(average > 3 && average <= 3.30) {
+        } else if (average > 3 && average <= 3.30) {
             retval = "C-";
         } else {
             retval = "D";

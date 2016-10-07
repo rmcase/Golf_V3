@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.ryancase.golf_v3.ViewModels.DrivingViewModel" />
+            type="com.ryancase.golf_v3.ViewModels.ApproachViewModel" />
     </data>
 
     <LinearLayout
@@ -21,24 +21,23 @@
             android:layout_gravity="center_horizontal"
             android:padding="20dp">
 
-            <TableRow
-                android:paddingBottom="10dp">
+            <TableRow>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Driver Rating: "
+                    android:text="Approach Rating: "
                     android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{viewModel.driverRating}"
-                    android:textSize="42sp" />
+                    android:text="@{viewModel.approachRating}"
+                    android:textSize="14sp" />
             </TableRow>
-            <!-- ^ DRIVER RATING ROW ^ -->
+            <!-- ^ APPROACH RATING ROW ^ -->
 
             <TableRow>
 
@@ -46,17 +45,17 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Fairways: "
+                    android:text="Iron Rating: "
                     android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{viewModel.fairways}"
+                    android:text="@{viewModel.ironRating}"
                     android:textSize="14sp" />
             </TableRow>
-            <!-- ^ FAIRWAYS ROW ^ -->
+            <!-- ^ IRON RATING ROW ^ -->
 
             <TableRow>
 
@@ -64,17 +63,35 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Percentage of Fairways Hit: "
+                    android:text="GIRs: "
                     android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{viewModel.fairwayPercentage}"
+                    android:text="@{viewModel.greens}"
                     android:textSize="14sp" />
             </TableRow>
-            <!-- ^ FAIRWAY PERCENTAGE ROW ^ -->
+            <!-- ^ GREENS ROW ^ -->
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Percentage of Greens Hit: "
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.greenPercentage}"
+                    android:textSize="14sp" />
+            </TableRow>
+            <!-- ^ GREEN PERCENTAGE ROW ^ -->
 
         </TableLayout>
     </LinearLayout>

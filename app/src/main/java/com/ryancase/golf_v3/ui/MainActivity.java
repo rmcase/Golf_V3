@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         Round.setBackNine(back);
 //        Round.setRoundId(currentUser.getUid());
         Round.setRoundId("r.c8700@gmail.com");
-        Round.setCourse("bear creek");
+        Round.setCourse("Bear Creek");
         Round.setDatePlayed(new Date());
 
         FragmentManager fragmentManager = getFragmentManager();
