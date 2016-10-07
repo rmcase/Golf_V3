@@ -37,8 +37,8 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
 
     private FragmentTabHost tabHost;
 
-    private float fairwayPercentage, greenPercentage;
-    private String driverRating, ironRating, approachRating;
+    private float fairwayPercentage, greenPercentage, puttPercentage;
+    private String driverRating, ironRating, approachRating, puttRating;
 
     public HistoryItemFragment(RoundThing round) {
         this.round = round;
@@ -98,22 +98,27 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         int par = round.getFrontNine().getPar() + round.getBackNine().getPar();
         int fairways = round.getBackNine().getFairways() + round.getFrontNine().getFairways();
         int greens = round.getBackNine().getGreens() + round.getFrontNine().getGreens();
+        int putts = round.getBackNine().getPutts() + round.getFrontNine().getPutts();
 
         fairwayPercentage = findFairwayPercentage();
         greenPercentage = findGreenPercentage();
+        puttPercentage = findPuttPercentage();
 
         if(round.getBackNine().getScore() == 0) {
             driverRating = getLetterGrade(round.getFrontNine().getAverageDriverRatingAsFloat());
             ironRating = getLetterGrade(round.getFrontNine().getAverageIronRatingAsFloat());
             approachRating = getLetterGrade(round.getFrontNine().getAverageApproachRatingAsFloat());
+            puttRating = getLetterGrade(round.getFrontNine().getAveragePuttRatingAsFloat());
         } else if(round.getFrontNine().getScore() == 0) {
             driverRating = getLetterGrade(round.getBackNine().getAverageDriverRatingAsFloat());
             ironRating = getLetterGrade(round.getBackNine().getAverageIronRatingAsFloat());
             approachRating = getLetterGrade(round.getBackNine().getAverageApproachRatingAsFloat());
+            puttRating = getLetterGrade(round.getBackNine().getAveragePuttRatingAsFloat());
         } else {
             driverRating = getLetterGrade((round.getFrontNine().getAverageDriverRatingAsFloat() + round.getBackNine().getAverageDriverRatingAsFloat()) / 2f);
             ironRating = getLetterGrade((round.getBackNine().getAverageIronRatingAsFloat() + round.getFrontNine().getAverageIronRatingAsFloat()) / 2f);
             approachRating = getLetterGrade((round.getBackNine().getAverageApproachRatingAsFloat() + round.getFrontNine().getAverageApproachRatingAsFloat()) / 2f);
+            puttRating = getLetterGrade((round.getBackNine().getAverageApproachRatingAsFloat() + round.getFrontNine().getAverageApproachRatingAsFloat()) / 2f);
         }
         tabHost = binding.tabHost;
         tabHost.setup(getActivity(), getChildFragmentManager(), R.layout.driving_stat_tab);
@@ -149,14 +154,46 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         tabHost.addTab(tabHost.newTabSpec("ApproachTab").setIndicator("Approach"), ApproachTabFragment.class, approachStats);
         //---------------
 
-
-        Bundle arg3 = new Bundle();
-        arg3.putInt("", 3);
-        tabHost.addTab(tabHost.newTabSpec("Tab3").setIndicator("Putt"), DrivingTabFragment.class, arg3);
+        //PUTT TAB
+        Bundle puttStats = new Bundle();
+        puttStats.putString("puttRating", puttRating);
+        puttStats.putFloat("puttPercentage", puttPercentage);
+        puttStats.putInt("putts", putts);
+        tabHost.addTab(tabHost.newTabSpec("PuttTab").setIndicator("Putt"), PuttTabFragment.class, puttStats);
+        //---------------
 
         for(int i=0; i<4; i++) {
             TextView x = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
             x.setTextSize(10);
+        }
+
+        return retval;
+    }
+
+    private float findPuttPercentage() {
+        float retval;
+
+        String frontNinePuttPercent = round.getFrontNine().madePuttsPercentage().substring(0, round.getFrontNine().madePuttsPercentage().length()-1);
+        String backNinePuttPercent = round.getBackNine().madePuttsPercentage().substring(0, round.getBackNine().madePuttsPercentage().length()-1);;
+
+        if(round.getBackNine().getScore() == 0) {
+            return Float.valueOf(frontNinePuttPercent);
+        } else if(round.getFrontNine().getScore() == 0) {
+            return Float.valueOf(backNinePuttPercent);
+        }
+
+        if(round.getBackNine().madePuttsPercentage().equals("NaN%")) {
+            if(!round.getFrontNine().madePuttsPercentage().equals("NaN%")) {
+                retval = Float.valueOf(frontNinePuttPercent);
+            } else {
+                retval = 0f;
+            }
+        } else {
+            if(round.getFrontNine().madePuttsPercentage().equals("NaN%")) {
+                retval = Float.valueOf(backNinePuttPercent);
+            } else {
+                retval = (Float.valueOf(frontNinePuttPercent) + Float.valueOf(backNinePuttPercent)) / 2f;
+            }
         }
 
         return retval;
@@ -181,7 +218,7 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
                 retval = 0f;
             }
         } else {
-            if(round.getFrontNine().equals("NaN%")) {
+            if(round.getFrontNine().getGreenPercentage().equals("NaN%")) {
                 retval = Float.valueOf(backNineGreenPercent);
             } else {
                 retval = (Float.valueOf(frontNineGreenPercent) + Float.valueOf(backNineGreenPercent)) / 2f;
