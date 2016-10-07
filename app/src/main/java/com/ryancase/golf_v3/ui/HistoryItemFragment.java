@@ -4,7 +4,9 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.FloatRange;
 import android.support.v4.app.FragmentTabHost;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +36,8 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
     private HistoryRoundViewModel viewModel;
 
     private FragmentTabHost tabHost;
+
+    private float fairwayPercentage, greenPercentage;
 
     public HistoryItemFragment(RoundThing round) {
         this.round = round;
@@ -91,6 +95,26 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         int backScore = round.getBackNine().getScore();
         int scoreToPar = round.getFrontNine().getScoreToPar() + round.getBackNine().getScoreToPar();
         int par = round.getFrontNine().getPar() + round.getBackNine().getPar();
+        int fairways = round.getBackNine().getFairways() + round.getFrontNine().getFairways();
+
+        String frontNineFairwayPercent = round.getFrontNine().getFairwayPercentage().substring(0, round.getFrontNine().getFairwayPercentage().length()-1);
+        String backNineFairwayPercent = round.getBackNine().getFairwayPercentage().substring(0, round.getBackNine().getFairwayPercentage().length()-1);
+
+        if(round.getBackNine().getFairwayPercentage().equals("NaN%")) {
+            if(!round.getFrontNine().getFairwayPercentage().equals("NaN%")) {
+                fairwayPercentage = Float.valueOf(frontNineFairwayPercent);
+            } else {
+                fairwayPercentage = 0f;
+            }
+        } else {
+            if(round.getFrontNine().equals("NaN%")) {
+                fairwayPercentage = Float.valueOf(backNineFairwayPercent);
+            } else {
+                fairwayPercentage = (Float.valueOf(frontNineFairwayPercent) + Float.valueOf(round.getBackNine().getFairwayPercentage())) / 2f;
+            }
+        }
+
+        String driverRating = getLetterGrade((round.getFrontNine().getAverageDriverRatingAsFloat() + round.getBackNine().getAverageDriverRatingAsFloat()) / 2f);
 
         tabHost = binding.tabHost;
         tabHost.setup(getActivity(), getChildFragmentManager(), R.layout.driving_stat_tab);
@@ -101,9 +125,14 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         overviewStats.putInt("backScore", backScore);
         overviewStats.putInt("scoreToPar", scoreToPar);
         overviewStats.putInt("par", par);
+        overviewStats.putString("course", round.getCourse());
+        overviewStats.putString("date", round.getDate());
         tabHost.addTab(tabHost.newTabSpec("OverviewTab").setIndicator("Overview"), OverviewTabFragment.class, overviewStats);
 
         Bundle drivingStats = new Bundle();
+        drivingStats.putString("driverRating", driverRating);
+        drivingStats.putFloat("fairwayPercentage", fairwayPercentage);
+        drivingStats.putInt("fairways", fairways);
         drivingStats.putInt("", 1);
         tabHost.addTab(tabHost.newTabSpec("Tab1").setIndicator("Driving"), DrivingTabFragment.class, drivingStats);
 
@@ -134,6 +163,32 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         }
 
         return correctDate;
+    }
+
+    private String getLetterGrade(float average) {
+        String retval;
+
+        if(average <= 1) {
+            retval = "A";
+        } else if(average > 1 && average <= 1.30) {
+            retval = "A-";
+        } else if(average > 1.30 && average <= 1.75) {
+            retval = "B+";
+        } else if(average > 1.75 && average <= 2) {
+            retval = "B";
+        } else if(average > 2  && average <= 2.30) {
+            retval = "B-";
+        } else if(average > 2.30 && average <= 2.75) {
+            retval = "C+";
+        } else if(average > 2.75 && average <= 3) {
+            retval = "C";
+        } else if(average > 3 && average <= 3.30) {
+            retval = "C-";
+        } else {
+            retval = "D";
+        }
+
+        return retval;
     }
 
 }

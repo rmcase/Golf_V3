@@ -1,5 +1,6 @@
 package com.ryancase.golf_v3.ui;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -8,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ryancase.golf_v3.R;
+import com.ryancase.golf_v3.ViewModels.HistoryViewModel;
+import com.ryancase.golf_v3.ViewModels.OverviewViewModel;
+import com.ryancase.golf_v3.databinding.OverviewStatTabBinding;
 
 /**
  * Created by ryancase on 10/6/16.
@@ -16,6 +20,12 @@ import com.ryancase.golf_v3.R;
 public class OverviewTabFragment extends Fragment {
 
     private int score, scoreToPar, frontScore, backScore, par;
+    private String course, date;
+
+    private OverviewStatTabBinding binding;
+
+    private OverviewViewModel viewModel;
+
     public OverviewTabFragment() {
 
     }
@@ -29,6 +39,8 @@ public class OverviewTabFragment extends Fragment {
             backScore = getArguments().getInt("backScore");
             frontScore = getArguments().getInt("frontScore");
             par = getArguments().getInt("par");
+            course = getArguments().getString("course");
+            date = getArguments().getString("date");
         }
     }
 
@@ -36,9 +48,19 @@ public class OverviewTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.overview_stat_tab, container, false);
 
-//        Log.d("SAVEDINT:", "" + getArguments().getInt("Arg for Frag1"));
+        binding = DataBindingUtil.bind(retval);
+        if (viewModel == null) {
+            viewModel = new OverviewViewModel();
+        }
+        binding.setViewModel(viewModel);
 
-
+        viewModel.setScore(String.valueOf(score));
+        viewModel.setFrontScore(String.valueOf(frontScore));
+        viewModel.setBackScore(String.valueOf(backScore));
+        viewModel.setPar(String.valueOf(par));
+        viewModel.setScoreToPar(String.valueOf(scoreToPar));
+        viewModel.setCourse(course);
+        viewModel.setDate(date);
 
         return retval;
     }
