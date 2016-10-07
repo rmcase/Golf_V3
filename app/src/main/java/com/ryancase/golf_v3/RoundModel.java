@@ -1,7 +1,5 @@
 package com.ryancase.golf_v3;
 
-import java.util.Date;
-
 import lombok.ToString;
 
 /**

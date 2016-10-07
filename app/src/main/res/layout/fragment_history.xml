@@ -28,20 +28,6 @@
                 android:gravity="center"
                 android:paddingBottom="10dp">
 
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@{viewModel.title}"
-                    android:textSize="22sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="10dp">
-
                 <ListView
                     android:id="@+id/historyList"
                     android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.widget.TableLayout;
 
 public class HistoryViewModel extends BaseObservable {
     private String title;
+
     private ListView historyList;
 
     public HistoryViewModel() {

@@ -1,6 +1,5 @@
 package com.ryancase.golf_v3.ui;
 
-import android.app.Application;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,9 +11,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,17 +20,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.ryancase.golf_v3.Hole;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
-import com.ryancase.golf_v3.Round;
-import com.ryancase.golf_v3.RoundModel;
-import com.ryancase.golf_v3.RoundObject;
 import com.ryancase.golf_v3.RoundThing;
 import com.ryancase.golf_v3.ViewModels.HistoryViewModel;
-import com.ryancase.golf_v3.ViewModels.HoleViewModel;
 import com.ryancase.golf_v3.databinding.FragmentHistoryBinding;
-import com.ryancase.golf_v3.databinding.FragmentHoleBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +33,7 @@ import java.util.List;
  * File description here...
  */
 
-public class HistoryFragment extends Fragment implements HoleView {
+public class HistoryFragment extends android.support.v4.app.Fragment implements HoleView {
 
     private final String FRAGMENT_TAG = "HOLE";
 
@@ -94,6 +86,8 @@ public class HistoryFragment extends Fragment implements HoleView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_history, container, false);
 
+        getActivity().setTitle(R.string.history);
+
         binding = DataBindingUtil.bind(retval);
 
 
@@ -112,7 +106,6 @@ public class HistoryFragment extends Fragment implements HoleView {
     }
 
     private void populateViewModelElements() {
-        viewModel.setTitle("History");
         roundThings = new ArrayList<>();
         dates = new ArrayList<>();
         scores = new ArrayList<>();
@@ -140,7 +133,7 @@ public class HistoryFragment extends Fragment implements HoleView {
 
                 int score = round.getBackNine().getScore() + round.getFrontNine().getScore();
 
-                dates.add(String.format(score + "\t\t" + round.getCourse() + "\t\t\t" + round.getDate()));
+                dates.add(String.format(score + "\t\t\t" + round.getCourse().toUpperCase() + "\t\t\t\t\t" + round.getDate()));
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
 
@@ -165,6 +158,19 @@ public class HistoryFragment extends Fragment implements HoleView {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+        viewModel.getHistoryList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                RoundThing roundSelected = roundThings.get(position);
+
+                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                HistoryItemFragment stat = new HistoryItemFragment(roundSelected);
+                fragmentTransaction.add(R.id.content_view, stat, "STAT");
+                fragmentTransaction.commit();
             }
         });
     }

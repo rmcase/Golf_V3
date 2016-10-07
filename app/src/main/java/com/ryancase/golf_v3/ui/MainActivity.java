@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadHistoryFragment() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HistoryFragment hist = new HistoryFragment();
         startButton.setVisibility(View.INVISIBLE);
         historyButton.setVisibility(View.INVISIBLE);
