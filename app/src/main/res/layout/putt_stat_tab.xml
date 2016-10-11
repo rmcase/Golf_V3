@@ -27,55 +27,45 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:text="Putt Rating: "
                     android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="@{viewModel.puttRating}"
                     android:textSize="42sp" />
             </TableRow>
             <!-- ^ DRIVER RATING ROW ^ -->
 
-            <TableRow>
+            <TableRow
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:text="Putts: "
                     android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="@{viewModel.putts}"
                     android:textSize="14sp" />
             </TableRow>
             <!-- ^ FAIRWAYS ROW ^ -->
 
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Percentage of Putts Made: "
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.puttPercentage}"
-                    android:textSize="14sp" />
-            </TableRow>
-            <!-- ^ FAIRWAY PERCENTAGE ROW ^ -->
-
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <!-- ^ CHART ROW ^ -->
         </TableLayout>
     </LinearLayout>
 </layout>

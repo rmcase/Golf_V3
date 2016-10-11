@@ -71,6 +71,8 @@ public class HoleFragment extends Fragment implements HoleView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_hole, container, false);
 
+        getActivity().setTitle("Hole " + holeNum + "\t\t—\t\t" + Round.getCourse());
+
         binding = DataBindingUtil.bind(retval);
 
 

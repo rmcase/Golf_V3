@@ -2,9 +2,12 @@ package com.ryancase.golf_v3.ViewModels;
 
 import android.databinding.BaseObservable;
 
+import com.github.mikephil.charting.charts.PieChart;
+
 
 public class PuttViewModel extends BaseObservable {
     private String putts, puttRating, puttPercentage;
+    private PieChart pieChart;
 
     public PuttViewModel() {
 

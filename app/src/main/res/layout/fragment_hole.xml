@@ -23,33 +23,19 @@
             android:layout_height="match_parent">
 
             <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@{viewModel.title}"
-                    android:textSize="22sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:gravity="center_horizontal">
 
                 <NumberPicker
                     android:id="@+id/scoreSelector"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <NumberPicker
                     android:id="@+id/parSelector"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
@@ -155,16 +141,17 @@
 
                         <NumberPicker
                             android:id="@+id/ratingSelector"
-                            android:layout_height="wrap_content"
-                            android:layout_width="5dp" />
+                            android:layout_width="5dp"
+                            android:layout_height="wrap_content" />
                     </TableRow>
 
                     <TableRow>
+
                         <CheckBox
                             android:id="@+id/ratingConfirm"
-                            android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:text="Confirm Rating"/>
+                            android:layout_height="wrap_content"
+                            android:text="Confirm Rating" />
                     </TableRow>
                 </TableLayout>
             </TableRow>
