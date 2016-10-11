@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ryancase.golf_v3.ViewModels.StatisticsViewModel" />
+    </data>
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        tools:context=".ViewModels.StatisticsViewModel">
+
+        <!--Android:gravity sets the gravity of the content of the View its used on.
+            Android:layout_gravity sets the gravity of the View or Layout in its parent.-->
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:padding="5dp" />
+        <!-- ^ CHART ROW ^ -->
+
+        <NumberPicker
+            android:id="@+id/graphPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/chart" />
+    </RelativeLayout>
+</layout>
+

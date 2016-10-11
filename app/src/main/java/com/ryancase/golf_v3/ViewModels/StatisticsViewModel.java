@@ -3,11 +3,11 @@ package com.ryancase.golf_v3.ViewModels;
 import android.databinding.BaseObservable;
 
 
-public class OverviewViewModel extends BaseObservable {
+public class StatisticsViewModel extends BaseObservable {
     private String score, scoreToPar, par;
     private String frontScore, backScore;
 
-    public OverviewViewModel() {
+    public StatisticsViewModel() {
 
     }
 

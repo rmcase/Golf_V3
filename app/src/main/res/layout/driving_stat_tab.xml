@@ -21,8 +21,7 @@
             android:layout_gravity="center_horizontal"
             android:padding="20dp">
 
-            <TableRow
-                android:paddingBottom="10dp">
+            <TableRow android:paddingBottom="10dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -35,8 +34,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{viewModel.driverRating}"
-                    android:textSize="42sp" />
+                    android:text="Fairways: "
+                    android:textSize="14sp" />
+
             </TableRow>
             <!-- ^ DRIVER RATING ROW ^ -->
 
@@ -46,35 +46,25 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Fairways: "
-                    android:textSize="14sp" />
+                    android:text="@{viewModel.driverRating}"
+                    android:textSize="42sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.fairways}"
-                    android:textSize="14sp" />
+                    android:textSize="42sp" />
             </TableRow>
             <!-- ^ FAIRWAYS ROW ^ -->
 
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Percentage of Fairways Hit: "
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.fairwayPercentage}"
-                    android:textSize="14sp" />
-            </TableRow>
-            <!-- ^ FAIRWAY PERCENTAGE ROW ^ -->
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <!-- ^ CHART ROW ^ -->
 
         </TableLayout>
     </LinearLayout>

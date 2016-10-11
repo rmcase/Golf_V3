@@ -111,42 +111,6 @@
             </TableRow>
             <!-- ^ PAR ROW ^ -->
 
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Course: "
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.course}"
-                    android:textSize="14sp" />
-            </TableRow>
-            <!-- ^ COURSE ROW ^ -->
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Date: "
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.date}"
-                    android:textSize="14sp" />
-            </TableRow>
-            <!-- ^ DATE ROW ^ -->
-
         </TableLayout>
     </LinearLayout>
 </layout>

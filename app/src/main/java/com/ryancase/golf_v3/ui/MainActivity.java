@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button historyButton;
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
+    private Button statisticsButton;
 
     @Override
     public void onBackPressed() {
@@ -61,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        statisticsButton = (Button) findViewById(R.id.statisticsButton);
+
+        statisticsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadStatisticsFragment();
+            }
+        });
+
     }
 
     private void loadHoleFragment() {
@@ -78,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         HoleFragment hole = new HoleFragment(1);
         startButton.setVisibility(View.INVISIBLE);
         historyButton.setVisibility(View.INVISIBLE);
+        statisticsButton.setVisibility(View.INVISIBLE);
         fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
@@ -88,9 +100,19 @@ public class MainActivity extends AppCompatActivity {
         HistoryFragment hist = new HistoryFragment();
         startButton.setVisibility(View.INVISIBLE);
         historyButton.setVisibility(View.INVISIBLE);
+        statisticsButton.setVisibility(View.INVISIBLE);
         fragmentTransaction.add(R.id.content_view, hist, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
 
-
+    private void loadStatisticsFragment() {
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        StatisticsFragment stats = new StatisticsFragment();
+        startButton.setVisibility(View.INVISIBLE);
+        historyButton.setVisibility(View.INVISIBLE);
+        statisticsButton.setVisibility(View.INVISIBLE);
+        fragmentTransaction.add(R.id.content_view, stats, FRAGMENT_TAG);
+        fragmentTransaction.commit();
+    }
 }

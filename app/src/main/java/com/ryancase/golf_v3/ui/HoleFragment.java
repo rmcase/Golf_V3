@@ -104,7 +104,11 @@ public class HoleFragment extends Fragment implements HoleView {
         viewModel.getRatingSelector().setMinValue(0);
         viewModel.getRatingSelector().setMaxValue(4);
         viewModel.getRatingSelector().setDisplayedValues(ratingStrings);
-        viewModel.getRatingSelector().setValue(1);
+        if(viewModel.getParForHole() == 3 && viewModel.getClubToRate().equals("Driver")) {
+            viewModel.getRatingSelector().setValue(0);
+        } else {
+            viewModel.getRatingSelector().setValue(2);
+        }
         viewModel.getScoreSelect().setMinValue(1);
         viewModel.getScoreSelect().setMaxValue(10);
         viewModel.getScoreSelect().setValue(4);
@@ -228,7 +232,7 @@ public class HoleFragment extends Fragment implements HoleView {
                     viewModel.getRatingConfirm().setChecked(false);
                 } else if(viewModel.getClubToRate().getText() == "Putt") {
                     viewModel.setPuttRating(viewModel.getRatingSelector().getValue());
-                    viewModel.getClubToRate().setText("√");
+                    viewModel.getClubToRate().setText("");
                     viewModel.getRatingConfirm().setEnabled(false);
                 } else {
 

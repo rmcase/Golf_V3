@@ -20,7 +20,6 @@ import com.ryancase.golf_v3.databinding.OverviewStatTabBinding;
 public class OverviewTabFragment extends Fragment {
 
     private int score, scoreToPar, frontScore, backScore, par;
-    private String course, date;
 
     private OverviewStatTabBinding binding;
 
@@ -39,8 +38,6 @@ public class OverviewTabFragment extends Fragment {
             backScore = getArguments().getInt("backScore");
             frontScore = getArguments().getInt("frontScore");
             par = getArguments().getInt("par");
-            course = getArguments().getString("course");
-            date = getArguments().getString("date");
         }
     }
 
@@ -59,8 +56,6 @@ public class OverviewTabFragment extends Fragment {
         viewModel.setBackScore(String.valueOf(backScore));
         viewModel.setPar(String.valueOf(par));
         viewModel.setScoreToPar(String.valueOf(scoreToPar));
-        viewModel.setCourse(course);
-        viewModel.setDate(date);
 
         return retval;
     }

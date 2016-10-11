@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:padding="20dp">
+            android:padding="10dp">
 
             <TableRow>
 
@@ -34,8 +34,16 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{viewModel.approachRating}"
+                    android:text="Iron Rating: "
                     android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="GIRs: "
+                    android:textSize="14sp" />
+
             </TableRow>
             <!-- ^ APPROACH RATING ROW ^ -->
 
@@ -45,7 +53,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Iron Rating: "
+                    android:text="@{viewModel.approachRating}"
                     android:textSize="14sp" />
 
                 <TextView
@@ -53,17 +61,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.ironRating}"
-                    android:textSize="14sp" />
-            </TableRow>
-            <!-- ^ IRON RATING ROW ^ -->
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="GIRs: "
                     android:textSize="14sp" />
 
                 <TextView
@@ -73,25 +70,39 @@
                     android:text="@{viewModel.greens}"
                     android:textSize="14sp" />
             </TableRow>
-            <!-- ^ GREENS ROW ^ -->
+            <!-- ^ IRON RATING ROW ^ -->
 
             <TableRow>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Percentage of Greens Hit: "
-                    android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.greenPercentage}"
-                    android:textSize="14sp" />
             </TableRow>
+            <!-- ^ GREENS ROW ^ -->
+
+            <!--<TableRow>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="Percentage of Greens Hit: "-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="@{viewModel.greenPercentage}"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</TableRow>-->
             <!-- ^ GREEN PERCENTAGE ROW ^ -->
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <!-- ^ CHART ROW ^ -->
 
         </TableLayout>
     </LinearLayout>
