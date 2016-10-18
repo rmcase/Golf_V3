@@ -31,12 +31,16 @@
                     android:id="@+id/scoreSelector"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="1" />
 
                 <NumberPicker
                     android:id="@+id/parSelector"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="1" />
 
             </TableRow>
@@ -156,59 +160,14 @@
                 </TableLayout>
             </TableRow>
 
-
-            <!--<TableRow-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:layout_marginRight="15dp">-->
-
-            <!--<TextView-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:id="@+id/clubToRate" />-->
-            <!--</TableRow>-->
-
-            <!--<TableRow-->
-            <!--android:layout_width="0px"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:layout_marginRight="15dp">-->
-
-            <!--<CheckBox-->
-            <!--android:id="@+id/checkboxA"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="@{viewModel.checkboxA.getText()}"/>-->
-            <!--<CheckBox-->
-            <!--android:id="@+id/checkboxB"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="@{viewModel.checkboxB.getText()}"/>-->
-            <!--<CheckBox-->
-            <!--android:id="@+id/checkboxC"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="@{viewModel.checkboxC.getText()}"/>-->
-            <!--<CheckBox-->
-            <!--android:id="@+id/checkboxD"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="@{viewModel.checkboxD.getText()}"/>-->
-            <!--<CheckBox-->
-            <!--android:id="@+id/checkboxN"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="@{viewModel.checkboxN.getText()}"/>-->
-            <!--</TableRow>-->
-
             <Button
                 android:id="@+id/nextHole"
+                style="@style/ButtonColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
 
 
         </TableLayout>

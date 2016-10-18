@@ -5,11 +5,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableLayout;
 
+import com.android.annotations.VisibleForTesting;
+
 
 public class HistoryViewModel extends BaseObservable {
     private String title;
 
     private ListView historyList;
+
+    private int visibility;
 
     public HistoryViewModel() {
 

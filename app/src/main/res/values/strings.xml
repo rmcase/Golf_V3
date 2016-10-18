@@ -11,4 +11,7 @@
     <string name="finish_round">Finish Round</string>
     <string name="history">History</string>
     <string name="statistics">Statistics</string>
+    <string name="average">Avg:\t\t</string>
+    <string name="min">Min:\t\t</string>
+    <string name="max">Max:\t\t</string>
 </resources>

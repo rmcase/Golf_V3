@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
     tools:context=".ui.MainActivity">
 
     <FrameLayout
@@ -11,27 +12,30 @@
         android:layout_height="match_parent" />
 
     <Button
+        android:id="@+id/startButton"
+        style="@style/ButtonColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start_round"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
-        android:id="@+id/startButton" />
+        android:text="@string/start_round" />
 
     <Button
+        android:id="@+id/historyButton"
+        style="@style/ButtonColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/history"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:id="@+id/historyButton" />
+        android:text="@string/history" />
 
     <Button
+        android:id="@+id/statisticsButton"
+        style="@style/ButtonColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/statistics"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="190dp"
-        android:id="@+id/statisticsButton" />
+        android:text="@string/statistics" />
 
 </RelativeLayout>

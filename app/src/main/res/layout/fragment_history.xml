@@ -17,6 +17,14 @@
         <!--Android:gravity sets the gravity of the content of the View its used on.
             Android:layout_gravity sets the gravity of the View or Layout in its parent.-->
 
+        <ProgressBar
+            android:id="@+id/loading_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp"
+            android:visibility="gone" />
+
+
         <TableLayout
             android:id="@+id/table"
             android:layout_width="match_parent"

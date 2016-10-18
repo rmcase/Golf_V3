@@ -4,51 +4,34 @@ import android.databinding.BaseObservable;
 
 
 public class StatisticsViewModel extends BaseObservable {
-    private String score, scoreToPar, par;
-    private String frontScore, backScore;
+    private String average, max, min;
 
     public StatisticsViewModel() {
 
     }
 
-    public String getScoreToPar() {
-        return scoreToPar;
+    public String getAverage() {
+        return average;
     }
 
-    public void setScoreToPar(String scoreToPar) {
-        this.scoreToPar = scoreToPar;
+    public void setAverage(String average) {
+        this.average = average;
     }
 
-    public String getPar() {
-        return par;
+    public String getMax() {
+        return max;
     }
 
-    public void setPar(String par) {
-        this.par = par;
+    public void setMax(String max) {
+        this.max = max;
     }
 
-    public String getBackScore() {
-        return backScore;
+    public String getMin() {
+        return min;
     }
 
-    public void setBackScore(String backScore) {
-        this.backScore = backScore;
-    }
-
-    public String getFrontScore() {
-        return frontScore;
-    }
-
-    public void setFrontScore(String frontScore) {
-        this.frontScore = frontScore;
-    }
-
-    public String getScore() {
-        return score;
-    }
-
-    public void setScore(String score) {
-        this.score = score;
+    public void setMin(String min) {
+        this.min = min;
     }
 }
 

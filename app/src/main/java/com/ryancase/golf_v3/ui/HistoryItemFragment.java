@@ -1,12 +1,8 @@
 package com.ryancase.golf_v3.ui;
 
-import android.app.Fragment;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.FloatRange;
 import android.support.v4.app.FragmentTabHost;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -174,7 +170,7 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         float retval;
 
         String frontNinePuttPercent = round.getFrontNine().madePuttsPercentage().substring(0, round.getFrontNine().madePuttsPercentage().length()-1);
-        String backNinePuttPercent = round.getBackNine().madePuttsPercentage().substring(0, round.getBackNine().madePuttsPercentage().length()-1);;
+        String backNinePuttPercent = round.getBackNine().madePuttsPercentage().substring(0, round.getBackNine().madePuttsPercentage().length()-1);
 
         if(round.getBackNine().getScore() == 0) {
             return Float.valueOf(frontNinePuttPercent);

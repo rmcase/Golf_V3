@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -48,6 +50,8 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     private List<Integer> scores;
 
     private DatabaseReference database;
+
+    private ProgressBar progressBar;
 
     public HistoryFragment() {
     }
@@ -110,10 +114,12 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
         dates = new ArrayList<>();
         scores = new ArrayList<>();
 
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     private void bindViewModelElements() {
        viewModel.setHistoryList(binding.historyList);
+        progressBar = binding.loadingIndicator;
 
     }
 
@@ -129,6 +135,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
                 roundThings.add(round);
 
+                progressBar.setVisibility(View.GONE);
                 Log.d("THEMOFO:", "" + round.getDate());
 
                 int score = round.getBackNine().getScore() + round.getFrontNine().getScore();
@@ -138,6 +145,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
 
                 viewModel.getHistoryList().setAdapter(adapter);
+
             }
 
             @Override

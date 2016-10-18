@@ -1,5 +1,6 @@
 package com.ryancase.golf_v3.ui;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -9,6 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -36,6 +40,37 @@ public class HoleFragment extends Fragment implements HoleView {
     public HoleFragment(int holeNum) {
         this.holeNum = holeNum;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_score:
+                // User chose the "Settings" item, show the app settings UI...
+                showCurrentStatsDialog();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    private void showCurrentStatsDialog() {
+        FragmentManager fm = getFragmentManager();
+        DialogFragment dialog = new MyDialogFragment(viewModel.getScoreForHole(), viewModel.getScoreRelativeToPar(), viewModel.getNumberOfPutts()); // creating new object
+        dialog.show(fm, "dialog");
+    }
+
 
     @Override
     public void onResume() {
@@ -73,6 +108,8 @@ public class HoleFragment extends Fragment implements HoleView {
 
         getActivity().setTitle("Hole " + holeNum + "\t\t—\t\t" + Round.getCourse());
 
+        setHasOptionsMenu(true);
+
         binding = DataBindingUtil.bind(retval);
 
 
@@ -104,7 +141,7 @@ public class HoleFragment extends Fragment implements HoleView {
         viewModel.getRatingSelector().setMinValue(0);
         viewModel.getRatingSelector().setMaxValue(4);
         viewModel.getRatingSelector().setDisplayedValues(ratingStrings);
-        if(viewModel.getParForHole() == 3 && viewModel.getClubToRate().equals("Driver")) {
+        if (viewModel.getParForHole() == 3 && viewModel.getClubToRate().equals("Driver")) {
             viewModel.getRatingSelector().setValue(0);
         } else {
             viewModel.getRatingSelector().setValue(2);
@@ -218,19 +255,19 @@ public class HoleFragment extends Fragment implements HoleView {
             @Override
             public void onClick(View v) {
 
-                if(viewModel.getClubToRate().getText() == "Driver") {
+                if (viewModel.getClubToRate().getText() == "Driver") {
                     viewModel.setDriverRating(viewModel.getRatingSelector().getValue());
                     viewModel.getClubToRate().setText("Iron");
                     viewModel.getRatingConfirm().setChecked(false);
-                } else if(viewModel.getClubToRate().getText() == "Iron") {
+                } else if (viewModel.getClubToRate().getText() == "Iron") {
                     viewModel.setIronRating(viewModel.getRatingSelector().getValue());
                     viewModel.getClubToRate().setText("Approach");
                     viewModel.getRatingConfirm().setChecked(false);
-                } else if(viewModel.getClubToRate().getText() == "Approach") {
+                } else if (viewModel.getClubToRate().getText() == "Approach") {
                     viewModel.setApproachRating(viewModel.getRatingSelector().getValue());
                     viewModel.getClubToRate().setText("Putt");
                     viewModel.getRatingConfirm().setChecked(false);
-                } else if(viewModel.getClubToRate().getText() == "Putt") {
+                } else if (viewModel.getClubToRate().getText() == "Putt") {
                     viewModel.setPuttRating(viewModel.getRatingSelector().getValue());
                     viewModel.getClubToRate().setText("");
                     viewModel.getRatingConfirm().setEnabled(false);
