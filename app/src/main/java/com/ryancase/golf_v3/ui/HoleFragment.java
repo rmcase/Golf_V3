@@ -67,7 +67,7 @@ public class HoleFragment extends Fragment implements HoleView {
 
     private void showCurrentStatsDialog() {
         FragmentManager fm = getFragmentManager();
-        DialogFragment dialog = new MyDialogFragment(viewModel.getScoreForHole(), viewModel.getScoreRelativeToPar(), viewModel.getNumberOfPutts()); // creating new object
+        DialogFragment dialog = new MyDialogFragment(Round.getScore(), Round.getRelativeScore(), Round.getPutts()); // creating new object
         dialog.show(fm, "dialog");
     }
 
@@ -152,6 +152,10 @@ public class HoleFragment extends Fragment implements HoleView {
         viewModel.getParSelect().setMinValue(3);
         viewModel.getParSelect().setMaxValue(5);
         viewModel.getParSelect().setValue(4);
+
+        Round.setScore(Round.getScore() + viewModel.getScoreForHole());
+        Round.setPutts(Round.getPutts() + viewModel.getNumberOfPutts());
+        Round.setRelativeScore(Round.getRelativeScore() + viewModel.getScoreRelativeToPar());
 
         if (holeNum == 18) {
             viewModel.getNextHoleButton().setText("Finish Round");

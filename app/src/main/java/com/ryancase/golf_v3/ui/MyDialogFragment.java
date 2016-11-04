@@ -42,7 +42,7 @@ public class MyDialogFragment extends DialogFragment {
         WindowManager.LayoutParams p = getDialog().getWindow().getAttributes();
         p.width = ViewGroup.LayoutParams.MATCH_PARENT;
         p.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE;
-        p.x = 200;
+//        p.x = 200;
         getDialog().getWindow().setAttributes(p);
 
         binding = DataBindingUtil.bind(view);

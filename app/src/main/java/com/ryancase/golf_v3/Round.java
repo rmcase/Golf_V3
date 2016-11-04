@@ -18,6 +18,23 @@ public class Round {
     private static String roundId;
     private static String course;
     private static Date datePlayed;
+    private static int score, putts, relativeScore;
+
+    public static void setPutts(int putts) {
+        Round.putts = putts;
+    }
+
+    public static int getRelativeScore() {
+        return relativeScore;
+    }
+
+    public static void setRelativeScore(int relativeScore) {
+        Round.relativeScore = relativeScore;
+    }
+
+    public static void setScore(int score) {
+        Round.score = score;
+    }
 
     public static String getDatePlayed() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
@@ -107,21 +124,21 @@ public class Round {
     private static String getLetterGrade(float average) {
         String retval;
 
-        if(average <= 1) {
+        if (average <= 1) {
             retval = "A";
-        } else if(average > 1 && average <= 1.30) {
+        } else if (average > 1 && average <= 1.30) {
             retval = "A-";
-        } else if(average > 1.30 && average <= 1.75) {
+        } else if (average > 1.30 && average <= 1.75) {
             retval = "B+";
-        } else if(average > 1.75 && average <= 2) {
+        } else if (average > 1.75 && average <= 2) {
             retval = "B";
-        } else if(average > 2  && average <= 2.30) {
+        } else if (average > 2 && average <= 2.30) {
             retval = "B-";
-        } else if(average > 2.30 && average <= 2.75) {
+        } else if (average > 2.30 && average <= 2.75) {
             retval = "C+";
-        } else if(average > 2.75 && average <= 3) {
+        } else if (average > 2.75 && average <= 3) {
             retval = "C";
-        } else if(average > 3 && average <= 3.30) {
+        } else if (average > 3 && average <= 3.30) {
             retval = "C-";
         } else {
             retval = "D";

@@ -21,93 +21,98 @@
             android:layout_gravity="center_horizontal"
             android:padding="20dp">
 
-            <TableRow>
+            <TableRow android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Score: "
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.score}"
-                    android:textSize="14sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
             </TableRow>
             <!-- ^ SCORE ROW ^ -->
 
-            <TableRow>
+            <TableRow android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Front Nine: "
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.frontScore}"
-                    android:textSize="14sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
             </TableRow>
             <!-- ^ FRONT SCORE ROW ^ -->
 
-            <TableRow>
+            <TableRow android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Back Nine: "
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.backScore}"
-                    android:textSize="14sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
             </TableRow>
             <!-- ^ BACK SCORE ROW ^ -->
 
-            <TableRow>
+            <TableRow android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Score To Par: "
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.scoreToPar}"
-                    android:textSize="14sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </TableRow>
             <!-- ^ SCORE TO PAR ROW ^ -->
 
-            <TableRow>
+            <TableRow android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Par: "
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.par}"
-                    android:textSize="14sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </TableRow>
             <!-- ^ PAR ROW ^ -->
 
