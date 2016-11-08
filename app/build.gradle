@@ -36,6 +36,7 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:9.4.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
     compile 'com.wefika:horizontal-picker:1.1.1'
+    compile 'com.github.bloder:magic:1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
