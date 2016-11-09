@@ -1,6 +1,5 @@
 package com.ryancase.golf_v3.ui;
 
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -10,7 +9,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,30 +16,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.ryancase.golf_v3.Hole;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.Round;
 import com.ryancase.golf_v3.RoundThing;
 import com.ryancase.golf_v3.ViewModels.CourseSelectViewModel;
-import com.ryancase.golf_v3.ViewModels.HoleViewModel;
 import com.ryancase.golf_v3.databinding.FragmentCourseSelectBinding;
-import com.ryancase.golf_v3.databinding.FragmentHoleBinding;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -140,6 +130,8 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
         }
         binding.setViewModel(viewModel);
 
+        mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
         bindViewModelElements();
 
         populateViewModelElements();
@@ -163,6 +155,7 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
     private void bindViewModelElements() {
         viewModel.setPreviousCourseList(binding.savedCoursesList);
         viewModel.setNewCourseButton(binding.newCourseButton);
+        viewModel.setBeginRoundButton(binding.beginRoundButton);
     }
 
     private void loadRounds() {
@@ -174,8 +167,6 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 RoundThing round = dataSnapshot.getValue(RoundThing.class);
-
-
 
                 courseNames.add(round.getCourse().toUpperCase());
                 HashSet<String> set = new HashSet<>(courseNames);
@@ -220,16 +211,11 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
     }
 
     private void selectCourseName() {
-//        binding.previousCourseTv.setVisibility(View.GONE);
         viewModel.getNewCourseButton().setVisibility(View.GONE);
-//        viewModel.getPreviousCourseList().setVisibility(View.GONE);
 
-        binding.courseNameTv.setVisibility(View.VISIBLE);
-        binding.courseNameEt.setVisibility(View.VISIBLE);
-//        binding.beginRoundButton.setVisibility(View.VISIBLE);
+//        binding.courseNameTv.setVisibility(View.VISIBLE);
 
         binding.courseNameEt.requestFocus();
-        mgr = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.showSoftInput(binding.courseNameEt, InputMethodManager.SHOW_IMPLICIT);
 
         binding.courseNameEt.setSingleLine(true);
@@ -242,10 +228,10 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() != 0) {
-                    binding.beginRoundButton.setVisibility(View.VISIBLE);
+                if (s.length() != 0) {
+                    viewModel.getBeginRoundButton().setVisibility(View.VISIBLE);
                 } else {
-                    binding.beginRoundButton.setVisibility(View.GONE);
+                    viewModel.getBeginRoundButton().setVisibility(View.GONE);
                 }
             }
 
@@ -255,7 +241,7 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
             }
         });
 
-        binding.beginRoundButton.setOnClickListener(new View.OnClickListener() {
+        viewModel.getBeginRoundButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Round.setCourse(binding.courseNameEt.getText().toString().toUpperCase());
@@ -270,6 +256,7 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HoleFragment hole = new HoleFragment(1);
         fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
+        mgr.hideSoftInputFromWindow(binding.courseNameEt.getWindowToken(), 0);
         fragmentTransaction.commit();
     }
 }

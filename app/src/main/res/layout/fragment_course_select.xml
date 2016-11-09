@@ -8,10 +8,11 @@
             type="com.ryancase.golf_v3.ViewModels.CourseSelectViewModel" />
     </data>
 
-    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/adbTan"
         android:paddingBottom="14dp"
         android:paddingLeft="28dp"
         android:paddingRight="28dp"
@@ -32,28 +33,48 @@
                 android:gravity="center"
                 android:paddingBottom="20dp">
 
-                <Button
+                <com.github.florent37.materialtextfield.MaterialTextField xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/matTv"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    app:mtf_openKeyboardOnFocus="true">
+
+                    <EditText
+                        android:id="@+id/courseNameEt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="New Course"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="2dp"
+                        android:textColor="@color/fDarkPurple"
+                        android:textColorHint="@color/fDarkTeal"
+                        android:textSize="15sp"
+                        android:visibility="visible" />
+                </com.github.florent37.materialtextfield.MaterialTextField>
+
+                <info.hoang8f.widget.FButton
                     android:id="@+id/newCourseButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="New Course" />
+                    android:text="New Course"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    fbutton:buttonColor="@color/fPurple"
+                    fbutton:cornerRadius="5dp"
+                    fbutton:shadowColor="@color/adbGreen"
+                    fbutton:shadowEnabled="true"
+                    fbutton:shadowHeight="5dp"/>
 
                 <TextView
                     android:id="@+id/courseNameTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/fDarkPurple"
                     android:text="Course Name:"
-                    android:visibility="gone" />
-
-                <EditText
-                    android:id="@+id/courseNameEt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:inputType="text"
-                    android:padding="10dp"
+                    android:textColor="@color/white"
                     android:visibility="gone" />
             </TableRow>
 
@@ -61,14 +82,21 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingBottom="20dp">
+                android:paddingBottom="20dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp">
 
-                <Button
+                <info.hoang8f.widget.FButton
                     android:id="@+id/beginRoundButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Begin Round"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    fbutton:buttonColor="@color/adbGreen"
+                    fbutton:cornerRadius="5dp"
+                    fbutton:shadowColor="@color/fPurple"
+                    fbutton:shadowEnabled="true"
+                    fbutton:shadowHeight="5dp" />
             </TableRow>
 
             <TableRow

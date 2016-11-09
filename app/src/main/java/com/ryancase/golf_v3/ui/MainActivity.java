@@ -4,10 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,14 +14,17 @@ import com.ryancase.golf_v3.Round;
 
 import java.util.Date;
 
+import br.com.bloder.magic.view.MagicButton;
+
 public class MainActivity extends AppCompatActivity {
 
     private final String FRAGMENT_TAG = "HOLE";
-    private Button startButton;
-    private Button historyButton;
+//    private Button startButton;
+//    private Button historyButton;
+//    private Button statisticsButton;
+    private MagicButton startButton, historyButton, statisticsButton;
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
-    private Button statisticsButton;
 
     @Override
     public void onBackPressed() {
@@ -49,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
             currentUser = auth.getCurrentUser();
         }
 
-        startButton = (Button) findViewById(R.id.startButton);
+        startButton = (MagicButton) findViewById(R.id.startButton);
         if (startButton != null) {
             startButton.setVisibility(View.VISIBLE);
         }
 
-        startButton.setOnClickListener(new View.OnClickListener() {
+        startButton.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadHoleFragment();
@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        historyButton = (Button) findViewById(R.id.historyButton);
+        historyButton = (MagicButton) findViewById(R.id.historyButton);
 
-        historyButton.setOnClickListener(new View.OnClickListener() {
+        historyButton.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadHistoryFragment();
@@ -72,14 +72,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        statisticsButton = (Button) findViewById(R.id.statisticsButton);
+        statisticsButton = (MagicButton) findViewById(R.id.statisticsButton);
 
-        statisticsButton.setOnClickListener(new View.OnClickListener() {
+        statisticsButton.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadStatisticsFragment();
             }
         });
+
+//        MagicButton magicButton = (MagicButton) findViewById(R.id.magic_button);
+//        magicButton.setMagicButtonClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                loadHoleFragment();
+//            }
+//        });
 
     }
 
@@ -88,18 +96,18 @@ public class MainActivity extends AppCompatActivity {
         Nine back = new Nine();
         Round.setFrontNine(front);
         Round.setBackNine(back);
-//        Round.setRoundId(currentUser.getUid());
+//        Round.setRoundId(currentUser.getEmail());
         Round.setRoundId("r.c8700@gmail.com");
-        Round.setCourse("Bear Creek");
+//        Round.setCourse("Bear Creek");
         Round.setDatePlayed(new Date());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        HoleFragment hole = new HoleFragment(1);
+        CourseSelectionFragment selectionFragment = new CourseSelectionFragment();
         startButton.setVisibility(View.INVISIBLE);
         historyButton.setVisibility(View.INVISIBLE);
         statisticsButton.setVisibility(View.INVISIBLE);
-        fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
+        fragmentTransaction.add(R.id.content_view, selectionFragment, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
 

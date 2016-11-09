@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/adbTan"
     tools:context=".ui.MainActivity">
 
     <FrameLayout
@@ -11,31 +12,58 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
+    <br.com.bloder.magic.view.MagicButton
         android:id="@+id/startButton"
-        style="@style/ButtonColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:text="@string/start_round" />
+        android:layout_marginTop="30dp"
+        app:button_icon="@drawable/golfflag"
+        app:button_icon_height="32dp"
+        app:button_icon_width="32dp"
+        app:expandable_area_color="@color/fDarkPurple"
+        app:hide_text="New Round"
+        app:hide_text_color="@color/white"
+        app:hide_text_size="6.5dp"
+        app:icon_button_color="@color/fDarkTeal"
+        app:magic_button_size="60dp"
+        app:paddingEnd="10dp"
+        app:paddingStart="10dp" />
 
-    <Button
+    <br.com.bloder.magic.view.MagicButton
         android:id="@+id/historyButton"
-        style="@style/ButtonColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:text="@string/history" />
+        android:layout_marginTop="120dp"
+        app:button_icon="@drawable/bulletlist"
+        app:button_icon_height="28.5dp"
+        app:button_icon_width="28.5dp"
+        app:expandable_area_color="@color/fDarkPurple"
+        app:hide_text="History"
+        app:hide_text_color="@color/white"
+        app:hide_text_size="5.75dp"
+        app:icon_button_color="@color/fDarkTeal"
+        app:magic_button_size="55dp"
+        app:paddingEnd="10dp"
+        app:paddingStart="10dp" />
 
-    <Button
+    <br.com.bloder.magic.view.MagicButton
         android:id="@+id/statisticsButton"
-        style="@style/ButtonColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="190dp"
-        android:text="@string/statistics" />
+        android:layout_marginTop="220dp"
+        app:button_icon="@drawable/linegraph"
+        app:button_icon_height="25dp"
+        app:button_icon_width="25dp"
+        app:expandable_area_color="@color/fDarkPurple"
+        app:hide_text="Statistics"
+        app:hide_text_color="@color/white"
+        app:hide_text_size="5dp"
+        app:icon_button_color="@color/fDarkTeal"
+        app:magic_button_size="50dp"
+        app:paddingEnd="10dp"
+        app:paddingStart="10dp" />
 
 </RelativeLayout>

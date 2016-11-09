@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "467985788864-tvhj8t8fmp5qqpc3fiuags3bvpgfm767.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ryancase.golf_v3",
+            "certificate_hash": "BF97EEC20D8732A549AE5857DB79D627CC81CCB4"
+          }
+        },
+        {
+          "client_id": "467985788864-qi7h5jk6ako8ae1a3rtaet3rgi0al3ki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ryancase.golf_v3",
+            "certificate_hash": "85E55369771421FB7D477C34403C6FC965D477D2"
+          }
+        },
+        {
           "client_id": "467985788864-6i0449he50pclb9hkpe9hta2j4e1prqp.apps.googleusercontent.com",
           "client_type": 3
         }
