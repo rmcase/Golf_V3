@@ -230,9 +230,9 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 dataSet.setLineWidth(1.5f);
                 dataSet.setCircleRadius(5f);
                 dataSet.setCircleHoleRadius(3.25f);
-                dataSet.setColor(getResources().getColor(R.color.darkgreen));
+                dataSet.setColor(getResources().getColor(R.color.fTeal));
                 dataSet.setCircleColor(Color.BLACK);
-                dataSet.setCircleColorHole(getResources().getColor(R.color.darkgreen));
+                dataSet.setCircleColorHole(getResources().getColor(R.color.fTeal));
 
                 LineData lineData = new LineData(dataSet);
                 lineChart.setData(lineData);

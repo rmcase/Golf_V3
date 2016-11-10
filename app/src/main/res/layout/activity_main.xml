@@ -66,4 +66,18 @@
         app:paddingEnd="10dp"
         app:paddingStart="10dp" />
 
+    <info.hoang8f.widget.FButton
+        android:id="@+id/signOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="360dp"
+        android:text="Sign Out"
+        android:textColor="@color/white"
+        app:buttonColor="@color/fDarkPurple"
+        app:cornerRadius="6.75dp"
+        app:shadowColor="@color/fPurple"
+        app:shadowEnabled="true"
+        app:shadowHeight="3.5dp" />
+
 </RelativeLayout>

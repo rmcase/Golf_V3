@@ -2,8 +2,10 @@ package com.ryancase.golf_v3.ui;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,14 +17,14 @@ import com.ryancase.golf_v3.Round;
 import java.util.Date;
 
 import br.com.bloder.magic.view.MagicButton;
+import info.hoang8f.widget.FButton;
 
 public class MainActivity extends AppCompatActivity {
 
     private final String FRAGMENT_TAG = "HOLE";
-//    private Button startButton;
-//    private Button historyButton;
-//    private Button statisticsButton;
     private MagicButton startButton, historyButton, statisticsButton;
+    private FButton signOutButton;
+
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
 
@@ -81,13 +83,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        MagicButton magicButton = (MagicButton) findViewById(R.id.magic_button);
-//        magicButton.setMagicButtonClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                loadHoleFragment();
-//            }
-//        });
+        signOutButton = (FButton) findViewById(R.id.signOutButton);
+
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Log.d("CURUSER:", "" + auth.getCurrentUser());
+
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
+        });
+
 
     }
 
@@ -96,17 +103,18 @@ public class MainActivity extends AppCompatActivity {
         Nine back = new Nine();
         Round.setFrontNine(front);
         Round.setBackNine(back);
-//        Round.setRoundId(currentUser.getEmail());
-        Round.setRoundId("r.c8700@gmail.com");
+        Round.setRoundId(currentUser.getEmail());
+//        Round.setRoundId("r.c8700@gmail.com");
 //        Round.setCourse("Bear Creek");
         Round.setDatePlayed(new Date());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         CourseSelectionFragment selectionFragment = new CourseSelectionFragment();
-        startButton.setVisibility(View.INVISIBLE);
-        historyButton.setVisibility(View.INVISIBLE);
-        statisticsButton.setVisibility(View.INVISIBLE);
+        startButton.setVisibility(View.GONE);
+        historyButton.setVisibility(View.GONE);
+        statisticsButton.setVisibility(View.GONE);
+        signOutButton.setVisibility(View.GONE);
         fragmentTransaction.add(R.id.content_view, selectionFragment, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
@@ -115,9 +123,10 @@ public class MainActivity extends AppCompatActivity {
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HistoryFragment hist = new HistoryFragment();
-        startButton.setVisibility(View.INVISIBLE);
-        historyButton.setVisibility(View.INVISIBLE);
-        statisticsButton.setVisibility(View.INVISIBLE);
+        startButton.setVisibility(View.GONE);
+        historyButton.setVisibility(View.GONE);
+        statisticsButton.setVisibility(View.GONE);
+        signOutButton.setVisibility(View.GONE);
         fragmentTransaction.add(R.id.content_view, hist, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
@@ -126,9 +135,10 @@ public class MainActivity extends AppCompatActivity {
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         StatisticsFragment stats = new StatisticsFragment();
-        startButton.setVisibility(View.INVISIBLE);
-        historyButton.setVisibility(View.INVISIBLE);
-        statisticsButton.setVisibility(View.INVISIBLE);
+        startButton.setVisibility(View.GONE);
+        historyButton.setVisibility(View.GONE);
+        statisticsButton.setVisibility(View.GONE);
+        signOutButton.setVisibility(View.GONE);
         fragmentTransaction.add(R.id.content_view, stats, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
