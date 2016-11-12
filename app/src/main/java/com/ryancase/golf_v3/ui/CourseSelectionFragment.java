@@ -212,8 +212,8 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
 
     private void selectCourseName() {
         viewModel.getNewCourseButton().setVisibility(View.GONE);
-
-//        binding.courseNameTv.setVisibility(View.VISIBLE);
+        binding.courseNameEt.setVisibility(View.VISIBLE);
+        binding.courseNameTv.setVisibility(View.VISIBLE);
 
         binding.courseNameEt.requestFocus();
         mgr.showSoftInput(binding.courseNameEt, InputMethodManager.SHOW_IMPLICIT);

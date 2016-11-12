@@ -11,7 +11,7 @@
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lgray"
+        android:background="@color/grey"
         tools:context=".ViewModels.StatisticsViewModel">
 
         <!--Android:gravity sets the gravity of the content of the View its used on.
@@ -20,7 +20,7 @@
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:layout_margin="8dp"/>
+            android:layout_margin="2dp" />
         <!-- ^ CHART ROW ^ -->
 
         <TableLayout
@@ -31,16 +31,21 @@
 
             <TableRow>
 
-                <NumberPicker
+                <com.ryancase.golf_v3.Helpers.NumberPickerRc
                     android:id="@+id/graphPicker"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3" />
+                <!--<NumberPicker-->
+                <!--android:id="@+id/graphPicker"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="3" />-->
 
                 <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <TableLayout
                     android:layout_width="0dp"
@@ -58,6 +63,7 @@
                             android:layout_weight="1"
                             android:gravity="left"
                             android:text=""
+                            android:textColor="@color/fDarkPurple"
                             android:textSize="14sp" />
                     </TableRow>
 
@@ -71,6 +77,7 @@
                             android:layout_weight="1"
                             android:gravity="left"
                             android:text=""
+                            android:textColor="@color/fDarkPurple"
                             android:textSize="14sp" />
                     </TableRow>
 
@@ -84,6 +91,7 @@
                             android:layout_weight="1"
                             android:gravity="left"
                             android:text=""
+                            android:textColor="@color/fDarkPurple"
                             android:textSize="14sp" />
                     </TableRow>
                 </TableLayout>

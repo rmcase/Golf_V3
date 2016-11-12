@@ -20,7 +20,7 @@ import com.ryancase.golf_v3.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button loginButton, signUpButton, signInButton;
+    private Button signUpButton, signInButton;
     private EditText passwordText, emailText;
 
     private FirebaseAuth auth;

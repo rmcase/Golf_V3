@@ -12,7 +12,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/adbTan"
+        android:background="@color/white"
         android:paddingBottom="14dp"
         android:paddingLeft="28dp"
         android:paddingRight="28dp"
@@ -33,25 +33,28 @@
                 android:gravity="center"
                 android:paddingBottom="20dp">
 
-                <com.github.florent37.materialtextfield.MaterialTextField xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/matTv"
-                    android:layout_width="300dp"
+                <TextView
+                    android:id="@+id/courseNameTv"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:mtf_openKeyboardOnFocus="true">
+                    android:layout_weight="1"
+                    android:text="Course Name:"
+                    android:textColor="@color/fDarkPurple"
+                    android:visibility="gone" />
 
-                    <EditText
-                        android:id="@+id/courseNameEt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="New Course"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:padding="2dp"
-                        android:textColor="@color/fDarkPurple"
-                        android:textColorHint="@color/fDarkTeal"
-                        android:textSize="15sp"
-                        android:visibility="visible" />
-                </com.github.florent37.materialtextfield.MaterialTextField>
+                <EditText
+                    android:id="@+id/courseNameEt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="New Course"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="2dp"
+                    android:textColor="@color/fDarkPurple"
+                    android:textColorHint="@color/fDarkTeal"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
 
                 <info.hoang8f.widget.FButton
                     android:id="@+id/newCourseButton"
@@ -61,21 +64,12 @@
                     android:paddingRight="10dp"
                     android:text="New Course"
                     android:textColor="@color/white"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     fbutton:buttonColor="@color/fPurple"
                     fbutton:cornerRadius="5dp"
                     fbutton:shadowColor="@color/adbGreen"
                     fbutton:shadowEnabled="true"
-                    fbutton:shadowHeight="5dp"/>
-
-                <TextView
-                    android:id="@+id/courseNameTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/fDarkPurple"
-                    android:text="Course Name:"
-                    android:textColor="@color/white"
-                    android:visibility="gone" />
+                    fbutton:shadowHeight="5dp" />
             </TableRow>
 
             <TableRow

@@ -1,15 +1,14 @@
 package com.ryancase.golf_v3.ui;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -57,6 +56,31 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                // User chose the "Settings" item, show the app settings UI...
+                startActivity(new Intent(getActivity(), MainActivity.class));
+
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.home, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    @Override
     public void onResume() {
 
         super.onResume();
@@ -91,6 +115,8 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
         View retval = inflater.inflate(R.layout.fragment_history, container, false);
 
         getActivity().setTitle(R.string.history);
+
+        setHasOptionsMenu(true);
 
         binding = DataBindingUtil.bind(retval);
 

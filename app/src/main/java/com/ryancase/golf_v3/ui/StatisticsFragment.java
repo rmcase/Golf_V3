@@ -39,7 +39,12 @@ import java.util.List;
 public class StatisticsFragment extends android.support.v4.app.Fragment implements HoleView {
 
     private final String FRAGMENT_TAG = "HOLE";
+    private final float circleRadius = 5f;
+    private final float lineWidth = 1.5f;
+    private final float circleHoleRadius = 3.5f;
 
+    private int lineColor;
+    private int circleColor;
     private StatisticsViewModel viewModel;
 
     private FragmentStatisticsBinding binding;
@@ -97,6 +102,9 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
             viewModel = new StatisticsViewModel();
         }
         binding.setViewModel(viewModel);
+
+        lineColor = getResources().getColor(R.color.fTeal);
+        circleColor = getResources().getColor(R.color.fTeal);
 
         bindViewModelElements();
 
@@ -227,12 +235,12 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
-                dataSet.setLineWidth(1.5f);
-                dataSet.setCircleRadius(5f);
-                dataSet.setCircleHoleRadius(3.25f);
-                dataSet.setColor(getResources().getColor(R.color.fTeal));
+                dataSet.setLineWidth(lineWidth);
+                dataSet.setCircleRadius(circleRadius);
+                dataSet.setCircleHoleRadius(circleHoleRadius);
+                dataSet.setColor(lineColor);
                 dataSet.setCircleColor(Color.BLACK);
-                dataSet.setCircleColorHole(getResources().getColor(R.color.fTeal));
+                dataSet.setCircleColorHole(circleColor);
 
                 LineData lineData = new LineData(dataSet);
                 lineChart.setData(lineData);
@@ -260,12 +268,12 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
-                dataSet.setLineWidth(1.5f);
-                dataSet.setCircleRadius(6f);
-                dataSet.setCircleHoleRadius(3f);
-                dataSet.setColor(getResources().getColor(R.color.darkgreen));
+                dataSet.setLineWidth(lineWidth);
+                dataSet.setCircleRadius(circleRadius);
+                dataSet.setCircleHoleRadius(circleHoleRadius);
+                dataSet.setColor(lineColor);
                 dataSet.setCircleColor(Color.BLACK);
-                dataSet.setCircleColorHole(getResources().getColor(R.color.darkgreen));
+                dataSet.setCircleColorHole(circleColor);
 
                 LineData lineData = new LineData(dataSet);
                 lineChart.setData(lineData);
@@ -293,12 +301,12 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
-                dataSet.setLineWidth(1.5f);
-                dataSet.setCircleRadius(6f);
-                dataSet.setCircleHoleRadius(3f);
-                dataSet.setColor(getResources().getColor(R.color.darkgreen));
+                dataSet.setLineWidth(lineWidth);
+                dataSet.setCircleRadius(circleRadius);
+                dataSet.setCircleHoleRadius(circleHoleRadius);
+                dataSet.setColor(lineColor);
                 dataSet.setCircleColor(Color.BLACK);
-                dataSet.setCircleColorHole(getResources().getColor(R.color.darkgreen));
+                dataSet.setCircleColorHole(circleColor);
 
                 LineData lineData = new LineData(dataSet);
                 lineChart.setData(lineData);
@@ -326,12 +334,12 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
-                dataSet.setLineWidth(1.5f);
-                dataSet.setCircleRadius(6f);
-                dataSet.setCircleHoleRadius(3f);
-                dataSet.setColor(getResources().getColor(R.color.darkgreen));
+                dataSet.setLineWidth(lineWidth);
+                dataSet.setCircleRadius(circleRadius);
+                dataSet.setCircleHoleRadius(circleHoleRadius);
+                dataSet.setColor(lineColor);
                 dataSet.setCircleColor(Color.BLACK);
-                dataSet.setCircleColorHole(getResources().getColor(R.color.darkgreen));
+                dataSet.setCircleColorHole(circleColor);
 
                 LineData lineData = new LineData(dataSet);
                 lineChart.setData(lineData);
@@ -359,12 +367,12 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
-                dataSet.setLineWidth(1.5f);
-                dataSet.setCircleRadius(6f);
-                dataSet.setCircleHoleRadius(3f);
-                dataSet.setColor(getResources().getColor(R.color.darkgreen));
+                dataSet.setLineWidth(lineWidth);
+                dataSet.setCircleRadius(circleRadius);
+                dataSet.setCircleHoleRadius(circleHoleRadius);
+                dataSet.setColor(lineColor);
                 dataSet.setCircleColor(Color.BLACK);
-                dataSet.setCircleColorHole(getResources().getColor(R.color.darkgreen));
+                dataSet.setCircleColorHole(circleColor);
 
                 LineData lineData = new LineData(dataSet);
                 lineChart.setData(lineData);
@@ -393,7 +401,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         lineChart.getXAxis().setAxisMaxValue(10);
         lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         lineChart.setDescriptionColor(Color.BLACK);
-        lineChart.setBackgroundColor(getResources().getColor(R.color.grey));
+        lineChart.setBackgroundColor(getResources().getColor(R.color.white));
     }
 
 

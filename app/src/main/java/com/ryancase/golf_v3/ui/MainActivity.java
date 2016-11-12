@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
+    private String email;
 
     @Override
     public void onBackPressed() {
@@ -47,8 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        email = "";
+
         if (auth.getCurrentUser() != null) {
             currentUser = auth.getCurrentUser();
+            email = currentUser.getEmail();
         }
 
         startButton = (MagicButton) findViewById(R.id.startButton);
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Log.d("CURUSER:", "" + auth.getCurrentUser());
+                Log.d("Current User:", "" + auth.getCurrentUser());
 
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
@@ -103,9 +107,8 @@ public class MainActivity extends AppCompatActivity {
         Nine back = new Nine();
         Round.setFrontNine(front);
         Round.setBackNine(back);
-        Round.setRoundId(currentUser.getEmail());
+        Round.setRoundId(email);
 //        Round.setRoundId("r.c8700@gmail.com");
-//        Round.setCourse("Bear Creek");
         Round.setDatePlayed(new Date());
 
         FragmentManager fragmentManager = getFragmentManager();

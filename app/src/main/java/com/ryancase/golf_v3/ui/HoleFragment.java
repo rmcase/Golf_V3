@@ -133,7 +133,7 @@ public class HoleFragment extends Fragment implements HoleView {
         viewModel.getThreePutt().setText(R.string.threePutt);
         viewModel.getGreenCheck().setText("GIR");
         viewModel.getFairwayCheck().setText("Fairway");
-        viewModel.getUpAndDownCheck().setText("Up and Down");
+        viewModel.getUpAndDownCheck().setText("Scrambling");
         viewModel.getClubToRate().setText("Driver");
 
         setRatingOnClickListener();
