@@ -40,36 +40,42 @@
                     android:layout_weight="1"
                     android:text="Course Name:"
                     android:textColor="@color/fDarkPurple"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
-                <EditText
-                    android:id="@+id/courseNameEt"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="New Course"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:padding="2dp"
-                    android:textColor="@color/fDarkPurple"
-                    android:textColorHint="@color/fDarkTeal"
-                    android:textSize="15sp"
-                    android:visibility="gone" />
+                    android:layout_weight="1">
 
-                <info.hoang8f.widget.FButton
-                    android:id="@+id/newCourseButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="New Course"
-                    android:textColor="@color/white"
-                    android:visibility="visible"
-                    fbutton:buttonColor="@color/fPurple"
-                    fbutton:cornerRadius="5dp"
-                    fbutton:shadowColor="@color/adbGreen"
-                    fbutton:shadowEnabled="true"
-                    fbutton:shadowHeight="5dp" />
+                    <EditText
+                        android:id="@+id/courseNameEt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="New Course"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="2dp"
+                        android:textColor="@color/fDarkPurple"
+                        android:textColorHint="@color/fDarkTeal"
+                        android:textSize="15sp"
+                        android:visibility="visible" />
+                </android.support.design.widget.TextInputLayout>
+
+                <!--<info.hoang8f.widget.FButton-->
+                    <!--android:id="@+id/newCourseButton"-->
+                    <!--android:layout_width="200dp"-->
+                    <!--android:layout_height="42dp"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:paddingRight="10dp"-->
+                    <!--android:text="New Course"-->
+                    <!--android:textColor="@color/fDarkPurple"-->
+                    <!--android:visibility="visible"-->
+                    <!--fbutton:buttonColor="@color/whiteOP"-->
+                    <!--fbutton:cornerRadius="5dp"-->
+                    <!--fbutton:shadowColor="@color/fPurple"-->
+                    <!--fbutton:shadowEnabled="true"-->
+                    <!--fbutton:shadowHeight="4dp" />-->
             </TableRow>
 
             <TableRow

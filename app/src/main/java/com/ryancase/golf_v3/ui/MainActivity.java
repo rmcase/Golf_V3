@@ -1,29 +1,25 @@
 package com.ryancase.golf_v3.ui;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.ryancase.golf_v3.Nine;
 import com.ryancase.golf_v3.R;
-import com.ryancase.golf_v3.Round;
-
-import java.util.Date;
-
-import br.com.bloder.magic.view.MagicButton;
-import info.hoang8f.widget.FButton;
 
 public class MainActivity extends AppCompatActivity {
 
     private final String FRAGMENT_TAG = "HOLE";
-    private MagicButton startButton, historyButton, statisticsButton;
-    private FButton signOutButton;
 
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
@@ -44,7 +40,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_tabs);
+
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
+                MainActivity.this));
+
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
         auth = FirebaseAuth.getInstance();
 
@@ -55,94 +60,73 @@ public class MainActivity extends AppCompatActivity {
             email = currentUser.getEmail();
         }
 
-        startButton = (MagicButton) findViewById(R.id.startButton);
-        if (startButton != null) {
-            startButton.setVisibility(View.VISIBLE);
-        }
-
-        startButton.setMagicButtonClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadHoleFragment();
-            }
-        });
-
-
-        historyButton = (MagicButton) findViewById(R.id.historyButton);
-
-        historyButton.setMagicButtonClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadHistoryFragment();
-            }
-        });
-
-
-        statisticsButton = (MagicButton) findViewById(R.id.statisticsButton);
-
-        statisticsButton.setMagicButtonClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadStatisticsFragment();
-            }
-        });
-
-        signOutButton = (FButton) findViewById(R.id.signOutButton);
-
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Log.d("Current User:", "" + auth.getCurrentUser());
-
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            }
-        });
-
 
     }
 
-    private void loadHoleFragment() {
-        Nine front = new Nine();
-        Nine back = new Nine();
-        Round.setFrontNine(front);
-        Round.setBackNine(back);
-        Round.setRoundId(email);
-//        Round.setRoundId("r.c8700@gmail.com");
-        Round.setDatePlayed(new Date());
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        CourseSelectionFragment selectionFragment = new CourseSelectionFragment();
-        startButton.setVisibility(View.GONE);
-        historyButton.setVisibility(View.GONE);
-        statisticsButton.setVisibility(View.GONE);
-        signOutButton.setVisibility(View.GONE);
-        fragmentTransaction.add(R.id.content_view, selectionFragment, FRAGMENT_TAG);
-        fragmentTransaction.commit();
-    }
-
-    private void loadHistoryFragment() {
+    public void loadHistory() {
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HistoryFragment hist = new HistoryFragment();
-        startButton.setVisibility(View.GONE);
-        historyButton.setVisibility(View.GONE);
-        statisticsButton.setVisibility(View.GONE);
-        signOutButton.setVisibility(View.GONE);
         fragmentTransaction.add(R.id.content_view, hist, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
 
-    private void loadStatisticsFragment() {
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        StatisticsFragment stats = new StatisticsFragment();
-        startButton.setVisibility(View.GONE);
-        historyButton.setVisibility(View.GONE);
-        statisticsButton.setVisibility(View.GONE);
-        signOutButton.setVisibility(View.GONE);
-        fragmentTransaction.add(R.id.content_view, stats, FRAGMENT_TAG);
-        fragmentTransaction.commit();
+
+}
+
+class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
+    final int PAGE_COUNT = 4;
+    private String tabTitles[] = new String[]{"New Round", "History", "Statistics"};
+    private Context context;
+
+    public SampleFragmentPagerAdapter(android.support.v4.app.FragmentManager fm, Context context) {
+        super(fm);
+        this.context = context;
+    }
+
+    @Override
+    public int getCount() {
+        return PAGE_COUNT;
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+        switch (position) {
+            case 0: {
+                return new OverviewTabFragment();
+            }
+            case 1: {
+                return new CourseSelectionFragment();
+            }
+            case 2: {
+                return new HistoryFragment();
+            }
+            case 3: {
+                return new StatisticsFragment();
+            }
+            default: {
+                return new Fragment();
+            }
+        }
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        int[] imageResId = {
+                R.drawable.profile,
+                R.drawable.golf_flag,
+                R.drawable.bulletlist_sm,
+                R.drawable.linegraph_sm
+        };
+
+        Drawable image = ContextCompat.getDrawable(context, imageResId[position]);
+        image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
+        SpannableString sb = new SpannableString(" ");
+        ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
+        sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return sb;
+
+        // Generate title based on item position
+//        return tabTitles[position];
     }
 }

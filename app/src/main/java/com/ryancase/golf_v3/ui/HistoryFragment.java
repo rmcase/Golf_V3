@@ -114,9 +114,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_history, container, false);
 
-        getActivity().setTitle(R.string.history);
-
-        setHasOptionsMenu(true);
+//        getActivity().setTitle(R.string.history);
 
         binding = DataBindingUtil.bind(retval);
 
@@ -199,6 +197,8 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 RoundThing roundSelected = roundThings.get(position);
+
+                viewModel.getHistoryList().setVisibility(View.GONE);
 
                 android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

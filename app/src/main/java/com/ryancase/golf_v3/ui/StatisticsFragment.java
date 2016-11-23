@@ -93,7 +93,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_statistics, container, false);
 
-        getActivity().setTitle(R.string.statistics);
+//        getActivity().setTitle(R.string.statistics);
 
         binding = DataBindingUtil.bind(retval);
 
@@ -103,7 +103,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         }
         binding.setViewModel(viewModel);
 
-        lineColor = getResources().getColor(R.color.fTeal);
+        lineColor = getResources().getColor(R.color.fDarkPurple);
         circleColor = getResources().getColor(R.color.fTeal);
 
         bindViewModelElements();
