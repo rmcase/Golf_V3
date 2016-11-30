@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +18,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,8 +35,11 @@ import com.ryancase.golf_v3.ViewModels.CourseSelectViewModel;
 import com.ryancase.golf_v3.databinding.FragmentCourseSelectBinding;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+
+import static android.view.View.GONE;
 
 /**
  * File description here...
@@ -52,6 +58,9 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
     private InputMethodManager mgr;
 
     private List<String> courseNames;
+
+    private FirebaseAuth auth;
+    private FirebaseUser currentUser;
 
     public CourseSelectionFragment() {
 
@@ -110,13 +119,25 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+        getActivity().setTitle("Course Select");
+        setHasOptionsMenu(false);
+
+//        auth = FirebaseAuth.getInstance();
+//
+//        if (auth.getCurrentUser() != null) {
+//            currentUser = auth.getCurrentUser();
+//
+//
+//        } else {
+//            Log.d("USER IS NULL:", "");
+//        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_course_select, container, false);
 
-//        getActivity().setTitle("Course Select");
+        getActivity().setTitle("Course Select");
 
         binding = DataBindingUtil.bind(retval);
 
@@ -133,6 +154,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         populateViewModelElements();
 
         loadRounds();
+        selectCourseName();
 
         return retval;
     }
@@ -149,8 +171,9 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
 
     private void loadRounds() {
         database = FirebaseDatabase.getInstance().getReference();
-        Query roundQuery = database.child("Rounds").orderByChild("date");
+        Query roundQuery = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
 
+        Log.d("ROUNDID:", "" + Round.getRoundId());
         roundQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -162,7 +185,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
                 courseNames.clear();
                 courseNames.addAll(set);
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, courseNames);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
 
                 viewModel.getPreviousCourseList().setAdapter(adapter);
 
@@ -200,12 +223,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
     }
 
     private void selectCourseName() {
-//        viewModel.getNewCourseButton().setVisibility(View.GONE);
         binding.courseNameEt.setVisibility(View.VISIBLE);
-        binding.courseNameTv.setVisibility(View.VISIBLE);
-
-        binding.courseNameEt.requestFocus();
-        mgr.showSoftInput(binding.courseNameEt, InputMethodManager.SHOW_IMPLICIT);
 
         binding.courseNameEt.setSingleLine(true);
 
@@ -220,7 +238,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
                 if (s.length() != 0) {
                     viewModel.getBeginRoundButton().setVisibility(View.VISIBLE);
                 } else {
-                    viewModel.getBeginRoundButton().setVisibility(View.GONE);
+                    viewModel.getBeginRoundButton().setVisibility(GONE);
                 }
             }
 
@@ -241,11 +259,18 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
     }
 
     private void loadFirstHole() {
+        binding.courseNameEt.setVisibility(GONE);
+        binding.previousCourseTv.setVisibility(GONE);
+        binding.beginRoundButton.setVisibility(GONE);
+        binding.courseNameInputLayout.setVisibility(GONE);
+        viewModel.getPreviousCourseList().setVisibility(GONE);
+
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HoleFragment hole = new HoleFragment(1);
         Round.setFrontNine(new Nine());
         Round.setBackNine(new Nine());
+        Round.setDatePlayed(new Date());
         fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
         mgr.hideSoftInputFromWindow(binding.courseNameEt.getWindowToken(), 0);
         fragmentTransaction.commit();

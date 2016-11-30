@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
+import com.ryancase.golf_v3.Round;
 import com.ryancase.golf_v3.RoundThing;
 import com.ryancase.golf_v3.ViewModels.HistoryViewModel;
 import com.ryancase.golf_v3.databinding.FragmentHistoryBinding;
@@ -56,31 +54,6 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_home:
-                // User chose the "Settings" item, show the app settings UI...
-                startActivity(new Intent(getActivity(), MainActivity.class));
-
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.home, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-
-    }
-
-    @Override
     public void onResume() {
 
         super.onResume();
@@ -106,6 +79,10 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(false);
+
+        getActivity().setTitle(R.string.history);
+
         if (getArguments() != null) {
         }
     }
@@ -114,7 +91,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_history, container, false);
 
-//        getActivity().setTitle(R.string.history);
+        getActivity().setTitle(R.string.history);
 
         binding = DataBindingUtil.bind(retval);
 
@@ -149,7 +126,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
     private void loadRounds() {
         database = FirebaseDatabase.getInstance().getReference();
-        Query roundQuery = database.child("Rounds").orderByChild("date");
+        Query roundQuery = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
 
         roundQuery.addChildEventListener(new ChildEventListener() {
             @Override
@@ -203,7 +180,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
                 android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 HistoryItemFragment stat = new HistoryItemFragment(roundSelected);
-                fragmentTransaction.add(R.id.content_view, stat, "STAT");
+                fragmentTransaction.add(R.id.content_view_history, stat, "STAT");
                 fragmentTransaction.commit();
             }
         });

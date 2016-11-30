@@ -87,13 +87,15 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+
+        getActivity().setTitle(R.string.statistics);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_statistics, container, false);
 
-//        getActivity().setTitle(R.string.statistics);
+        getActivity().setTitle(R.string.statistics);
 
         binding = DataBindingUtil.bind(retval);
 

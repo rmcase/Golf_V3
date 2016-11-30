@@ -1,6 +1,5 @@
 package com.ryancase.golf_v3.ui;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
@@ -47,9 +46,13 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_home:
+            case R.id.action_undo:
                 // User chose the "Settings" item, show the app settings UI...
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                HistoryFragment stat = new HistoryFragment();
+                fragmentTransaction.add(R.id.content_view_history, stat, "STAT");
+                fragmentTransaction.commit();
 
                 return true;
 
@@ -64,7 +67,7 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(R.menu.home, menu);
+        inflater.inflate(R.menu.undo, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
     }
@@ -83,11 +86,7 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
 
                     // handle back button
-                    android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    HistoryFragment stat = new HistoryFragment();
-                    fragmentTransaction.add(R.id.content_view, stat, "STAT");
-                    fragmentTransaction.commit();
+
                     return true;
 
                 }
@@ -101,13 +100,12 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+        setHasOptionsMenu(false);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_history_round_click, container, false);
-
-        setHasOptionsMenu(true);
 
         getActivity().setTitle(round.getCourse().toUpperCase() + "\t" + round.getDate());
 
