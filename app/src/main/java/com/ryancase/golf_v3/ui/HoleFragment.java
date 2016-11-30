@@ -1,9 +1,5 @@
 package com.ryancase.golf_v3.ui;
 
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -28,7 +24,7 @@ import com.ryancase.golf_v3.databinding.FragmentHoleBinding;
  * File description here...
  */
 
-public class HoleFragment extends Fragment implements HoleView {
+public class HoleFragment extends android.support.v4.app.Fragment implements HoleView {
 
     private final String FRAGMENT_TAG = "HOLE";
 
@@ -36,6 +32,10 @@ public class HoleFragment extends Fragment implements HoleView {
     private FragmentHoleBinding binding;
 
     private HoleViewModel viewModel;
+
+    public HoleFragment() {
+
+    }
 
     public HoleFragment(int holeNum) {
         this.holeNum = holeNum;
@@ -66,9 +66,9 @@ public class HoleFragment extends Fragment implements HoleView {
     }
 
     private void showCurrentStatsDialog() {
-        FragmentManager fm = getFragmentManager();
-        DialogFragment dialog = new MyDialogFragment(Round.getScore(), Round.getRelativeScore(), Round.getPutts()); // creating new object
-        dialog.show(fm, "dialog");
+//        android.support.v4.app.FragmentManager fm = getFragmentManager();
+//        DialogFragment dialog = new MyDialogFragment(Round.getScore(), Round.getRelativeScore(), Round.getPutts()); // creating new object
+//        dialog.show(fm, "dialog");
     }
 
 
@@ -231,24 +231,24 @@ public class HoleFragment extends Fragment implements HoleView {
         else
             Log.d("Hole " + holeNum, "" + Round.getBackNine().getHoles().get(holeNum - 9).toString());
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HoleFragment hole = new HoleFragment(nextHoleNum);
         fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
 
     private void loadAtTheTurn() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         StatFragment stat = new StatFragment();
         fragmentTransaction.add(R.id.content_view, stat, "STAT");
         fragmentTransaction.commit();
     }
 
     private void loadFinishRound() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         StatFragment stat = new StatFragment(true);
         fragmentTransaction.add(R.id.content_view, stat, "STAT");
         fragmentTransaction.commit();

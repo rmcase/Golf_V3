@@ -87,6 +87,8 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+
+        getActivity().setTitle(R.string.statistics);
     }
 
     @Override
@@ -103,7 +105,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         }
         binding.setViewModel(viewModel);
 
-        lineColor = getResources().getColor(R.color.fTeal);
+        lineColor = getResources().getColor(R.color.fDarkPurple);
         circleColor = getResources().getColor(R.color.fTeal);
 
         bindViewModelElements();

@@ -1,8 +1,5 @@
 package com.ryancase.golf_v3.ui;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -29,7 +26,7 @@ import com.ryancase.golf_v3.databinding.FragmentStatViewBinding;
  * File description here...
  */
 
-public class StatFragment extends Fragment implements HoleView {
+public class StatFragment extends android.support.v4.app.Fragment implements HoleView {
 
     private final String FRAGMENT_TAG = "HOLE";
     private final int TEXTVIEW_TEXT_SIZE = 22;
@@ -291,8 +288,8 @@ public class StatFragment extends Fragment implements HoleView {
     }
 
     private void loadNextHole(int nextHoleNum) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HoleFragment hole = new HoleFragment(nextHoleNum);
         fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
         fragmentTransaction.commit();

@@ -192,6 +192,10 @@ public class Nine {
         return retval;
     }
 
+    public String setMadePuttsPercentage(String mPp) {
+        return mPp;
+    }
+
     public String getAverageDriverRating() {
         String retval;
         float total = 0;
@@ -232,6 +236,10 @@ public class Nine {
         return retval;
     }
 
+    public String setAverageDriverRating(String aDr) {
+        return aDr;
+    }
+
     public float getAverageDriverRatingAsFloat() {
         float total = 0;
         float drivingHoles = 0;
@@ -248,6 +256,10 @@ public class Nine {
             average = 0.0f;
         }
         return average;
+    }
+
+    public float setAverageDriverRatingAsFloat(Float aDr) {
+        return aDr;
     }
 
     public String getAverageIronRating() {
@@ -269,6 +281,10 @@ public class Nine {
         return retval;
     }
 
+    public String setAverageIronRating(String aIr) {
+        return aIr;
+    }
+
     public float getAverageIronRatingAsFloat() {
         float total = 0;
         float validHoles = 0;
@@ -285,6 +301,10 @@ public class Nine {
             average = 0.0f;
         }
         return average;
+    }
+
+    public float setAverageIronRatingAsFloat(float aIr) {
+        return aIr;
     }
 
     public String getAverageApproachRating() {
@@ -306,6 +326,10 @@ public class Nine {
         return retval;
     }
 
+    public String setAverageApproachRating(String aAr) {
+        return aAr;
+    }
+
     public float getAverageApproachRatingAsFloat() {
         float total = 0;
         float validHoles = 0;
@@ -322,6 +346,10 @@ public class Nine {
             average = 0.0f;
         }
         return average;
+    }
+
+    public float setAverageApproachRatingAsFloat(float aAr) {
+        return aAr;
     }
 
     public String getAveragePuttRating() {
@@ -343,6 +371,10 @@ public class Nine {
         return retval;
     }
 
+    public String setAveragePuttRating(String aPr) {
+        return aPr;
+    }
+
     public float getAveragePuttRatingAsFloat() {
         float total = 0;
         float validHoles = 0;
@@ -359,6 +391,10 @@ public class Nine {
             average = 0.0f;
         }
         return average;
+    }
+
+    public float setAveragePuttRatingAsFloat(float aPr) {
+        return aPr;
     }
 
     private String getLetterGrade(float average) {
@@ -386,6 +422,12 @@ public class Nine {
 
         return retval;
     }
+
+    public String setLetterGrade(String avg) {
+        return avg;
+    }
+
+
 
 
 }

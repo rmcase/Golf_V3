@@ -1,16 +1,21 @@
 package com.ryancase.golf_v3.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,10 +26,15 @@ import com.ryancase.golf_v3.R;
 public class LoginActivity extends AppCompatActivity {
 
     private Button signUpButton, signInButton;
-    private EditText passwordText, emailText;
+    private TextInputEditText passwordText, emailText;
 
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     public void onBackPressed() {
@@ -33,16 +43,26 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
-        super.onStart();
+        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
+// See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
         auth.addAuthStateListener(authStateListener);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
     }
 
     @Override
     public void onStop() {
-        super.onStop();
+        super.onStop();// ATTENTION: This was auto-generated to implement the App Indexing API.
+// See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
         if (authStateListener != null) {
             auth.removeAuthStateListener(authStateListener);
         }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.disconnect();
     }
 
     @Override
@@ -67,8 +87,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-        passwordText = (EditText) findViewById(R.id.passwordText);
-        emailText = (EditText) findViewById(R.id.emailText);
+        passwordText = (TextInputEditText) findViewById(R.id.passwordText);
+        emailText = (TextInputEditText) findViewById(R.id.emailText);
 
         signInButton = (Button) findViewById(R.id.signInButton);
         if (signInButton != null) {
@@ -91,6 +111,9 @@ public class LoginActivity extends AppCompatActivity {
                 signUp(emailText.getText().toString(), passwordText.getText().toString());
             }
         });
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void login(String email, String password) {
@@ -165,4 +188,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Login Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
 }

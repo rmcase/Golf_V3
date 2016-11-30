@@ -1,14 +1,12 @@
 package com.ryancase.golf_v3.ui;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +18,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.ryancase.golf_v3.HoleView;
+import com.ryancase.golf_v3.Nine;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.Round;
 import com.ryancase.golf_v3.RoundThing;
@@ -34,14 +35,17 @@ import com.ryancase.golf_v3.ViewModels.CourseSelectViewModel;
 import com.ryancase.golf_v3.databinding.FragmentCourseSelectBinding;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+
+import static android.view.View.GONE;
 
 /**
  * File description here...
  */
 
-public class CourseSelectionFragment extends Fragment implements HoleView {
+public class CourseSelectionFragment extends android.support.v4.app.Fragment implements HoleView {
 
     private final String FRAGMENT_TAG = "HOLE";
 
@@ -54,6 +58,9 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
     private InputMethodManager mgr;
 
     private List<String> courseNames;
+
+    private FirebaseAuth auth;
+    private FirebaseUser currentUser;
 
     public CourseSelectionFragment() {
 
@@ -112,6 +119,18 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+        getActivity().setTitle("Course Select");
+        setHasOptionsMenu(false);
+
+//        auth = FirebaseAuth.getInstance();
+//
+//        if (auth.getCurrentUser() != null) {
+//            currentUser = auth.getCurrentUser();
+//
+//
+//        } else {
+//            Log.d("USER IS NULL:", "");
+//        }
     }
 
     @Override
@@ -119,8 +138,6 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
         View retval = inflater.inflate(R.layout.fragment_course_select, container, false);
 
         getActivity().setTitle("Course Select");
-
-        setHasOptionsMenu(true);
 
         binding = DataBindingUtil.bind(retval);
 
@@ -137,31 +154,26 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
         populateViewModelElements();
 
         loadRounds();
+        selectCourseName();
 
         return retval;
     }
 
     private void populateViewModelElements() {
-        viewModel.getNewCourseButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectCourseName();
-            }
-        });
-
         courseNames = new ArrayList<>();
     }
 
     private void bindViewModelElements() {
         viewModel.setPreviousCourseList(binding.savedCoursesList);
-        viewModel.setNewCourseButton(binding.newCourseButton);
+//        viewModel.setNewCourseButton(binding.newCourseButton);
         viewModel.setBeginRoundButton(binding.beginRoundButton);
     }
 
     private void loadRounds() {
         database = FirebaseDatabase.getInstance().getReference();
-        Query roundQuery = database.child("Rounds").orderByChild("date");
+        Query roundQuery = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
 
+        Log.d("ROUNDID:", "" + Round.getRoundId());
         roundQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -173,7 +185,7 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
                 courseNames.clear();
                 courseNames.addAll(set);
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, courseNames);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
 
                 viewModel.getPreviousCourseList().setAdapter(adapter);
 
@@ -211,12 +223,7 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
     }
 
     private void selectCourseName() {
-        viewModel.getNewCourseButton().setVisibility(View.GONE);
         binding.courseNameEt.setVisibility(View.VISIBLE);
-        binding.courseNameTv.setVisibility(View.VISIBLE);
-
-        binding.courseNameEt.requestFocus();
-        mgr.showSoftInput(binding.courseNameEt, InputMethodManager.SHOW_IMPLICIT);
 
         binding.courseNameEt.setSingleLine(true);
 
@@ -231,7 +238,7 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
                 if (s.length() != 0) {
                     viewModel.getBeginRoundButton().setVisibility(View.VISIBLE);
                 } else {
-                    viewModel.getBeginRoundButton().setVisibility(View.GONE);
+                    viewModel.getBeginRoundButton().setVisibility(GONE);
                 }
             }
 
@@ -252,9 +259,18 @@ public class CourseSelectionFragment extends Fragment implements HoleView {
     }
 
     private void loadFirstHole() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        binding.courseNameEt.setVisibility(GONE);
+        binding.previousCourseTv.setVisibility(GONE);
+        binding.beginRoundButton.setVisibility(GONE);
+        binding.courseNameInputLayout.setVisibility(GONE);
+        viewModel.getPreviousCourseList().setVisibility(GONE);
+
+        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HoleFragment hole = new HoleFragment(1);
+        Round.setFrontNine(new Nine());
+        Round.setBackNine(new Nine());
+        Round.setDatePlayed(new Date());
         fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
         mgr.hideSoftInputFromWindow(binding.courseNameEt.getWindowToken(), 0);
         fragmentTransaction.commit();
