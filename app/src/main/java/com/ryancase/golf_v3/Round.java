@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class Round {
 
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final String DATE_FORMAT = "dd/MM/yy";
     private static Nine frontNine;
     private static Nine backnine;
     private static String roundId;
@@ -20,20 +20,12 @@ public class Round {
     private static Date datePlayed;
     private static int score, putts, relativeScore;
 
-    public static void setPutts(int putts) {
-        Round.putts = putts;
-    }
-
     public static int getRelativeScore() {
         return relativeScore;
     }
 
     public static void setRelativeScore(int relativeScore) {
         Round.relativeScore = relativeScore;
-    }
-
-    public static void setScore(int score) {
-        Round.score = score;
     }
 
     public static String getDatePlayed() {
@@ -82,6 +74,10 @@ public class Round {
         return frontNine.getScore() + backnine.getScore();
     }
 
+    public static void setScore(int score) {
+        Round.score = score;
+    }
+
     public static int getScoreToPar() {
         return frontNine.getScoreToPar() + backnine.getScoreToPar();
     }
@@ -92,6 +88,10 @@ public class Round {
 
     public static int getPutts() {
         return frontNine.getPutts() + backnine.getPutts();
+    }
+
+    public static void setPutts(int putts) {
+        Round.putts = putts;
     }
 
     public static int getGreens() {

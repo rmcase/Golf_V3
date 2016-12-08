@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.Round;
+import com.ryancase.golf_v3.RoundObject;
 import com.ryancase.golf_v3.RoundThing;
 import com.ryancase.golf_v3.ViewModels.ProfileViewModel;
 import com.ryancase.golf_v3.databinding.ProfileTabBinding;
@@ -66,8 +67,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.profile_tab, container, false);
 
-        getActivity().setTitle("Profile");
-
         binding = DataBindingUtil.bind(retval);
         if (viewModel == null) {
             viewModel = new ProfileViewModel();
@@ -95,6 +94,7 @@ public class ProfileFragment extends Fragment {
     private void loadRounds() {
         database = FirebaseDatabase.getInstance().getReference();
         Query roundQue = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
+//        Query roundQue = database.child("Rounds").orderByChild("roundId").equalTo("r.c8700@gmail.com");
 
         roundQue.addChildEventListener(new ChildEventListener() {
             @Override
@@ -106,7 +106,7 @@ public class ProfileFragment extends Fragment {
                 float scoAvg = 0;
                 int roundsPlayed = 0;
 
-                Log.d("ROUNDS", "" + rounds.size());
+                Log.d("ROUNDSPRofile", "" + rounds.size());
 
                 for (RoundThing r : rounds) {
                     totalStrokes += (r.getBackNine().getScore() + r.getFrontNine().getScore());
@@ -114,11 +114,13 @@ public class ProfileFragment extends Fragment {
                 scoAvg = (float) totalStrokes / rounds.size();
                 roundsPlayed = rounds.size();
 
-                viewModel.setRoundsPlayed(String.valueOf(roundsPlayed));
-                viewModel.setTotalStrokes(String.valueOf(totalStrokes));
-                viewModel.setScoringAverage(String.valueOf(scoAvg));
+                RoundObject.setHistoryListRounds(rounds);
 
-                Log.d("SCOAVG", "" + scoAvg);
+                binding.roundsPl.setText(String.valueOf(roundsPlayed));
+                binding.scoAvg.setText(String.valueOf(scoAvg));
+                binding.strokesTk.setText(String.valueOf(totalStrokes));
+
+                Log.d("SCOAVGProfile", "" + scoAvg);
             }
 
             @Override

@@ -48,10 +48,10 @@
             <!-- ^ APPROACH RATING ROW ^ -->
 
             <TableRow
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -84,6 +84,20 @@
                     android:layout_weight="1"
                     android:text="Iron Rating: "
                     android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Scrambling: "
+                    android:textSize="14sp" />
+
+
             </TableRow>
 
             <TableRow
@@ -96,6 +110,18 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.ironRating}"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@{viewModel.scrambling}"
                     android:textSize="40sp" />
             </TableRow>
             <!-- ^ GREENS ROW ^ -->

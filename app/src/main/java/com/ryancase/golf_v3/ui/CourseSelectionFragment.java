@@ -30,11 +30,13 @@ import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.Nine;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.Round;
+import com.ryancase.golf_v3.RoundObject;
 import com.ryancase.golf_v3.RoundThing;
 import com.ryancase.golf_v3.ViewModels.CourseSelectViewModel;
 import com.ryancase.golf_v3.databinding.FragmentCourseSelectBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -56,6 +58,8 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
     private DatabaseReference database;
 
     private InputMethodManager mgr;
+
+    private List<RoundThing> roundThings;
 
     private List<String> courseNames;
 
@@ -119,25 +123,12 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
-        getActivity().setTitle("Course Select");
         setHasOptionsMenu(false);
-
-//        auth = FirebaseAuth.getInstance();
-//
-//        if (auth.getCurrentUser() != null) {
-//            currentUser = auth.getCurrentUser();
-//
-//
-//        } else {
-//            Log.d("USER IS NULL:", "");
-//        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_course_select, container, false);
-
-        getActivity().setTitle("Course Select");
 
         binding = DataBindingUtil.bind(retval);
 
@@ -169,9 +160,36 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         viewModel.setBeginRoundButton(binding.beginRoundButton);
     }
 
+    private void loadRds() {
+        roundThings = Collections.emptyList();
+        if(RoundObject.getHistoryListRounds() != null) {
+            roundThings = new ArrayList<>(RoundObject.getHistoryListRounds());
+        }
+
+        for (RoundThing round : roundThings) {
+            courseNames.add(round.getCourse().toUpperCase());
+            HashSet<String> set = new HashSet<>(courseNames);
+            courseNames.clear();
+            courseNames.addAll(set);
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
+
+            viewModel.getPreviousCourseList().setAdapter(adapter);
+
+            viewModel.getPreviousCourseList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String course = courseNames.get(position);
+                    Round.setCourse(course);
+                    loadFirstHole();
+                }
+            });
+        }
+    }
     private void loadRounds() {
         database = FirebaseDatabase.getInstance().getReference();
         Query roundQuery = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
+//        Query roundQuery = database.child("Rounds").orderByChild("roundId").equalTo("r.c8700@gmail.com");
 
         Log.d("ROUNDID:", "" + Round.getRoundId());
         roundQuery.addChildEventListener(new ChildEventListener() {

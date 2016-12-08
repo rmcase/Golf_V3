@@ -1,5 +1,7 @@
 package com.ryancase.golf_v3;
 
+import java.util.List;
+
 import lombok.ToString;
 
 /**
@@ -9,17 +11,22 @@ import lombok.ToString;
 @ToString
 public class RoundObject {
 
-    private RoundModel roundModel;
+//    private RoundModel roundModel;
+    private static List<RoundThing> historyListRounds;
 
-    public RoundObject(RoundModel roundModel) {
-        this.roundModel = roundModel;
+    public static List<RoundThing> getHistoryListRounds() {
+        return historyListRounds;
     }
 
-    public RoundModel getRoundModel() {
-        return roundModel;
+    public static void setHistoryListRounds(List<RoundThing> historyListRds) {
+        historyListRounds = historyListRds;
     }
 
-    public void setRoundModel(RoundModel roundModel) {
-        this.roundModel = roundModel;
-    }
+//    public RoundModel getRoundModel() {
+//        return roundModel;
+//    }
+//
+//    public void setRoundModel(RoundModel roundModel) {
+//        this.roundModel = roundModel;
+//    }
 }

@@ -21,11 +21,15 @@ import com.google.firebase.database.Query;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.Round;
+import com.ryancase.golf_v3.RoundObject;
 import com.ryancase.golf_v3.RoundThing;
 import com.ryancase.golf_v3.ViewModels.HistoryViewModel;
 import com.ryancase.golf_v3.databinding.FragmentHistoryBinding;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -81,8 +85,6 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(false);
 
-        getActivity().setTitle(R.string.history);
-
         if (getArguments() != null) {
         }
     }
@@ -90,8 +92,6 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_history, container, false);
-
-        getActivity().setTitle(R.string.history);
 
         binding = DataBindingUtil.bind(retval);
 
@@ -125,6 +125,44 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     }
 
     private void loadRounds() {
+        roundThings = new ArrayList<>(RoundObject.getHistoryListRounds());
+
+        progressBar.setVisibility(View.GONE);
+
+        for(RoundThing r : roundThings) {
+            String newDate = "";
+            SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
+            try {
+                Date date = sd.parse(r.getDate());
+
+                newDate = sd.format(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            dates.add(String.format(r.getCourse().toUpperCase() + "\t\t\t\t\t" + newDate));
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
+
+        viewModel.getHistoryList().setAdapter(adapter);
+
+        viewModel.getHistoryList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                RoundThing roundSelected = roundThings.get(position);
+
+                viewModel.getHistoryList().setVisibility(View.GONE);
+
+                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                HistoryItemFragment stat = new HistoryItemFragment(roundSelected);
+                fragmentTransaction.add(R.id.content_view_history, stat, "STAT");
+                fragmentTransaction.commit();
+            }
+        });
+    }
+
+    private void rounds() {
         database = FirebaseDatabase.getInstance().getReference();
         Query roundQuery = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
 
@@ -141,7 +179,18 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
                 int score = round.getBackNine().getScore() + round.getFrontNine().getScore();
 
-                dates.add(String.format(score + "\t\t\t" + round.getCourse().toUpperCase() + "\t\t\t\t\t" + round.getDate()));
+                String newDate = "";
+                SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
+                try {
+                    Date date = sd.parse(round.getDate());
+
+                    newDate = sd.format(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+//                dates.add(String.format(score + "\t\t\t" + round.getCourse().toUpperCase() + "\t\t\t\t\t" + newDate));
+                dates.add(String.format(round.getCourse().toUpperCase() + "\t\t\t\t\t" + newDate));
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
 
@@ -170,20 +219,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
             }
         });
 
-        viewModel.getHistoryList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RoundThing roundSelected = roundThings.get(position);
 
-                viewModel.getHistoryList().setVisibility(View.GONE);
-
-                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                HistoryItemFragment stat = new HistoryItemFragment(roundSelected);
-                fragmentTransaction.add(R.id.content_view_history, stat, "STAT");
-                fragmentTransaction.commit();
-            }
-        });
     }
 
 
