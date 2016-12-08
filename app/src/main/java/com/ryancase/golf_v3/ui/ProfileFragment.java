@@ -66,8 +66,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.profile_tab, container, false);
 
-        getActivity().setTitle("Profile");
-
         binding = DataBindingUtil.bind(retval);
         if (viewModel == null) {
             viewModel = new ProfileViewModel();
@@ -106,7 +104,7 @@ public class ProfileFragment extends Fragment {
                 float scoAvg = 0;
                 int roundsPlayed = 0;
 
-                Log.d("ROUNDS", "" + rounds.size());
+                Log.d("ROUNDSPROF", "" + rounds.size());
 
                 for (RoundThing r : rounds) {
                     totalStrokes += (r.getBackNine().getScore() + r.getFrontNine().getScore());
@@ -114,11 +112,14 @@ public class ProfileFragment extends Fragment {
                 scoAvg = (float) totalStrokes / rounds.size();
                 roundsPlayed = rounds.size();
 
-                viewModel.setRoundsPlayed(String.valueOf(roundsPlayed));
-                viewModel.setTotalStrokes(String.valueOf(totalStrokes));
-                viewModel.setScoringAverage(String.valueOf(scoAvg));
+//                viewModel.setRoundsPlayed(String.valueOf(roundsPlayed));
+//                viewModel.setTotalStrokes(String.valueOf(totalStrokes));
+//                viewModel.setScoringAverage(String.valueOf(scoAvg));
+                binding.roundsPl.setText(String.valueOf(roundsPlayed));
+                binding.scoAvg.setText(String.valueOf(scoAvg));
+                binding.strokesTk.setText(String.valueOf(totalStrokes));
 
-                Log.d("SCOAVG", "" + scoAvg);
+                Log.d("SCOAVGPROF", "" + scoAvg);
             }
 
             @Override

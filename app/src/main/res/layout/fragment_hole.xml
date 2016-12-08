@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -23,24 +24,24 @@
             android:layout_height="match_parent">
 
             <TableRow
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center_horizontal">
 
                 <NumberPicker
                     android:id="@+id/scoreSelector"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
                     android:layout_weight="1" />
 
                 <NumberPicker
                     android:id="@+id/parSelector"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
                     android:layout_weight="1" />
 
             </TableRow>
@@ -62,14 +63,17 @@
                     android:text="@{viewModel.clubToRate.getText()}" />
             </TableRow>
 
-            <TableRow>
+            <TableRow android:layout_marginTop="20dp">
 
-                <TableLayout android:layout_weight="1">
+                <TableLayout
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="45dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp">
 
@@ -94,6 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="45dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp">
 
@@ -160,14 +165,18 @@
                 </TableLayout>
             </TableRow>
 
-            <Button
+            <info.hoang8f.widget.FButton
                 android:id="@+id/nextHole"
                 style="@style/ButtonColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
+                android:textColor="@color/white"
+                fbutton:buttonColor="@color/fDarkTeal"
+                fbutton:cornerRadius="15dp"
+                fbutton:shadowEnabled="false" />
 
 
         </TableLayout>

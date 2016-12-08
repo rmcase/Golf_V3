@@ -39,12 +39,12 @@ import java.util.List;
 public class StatisticsFragment extends android.support.v4.app.Fragment implements HoleView {
 
     private final String FRAGMENT_TAG = "HOLE";
-    private final float circleRadius = 5f;
+    private final float circleRadius = 5.75f;
     private final float lineWidth = 1.5f;
-    private final float circleHoleRadius = 3.5f;
+    private final float circleHoleRadius = 4.25f;
 
     private int lineColor;
-    private int circleColor;
+    private int circleColor, circleOutlineColor;
     private StatisticsViewModel viewModel;
 
     private FragmentStatisticsBinding binding;
@@ -88,14 +88,11 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         if (getArguments() != null) {
         }
 
-        getActivity().setTitle(R.string.statistics);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_statistics, container, false);
-
-        getActivity().setTitle(R.string.statistics);
 
         binding = DataBindingUtil.bind(retval);
 
@@ -105,8 +102,9 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         }
         binding.setViewModel(viewModel);
 
+        circleOutlineColor = getResources().getColor(R.color.white);
         lineColor = getResources().getColor(R.color.fDarkPurple);
-        circleColor = getResources().getColor(R.color.fTeal);
+        circleColor = getResources().getColor(R.color.fDarkTeal);
 
         bindViewModelElements();
 
@@ -241,7 +239,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 dataSet.setCircleRadius(circleRadius);
                 dataSet.setCircleHoleRadius(circleHoleRadius);
                 dataSet.setColor(lineColor);
-                dataSet.setCircleColor(Color.BLACK);
+                dataSet.setCircleColor(circleOutlineColor);
                 dataSet.setCircleColorHole(circleColor);
 
                 LineData lineData = new LineData(dataSet);
@@ -274,7 +272,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 dataSet.setCircleRadius(circleRadius);
                 dataSet.setCircleHoleRadius(circleHoleRadius);
                 dataSet.setColor(lineColor);
-                dataSet.setCircleColor(Color.BLACK);
+                dataSet.setCircleColor(circleOutlineColor);
                 dataSet.setCircleColorHole(circleColor);
 
                 LineData lineData = new LineData(dataSet);
@@ -307,7 +305,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 dataSet.setCircleRadius(circleRadius);
                 dataSet.setCircleHoleRadius(circleHoleRadius);
                 dataSet.setColor(lineColor);
-                dataSet.setCircleColor(Color.BLACK);
+                dataSet.setCircleColor(circleOutlineColor);
                 dataSet.setCircleColorHole(circleColor);
 
                 LineData lineData = new LineData(dataSet);
@@ -340,7 +338,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 dataSet.setCircleRadius(circleRadius);
                 dataSet.setCircleHoleRadius(circleHoleRadius);
                 dataSet.setColor(lineColor);
-                dataSet.setCircleColor(Color.BLACK);
+                dataSet.setCircleColor(circleOutlineColor);
                 dataSet.setCircleColorHole(circleColor);
 
                 LineData lineData = new LineData(dataSet);
@@ -373,7 +371,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 dataSet.setCircleRadius(circleRadius);
                 dataSet.setCircleHoleRadius(circleHoleRadius);
                 dataSet.setColor(lineColor);
-                dataSet.setCircleColor(Color.BLACK);
+                dataSet.setCircleColor(circleOutlineColor);
                 dataSet.setCircleColorHole(circleColor);
 
                 LineData lineData = new LineData(dataSet);

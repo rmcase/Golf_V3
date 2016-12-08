@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("USER IS NULL:", "");
         }
 
-        Log.d("EMAIL:", "" + email);
+        Log.d("USREMAIL:", "" + email);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);

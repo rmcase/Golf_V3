@@ -62,25 +62,25 @@
             </TableRow>
 
             <TableRow
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingBottom="20dp"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <info.hoang8f.widget.FButton
                     android:id="@+id/beginRoundButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:text="Begin Round"
-                    android:textColor="@color/fDarkPurple"
+                    android:textColor="@color/white"
                     android:visibility="gone"
-                    fbutton:buttonColor="@color/whiteOP"
-                    fbutton:cornerRadius="10dp"
-                    fbutton:shadowColor="@color/fDarkTeal"
+                    fbutton:buttonColor="@color/fDarkTeal"
+                    fbutton:cornerRadius="15dp"
+                    fbutton:shadowColor="@color/fTeal"
                     fbutton:shadowEnabled="true"
-                    fbutton:shadowHeight="5dp" />
+                    fbutton:shadowHeight="1dp" />
             </TableRow>
 
             <TableRow
