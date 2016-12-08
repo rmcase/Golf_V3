@@ -1,8 +1,11 @@
 package com.ryancase.golf_v3.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.gson.Gson;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.Round;
 import com.ryancase.golf_v3.RoundThing;
@@ -40,6 +44,8 @@ public class ProfileFragment extends Fragment {
     private List<RoundThing> rounds;
 
     private FirebaseAuth auth;
+
+    private SharedPreferences preferences;
 
     public ProfileFragment() {
 
@@ -76,6 +82,8 @@ public class ProfileFragment extends Fragment {
 
         auth = FirebaseAuth.getInstance();
 
+        preferences = getActivity().getSharedPreferences("PREF", Context.MODE_PRIVATE);
+
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,62 +93,20 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        loadRounds();
+        loadProfileData();
 
         return retval;
     }
 
-    private void loadRounds() {
-        database = FirebaseDatabase.getInstance().getReference();
-        Query roundQue = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
+    private void loadProfileData() {
+        Float scoAvg = preferences.getFloat("scoAvg", 0f);
+        int totalStrokes = preferences.getInt("totalStrokes", 0);
+        int roundsPlayed = preferences.getInt("roundsPlayed", 0);
 
-        roundQue.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                RoundThing round = dataSnapshot.getValue(RoundThing.class);
-                rounds.add(round);
+        binding.scoAvg.setText(String.valueOf(scoAvg));
+        binding.roundsPl.setText(String.valueOf(roundsPlayed));
+        binding.strokesTk.setText(String.valueOf(totalStrokes));
 
-                int totalStrokes = 0;
-                float scoAvg = 0;
-                int roundsPlayed = 0;
-
-                Log.d("ROUNDSPROF", "" + rounds.size());
-
-                for (RoundThing r : rounds) {
-                    totalStrokes += (r.getBackNine().getScore() + r.getFrontNine().getScore());
-                }
-                scoAvg = (float) totalStrokes / rounds.size();
-                roundsPlayed = rounds.size();
-
-//                viewModel.setRoundsPlayed(String.valueOf(roundsPlayed));
-//                viewModel.setTotalStrokes(String.valueOf(totalStrokes));
-//                viewModel.setScoringAverage(String.valueOf(scoAvg));
-                binding.roundsPl.setText(String.valueOf(roundsPlayed));
-                binding.scoAvg.setText(String.valueOf(scoAvg));
-                binding.strokesTk.setText(String.valueOf(totalStrokes));
-
-                Log.d("SCOAVGPROF", "" + scoAvg);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        Log.d("roundPlayed: ", "" + roundsPlayed);
     }
 }

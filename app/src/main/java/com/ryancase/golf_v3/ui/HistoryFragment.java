@@ -1,6 +1,8 @@
 package com.ryancase.golf_v3.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.gson.Gson;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.Round;
@@ -44,13 +47,13 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
     private HistoryViewModel viewModel;
 
-    private List<RoundThing> roundThings;
-
     private List<String> dates;
 
     private List<Integer> scores;
 
-    private DatabaseReference database;
+    private List<RoundThing> rounds;
+
+    private SharedPreferences preferences;
 
     private ProgressBar progressBar;
 
@@ -95,6 +98,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
         binding = DataBindingUtil.bind(retval);
 
+        preferences = getActivity().getSharedPreferences("PREF", Context.MODE_PRIVATE);
 
         if (viewModel == null) {
             viewModel = new HistoryViewModel();
@@ -105,15 +109,15 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
         populateViewModelElements();
 
-//        loadRounds();
+        loadHistoryData();
 
         return retval;
     }
 
     private void populateViewModelElements() {
-        roundThings = new ArrayList<>();
         dates = new ArrayList<>();
         scores = new ArrayList<>();
+        rounds = new ArrayList<>();
 
         progressBar.setVisibility(View.VISIBLE);
     }
@@ -124,24 +128,30 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
     }
 
-    private void loadRounds() {
-        roundThings = new ArrayList<>(RoundObject.getHistoryListRounds());
+    private void loadHistoryData() {
+        int numberOfRoundsToLoad;
+        numberOfRoundsToLoad = preferences.getInt("roundsPlayed", 0);
 
-        progressBar.setVisibility(View.GONE);
+        Gson gson = new Gson();
 
-        for (RoundThing r : roundThings) {
+        for (int i = 0; i < numberOfRoundsToLoad; i++) {
+            String objectToLoad = preferences.getString("round" + i, "");
+            rounds.add(gson.fromJson(objectToLoad, RoundThing.class));
+
             String newDate = "";
             SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
             try {
-                Date date = sd.parse(r.getDate());
+                Date date = sd.parse(rounds.get(i).getDate());
 
                 newDate = sd.format(date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-            dates.add(String.format(r.getCourse().toUpperCase() + "\t\t\t\t\t" + newDate));
+            dates.add(rounds.get(i).getCourse().toUpperCase() + "\t\t\t\t\t" + newDate);
         }
+
+        progressBar.setVisibility(View.GONE);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
 
@@ -150,7 +160,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
         viewModel.getHistoryList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RoundThing roundSelected = roundThings.get(position);
+                RoundThing roundSelected = rounds.get(position);
 
                 viewModel.getHistoryList().setVisibility(View.GONE);
 
@@ -164,50 +174,27 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     }
 
 //    private void loadRounds() {
-//        database = FirebaseDatabase.getInstance().getReference();
-//        Query roundQuery = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
+//        roundThings = new ArrayList<>(RoundObject.getHistoryListRounds());
 //
-//        roundQuery.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//        progressBar.setVisibility(View.GONE);
 //
-//                RoundThing round = dataSnapshot.getValue(RoundThing.class);
+//        for (RoundThing r : roundThings) {
+//            String newDate = "";
+//            SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
+//            try {
+//                Date date = sd.parse(r.getDate());
 //
-//                roundThings.add(round);
-//
-//                progressBar.setVisibility(View.GONE);
-//                Log.d("THEMOFO:", ""   round.getDate());
-//
-//                int score = round.getBackNine().getScore()   round.getFrontNine().getScore();
-//
-//                dates.add(String.format(score   "\t\t\t"   round.getCourse().toUpperCase()   "\t\t\t\t\t"   round.getDate()));
-//
-//                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
-//
-//                viewModel.getHistoryList().setAdapter(adapter);
-//
+//                newDate = sd.format(date);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
 //            }
 //
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//            dates.add(String.format(r.getCourse().toUpperCase() + "\t\t\t\t\t" + newDate));
+//        }
 //
-//            }
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
 //
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+//        viewModel.getHistoryList().setAdapter(adapter);
 //
 //        viewModel.getHistoryList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -224,6 +211,5 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 //            }
 //        });
 //    }
-
 
 }

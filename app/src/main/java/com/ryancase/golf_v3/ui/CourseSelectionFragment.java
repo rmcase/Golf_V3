@@ -2,6 +2,7 @@ package com.ryancase.golf_v3.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,25 +19,22 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.gson.Gson;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.Nine;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.Round;
-import com.ryancase.golf_v3.RoundObject;
 import com.ryancase.golf_v3.RoundThing;
 import com.ryancase.golf_v3.ViewModels.CourseSelectViewModel;
 import com.ryancase.golf_v3.databinding.FragmentCourseSelectBinding;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -59,7 +57,9 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
 
     private InputMethodManager mgr;
 
-    private List<RoundThing> roundThings;
+    private List<RoundThing> rounds;
+
+    private SharedPreferences preferences;
 
     private List<String> courseNames;
 
@@ -130,6 +130,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
 
         binding = DataBindingUtil.bind(retval);
 
+        preferences = getActivity().getSharedPreferences("PREF", Context.MODE_PRIVATE);
 
         if (viewModel == null) {
             viewModel = new CourseSelectViewModel();
@@ -142,7 +143,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
 
         populateViewModelElements();
 
-//        loadRds();
+        loadPreviouslyPlayedCourses();
         selectCourseName();
 
         return retval;
@@ -150,6 +151,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
 
     private void populateViewModelElements() {
         courseNames = new ArrayList<>();
+        rounds = new ArrayList<>();
     }
 
     private void bindViewModelElements() {
@@ -158,75 +160,27 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         viewModel.setBeginRoundButton(binding.beginRoundButton);
     }
 
-    private void loadRds() {
-        roundThings = Collections.emptyList();
-        if (RoundObject.getHistoryListRounds() != null) {
-            roundThings = new ArrayList<>(RoundObject.getHistoryListRounds());
+    private void loadPreviouslyPlayedCourses() {
+        int numberOfRoundsToLoad;
+        numberOfRoundsToLoad = preferences.getInt("roundsPlayed", 0);
+
+        Gson gson = new Gson();
+
+        for (int i = 0; i < numberOfRoundsToLoad; i++) {
+            String objectToLoad = preferences.getString("round" + i, "");
+            rounds.add(gson.fromJson(objectToLoad, RoundThing.class));
         }
 
-        for (RoundThing round : roundThings) {
+        for (RoundThing round : rounds) {
             courseNames.add(round.getCourse().toUpperCase());
-            HashSet<String> set = new HashSet<>(courseNames);
-            courseNames.clear();
-            courseNames.addAll(set);
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
-
-            viewModel.getPreviousCourseList().setAdapter(adapter);
-
-            viewModel.getPreviousCourseList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String course = courseNames.get(position);
-                    Round.setCourse(course);
-                    loadFirstHole();
-                }
-            });
         }
-    }
+        HashSet<String> set = new HashSet<>(courseNames);
+        courseNames.clear();
+        courseNames.addAll(set);
 
-    private void loadRounds() {
-        database = FirebaseDatabase.getInstance().getReference();
-        Query roundQuery = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
 
-        Log.d("ROUNDID:", "" + Round.getRoundId());
-        roundQuery.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                RoundThing round = dataSnapshot.getValue(RoundThing.class);
-
-                courseNames.add(round.getCourse().toUpperCase());
-                HashSet<String> set = new HashSet<>(courseNames);
-                courseNames.clear();
-                courseNames.addAll(set);
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
-
-                viewModel.getPreviousCourseList().setAdapter(adapter);
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        viewModel.getPreviousCourseList().setAdapter(adapter);
 
         viewModel.getPreviousCourseList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

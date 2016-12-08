@@ -1,6 +1,8 @@
 package com.ryancase.golf_v3.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.gson.Gson;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.RoundThing;
@@ -49,6 +52,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
     private FragmentStatisticsBinding binding;
 
+    private SharedPreferences preferences;
     private DatabaseReference database;
     private List<RoundThing> previousRounds;
     private LineChart lineChart;
@@ -96,6 +100,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
         binding = DataBindingUtil.bind(retval);
 
+        preferences = getActivity().getSharedPreferences("PREF", Context.MODE_PRIVATE);
 
         if (viewModel == null) {
             viewModel = new StatisticsViewModel();
@@ -110,7 +115,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
         populateViewModelElements();
 
-        loadRounds();
+        loadStatisticsData();
 
         return retval;
     }
@@ -138,7 +143,56 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         maxTv = binding.maxTv;
     }
 
-    private void loadRounds() {
+    private void loadStatisticsData() {
+        int numberOfRoundsToLoad;
+        numberOfRoundsToLoad = preferences.getInt("roundsPlayed", 0);
+
+        Gson gson = new Gson();
+
+        for (int i = 0; i < numberOfRoundsToLoad; i++) {
+            String objectToLoad = preferences.getString("round" + i, "");
+            previousRounds.add(gson.fromJson(objectToLoad, RoundThing.class));
+        }
+
+        for(RoundThing round : previousRounds) {
+            int score = round.getBackNine().getScore() + round.getFrontNine().getScore();
+            int putt = round.getBackNine().getPutts() + round.getFrontNine().getPutts();
+            int green = round.getBackNine().getGreens() + round.getFrontNine().getGreens();
+            int fairway = round.getBackNine().getFairways() + round.getFrontNine().getFairways();
+            int relScore = round.getBackNine().getScoreToPar() + round.getFrontNine().getScoreToPar();
+
+            scoresToPar.add(relScore);
+            fairways.add(fairway);
+            greens.add(green);
+            putts.add(putt);
+            scores.add(score);
+        }
+
+        createChart("Score");
+
+        picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                if (newVal == 0) {
+                    createChart("Score");
+                }
+                if (newVal == 1) {
+                    createChart("Putts");
+                }
+                if (newVal == 2) {
+                    createChart("Greens");
+                }
+                if (newVal == 3) {
+                    createChart("Fairways");
+                }
+                if (newVal == 4) {
+                    createChart("Relative Score");
+                }
+            }
+        });
+    }
+
+    private void lodRounds() {
         database = FirebaseDatabase.getInstance().getReference();
         Query roundQuery = database.child("Rounds").orderByChild("date");
 
@@ -181,7 +235,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                         if (newVal == 3) {
                             createChart("Fairways");
                         }
-                        if(newVal == 4) {
+                        if (newVal == 4) {
                             createChart("Relative Score");
                         }
                     }
@@ -224,13 +278,13 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         switch (value) {
             case "Score": {
                 for (int i = 1; i <= scores.size(); i++) {
-                    if(scores.get(i-1) > max) {
-                        max = scores.get(i-1);
+                    if (scores.get(i - 1) > max) {
+                        max = scores.get(i - 1);
                     }
-                    if(scores.get(i-1) < min) {
-                        min = scores.get(i-1);
+                    if (scores.get(i - 1) < min) {
+                        min = scores.get(i - 1);
                     }
-                    average += scores.get(i-1);
+                    average += scores.get(i - 1);
                     entries.add(new Entry(i, scores.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
@@ -246,7 +300,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float)scores.size();
+                average = average / (float) scores.size();
 
                 averageTv.setText(String.format(getString(R.string.average) + average));
                 minTv.setText(String.format(getString(R.string.min) + min));
@@ -257,13 +311,13 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Putts": {
                 for (int i = 1; i <= putts.size(); i++) {
-                    if(putts.get(i-1) > max) {
-                        max = putts.get(i-1);
+                    if (putts.get(i - 1) > max) {
+                        max = putts.get(i - 1);
                     }
-                    if(putts.get(i-1) < min) {
-                        min = putts.get(i-1);
+                    if (putts.get(i - 1) < min) {
+                        min = putts.get(i - 1);
                     }
-                    average += putts.get(i-1);
+                    average += putts.get(i - 1);
                     entries.add(new Entry(i, putts.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
@@ -279,7 +333,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float)putts.size();
+                average = average / (float) putts.size();
 
                 averageTv.setText(String.format(getString(R.string.average) + average));
                 minTv.setText(String.format(getString(R.string.min) + min));
@@ -290,13 +344,13 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Greens": {
                 for (int i = 1; i <= greens.size(); i++) {
-                    if(greens.get(i-1) > max) {
-                        max = greens.get(i-1);
+                    if (greens.get(i - 1) > max) {
+                        max = greens.get(i - 1);
                     }
-                    if(greens.get(i-1) < min) {
-                        min = greens.get(i-1);
+                    if (greens.get(i - 1) < min) {
+                        min = greens.get(i - 1);
                     }
-                    average += greens.get(i-1);
+                    average += greens.get(i - 1);
                     entries.add(new Entry(i, greens.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
@@ -312,7 +366,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float)putts.size();
+                average = average / (float) putts.size();
 
                 averageTv.setText(String.format(getString(R.string.average) + average));
                 minTv.setText(String.format(getString(R.string.min) + min));
@@ -323,13 +377,13 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Fairways": {
                 for (int i = 1; i <= fairways.size(); i++) {
-                    if(fairways.get(i-1) > max) {
-                        max = fairways.get(i-1);
+                    if (fairways.get(i - 1) > max) {
+                        max = fairways.get(i - 1);
                     }
-                    if(fairways.get(i-1) < min) {
-                        min = fairways.get(i-1);
+                    if (fairways.get(i - 1) < min) {
+                        min = fairways.get(i - 1);
                     }
-                    average += fairways.get(i-1);
+                    average += fairways.get(i - 1);
                     entries.add(new Entry(i, fairways.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
@@ -345,7 +399,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float)putts.size();
+                average = average / (float) putts.size();
 
                 averageTv.setText(String.format(getString(R.string.average) + average));
                 minTv.setText(String.format(getString(R.string.min) + min));
@@ -356,13 +410,13 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Relative Score": {
                 for (int i = 1; i <= scoresToPar.size(); i++) {
-                    if(scoresToPar.get(i-1) > max) {
-                        max = scoresToPar.get(i-1);
+                    if (scoresToPar.get(i - 1) > max) {
+                        max = scoresToPar.get(i - 1);
                     }
-                    if(scoresToPar.get(i-1) < min) {
-                        min = scoresToPar.get(i-1);
+                    if (scoresToPar.get(i - 1) < min) {
+                        min = scoresToPar.get(i - 1);
                     }
-                    average += scoresToPar.get(i-1);
+                    average += scoresToPar.get(i - 1);
                     entries.add(new Entry(i, scoresToPar.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
@@ -378,7 +432,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float)putts.size();
+                average = average / (float) putts.size();
 
                 averageTv.setText(String.format(getString(R.string.average) + average));
                 minTv.setText(String.format(getString(R.string.min) + min));
