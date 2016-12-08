@@ -30,7 +30,7 @@ public class ApproachTabFragment extends Fragment {
 
     private String ironRating, approachRating;
     private float greenPercentage;
-    private int greens;
+    private int greens, scrambling;
     private PieChart pieChart;
 
     private ApproachStatTabBinding binding;

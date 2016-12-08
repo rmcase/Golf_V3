@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -12,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-
 
         <TableLayout
             android:id="@+id/profileTable"
@@ -31,10 +31,10 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/roundsPl"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{viewModel.roundsPlayed}"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </TableRow>
@@ -50,10 +50,10 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/strokesTk"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{viewModel.totalStrokes}"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </TableRow>
@@ -69,20 +69,27 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/scoAvg"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{viewModel.scoringAverage}"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </TableRow>
 
-            <TableRow>
-                <Button
+            <TableRow
+                android:layout_marginTop="250dp"
+                android:gravity="center">
+
+                <info.hoang8f.widget.FButton
                     android:id="@+id/logoutBtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
-                    android:text="LOGOUT"/>
+                    android:text="LOGOUT"
+                    android:textColor="@color/white"
+                    fbutton:buttonColor="@color/fDarkTeal"
+                    fbutton:cornerRadius="15dp"
+                    fbutton:shadowEnabled="false" />
 
             </TableRow>
 

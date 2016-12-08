@@ -5,7 +5,7 @@ import android.databinding.BaseObservable;
 
 public class ApproachViewModel extends BaseObservable {
     private String greens, ironRating, greenPercentage;
-    private String upDowns, approachRating;
+    private String scrambling, approachRating;
 
     public ApproachViewModel() {
 
@@ -35,12 +35,12 @@ public class ApproachViewModel extends BaseObservable {
         this.greenPercentage = greenPercentage;
     }
 
-    public String getUpDowns() {
-        return upDowns;
+    public String getScrambling() {
+        return scrambling;
     }
 
-    public void setUpDowns(String upDowns) {
-        this.upDowns = upDowns;
+    public void setScrambling(String scrambling) {
+        this.scrambling = scrambling;
     }
 
     public String getApproachRating() {
