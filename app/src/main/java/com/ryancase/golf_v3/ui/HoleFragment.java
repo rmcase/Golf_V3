@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.ryancase.golf_v3.Hole;
 import com.ryancase.golf_v3.HoleView;
@@ -127,6 +128,34 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
 
         populateViewModelElements();
 
+        binding.theSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    binding.holeTable.setVisibility(View.GONE);
+                    binding.ratingTable.setVisibility(View.VISIBLE);
+                } else {
+                    binding.holeTable.setVisibility(View.VISIBLE);
+                    binding.ratingTable.setVisibility(View.GONE);
+                }
+            }
+        });
+
+//        switch (binding.DriverRadioGroup.getCheckedRadioButtonId()) {
+//            case 0: {
+//
+//            }
+//            case 1: {
+//
+//            }
+//            case 2: {
+//
+//            }
+//            case 3: {
+//
+//            }
+//        }
+
         return retval;
     }
 
@@ -139,18 +168,6 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
         viewModel.getGreenCheck().setText("GIR");
         viewModel.getFairwayCheck().setText("Fairway");
         viewModel.getUpAndDownCheck().setText("Scrambling");
-        viewModel.getClubToRate().setText("Driver");
-
-        setRatingOnClickListener();
-
-        viewModel.getRatingSelector().setMinValue(0);
-        viewModel.getRatingSelector().setMaxValue(4);
-        viewModel.getRatingSelector().setDisplayedValues(ratingStrings);
-        if (viewModel.getParForHole() == 3 && viewModel.getClubToRate().equals("Driver")) {
-            viewModel.getRatingSelector().setValue(0);
-        } else {
-            viewModel.getRatingSelector().setValue(2);
-        }
         viewModel.getScoreSelect().setMinValue(1);
         viewModel.getScoreSelect().setMaxValue(10);
         viewModel.getScoreSelect().setValue(4);
@@ -170,6 +187,10 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
         viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int index = viewModel.getDriverRg().indexOfChild(viewModel.getDriverRg().findViewById(viewModel.getDriverRg().getCheckedRadioButtonId()));
+                viewModel.setDriverRating(index);
+                index = viewModel.getIronRg().indexOfChild(viewModel.getIronRg().findViewById(viewModel.getIronRg().getCheckedRadioButtonId()));
+                viewModel.setIronRating(index);
                 Hole hole = new Hole.Builder()
                         .score(viewModel.getScoreForHole())
                         .par(viewModel.getParForHole())
@@ -220,9 +241,10 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
         viewModel.setThreePutt(binding.threePutt);
         viewModel.setTitle("Hole " + holeNum);
         viewModel.setPuttTv("Putts");
-        viewModel.setClubToRate(binding.clubToRateTv);
-        viewModel.setRatingSelector(binding.ratingSelector);
-        viewModel.setRatingConfirm(binding.ratingConfirm);
+        viewModel.setApproachRg(binding.ApproachRadioGroup);
+        viewModel.setDriverRg(binding.DriverRadioGroup);
+        viewModel.setPuttRg(binding.PuttRadioGroup);
+        viewModel.setIronRg(binding.IronRadioGroup);
 
 
         for (int i = 1; i < 4; i++) {

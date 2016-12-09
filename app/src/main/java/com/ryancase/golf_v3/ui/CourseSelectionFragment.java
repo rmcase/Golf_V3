@@ -180,8 +180,8 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
 
-        View view = getActivity().getLayoutInflater() .inflate(R.layout.empty_list_view, null);
-        ViewGroup viewGroup= ( ViewGroup)viewModel.getPreviousCourseList().getParent();
+        View view = getActivity().getLayoutInflater().inflate(R.layout.empty_list_view, null);
+        ViewGroup viewGroup = (ViewGroup) viewModel.getPreviousCourseList().getParent();
         viewGroup.addView(view);
         viewModel.getPreviousCourseList().setEmptyView(view);
 
@@ -238,7 +238,9 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         binding.previousCourseTv.setVisibility(GONE);
         binding.beginRoundButton.setVisibility(GONE);
         binding.courseNameInputLayout.setVisibility(GONE);
+        binding.line.setVisibility(GONE);
         viewModel.getPreviousCourseList().setVisibility(GONE);
+        viewModel.getPreviousCourseList().getEmptyView().setVisibility(GONE);
 
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
