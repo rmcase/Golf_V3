@@ -40,6 +40,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import static android.R.id.list;
 import static android.view.View.GONE;
 
 /**
@@ -178,6 +179,11 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         courseNames.addAll(set);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
+
+        View view = getActivity().getLayoutInflater() .inflate(R.layout.empty_list_view, null);
+        ViewGroup viewGroup= ( ViewGroup)viewModel.getPreviousCourseList().getParent();
+        viewGroup.addView(view);
+        viewModel.getPreviousCourseList().setEmptyView(view);
 
         viewModel.getPreviousCourseList().setAdapter(adapter);
 

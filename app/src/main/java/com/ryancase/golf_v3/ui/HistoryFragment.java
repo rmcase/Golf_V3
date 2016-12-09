@@ -155,6 +155,11 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
 
+        View view = getActivity().getLayoutInflater() .inflate(R.layout.empty_list_view, null);
+        ViewGroup viewGroup= ( ViewGroup)viewModel.getHistoryList().getParent();
+        viewGroup.addView(view);
+        viewModel.getHistoryList().setEmptyView(view);
+
         viewModel.getHistoryList().setAdapter(adapter);
 
         viewModel.getHistoryList().setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -85,9 +85,7 @@
 
             <TableRow
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/previousCourseTv"
@@ -98,6 +96,18 @@
                     android:text="Previously Played"
                     android:textSize="16sp" />
 
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="center">
+
+                <View
+                    android:layout_width="340dp"
+                    android:layout_height="1dp"
+                    android:background="@color/fDarkTeal" />
             </TableRow>
 
             <TableRow
