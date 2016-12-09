@@ -21,6 +21,25 @@
             android:layout_gravity="center_horizontal"
             android:padding="20dp">
 
+            <TableRow android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Golfer: "
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/golfer"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </TableRow>
+            <!-- ^^ -->
+
             <TableRow android:layout_marginBottom="5dp">
 
                 <TextView

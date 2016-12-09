@@ -23,9 +23,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ryancase.golf_v3.R;
 
+import info.hoang8f.widget.FButton;
+
 public class LoginActivity extends AppCompatActivity {
 
-    private Button signUpButton, signInButton;
+    private FButton signUpButton, signInButton;
     private TextInputEditText passwordText, emailText;
 
     private FirebaseAuth auth;
@@ -90,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordText = (TextInputEditText) findViewById(R.id.passwordText);
         emailText = (TextInputEditText) findViewById(R.id.emailText);
 
-        signInButton = (Button) findViewById(R.id.signInButton);
+        signInButton = (FButton) findViewById(R.id.signInButton);
         if (signInButton != null) {
             signInButton.setVisibility(View.VISIBLE);
         }
@@ -101,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signUpButton = (Button) findViewById(R.id.signUpButton);
+        signUpButton = (FButton) findViewById(R.id.signUpButton);
         if (signUpButton != null) {
             signUpButton.setVisibility(View.VISIBLE);
         }

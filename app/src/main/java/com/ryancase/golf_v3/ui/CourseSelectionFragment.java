@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -52,8 +53,6 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
     private FragmentCourseSelectBinding binding;
 
     private CourseSelectViewModel viewModel;
-
-    private DatabaseReference database;
 
     private InputMethodManager mgr;
 
@@ -241,7 +240,8 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         Round.setFrontNine(new Nine());
         Round.setBackNine(new Nine());
         Round.setDatePlayed(new Date());
-        fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
+        fragmentTransaction.replace(R.id.content_view, hole, FRAGMENT_TAG);
+        fragmentTransaction.addToBackStack("CourseSelectionFragment");
         mgr.hideSoftInputFromWindow(binding.courseNameEt.getWindowToken(), 0);
         fragmentTransaction.commit();
     }

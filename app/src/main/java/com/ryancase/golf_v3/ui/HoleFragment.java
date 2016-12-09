@@ -86,7 +86,12 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
 
                     // handle back button
-                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    CourseSelectionFragment csf = new CourseSelectionFragment();
+                    fragmentTransaction.replace(R.id.content_view, csf, "STAT");
+                    fragmentTransaction.commit();
+
                     return true;
 
                 }

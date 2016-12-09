@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,8 +40,6 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel viewModel;
 
-    private DatabaseReference database;
-
     private List<RoundThing> rounds;
 
     private FirebaseAuth auth;
@@ -58,14 +57,26 @@ public class ProfileFragment extends Fragment {
 
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
+
+//        getActivity().setTitle("Profile");
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getActivity().setTitle("Profile");
+
         if (getArguments() != null) {
         }
+
+        getActivity().getSupportFragmentManager().addOnBackStackChangedListener(
+                new FragmentManager.OnBackStackChangedListener() {
+                    public void onBackStackChanged() {
+                        // Update your UI here.
+                        getActivity().setTitle("Profile");
+                    }
+                });
     }
 
     @Override
@@ -88,7 +99,10 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 binding.profileTable.setVisibility(View.GONE);
-                auth.signOut();
+                preferences.edit().clear();
+                preferences.edit().apply();
+                FirebaseAuth.getInstance().signOut();
+
                 startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
@@ -102,11 +116,16 @@ public class ProfileFragment extends Fragment {
         Float scoAvg = preferences.getFloat("scoAvg", 0f);
         int totalStrokes = preferences.getInt("totalStrokes", 0);
         int roundsPlayed = preferences.getInt("roundsPlayed", 0);
+        String currentGolfer = "NOLOGIN";
 
+        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+            currentGolfer = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        }
+        binding.golfer.setText(currentGolfer);
         binding.scoAvg.setText(String.valueOf(scoAvg));
         binding.roundsPl.setText(String.valueOf(roundsPlayed));
         binding.strokesTk.setText(String.valueOf(totalStrokes));
 
-        Log.d("roundPlayed: ", "" + roundsPlayed);
+        Log.d("roundsPlayed: ", "" + roundsPlayed);
     }
 }

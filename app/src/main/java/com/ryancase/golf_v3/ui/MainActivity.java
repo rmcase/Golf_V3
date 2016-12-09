@@ -65,16 +65,32 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("USREMAIL:", "" + email);
 
+        preferences = getSharedPreferences("PREF", MODE_PRIVATE);
+        editor = preferences.edit();
+
+        editor.clear();
+        editor.commit();
+
+
         rounds = new ArrayList<>();
         roundStrings = new ArrayList<>();
 
         loadRounds();
+
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(),
+                MainActivity.this));
+
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void loadRounds() {
         database = FirebaseDatabase.getInstance().getReference();
-        Query roundQue = database.child("Rounds").orderByChild("roundId").equalTo("r.c8700@gmail.com");
-//        Query roundQue = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
+//        Query roundQue = database.child("Rounds").orderByChild("roundId").equalTo("r.c8700@gmail.com");
+        Query roundQue = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
 
         roundQue.addChildEventListener(new ChildEventListener() {
             @Override
@@ -87,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
                 int roundsPlayed = 0;
 
                 Gson gson = new Gson();
-                preferences = getSharedPreferences("PREF", MODE_PRIVATE);
-                editor = preferences.edit();
 
                 roundsPlayed = rounds.size();
 

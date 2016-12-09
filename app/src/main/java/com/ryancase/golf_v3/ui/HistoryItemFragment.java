@@ -86,7 +86,11 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
 
                     // handle back button
-
+                    android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    HistoryFragment historyFragment = new HistoryFragment();
+                    fragmentTransaction.replace(R.id.content_view_history, historyFragment, "STAT");
+                    fragmentTransaction.commit();
                     return true;
 
                 }
