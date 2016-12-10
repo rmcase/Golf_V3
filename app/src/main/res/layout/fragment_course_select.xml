@@ -99,19 +99,6 @@
             </TableRow>
 
             <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center">
-
-                <View
-                    android:id="@+id/line"
-                    android:layout_width="340dp"
-                    android:layout_height="1dp"
-                    android:background="@color/fDarkTeal" />
-            </TableRow>
-
-            <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center">
