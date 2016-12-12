@@ -1,6 +1,5 @@
 package com.ryancase.golf_v3.ui;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +19,8 @@ import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.Round;
 import com.ryancase.golf_v3.ViewModels.HoleViewModel;
 import com.ryancase.golf_v3.databinding.FragmentHoleBinding;
+
+import static android.view.View.GONE;
 
 /**
  * File description here...
@@ -67,9 +68,10 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
     }
 
     private void showCurrentStatsDialog() {
-//        android.support.v4.app.FragmentManager fm = getFragmentManager();
-//        DialogFragment dialog = new MyDialogFragment(Round.getScore(), Round.getRelativeScore(), Round.getPutts()); // creating new object
-//        dialog.show(fm, "dialog");
+        android.support.v4.app.FragmentManager fm = getFragmentManager();
+        android.support.v4.app.DialogFragment dialog = new ScorecardFragment(Round.getScore(), Round.getRelativeScore(), Round.getPutts(), Round.getFrontNine(), Round.getBackNine()); // creating new object
+        dialog.show(fm, "");
+
     }
 
 
@@ -131,12 +133,12 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
         binding.theSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    binding.holeTable.setVisibility(View.GONE);
+                if (isChecked) {
+                    binding.holeTable.setVisibility(GONE);
                     binding.ratingTable.setVisibility(View.VISIBLE);
                 } else {
                     binding.holeTable.setVisibility(View.VISIBLE);
-                    binding.ratingTable.setVisibility(View.GONE);
+                    binding.ratingTable.setVisibility(GONE);
                 }
             }
         });
@@ -256,12 +258,12 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
         if (nextHoleNum < 10)
             Log.d("Hole " + holeNum, "" + Round.getFrontNine().getHoles().get(holeNum - 1).toString());
         else
-            Log.d("Hole " + holeNum, "" + Round.getBackNine().getHoles().get(holeNum - 9).toString());
+            Log.d("Hole " + holeNum, "" + Round.getBackNine().getHoles().get(holeNum - 10).toString());
 
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HoleFragment hole = new HoleFragment(nextHoleNum);
-        fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
+        fragmentTransaction.replace(R.id.content_view, hole, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
 

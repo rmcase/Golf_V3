@@ -2,12 +2,23 @@ package com.ryancase.golf_v3.ViewModels;
 
 import android.databinding.BaseObservable;
 
+import java.util.List;
 
-public class DialogViewModel extends BaseObservable {
+
+public class ScorecardViewModel extends BaseObservable {
     private String score, scoreToPar, putts;
+    private List<String> scores;
 
-    public DialogViewModel() {
+    public ScorecardViewModel() {
 
+    }
+
+    public List<String> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<String> scores) {
+        this.scores = scores;
     }
 
     public String getScore() {

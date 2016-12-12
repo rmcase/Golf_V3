@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ryancase.golf_v3.ViewModels.ScorecardViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@color/white50"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <TableRow android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Scorecard"
+                    android:textColor="@color/fDarkTeal"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:paddingEnd="0dp"
+                android:paddingStart="6dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="2" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="3" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="4" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="5" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="6" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="7" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="8" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="9" />
+
+            </TableRow>
+            <!--Hole Numbers Front-->
+
+            <TableRow
+                android:layout_marginTop="10dp"
+                android:background="@color/fDarkTeal"
+                android:paddingEnd="0dp"
+                android:paddingStart="6dp">
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(0)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(1)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(2)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(3)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(4)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(5)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(6)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(7)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(8)}" />
+
+            </TableRow>
+            <!--Scores Front-->
+
+            <TableRow
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_10" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_11" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_12" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_13" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_14" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_15" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_17" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_18" />
+
+            </TableRow>
+            <!--Hole Numbers Front-->
+
+            <TableRow
+                android:layout_marginTop="10dp"
+                android:background="@color/fDarkTeal"
+                android:paddingEnd="0dp"
+                android:paddingStart="6dp">
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(9)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(10)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(11)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(12)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(13)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(14)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(15)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(16)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(17)}" />
+
+            </TableRow>
+            <!--Scores Back-->
+
+            <TableRow
+                android:layout_marginTop="30dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Score:" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.score}" />
+            </TableRow>
+            <!--Score-->
+
+            <TableRow
+                android:layout_marginTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Score To Par:" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scoreToPar}" />
+            </TableRow>
+            <!--Relative Score-->
+
+            <TableRow
+                android:layout_marginTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Putts:" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.putts}" />
+            </TableRow>
+            <!--Putts-->
+
+        </TableLayout>
+    </LinearLayout>
+</layout>

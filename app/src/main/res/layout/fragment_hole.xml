@@ -10,13 +10,15 @@
     </data>
 
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/holeRelLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         tools:context=".ViewModels.HoleViewModel">
 
         <!--Android:gravity sets the gravity of the content of the View its used on.
             Android:layout_gravity sets the gravity of the View or Layout in its parent.-->
+
+        <!--Scorecard-->
 
         <TableLayout
             android:id="@+id/ratingTable"
@@ -37,15 +39,15 @@
 
             </TableRow>
             <TableRow
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
                 android:gravity="center_horizontal">
 
                 <RadioGroup
+                    android:id="@+id/DriverRadioGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/DriverRadioGroup"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -100,15 +102,15 @@
 
             </TableRow>
             <TableRow
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
                 android:gravity="center_horizontal">
 
                 <RadioGroup
+                    android:id="@+id/IronRadioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/IronRadioGroup"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -163,15 +165,15 @@
 
             </TableRow>
             <TableRow
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
                 android:gravity="center_horizontal">
 
                 <RadioGroup
+                    android:id="@+id/ApproachRadioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ApproachRadioGroup"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -231,9 +233,9 @@
                 android:gravity="center_horizontal">
 
                 <RadioGroup
+                    android:id="@+id/PuttRadioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/PuttRadioGroup"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -377,6 +379,7 @@
             </TableRow>
 
         </TableLayout>
+        <!--Hole Statistics-->
 
         <Switch
             android:id="@+id/theSwitch"
@@ -386,6 +389,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="320dp"
             android:text="Show Club Ratings" />
+        <!--Show Ratings Switch-->
 
         <info.hoang8f.widget.FButton
             android:id="@+id/nextHole"
@@ -400,6 +404,7 @@
             fbutton:buttonColor="@color/fDarkTeal"
             fbutton:cornerRadius="15dp"
             fbutton:shadowEnabled="false" />
+        <!--Next Hole-->
 
 
     </RelativeLayout>

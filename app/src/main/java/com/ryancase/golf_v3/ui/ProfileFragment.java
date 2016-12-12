@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -14,15 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.gson.Gson;
 import com.ryancase.golf_v3.R;
-import com.ryancase.golf_v3.Round;
 import com.ryancase.golf_v3.RoundThing;
 import com.ryancase.golf_v3.ViewModels.ProfileViewModel;
 import com.ryancase.golf_v3.databinding.ProfileTabBinding;
@@ -65,7 +56,7 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getActivity().setTitle("Profile");
+//        getActivity().setTitle("Profile");
 
         if (getArguments() != null) {
         }
@@ -74,7 +65,7 @@ public class ProfileFragment extends Fragment {
                 new FragmentManager.OnBackStackChangedListener() {
                     public void onBackStackChanged() {
                         // Update your UI here.
-                        getActivity().setTitle("Profile");
+//                        getActivity().setTitle("Profile");
                     }
                 });
     }
