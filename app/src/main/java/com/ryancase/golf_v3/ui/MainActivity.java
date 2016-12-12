@@ -2,7 +2,6 @@ package com.ryancase.golf_v3.ui;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -100,23 +99,32 @@ public class MainActivity extends AppCompatActivity {
 
                 int totalStrokes = 0;
                 float scoAvg = 0;
-                int roundsPlayed = 0;
+                float roundsPlayed = 0;
+                float fullRounds = 0;
+                int strokesFromFullRounds = 0;
 
                 Gson gson = new Gson();
 
-                roundsPlayed = rounds.size();
+                for(int i=0; i< rounds.size(); i++) {
+                    if(rounds.get(i).getBackNine().getScore() == 0 || rounds.get(i).getFrontNine().getScore() == 0) {
+                        roundsPlayed += 0.5f;
+                    } else {
+                        fullRounds++;
+                        strokesFromFullRounds += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
+                        roundsPlayed++;
+                    }
 
-                for(int i=0; i< roundsPlayed; i++) {
                     String str = gson.toJson(rounds.get(i));
                     roundStrings.add(str);
                     editor.putString("round"+i, str);
                     totalStrokes += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
                 }
 
-                scoAvg = (float) totalStrokes / rounds.size();
+                scoAvg = (float) strokesFromFullRounds / fullRounds;
 
                 editor.putFloat("scoAvg", scoAvg);
-                editor.putInt("roundsPlayed", roundsPlayed);
+                editor.putFloat("profileRoundsPlayed", roundsPlayed);
+                editor.putInt("roundsPlayed", rounds.size());
                 editor.putInt("totalStrokes", totalStrokes);
 
                 editor.commit();

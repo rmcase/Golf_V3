@@ -106,14 +106,19 @@ public class ProfileFragment extends Fragment {
     private void loadProfileData() {
         Float scoAvg = preferences.getFloat("scoAvg", 0f);
         int totalStrokes = preferences.getInt("totalStrokes", 0);
-        int roundsPlayed = preferences.getInt("roundsPlayed", 0);
-        String currentGolfer = "NOLOGIN";
+        float roundsPlayed = preferences.getFloat("profileRoundsPlayed", 0);
+        String currentGolfer = "Bailey Woods";
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             currentGolfer = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         }
+
+        if(Float.isNaN(scoAvg)) {
+            binding.scoAvg.setText("No 18 hole rounds played");
+        } else {
+            binding.scoAvg.setText(String.valueOf(scoAvg));
+        }
         binding.golfer.setText(currentGolfer);
-        binding.scoAvg.setText(String.valueOf(scoAvg));
         binding.roundsPl.setText(String.valueOf(roundsPlayed));
         binding.strokesTk.setText(String.valueOf(totalStrokes));
 

@@ -28,8 +28,10 @@
                     android:layout_margin="5dp"
                     android:text="Scorecard"
                     android:textColor="@color/fDarkTeal"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </TableRow>
+            <!--Title-->
 
             <TableRow
                 android:layout_marginTop="10dp"
