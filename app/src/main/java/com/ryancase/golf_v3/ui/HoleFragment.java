@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 
 import com.ryancase.golf_v3.Hole;
 import com.ryancase.golf_v3.HoleView;
@@ -69,7 +70,7 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
 
     private void showCurrentStatsDialog() {
         android.support.v4.app.FragmentManager fm = getFragmentManager();
-        android.support.v4.app.DialogFragment dialog = new ScorecardFragment(Round.getScore(), Round.getRelativeScore(), Round.getPutts(), Round.getFrontNine(), Round.getBackNine()); // creating new object
+        android.support.v4.app.DialogFragment dialog = new ScorecardFragment(Round.getScore(), Round.getPutts(), Round.getFrontNine(), Round.getBackNine()); // creating new object
         dialog.show(fm, "");
 
     }
@@ -143,21 +144,6 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
             }
         });
 
-//        switch (binding.DriverRadioGroup.getCheckedRadioButtonId()) {
-//            case 0: {
-//
-//            }
-//            case 1: {
-//
-//            }
-//            case 2: {
-//
-//            }
-//            case 3: {
-//
-//            }
-//        }
-
         return retval;
     }
 
@@ -179,7 +165,7 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
 
         Round.setScore(Round.getScore() + viewModel.getScoreForHole());
         Round.setPutts(Round.getPutts() + viewModel.getNumberOfPutts());
-        Round.setRelativeScore(Round.getRelativeScore() + viewModel.getScoreRelativeToPar());
+//        Round.setRelativeScore(Round.getRelativeScore() + viewModel.getScoreRelativeToPar());
 
         if (holeNum == 18) {
             viewModel.getNextHoleButton().setText("Finish Round");
@@ -189,10 +175,8 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
         viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int index = viewModel.getDriverRg().indexOfChild(viewModel.getDriverRg().findViewById(viewModel.getDriverRg().getCheckedRadioButtonId()));
-                viewModel.setDriverRating(index);
-                index = viewModel.getIronRg().indexOfChild(viewModel.getIronRg().findViewById(viewModel.getIronRg().getCheckedRadioButtonId()));
-                viewModel.setIronRating(index);
+                setClubRatings();
+
                 Hole hole = new Hole.Builder()
                         .score(viewModel.getScoreForHole())
                         .par(viewModel.getParForHole())
@@ -220,6 +204,20 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
                 }
             }
         });
+    }
+
+    private void setClubRatings() {
+        int ratingIndex = viewModel.getDriverRg().indexOfChild(viewModel.getDriverRg().findViewById(viewModel.getDriverRg().getCheckedRadioButtonId()));
+        viewModel.setDriverRating(ratingIndex);
+
+        ratingIndex = viewModel.getIronRg().indexOfChild(viewModel.getIronRg().findViewById(viewModel.getIronRg().getCheckedRadioButtonId()));
+        viewModel.setIronRating(ratingIndex);
+
+        ratingIndex = viewModel.getApproachRg().indexOfChild(viewModel.getApproachRg().findViewById(viewModel.getApproachRg().getCheckedRadioButtonId()));
+        viewModel.setApproachRating(ratingIndex);
+
+        ratingIndex = viewModel.getPuttRg().indexOfChild(viewModel.getPuttRg().findViewById(viewModel.getPuttRg().getCheckedRadioButtonId()));
+        viewModel.setPuttRating(ratingIndex);
     }
 
     private void saveHole(Hole hole) {
@@ -281,36 +279,6 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
         StatFragment stat = new StatFragment(true);
         fragmentTransaction.add(R.id.content_view, stat, "STAT");
         fragmentTransaction.commit();
-    }
-
-    private void setRatingOnClickListener() {
-        viewModel.getRatingConfirm().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (viewModel.getClubToRate().getText() == "Driver") {
-                    viewModel.setDriverRating(viewModel.getRatingSelector().getValue());
-                    viewModel.getClubToRate().setText("Iron");
-                    viewModel.getRatingConfirm().setChecked(false);
-                } else if (viewModel.getClubToRate().getText() == "Iron") {
-                    viewModel.setIronRating(viewModel.getRatingSelector().getValue());
-                    viewModel.getClubToRate().setText("Approach");
-                    viewModel.getRatingConfirm().setChecked(false);
-                } else if (viewModel.getClubToRate().getText() == "Approach") {
-                    viewModel.setApproachRating(viewModel.getRatingSelector().getValue());
-                    viewModel.getClubToRate().setText("Putt");
-                    viewModel.getRatingConfirm().setChecked(false);
-                } else if (viewModel.getClubToRate().getText() == "Putt") {
-                    viewModel.setPuttRating(viewModel.getRatingSelector().getValue());
-                    viewModel.getClubToRate().setText("");
-                    viewModel.getRatingConfirm().setEnabled(false);
-                } else {
-
-                }
-
-
-            }
-        });
     }
 
     private void setPuttOnClickListener(int puttNum) {

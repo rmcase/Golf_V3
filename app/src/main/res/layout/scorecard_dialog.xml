@@ -20,7 +20,8 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal">
 
-            <TableRow android:gravity="center">
+            <TableRow android:gravity="center"
+                android:layout_marginTop="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -293,27 +294,34 @@
             <!--Scores Back-->
 
             <TableRow
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="40dp"
                 android:paddingEnd="15dp"
                 android:paddingStart="15dp">
 
                 <TextView
                     android:layout_width="0dp"
-
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="Score:" />
+            </TableRow>
+
+            <TableRow
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp">
 
                 <TextView
+                    style="@style/ScorecardTextNonTable"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@{viewModel.score}" />
             </TableRow>
             <!--Score-->
 
             <TableRow
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:paddingEnd="15dp"
                 android:paddingStart="15dp">
 
@@ -321,18 +329,27 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="Score To Par:" />
+            </TableRow>
+
+            <TableRow
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp">
 
                 <TextView
+                    android:id="@+id/relativeScoreTv"
+                    style="@style/ScorecardTextNonTable"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@{viewModel.scoreToPar}" />
             </TableRow>
             <!--Relative Score-->
 
             <TableRow
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:paddingEnd="15dp"
                 android:paddingStart="15dp">
 
@@ -340,12 +357,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="Putts:" />
+            </TableRow>
+
+            <TableRow
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp">
 
                 <TextView
+                    style="@style/ScorecardTextNonTable"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@{viewModel.putts}" />
             </TableRow>
             <!--Putts-->

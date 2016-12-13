@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ScorecardFragment extends android.support.v4.app.DialogFragment {
 
-    private int score, scoreToPar, putts;
+    private int score, putts, scoreToPar;
 
     private Nine front, back;
 
@@ -28,9 +28,8 @@ public class ScorecardFragment extends android.support.v4.app.DialogFragment {
 
     private ScorecardDialogBinding binding;
 
-    public ScorecardFragment(int score, int scoreToPar, int putts, Nine front, Nine back) {
+    public ScorecardFragment(int score, int putts, Nine front, Nine back) {
         this.score = score;
-        this.scoreToPar = scoreToPar;
         this.putts = putts;
         this.front = front;
         this.back = back;
@@ -40,8 +39,6 @@ public class ScorecardFragment extends android.support.v4.app.DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.scorecard_dialog, container);
-
-        setStyle(android.support.v4.app.DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
         binding = DataBindingUtil.bind(view);
 
@@ -53,15 +50,10 @@ public class ScorecardFragment extends android.support.v4.app.DialogFragment {
         getDialog().show();
         getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-
-        Log.d("FROSIZE", ""+ front.getHoles().size());
-
         List<String> scores = new ArrayList<>();
         for(int i=0; i<front.getHoles().size(); i++) {
             scores.add(i, String.valueOf(front.getHoles().get(i).getScore()));
         }
-
-        Log.d("SCOSIZE", ""+scores.size());
 
         for(int i=0; i<(18-front.getHoles().size()); i++) {
             scores.add(i+front.getHoles().size(), String.valueOf(0));
@@ -74,10 +66,23 @@ public class ScorecardFragment extends android.support.v4.app.DialogFragment {
         }
 
 
+        scoreToPar = back.getScoreToPar() + front.getScoreToPar();
+
         viewModel.setScores(scores);
         viewModel.setScore(String.valueOf(score));
         viewModel.setPutts(String.valueOf(putts));
-        viewModel.setScoreToPar(String.valueOf(scoreToPar));
+
+        if(scoreToPar == 0) {
+            viewModel.setScoreToPar("E");
+            binding.relativeScoreTv.setTextColor(getResources().getColor(R.color.fTeal));
+        } else if(scoreToPar > 0) {
+            viewModel.setScoreToPar("+" + String.valueOf(scoreToPar));
+        } else {
+            viewModel.setScoreToPar(String.valueOf(scoreToPar));
+        }
+        if(scoreToPar < 0) {
+            binding.relativeScoreTv.setTextColor(getResources().getColor(R.color.red));
+        }
 
         return view;
     }

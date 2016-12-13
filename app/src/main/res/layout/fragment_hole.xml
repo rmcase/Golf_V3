@@ -18,8 +18,6 @@
         <!--Android:gravity sets the gravity of the content of the View its used on.
             Android:layout_gravity sets the gravity of the View or Layout in its parent.-->
 
-        <!--Scorecard-->
-
         <TableLayout
             android:id="@+id/ratingTable"
             android:layout_width="match_parent"
