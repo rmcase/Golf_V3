@@ -22,260 +22,238 @@
             android:id="@+id/ratingTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:visibility="gone">
+            android:layout_margin="10dp">
 
-            <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal">
+            <TableRow>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Driver Rating" />
-
+                    android:text="Rate Your Shots"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </TableRow>
-            <TableRow
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal">
+            <!--Header-->
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Driver" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Iron" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Approach" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Putt" />
+            </TableRow>
+            <!--Clubs-->
+
+            <TableRow>
 
                 <RadioGroup
                     android:id="@+id/DriverRadioGroup"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="N/A" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="A" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="3dp"
-                        android:paddingRight="3dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="B" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="C" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="D" />
                 </RadioGroup>
-                <!--BOTTOM DRIVER RATING GROUP -->
-
-            </TableRow>
-            <!--DRIVER RATING ROW-->
-
-            <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Iron Rating" />
-
-            </TableRow>
-            <TableRow
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal">
 
                 <RadioGroup
                     android:id="@+id/IronRadioGroup"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="N/A" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="A" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="4dp"
-                        android:paddingRight="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="B" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="C" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="D" />
                 </RadioGroup>
-                <!--BOTTOM IRON RATING GROUP -->
-
-            </TableRow>
-            <!--IRON RATING ROW-->
-
-            <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Approach Rating" />
-
-            </TableRow>
-            <TableRow
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal">
 
                 <RadioGroup
                     android:id="@+id/ApproachRadioGroup"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="N/A" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="A" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="B" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="C" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="D" />
                 </RadioGroup>
-                <!--BOTTOM APPROACH RATING GROUP -->
-
-            </TableRow>
-            <!--APPROACH RATING ROW-->
-
-            <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Putt Rating" />
-
-            </TableRow>
-            <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal">
 
                 <RadioGroup
                     android:id="@+id/PuttRadioGroup"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="N/A" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="A" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="B" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="C" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="D" />
                 </RadioGroup>
-                <!--BOTTOM PUTT RATING GROUP -->
-
             </TableRow>
-            <!--PUTT RATING ROW-->
-
+            <!--Radio Groups-->
         </TableLayout>
         <!--Ratings Table-->
 
@@ -387,7 +365,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="320dp"
             android:text="Show Club Ratings" />
-        <!--Show Ratings Switch-->
+        <!--Show-Ratings Switch-->
 
         <info.hoang8f.widget.FButton
             android:id="@+id/nextHole"
