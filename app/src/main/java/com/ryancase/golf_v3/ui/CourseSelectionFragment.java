@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,12 +18,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.gson.Gson;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.Nine;
@@ -40,7 +32,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-import static android.R.id.list;
 import static android.view.View.GONE;
 
 /**
@@ -180,8 +171,8 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
 
-        View view = getActivity().getLayoutInflater() .inflate(R.layout.empty_list_view, null);
-        ViewGroup viewGroup= ( ViewGroup)viewModel.getPreviousCourseList().getParent();
+        View view = getActivity().getLayoutInflater().inflate(R.layout.empty_list_view, null);
+        ViewGroup viewGroup = (ViewGroup) viewModel.getPreviousCourseList().getParent();
         viewGroup.addView(view);
         viewModel.getPreviousCourseList().setEmptyView(view);
 
@@ -239,6 +230,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         binding.beginRoundButton.setVisibility(GONE);
         binding.courseNameInputLayout.setVisibility(GONE);
         viewModel.getPreviousCourseList().setVisibility(GONE);
+        viewModel.getPreviousCourseList().getEmptyView().setVisibility(GONE);
 
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

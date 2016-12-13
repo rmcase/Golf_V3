@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +18,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.gson.Gson;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
@@ -188,79 +182,6 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 if (newVal == 4) {
                     createChart("Relative Score");
                 }
-            }
-        });
-    }
-
-    private void lodRounds() {
-        database = FirebaseDatabase.getInstance().getReference();
-        Query roundQuery = database.child("Rounds").orderByChild("date");
-
-        roundQuery.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                RoundThing round = dataSnapshot.getValue(RoundThing.class);
-
-                previousRounds.add(round);
-
-                Log.d("THEMOFO:", "" + round.getDate());
-
-                int score = round.getBackNine().getScore() + round.getFrontNine().getScore();
-                int putt = round.getBackNine().getPutts() + round.getFrontNine().getPutts();
-                int green = round.getBackNine().getGreens() + round.getFrontNine().getGreens();
-                int fairway = round.getBackNine().getFairways() + round.getFrontNine().getFairways();
-                int relScore = round.getBackNine().getScoreToPar() + round.getFrontNine().getScoreToPar();
-
-                scoresToPar.add(relScore);
-                fairways.add(fairway);
-                greens.add(green);
-                putts.add(putt);
-                scores.add(score);
-
-                createChart("Score");
-
-                picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                    @Override
-                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                        if (newVal == 0) {
-                            createChart("Score");
-                        }
-                        if (newVal == 1) {
-                            createChart("Putts");
-                        }
-                        if (newVal == 2) {
-                            createChart("Greens");
-                        }
-                        if (newVal == 3) {
-                            createChart("Fairways");
-                        }
-                        if (newVal == 4) {
-                            createChart("Relative Score");
-                        }
-                    }
-                });
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }

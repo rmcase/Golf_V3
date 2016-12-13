@@ -18,7 +18,7 @@ public class Round {
     private static String roundId;
     private static String course;
     private static Date datePlayed;
-    private static int score, putts, relativeScore;
+    private static int score, putts, relativeScore = 0;
 
     public static void setPutts(int putts) {
         Round.putts = putts;

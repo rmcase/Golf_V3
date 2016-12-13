@@ -120,9 +120,13 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
     private void setViewModelElements() {
         configureTableLayout();
 
+        viewModel.getNextHoleButton().setTextColor(getResources().getColor(R.color.white));
+        viewModel.getNextHoleButton().setBackgroundColor(getResources().getColor(R.color.fDarkTeal));
+        viewModel.getFinishHoleButton().setTextColor(getResources().getColor(R.color.white));
+        viewModel.getFinishHoleButton().setBackgroundColor(getResources().getColor(R.color.fDarkTeal));
+
         if (goToFinishRound) {
             viewModel.getFinishHoleButton().setVisibility(View.GONE);
-
             viewModel.getNextHoleButton().setText(R.string.finish_round);
             viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -264,14 +268,16 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
         TableRow tr = new TableRow(getActivity());
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
         nextHole.setLayoutParams(params);
+        finishRound.setLayoutParams(params);
         tr.setPadding(40, 20, 40, 0);
         tr.addView(nextHole);
+        tr.addView(finishRound);
 
-        TableRow tRow = new TableRow(getActivity());
-        tRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-        finishRound.setLayoutParams(params);
-        tRow.setPadding(40, 20, 40, 0);
-        tRow.addView(finishRound);
+//        TableRow tRow = new TableRow(getActivity());
+//        tRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+//        finishRound.setLayoutParams(params);
+//        tRow.setPadding(40, 20, 40, 0);
+//        tRow.addView(finishRound);
 
         viewModel.getTableLayout().addView(addTableRow(scoreRelativeToPar, scoreRelativeToParTv), tableParam);
         viewModel.getTableLayout().addView(addTableRow(score, scoreTv), tableParam);
@@ -284,14 +290,15 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
         viewModel.getTableLayout().addView(addTableRow(approachRating, approachRatingTv), tableParam);
         viewModel.getTableLayout().addView(addTableRow(puttRating, puttRatingTv), tableParam);
         viewModel.getTableLayout().addView(tr, tableParam);
-        viewModel.getTableLayout().addView(tRow, tableParam);
+//        viewModel.getTableLayout().addView(tRow, tableParam);
     }
 
     private void loadNextHole(int nextHoleNum) {
+        binding.table.setVisibility(View.GONE);
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         HoleFragment hole = new HoleFragment(nextHoleNum);
-        fragmentTransaction.add(R.id.content_view, hole, FRAGMENT_TAG);
+        fragmentTransaction.replace(R.id.content_view, hole, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
 

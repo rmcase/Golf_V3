@@ -10,18 +10,280 @@
     </data>
 
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/holeRelLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         tools:context=".ViewModels.HoleViewModel">
 
         <!--Android:gravity sets the gravity of the content of the View its used on.
             Android:layout_gravity sets the gravity of the View or Layout in its parent.-->
 
         <TableLayout
-            android:id="@+id/table"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:id="@+id/ratingTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Driver Rating" />
+
+            </TableRow>
+            <TableRow
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal">
+
+                <RadioGroup
+                    android:id="@+id/DriverRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="N/A" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="A" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:text="B" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="C" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="D" />
+                </RadioGroup>
+                <!--BOTTOM DRIVER RATING GROUP -->
+
+            </TableRow>
+            <!--DRIVER RATING ROW-->
+
+            <TableRow
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Iron Rating" />
+
+            </TableRow>
+            <TableRow
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal">
+
+                <RadioGroup
+                    android:id="@+id/IronRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="N/A" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="A" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:text="B" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="C" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="D" />
+                </RadioGroup>
+                <!--BOTTOM IRON RATING GROUP -->
+
+            </TableRow>
+            <!--IRON RATING ROW-->
+
+            <TableRow
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Approach Rating" />
+
+            </TableRow>
+            <TableRow
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal">
+
+                <RadioGroup
+                    android:id="@+id/ApproachRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="N/A" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="A" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="B" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="C" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="D" />
+                </RadioGroup>
+                <!--BOTTOM APPROACH RATING GROUP -->
+
+            </TableRow>
+            <!--APPROACH RATING ROW-->
+
+            <TableRow
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Putt Rating" />
+
+            </TableRow>
+            <TableRow
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal">
+
+                <RadioGroup
+                    android:id="@+id/PuttRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="N/A" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="A" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="B" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="C" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="D" />
+                </RadioGroup>
+                <!--BOTTOM PUTT RATING GROUP -->
+
+            </TableRow>
+            <!--PUTT RATING ROW-->
+
+        </TableLayout>
+        <!--Ratings Table-->
+
+        <TableLayout xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/holeTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
             <TableRow
                 android:layout_marginLeft="10dp"
@@ -56,130 +318,91 @@
                     android:layout_weight="1"
                     android:text="@{viewModel.puttTv}" />
 
-                <TextView
-                    android:id="@+id/clubToRateTv"
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <CheckBox
+                    android:id="@+id/onePutt"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@{viewModel.clubToRate.getText()}" />
-            </TableRow>
+                    android:text="@{viewModel.onePutt.getText()}" />
 
-            <TableRow android:layout_marginTop="20dp">
-
-                <TableLayout
+                <CheckBox
+                    android:id="@+id/twoPutt"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:text="@{viewModel.twoPutt.getText()}" />
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="45dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp">
+                <CheckBox
+                    android:id="@+id/threePutt"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.threePutt.getText()}" />
+            </TableRow>
+            <!--PUTTS-->
 
-                        <CheckBox
-                            android:id="@+id/onePutt"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@{viewModel.onePutt.getText()}" />
+            <TableRow
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
 
-                        <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                <CheckBox
+                    android:id="@+id/greenCheck"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.greenCheck.getText()}" />
 
-                        <CheckBox
-                            android:id="@+id/greenCheck"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@{viewModel.greenCheck.getText()}" />
-                    </TableRow>
+                <CheckBox
+                    android:id="@+id/fairwayCheck"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.fairwayCheck.getText()}" />
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="45dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp">
+                <CheckBox
+                    android:id="@+id/upAndDownCheck"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.upAndDownCheck.getText()}" />
 
-                        <CheckBox
-                            android:id="@+id/twoPutt"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@{viewModel.twoPutt.getText()}" />
-
-                        <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-                        <CheckBox
-                            android:id="@+id/fairwayCheck"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@{viewModel.fairwayCheck.getText()}" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp">
-
-                        <CheckBox
-                            android:id="@+id/threePutt"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@{viewModel.threePutt.getText()}" />
-
-                        <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-                        <CheckBox
-                            android:id="@+id/upAndDownCheck"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@{viewModel.upAndDownCheck.getText()}" />
-                    </TableRow>
-                </TableLayout>
-
-                <TableLayout android:layout_weight="1">
-
-                    <TableRow>
-
-                        <NumberPicker
-                            android:id="@+id/ratingSelector"
-                            android:layout_width="5dp"
-                            android:layout_height="wrap_content" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <CheckBox
-                            android:id="@+id/ratingConfirm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Confirm Rating" />
-                    </TableRow>
-                </TableLayout>
             </TableRow>
 
-            <info.hoang8f.widget.FButton
-                android:id="@+id/nextHole"
-                style="@style/ButtonColor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/white"
-                fbutton:buttonColor="@color/fDarkTeal"
-                fbutton:cornerRadius="15dp"
-                fbutton:shadowEnabled="false" />
+            <TableRow android:gravity="center">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
 
         </TableLayout>
+        <!--Hole Statistics-->
+
+        <Switch
+            android:id="@+id/theSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="320dp"
+            android:text="Show Club Ratings" />
+        <!--Show Ratings Switch-->
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/nextHole"
+            style="@style/ButtonColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/theSwitch"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            fbutton:buttonColor="@color/fDarkTeal"
+            fbutton:cornerRadius="15dp"
+            fbutton:shadowEnabled="false" />
+        <!--Next Hole-->
 
 
     </RelativeLayout>

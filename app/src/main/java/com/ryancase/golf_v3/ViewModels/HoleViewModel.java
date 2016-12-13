@@ -4,6 +4,7 @@ import android.databinding.BaseObservable;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.NumberPicker;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.ryancase.golf_v3.Helpers.Checkbox;
@@ -16,6 +17,7 @@ public class HoleViewModel extends BaseObservable {
     private NumberPicker scoreSelect;
     private NumberPicker parSelect;
     private NumberPicker ratingSelector;
+    private RadioGroup driverRg, puttRg, approachRg, ironRg;
     private Button nextHoleButton;
     private CheckBox onePutt;
     private CheckBox twoPutt;
@@ -26,6 +28,38 @@ public class HoleViewModel extends BaseObservable {
     private TextView clubToRate;
     private CheckBox ratingConfirm;
     private int driverRating, ironRating, approachRating, puttRating;
+
+    public RadioGroup getDriverRg() {
+        return driverRg;
+    }
+
+    public void setDriverRg(RadioGroup driverRg) {
+        this.driverRg = driverRg;
+    }
+
+    public RadioGroup getPuttRg() {
+        return puttRg;
+    }
+
+    public void setPuttRg(RadioGroup puttRg) {
+        this.puttRg = puttRg;
+    }
+
+    public RadioGroup getApproachRg() {
+        return approachRg;
+    }
+
+    public void setApproachRg(RadioGroup approachRg) {
+        this.approachRg = approachRg;
+    }
+
+    public RadioGroup getIronRg() {
+        return ironRg;
+    }
+
+    public void setIronRg(RadioGroup ironRg) {
+        this.ironRg = ironRg;
+    }
 
     public CheckBox getRatingConfirm() {
         return ratingConfirm;
