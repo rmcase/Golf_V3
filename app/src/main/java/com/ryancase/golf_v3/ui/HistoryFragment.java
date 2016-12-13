@@ -32,6 +32,8 @@ import com.ryancase.golf_v3.databinding.FragmentHistoryBinding;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +50,8 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     private HistoryViewModel viewModel;
 
     private List<String> dates;
+
+    private List<Date> dateList;
 
     private List<Integer> scores;
 
@@ -118,6 +122,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
         dates = new ArrayList<>();
         scores = new ArrayList<>();
         rounds = new ArrayList<>();
+        dateList = new ArrayList<>();
 
         progressBar.setVisibility(View.VISIBLE);
     }
@@ -137,17 +142,27 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
         for (int i = 0; i < numberOfRoundsToLoad; i++) {
             String objectToLoad = preferences.getString("round" + i, "");
             rounds.add(gson.fromJson(objectToLoad, RoundThing.class));
+        }
 
+        Collections.sort(rounds, new Comparator<RoundThing>() {
+            @Override
+            public int compare(RoundThing lhs, RoundThing rhs) {
+                return lhs.getDate().compareTo(rhs.getDate());
+            }
+        });
+
+        for(int i=0; i < numberOfRoundsToLoad; i++) {
             String newDate = "";
             SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
             try {
                 Date date = sd.parse(rounds.get(i).getDate());
 
+                dateList.add(date);
+
                 newDate = sd.format(date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
             dates.add(rounds.get(i).getCourse().toUpperCase() + "\t\t\t\t\t" + newDate);
         }
 
@@ -177,44 +192,4 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
             }
         });
     }
-
-//    private void loadRounds() {
-//        roundThings = new ArrayList<>(RoundObject.getHistoryListRounds());
-//
-//        progressBar.setVisibility(View.GONE);
-//
-//        for (RoundThing r : roundThings) {
-//            String newDate = "";
-//            SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
-//            try {
-//                Date date = sd.parse(r.getDate());
-//
-//                newDate = sd.format(date);
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//
-//            dates.add(String.format(r.getCourse().toUpperCase() + "\t\t\t\t\t" + newDate));
-//        }
-//
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
-//
-//        viewModel.getHistoryList().setAdapter(adapter);
-//
-//        viewModel.getHistoryList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                RoundThing roundSelected = roundThings.get(position);
-//
-//                viewModel.getHistoryList().setVisibility(View.GONE);
-//
-//                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-//                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                HistoryItemFragment stat = new HistoryItemFragment(roundSelected);
-//                fragmentTransaction.add(R.id.content_view_history, stat, "STAT");
-//                fragmentTransaction.commit();
-//            }
-//        });
-//    }
-
 }
