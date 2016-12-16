@@ -23,7 +23,7 @@
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"/>
+            android:layout_marginTop="1dp" />
         <!-- ^ CHART ROW ^ -->
 
         <TableLayout
@@ -39,11 +39,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
-                <!--<NumberPicker-->
-                <!--android:id="@+id/graphPicker"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="3" />-->
 
                 <TextView
                     android:layout_width="0dp"
@@ -52,16 +47,16 @@
 
                 <TableLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
                     android:layout_weight="1">
 
-                    <TableRow android:layout_marginBottom="15dp">
+                    <TableRow>
 
                         <TextView
                             android:id="@+id/averageTv"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="55dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="left"
@@ -70,12 +65,12 @@
                             android:textSize="14sp" />
                     </TableRow>
 
-                    <TableRow android:layout_marginBottom="15dp">
+                    <TableRow>
 
                         <TextView
                             android:id="@+id/minTv"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="55dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="left"
@@ -84,12 +79,12 @@
                             android:textSize="14sp" />
                     </TableRow>
 
-                    <TableRow android:layout_marginBottom="15dp">
+                    <TableRow>
 
                         <TextView
                             android:id="@+id/maxTv"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="55dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="left"
