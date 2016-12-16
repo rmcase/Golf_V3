@@ -3,31 +3,30 @@ package com.ryancase.golf_v3.ViewModels;
 import android.databinding.BaseObservable;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.NumberPicker;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
-import com.ryancase.golf_v3.Helpers.Checkbox;
 import com.ryancase.golf_v3.HoleView;
+
+import info.hoang8f.android.segmented.SegmentedGroup;
 
 
 public class HoleViewModel extends BaseObservable {
     private String title;
     private String puttTv;
-    private NumberPicker scoreSelect;
-    private NumberPicker parSelect;
-    private NumberPicker ratingSelector;
+    private com.shawnlin.numberpicker.NumberPicker scoreSelect;
+    private SegmentedGroup parSelect;
     private RadioGroup driverRg, puttRg, approachRg, ironRg;
     private Button nextHoleButton;
-    private CheckBox onePutt;
-    private CheckBox twoPutt;
-    private CheckBox threePutt;
     private CheckBox greenCheck;
     private CheckBox fairwayCheck;
     private CheckBox upAndDownCheck;
-    private TextView clubToRate;
-    private CheckBox ratingConfirm;
-    private int driverRating, ironRating, approachRating, puttRating;
+    private int parForHole, scoreForHole, scoreRelativeToPar;
+    private int driverRating, ironRating, approachRating, puttRating, numberOfPutts;
+    private HoleView holeView;
+
+    public HoleViewModel(HoleView holeView) {
+        this.holeView = holeView;
+    }
 
     public RadioGroup getDriverRg() {
         return driverRg;
@@ -59,14 +58,6 @@ public class HoleViewModel extends BaseObservable {
 
     public void setIronRg(RadioGroup ironRg) {
         this.ironRg = ironRg;
-    }
-
-    public CheckBox getRatingConfirm() {
-        return ratingConfirm;
-    }
-
-    public void setRatingConfirm(CheckBox ratingConfirm) {
-        this.ratingConfirm = ratingConfirm;
     }
 
     public int getPuttRating() {
@@ -101,28 +92,6 @@ public class HoleViewModel extends BaseObservable {
         this.driverRating = driverRating;
     }
 
-    public TextView getClubToRate() {
-        return clubToRate;
-    }
-
-    public void setClubToRate(TextView clubToRate) {
-        this.clubToRate = clubToRate;
-    }
-
-    public NumberPicker getRatingSelector() {
-        return ratingSelector;
-    }
-
-    public void setRatingSelector(NumberPicker ratingSelector) {
-        this.ratingSelector = ratingSelector;
-    }
-
-    private HoleView holeView;
-
-    public HoleViewModel(HoleView holeView) {
-        this.holeView = holeView;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -131,11 +100,11 @@ public class HoleViewModel extends BaseObservable {
         this.title = title;
     }
 
-    public NumberPicker getScoreSelect() {
+    public com.shawnlin.numberpicker.NumberPicker getScoreSelect() {
         return scoreSelect;
     }
 
-    public void setScoreSelect(NumberPicker scoreSelect) {
+    public void setScoreSelect(com.shawnlin.numberpicker.NumberPicker scoreSelect) {
         this.scoreSelect = scoreSelect;
     }
 
@@ -147,36 +116,12 @@ public class HoleViewModel extends BaseObservable {
         this.nextHoleButton = nextHoleButton;
     }
 
-    public NumberPicker getParSelect() {
+    public SegmentedGroup getParSelect() {
         return parSelect;
     }
 
-    public void setParSelect(NumberPicker parSelect) {
+    public void setParSelect(SegmentedGroup parSelect) {
         this.parSelect = parSelect;
-    }
-
-    public CheckBox getOnePutt() {
-        return onePutt;
-    }
-
-    public void setOnePutt(CheckBox onePutt) {
-        this.onePutt = onePutt;
-    }
-
-    public CheckBox getTwoPutt() {
-        return twoPutt;
-    }
-
-    public void setTwoPutt(CheckBox twoPutt) {
-        this.twoPutt = twoPutt;
-    }
-
-    public CheckBox getThreePutt() {
-        return threePutt;
-    }
-
-    public void setThreePutt(CheckBox threePutt) {
-        this.threePutt = threePutt;
     }
 
     public String getPuttTv() {
@@ -212,7 +157,11 @@ public class HoleViewModel extends BaseObservable {
     }
 
     public int getParForHole() {
-        return parSelect.getValue();
+        return parForHole;
+    }
+
+    public void setParForHole(int parForHole) {
+        this.parForHole = parForHole;
     }
 
     public int getScoreForHole() {
@@ -220,17 +169,11 @@ public class HoleViewModel extends BaseObservable {
     }
 
     public int getNumberOfPutts() {
-        int retval = 0;
+        return numberOfPutts;
+    }
 
-        if (onePutt.isChecked()) {
-            retval = 1;
-        } else if (twoPutt.isChecked()) {
-            retval = 2;
-        } else if (threePutt.isChecked()) {
-            retval = 3;
-        }
-
-        return retval;
+    public void setNumberOfPutts(int numberOfPutts) {
+        this.numberOfPutts = numberOfPutts;
     }
 
     public int getGreenStat() {
@@ -264,7 +207,11 @@ public class HoleViewModel extends BaseObservable {
     }
 
     public int getScoreRelativeToPar() {
-        return scoreSelect.getValue() - parSelect.getValue();
+        return scoreRelativeToPar;
+    }
+
+    public void setScoreRelativeToPar(int scoreRelativeToPar) {
+        this.scoreRelativeToPar = scoreRelativeToPar;
     }
 }
 

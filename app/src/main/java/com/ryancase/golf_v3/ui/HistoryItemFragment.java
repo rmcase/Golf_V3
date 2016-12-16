@@ -39,6 +39,10 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
     private float fairwayPercentage, greenPercentage, puttPercentage;
     private String driverRating, ironRating, approachRating, puttRating;
 
+    public HistoryItemFragment() {
+
+    }
+
     public HistoryItemFragment(RoundThing round) {
         this.round = round;
     }
@@ -302,7 +306,9 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
     private String getLetterGrade(float average) {
         String retval;
 
-        if(average <= 1) {
+        if(average == 0) {
+            retval = "N/A";
+        } else if(average <= 1) {
             retval = "A";
         } else if(average > 1 && average <= 1.30) {
             retval = "A-";

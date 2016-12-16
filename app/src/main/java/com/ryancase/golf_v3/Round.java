@@ -18,23 +18,7 @@ public class Round {
     private static String roundId;
     private static String course;
     private static Date datePlayed;
-    private static int score, putts, relativeScore = 0;
-
-    public static void setPutts(int putts) {
-        Round.putts = putts;
-    }
-
-    public static int getRelativeScore() {
-        return relativeScore;
-    }
-
-    public static void setRelativeScore(int relativeScore) {
-        Round.relativeScore = relativeScore;
-    }
-
-    public static void setScore(int score) {
-        Round.score = score;
-    }
+    private static int score, putts;
 
     public static String getDatePlayed() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
@@ -82,6 +66,10 @@ public class Round {
         return frontNine.getScore() + backnine.getScore();
     }
 
+    public static void setScore(int score) {
+        Round.score = score;
+    }
+
     public static int getScoreToPar() {
         return frontNine.getScoreToPar() + backnine.getScoreToPar();
     }
@@ -92,6 +80,10 @@ public class Round {
 
     public static int getPutts() {
         return frontNine.getPutts() + backnine.getPutts();
+    }
+
+    public static void setPutts(int putts) {
+        Round.putts = putts;
     }
 
     public static int getGreens() {
@@ -124,7 +116,9 @@ public class Round {
     private static String getLetterGrade(float average) {
         String retval;
 
-        if (average <= 1) {
+        if(average == 0) {
+            retval = "N/A";
+        } else if (average <= 1) {
             retval = "A";
         } else if (average > 1 && average <= 1.30) {
             retval = "A-";

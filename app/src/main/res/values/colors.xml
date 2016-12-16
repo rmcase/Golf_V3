@@ -9,7 +9,9 @@ Teal = #0ACC70
     <item name="fPurple" type="color">#58007F</item>
     <item name="fDarkPurple" type="color">#250533</item>
     <item name="fDarkTeal" type="color">#084C2C</item>
+    <item name="fDarkTeal55" type="color">#8C084C2C</item>
     <item name="fTeal" type="color">#0ACC70</item>
+    <item name="fTeal55" type="color">#8C0ACC70</item>
     <item name="ftan" type="color">#8C8923</item>
 
     <!--<item name="adbLightGreen" type="color">#99CC00</item>-->

@@ -36,6 +36,7 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
     private StatViewModel viewModel;
 
     private boolean goToFinishRound;
+    private boolean isNewCourse;
 
     private Button nextHole;
     private Button finishRound;
@@ -45,6 +46,10 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
 
     public StatFragment() {
 
+    }
+
+    public StatFragment(boolean isNewCourse, int x) {
+        this.isNewCourse = isNewCourse;
     }
 
     public StatFragment(boolean goToFinishRound) {
@@ -152,7 +157,7 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
             viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    loadNextHole(10);
+                    loadNextHole(10, isNewCourse);
                 }
             });
         }
@@ -293,11 +298,11 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
 //        viewModel.getTableLayout().addView(tRow, tableParam);
     }
 
-    private void loadNextHole(int nextHoleNum) {
+    private void loadNextHole(int nextHoleNum, boolean isNewCourse) {
         binding.table.setVisibility(View.GONE);
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        HoleFragment hole = new HoleFragment(nextHoleNum);
+        HoleFragment hole = new HoleFragment(nextHoleNum, isNewCourse);
         fragmentTransaction.replace(R.id.content_view, hole, FRAGMENT_TAG);
         fragmentTransaction.commit();
     }

@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,7 +30,6 @@ import com.ryancase.golf_v3.databinding.FragmentCourseSelectBinding;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -50,7 +50,8 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
 
     private List<RoundThing> rounds;
 
-    private SharedPreferences preferences;
+    private SharedPreferences preferences, prevParPref;
+    private SharedPreferences.Editor editor, prevParEditor;
 
     private List<String> courseNames;
 
@@ -112,7 +113,6 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         if (getArguments() != null) {
         }
         setHasOptionsMenu(false);
-
     }
 
     @Override
@@ -122,6 +122,13 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         binding = DataBindingUtil.bind(retval);
 
         preferences = getActivity().getSharedPreferences("PREF", Context.MODE_PRIVATE);
+        editor = preferences.edit();
+
+        prevParPref = getActivity().getSharedPreferences("PREFCS", Context.MODE_PRIVATE);
+        prevParEditor = prevParPref.edit();
+
+        prevParEditor.clear();
+        prevParEditor.commit();
 
         if (viewModel == null) {
             viewModel = new CourseSelectViewModel();
@@ -135,6 +142,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         populateViewModelElements();
 
         loadPreviouslyPlayedCourses();
+
         selectCourseName();
 
         return retval;
@@ -163,11 +171,8 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         }
 
         for (RoundThing round : rounds) {
-            courseNames.add(round.getCourse().toUpperCase());
+            courseNames.add(round.getCourse());
         }
-        HashSet<String> set = new HashSet<>(courseNames);
-        courseNames.clear();
-        courseNames.addAll(set);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
 
@@ -182,10 +187,42 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String course = courseNames.get(position);
-                Round.setCourse(course);
-                loadFirstHole();
+                Round.setCourse(formatCourseString(course));
+
+                int numberOfHoles = 18;
+                RoundThing roundSelected = rounds.get(position);
+
+                if(roundSelected.getFrontNine().getScore() == 0 || roundSelected.getBackNine().getScore() == 0) {
+                    numberOfHoles = 9;
+                }
+                for(int i=0; i<numberOfHoles; i++) {
+                    if(i<9) {
+                        prevParEditor.putInt("par"+i, roundSelected.getFrontNine().getHoles().get(i).getPar());
+                        Log.d("CSPar" + i, "" + roundSelected.getFrontNine().getHoles().get(i).getPar());
+                    } else {
+                        prevParEditor.putInt("par"+i, roundSelected.getBackNine().getHoles().get(i-9).getPar());
+                    }
+                }
+
+                prevParEditor.commit();
+
+
+
+                loadFirstHole(false);
             }
         });
+    }
+
+    private String formatCourseString(String courseToFormat) {
+        courseToFormat = courseToFormat.toLowerCase();
+        String[] tokens =  courseToFormat.split(" ");
+        StringBuffer sb = new StringBuffer();
+
+        for (int i = 0; i < tokens.length; i++) {
+            sb.append(Character.toUpperCase(tokens[i].charAt(0)))
+                    .append(tokens[i].substring(1)).append(" ");
+        }
+        return sb.toString().trim();
     }
 
     private void selectCourseName() {
@@ -217,14 +254,14 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         viewModel.getBeginRoundButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Round.setCourse(binding.courseNameEt.getText().toString().toUpperCase());
+                Round.setCourse(formatCourseString(binding.courseNameEt.getText().toString()));
                 mgr.hideSoftInputFromWindow(binding.courseNameEt.getWindowToken(), 0);
-                loadFirstHole();
+                loadFirstHole(true);
             }
         });
     }
 
-    private void loadFirstHole() {
+    private void loadFirstHole(boolean isNewCourse) {
         binding.courseNameEt.setVisibility(GONE);
         binding.previousCourseTv.setVisibility(GONE);
         binding.beginRoundButton.setVisibility(GONE);
@@ -234,7 +271,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
 
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        HoleFragment hole = new HoleFragment(1);
+        HoleFragment hole = new HoleFragment(1, isNewCourse);
         Round.setFrontNine(new Nine());
         Round.setBackNine(new Nine());
         Round.setDatePlayed(new Date());

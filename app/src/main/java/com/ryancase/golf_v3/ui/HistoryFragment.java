@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,17 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.gson.Gson;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
-import com.ryancase.golf_v3.Round;
-import com.ryancase.golf_v3.RoundObject;
 import com.ryancase.golf_v3.RoundThing;
 import com.ryancase.golf_v3.ViewModels.HistoryViewModel;
 import com.ryancase.golf_v3.databinding.FragmentHistoryBinding;
@@ -153,7 +144,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
         for(int i=0; i < numberOfRoundsToLoad; i++) {
             String newDate = "";
-            SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
+            SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yy");
             try {
                 Date date = sd.parse(rounds.get(i).getDate());
 
@@ -163,7 +154,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            dates.add(rounds.get(i).getCourse().toUpperCase() + "\t\t\t\t\t" + newDate);
+            dates.add(rounds.get(i).getCourse() + "\t\t\t\t\t" + newDate);
         }
 
         progressBar.setVisibility(View.GONE);

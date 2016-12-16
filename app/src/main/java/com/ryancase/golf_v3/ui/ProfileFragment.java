@@ -114,7 +114,7 @@ public class ProfileFragment extends Fragment {
         }
 
         if(Float.isNaN(scoAvg)) {
-            binding.scoAvg.setText("No 18 hole rounds played");
+            binding.scoAvg.setText("No 18-Hole Rounds!");
         } else {
             binding.scoAvg.setText(String.valueOf(scoAvg));
         }
