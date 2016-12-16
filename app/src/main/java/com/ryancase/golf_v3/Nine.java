@@ -16,6 +16,7 @@ public class Nine {
     private int scoreToPar;
     private int putts;
     private int greens;
+    private int scrambling;
     private int fairways;
     private String fairwayPercentage;
     private String greenPercentage;
@@ -38,6 +39,20 @@ public class Nine {
         if (holes != null) {
             holes.add(hole);
         }
+    }
+
+    public int getScrambling() {
+        scrambling = 0;
+
+        for(Hole hole : holes) {
+            scrambling += hole.getUpAndDown();
+        }
+
+        return scrambling;
+    }
+
+    public void setScrambling(int scrambling) {
+        this.scrambling = scrambling;
     }
 
     public int getPar() {

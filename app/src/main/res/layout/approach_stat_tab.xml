@@ -81,7 +81,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:text="Iron Rating: "
                     android:textSize="14sp" />
 
@@ -106,7 +106,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:text="@{viewModel.ironRating}"
                     android:textSize="40sp" />
 

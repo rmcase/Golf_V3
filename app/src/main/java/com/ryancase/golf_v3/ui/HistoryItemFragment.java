@@ -115,7 +115,7 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_history_round_click, container, false);
 
-        getActivity().setTitle(round.getCourse().toUpperCase() + "\t" + round.getDate());
+        getActivity().setTitle(round.getCourse() + "\t" + round.getDate());
 
         binding = DataBindingUtil.bind(retval);
 
@@ -132,6 +132,7 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         int fairways = round.getBackNine().getFairways() + round.getFrontNine().getFairways();
         int greens = round.getBackNine().getGreens() + round.getFrontNine().getGreens();
         int putts = round.getBackNine().getPutts() + round.getFrontNine().getPutts();
+        int scrambling = round.getBackNine().getScrambling() + round.getBackNine().getScrambling();
 
         fairwayPercentage = findFairwayPercentage();
         greenPercentage = findGreenPercentage();
@@ -183,7 +184,7 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         approachStats.putString("approachRating", approachRating);
         approachStats.putFloat("greenPercentage", greenPercentage);
         approachStats.putInt("greens", greens);
-//        approachStats.putInt("upDowns", 1);
+        approachStats.putInt("scrambling", scrambling);
         tabHost.addTab(tabHost.newTabSpec("ApproachTab").setIndicator("Approach"), ApproachTabFragment.class, approachStats);
         //---------------
 

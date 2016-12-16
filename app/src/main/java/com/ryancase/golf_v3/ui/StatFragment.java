@@ -108,7 +108,7 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
             viewModel.setScore(String.valueOf(Round.getFrontNine().getScore()));
             viewModel.setPar(String.valueOf(Round.getFrontNine().getPar()));
             viewModel.setScoreToPar(String.valueOf(Round.getFrontNine().getScoreToPar()));
-            viewModel.setPutts(String.valueOf(Round.getFrontNine().madePuttsPercentage()));
+            viewModel.setPutts(String.valueOf(Round.getFrontNine().getPutts()));
             viewModel.setGreens(String.valueOf(Round.getFrontNine().getGreens()));
             viewModel.setFairways(String.valueOf(Round.getFrontNine().getFairwayPercentage()));
             viewModel.setDriverRating(Round.getFrontNine().getAverageDriverRating());

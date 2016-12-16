@@ -15,9 +15,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.ViewModels.ApproachViewModel;
-import com.ryancase.golf_v3.ViewModels.DrivingViewModel;
 import com.ryancase.golf_v3.databinding.ApproachStatTabBinding;
-import com.ryancase.golf_v3.databinding.DrivingStatTabBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +47,7 @@ public class ApproachTabFragment extends Fragment {
             approachRating = getArguments().getString("approachRating");
             greenPercentage = getArguments().getFloat("greenPercentage");
             greens = getArguments().getInt("greens");
+            scrambling = getArguments().getInt("scrambling");
         }
     }
 
@@ -83,6 +82,7 @@ public class ApproachTabFragment extends Fragment {
         viewModel.setIronRating(ironRating);
         viewModel.setGreenPercentage(String.valueOf(greenPercentage));
         viewModel.setGreens(String.valueOf(greens));
+        viewModel.setScrambling(String.valueOf(scrambling));
 
         return retval;
     }
