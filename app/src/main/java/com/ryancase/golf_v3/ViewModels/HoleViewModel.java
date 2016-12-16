@@ -3,7 +3,6 @@ package com.ryancase.golf_v3.ViewModels;
 import android.databinding.BaseObservable;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RadioGroup;
 
 import com.ryancase.golf_v3.HoleView;
 
@@ -15,7 +14,7 @@ public class HoleViewModel extends BaseObservable {
     private String puttTv;
     private com.shawnlin.numberpicker.NumberPicker scoreSelect;
     private SegmentedGroup parSelect;
-    private RadioGroup driverRg, puttRg, approachRg, ironRg;
+    private SegmentedGroup driverRg, puttRg, approachRg, ironRg;
     private Button nextHoleButton;
     private CheckBox greenCheck;
     private CheckBox fairwayCheck;
@@ -28,35 +27,35 @@ public class HoleViewModel extends BaseObservable {
         this.holeView = holeView;
     }
 
-    public RadioGroup getDriverRg() {
+    public SegmentedGroup getDriverRg() {
         return driverRg;
     }
 
-    public void setDriverRg(RadioGroup driverRg) {
+    public void setDriverRg(SegmentedGroup driverRg) {
         this.driverRg = driverRg;
     }
 
-    public RadioGroup getPuttRg() {
+    public SegmentedGroup getPuttRg() {
         return puttRg;
     }
 
-    public void setPuttRg(RadioGroup puttRg) {
+    public void setPuttRg(SegmentedGroup puttRg) {
         this.puttRg = puttRg;
     }
 
-    public RadioGroup getApproachRg() {
+    public SegmentedGroup getApproachRg() {
         return approachRg;
     }
 
-    public void setApproachRg(RadioGroup approachRg) {
+    public void setApproachRg(SegmentedGroup approachRg) {
         this.approachRg = approachRg;
     }
 
-    public RadioGroup getIronRg() {
+    public SegmentedGroup getIronRg() {
         return ironRg;
     }
 
-    public void setIronRg(RadioGroup ironRg) {
+    public void setIronRg(SegmentedGroup ironRg) {
         this.ironRg = ironRg;
     }
 

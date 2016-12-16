@@ -66,193 +66,217 @@
 
             <TableRow>
 
-                <RadioGroup
+                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/DriverRadioGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    segmentedgroup:sc_border_width="2dp"
+                    segmentedgroup:sc_checked_text_color="@color/white"
+                    segmentedgroup:sc_corner_radius="10dp"
+                    segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="N/A" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="A" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="B" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="C" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="D" />
-                </RadioGroup>
+                </info.hoang8f.android.segmented.SegmentedGroup>
 
-                <RadioGroup
+                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/IronRadioGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    segmentedgroup:sc_border_width="2dp"
+                    segmentedgroup:sc_checked_text_color="@color/white"
+                    segmentedgroup:sc_corner_radius="10dp"
+                    segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="N/A" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="A" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="B" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="C" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="D" />
-                </RadioGroup>
+                </info.hoang8f.android.segmented.SegmentedGroup>
 
-                <RadioGroup
+                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/ApproachRadioGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    segmentedgroup:sc_border_width="2dp"
+                    segmentedgroup:sc_checked_text_color="@color/white"
+                    segmentedgroup:sc_corner_radius="10dp"
+                    segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="N/A" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="A" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="B" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="C" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="D" />
-                </RadioGroup>
+                </info.hoang8f.android.segmented.SegmentedGroup>
 
-                <RadioGroup
+                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/PuttRadioGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    segmentedgroup:sc_border_width="2dp"
+                    segmentedgroup:sc_checked_text_color="@color/white"
+                    segmentedgroup:sc_corner_radius="10dp"
+                    segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="N/A" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="A" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="B" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="C" />
 
                     <RadioButton
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="D" />
-                </RadioGroup>
+                </info.hoang8f.android.segmented.SegmentedGroup>
             </TableRow>
             <!--Radio Groups-->
         </TableLayout>
@@ -317,8 +341,7 @@
                 android:layout_marginTop="35dp"
                 android:gravity="center_horizontal">
 
-                <info.hoang8f.android.segmented.SegmentedGroup
-                    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/parSegmentedGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -370,11 +393,9 @@
             </TableRow>
             <!--Putt Tv-->
 
-            <TableRow
-                android:gravity="center_horizontal">
+            <TableRow android:gravity="center_horizontal">
 
-                <info.hoang8f.android.segmented.SegmentedGroup
-                    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/puttSegmentedGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -464,9 +485,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/theSwitch"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:textColor="@color/white"
             fbutton:buttonColor="@color/fDarkTeal"
             fbutton:cornerRadius="15dp"
