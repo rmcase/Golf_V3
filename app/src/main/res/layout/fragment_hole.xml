@@ -72,13 +72,15 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:checkedButton="@+id/driveNa"
                     android:orientation="vertical"
                     segmentedgroup:sc_border_width="2dp"
                     segmentedgroup:sc_checked_text_color="@color/white"
-                    segmentedgroup:sc_corner_radius="10dp"
+                    segmentedgroup:sc_corner_radius="20dp"
                     segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
                     <RadioButton
+                        android:id="@+id/driveNa"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -87,6 +89,7 @@
                         android:text="N/A" />
 
                     <RadioButton
+                        android:id="@+id/driveA"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -95,6 +98,7 @@
                         android:text="A" />
 
                     <RadioButton
+                        android:id="@+id/driveB"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -103,6 +107,7 @@
                         android:text="B" />
 
                     <RadioButton
+                        android:id="@+id/driveC"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -111,6 +116,7 @@
                         android:text="C" />
 
                     <RadioButton
+                        android:id="@+id/driveD"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -125,13 +131,15 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:checkedButton="@+id/ironNa"
                     android:orientation="vertical"
                     segmentedgroup:sc_border_width="2dp"
                     segmentedgroup:sc_checked_text_color="@color/white"
-                    segmentedgroup:sc_corner_radius="10dp"
+                    segmentedgroup:sc_corner_radius="20dp"
                     segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
                     <RadioButton
+                        android:id="@+id/ironNa"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -140,6 +148,7 @@
                         android:text="N/A" />
 
                     <RadioButton
+                        android:id="@+id/ironA"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -148,6 +157,7 @@
                         android:text="A" />
 
                     <RadioButton
+                        android:id="@+id/ironB"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -156,6 +166,7 @@
                         android:text="B" />
 
                     <RadioButton
+                        android:id="@+id/ironC"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -164,6 +175,7 @@
                         android:text="C" />
 
                     <RadioButton
+                        android:id="@+id/ironD"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -178,13 +190,15 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:checkedButton="@+id/approachNa"
                     android:orientation="vertical"
                     segmentedgroup:sc_border_width="2dp"
                     segmentedgroup:sc_checked_text_color="@color/white"
-                    segmentedgroup:sc_corner_radius="10dp"
+                    segmentedgroup:sc_corner_radius="20dp"
                     segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
                     <RadioButton
+                        android:id="@+id/approachNa"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -231,13 +245,15 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:checkedButton="@+id/puttNa"
                     android:orientation="vertical"
                     segmentedgroup:sc_border_width="2dp"
                     segmentedgroup:sc_checked_text_color="@color/white"
-                    segmentedgroup:sc_corner_radius="10dp"
+                    segmentedgroup:sc_corner_radius="20dp"
                     segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
                     <RadioButton
+                        android:id="@+id/puttNa"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -246,6 +262,7 @@
                         android:text="N/A" />
 
                     <RadioButton
+                        android:id="@+id/puttA"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -254,6 +271,7 @@
                         android:text="A" />
 
                     <RadioButton
+                        android:id="@+id/puttB"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -262,6 +280,7 @@
                         android:text="B" />
 
                     <RadioButton
+                        android:id="@+id/puttC"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -270,6 +289,7 @@
                         android:text="C" />
 
                     <RadioButton
+                        android:id="@+id/puttD"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"

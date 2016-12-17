@@ -38,6 +38,8 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
     private boolean isNewCourse;
     private SharedPreferences preferences, prevParPref;
 
+    private SegmentedGroup puttGroup;
+
     private int parToGet;
 
     private HoleViewModel viewModel;
@@ -182,8 +184,8 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
             public void onClick(View v) {
                 setClubRatings();
 
-                SegmentedGroup g = binding.puttSegmentedGroup;
-                viewModel.setNumberOfPutts(g.indexOfChild(g.findViewById(g.getCheckedRadioButtonId())) + 1);
+//                SegmentedGroup g = binding.puttSegmentedGroup;
+                viewModel.setNumberOfPutts(puttGroup.indexOfChild(puttGroup.findViewById(puttGroup.getCheckedRadioButtonId())) + 1);
 
                 if (!isNewCourse && prevParPref.getInt("par" + parToGet, 0) != 0) {
                     Log.d("PARLOAD:", "" + prevParPref.getInt("par" + parToGet, 0));
@@ -265,6 +267,7 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
         viewModel.setPuttRg(binding.PuttRadioGroup);
         viewModel.setIronRg(binding.IronRadioGroup);
 
+        puttGroup = binding.puttSegmentedGroup;
         //New Putt Listener
 //        binding.puttSegmentedGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 //            @Override
