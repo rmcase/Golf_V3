@@ -12,6 +12,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ryancase.golf_v3.HoleView;
@@ -41,6 +43,9 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
     private Button nextHole;
     private Button finishRound;
 
+    private FirebaseUser currentUser;
+    private FirebaseAuth auth;
+
     private DatabaseReference reference;
     private RoundModel roundModel;
 
@@ -67,8 +72,14 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_stat_view, container, false);
 
+        auth = FirebaseAuth.getInstance();
+        if(auth.getCurrentUser() != null) {
+            currentUser = auth.getCurrentUser();
+        }
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        reference = database.getReference("Rounds");
+//        reference = database.getReference("2A5wfxt9uScm8zlcxxkwj8J6rB42");
+        reference = database.getReference(currentUser.getUid());
 
         binding = DataBindingUtil.bind(retval);
 

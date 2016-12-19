@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadRounds() {
         database = FirebaseDatabase.getInstance().getReference();
-//        Query roundQue = database.child("Rounds").orderByChild("roundId").equalTo("r.c8700@gmail.com");
-        Query roundQue = database.child("Rounds").orderByChild("roundId").equalTo(Round.getRoundId());
+
+        Query roundQue = database.child(currentUser.getUid());
 
         roundQue.addChildEventListener(new ChildEventListener() {
             @Override
