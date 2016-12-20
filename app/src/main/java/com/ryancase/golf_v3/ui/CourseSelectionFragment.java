@@ -30,9 +30,7 @@ import com.ryancase.golf_v3.databinding.FragmentCourseSelectBinding;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import static android.view.View.GONE;
 
@@ -172,12 +170,12 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
             rounds.add(gson.fromJson(objectToLoad, RoundThing.class));
         }
 
-        Set<RoundThing> shortenedRounds = new LinkedHashSet<>(rounds);
-        rounds.clear();
-        rounds = new ArrayList<>(shortenedRounds);
-
-        for (RoundThing round : rounds) {
-            courseNames.add(round.getCourse());
+        for (int i=0; i< rounds.size(); i++) {
+            if(!courseNames.contains(rounds.get(i).getCourse())) {
+                courseNames.add(rounds.get(i).getCourse());
+            } else {
+                rounds.remove(i);
+            }
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.course_list_item, courseNames);
