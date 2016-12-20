@@ -4,6 +4,8 @@ import android.databinding.BaseObservable;
 import android.widget.Button;
 import android.widget.TableLayout;
 
+import java.util.List;
+
 
 public class StatViewModel extends BaseObservable {
     private String title;
@@ -11,6 +13,7 @@ public class StatViewModel extends BaseObservable {
     private String par;
     private String putts;
     private String greens;
+    private String scrambling;
     private String fairways;
     private String scoreToPar;
     private String driverRating;
@@ -19,10 +22,27 @@ public class StatViewModel extends BaseObservable {
     private String puttRating;
     private Button nextHoleButton;
     private Button finishHoleButton;
+    private List<String> scores;
     private TableLayout tableLayout;
 
     public StatViewModel() {
 
+    }
+
+    public List<String> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<String> scores) {
+        this.scores = scores;
+    }
+
+    public String getScrambling() {
+        return scrambling;
+    }
+
+    public void setScrambling(String scrambling) {
+        this.scrambling = scrambling;
     }
 
     public String getPuttRating() {

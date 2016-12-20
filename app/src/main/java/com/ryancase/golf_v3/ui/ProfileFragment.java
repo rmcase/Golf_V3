@@ -48,8 +48,6 @@ public class ProfileFragment extends Fragment {
 
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
-
-//        getActivity().setTitle("Profile");
     }
 
     @Override
@@ -107,7 +105,7 @@ public class ProfileFragment extends Fragment {
         Float scoAvg = preferences.getFloat("scoAvg", 0f);
         int totalStrokes = preferences.getInt("totalStrokes", 0);
         float roundsPlayed = preferences.getFloat("profileRoundsPlayed", 0);
-        String currentGolfer = "Bailey Woods";
+        String currentGolfer = "Tiger Woods";
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             currentGolfer = FirebaseAuth.getInstance().getCurrentUser().getEmail();

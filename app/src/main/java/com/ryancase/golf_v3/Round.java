@@ -74,6 +74,10 @@ public class Round {
         return frontNine.getScoreToPar() + backnine.getScoreToPar();
     }
 
+    public static int getScrambling() {
+        return frontNine.getScrambling() + backnine.getScrambling();
+    }
+
     public static int getPar() {
         return frontNine.getPar() + backnine.getPar();
     }

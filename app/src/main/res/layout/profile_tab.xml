@@ -22,30 +22,51 @@
             android:padding="20dp">
 
             <TableRow android:layout_marginBottom="15dp">
+                <View
+                    android:layout_width="345dp"
+                    android:layout_height="1dp"
+                    android:background="@color/fDarkPurple" />
+            </TableRow>
+            <!--Line above-->
 
-                <TextView
+            <TableRow android:layout_marginBottom="15dp">
+
+                <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:text="Golfer: "
-                    android:textSize="16sp" />
+                    android:src="@drawable/tiger" />
 
                 <TextView
                     android:id="@+id/golfer"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="16sp"
+                    android:background="@color/fDarkPurple"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
             </TableRow>
-            <!-- ^^ -->
+            <!--Profile picture / id-->
+
+            <TableRow android:layout_marginBottom="50dp">
+                <View
+                    android:layout_width="345dp"
+                    android:layout_height="1dp"
+                    android:background="@color/fDarkPurple" />
+            </TableRow>
+            <!--Line below-->
 
             <TableRow android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
+                    android:gravity="end"
                     android:text="Total Rounds Played: "
                     android:textSize="16sp" />
 
@@ -54,17 +75,19 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </TableRow>
-            <!-- ^^ -->
+            <!--Total rounds-->
 
             <TableRow android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
+                    android:gravity="end"
                     android:text="Strokes Taken: "
                     android:textSize="16sp" />
 
@@ -73,17 +96,19 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </TableRow>
-            <!-- ^^ -->
+            <!--Total strokes-->
 
             <TableRow android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
+                    android:gravity="end"
                     android:text="Scoring Average: "
                     android:textSize="16sp" />
 
@@ -92,18 +117,21 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </TableRow>
+            <!--Scoring average-->
 
             <TableRow
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="200dp"
                 android:gravity="center">
 
                 <info.hoang8f.widget.FButton
                     android:id="@+id/logoutBtn"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
                     android:text="LOGOUT"
                     android:textColor="@color/white"
                     fbutton:buttonColor="@color/fDarkTeal"
@@ -111,6 +139,7 @@
                     fbutton:shadowEnabled="false" />
 
             </TableRow>
+            <!--Logout(For now)-->
 
         </TableLayout>
     </LinearLayout>

@@ -19,483 +19,496 @@
         <!--Android:gravity sets the gravity of the content of the View its used on.
             Android:layout_gravity sets the gravity of the View or Layout in its parent.-->
 
-        <TableLayout
-            android:id="@+id/ratingTable"
+        <LinearLayout
+            android:id="@+id/tableHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:orientation="vertical">
 
-            <TableRow>
+            <TableLayout
+                android:id="@+id/ratingTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:visibility="gone">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rate Your Shots"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </TableRow>
-            <!--Header-->
+                <TableRow>
 
-            <TableRow android:layout_marginTop="15dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Driver" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Iron" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Approach" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Putt" />
-            </TableRow>
-            <!--Clubs-->
-
-            <TableRow>
-
-                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/DriverRadioGroup"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:checkedButton="@+id/driveNa"
-                    android:orientation="vertical"
-                    segmentedgroup:sc_border_width="2dp"
-                    segmentedgroup:sc_checked_text_color="@color/white"
-                    segmentedgroup:sc_corner_radius="20dp"
-                    segmentedgroup:sc_tint_color="@color/fDarkTeal">
-
-                    <RadioButton
-                        android:id="@+id/driveNa"
-                        style="@style/RadioButton"
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="N/A" />
+                        android:layout_height="wrap_content"
+                        android:text="Rate Your Shots"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </TableRow>
+                <!--Header-->
 
-                    <RadioButton
-                        android:id="@+id/driveA"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="A" />
+                <TableRow android:layout_marginTop="15dp">
 
-                    <RadioButton
-                        android:id="@+id/driveB"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="B" />
-
-                    <RadioButton
-                        android:id="@+id/driveC"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="C" />
-
-                    <RadioButton
-                        android:id="@+id/driveD"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="D" />
-                </info.hoang8f.android.segmented.SegmentedGroup>
-
-                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/IronRadioGroup"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:checkedButton="@+id/ironNa"
-                    android:orientation="vertical"
-                    segmentedgroup:sc_border_width="2dp"
-                    segmentedgroup:sc_checked_text_color="@color/white"
-                    segmentedgroup:sc_corner_radius="20dp"
-                    segmentedgroup:sc_tint_color="@color/fDarkTeal">
-
-                    <RadioButton
-                        android:id="@+id/ironNa"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="N/A" />
-
-                    <RadioButton
-                        android:id="@+id/ironA"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="A" />
-
-                    <RadioButton
-                        android:id="@+id/ironB"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="B" />
-
-                    <RadioButton
-                        android:id="@+id/ironC"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="C" />
-
-                    <RadioButton
-                        android:id="@+id/ironD"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="D" />
-                </info.hoang8f.android.segmented.SegmentedGroup>
-
-                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/ApproachRadioGroup"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:checkedButton="@+id/approachNa"
-                    android:orientation="vertical"
-                    segmentedgroup:sc_border_width="2dp"
-                    segmentedgroup:sc_checked_text_color="@color/white"
-                    segmentedgroup:sc_corner_radius="20dp"
-                    segmentedgroup:sc_tint_color="@color/fDarkTeal">
-
-                    <RadioButton
-                        android:id="@+id/approachNa"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="N/A" />
-
-                    <RadioButton
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="A" />
-
-                    <RadioButton
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="B" />
-
-                    <RadioButton
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="C" />
-
-                    <RadioButton
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="D" />
-                </info.hoang8f.android.segmented.SegmentedGroup>
-
-                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/PuttRadioGroup"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:checkedButton="@+id/puttNa"
-                    android:orientation="vertical"
-                    segmentedgroup:sc_border_width="2dp"
-                    segmentedgroup:sc_checked_text_color="@color/white"
-                    segmentedgroup:sc_corner_radius="20dp"
-                    segmentedgroup:sc_tint_color="@color/fDarkTeal">
-
-                    <RadioButton
-                        android:id="@+id/puttNa"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="N/A" />
-
-                    <RadioButton
-                        android:id="@+id/puttA"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="A" />
-
-                    <RadioButton
-                        android:id="@+id/puttB"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="B" />
-
-                    <RadioButton
-                        android:id="@+id/puttC"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="C" />
-
-                    <RadioButton
-                        android:id="@+id/puttD"
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="D" />
-                </info.hoang8f.android.segmented.SegmentedGroup>
-            </TableRow>
-            <!--Radio Groups-->
-        </TableLayout>
-        <!--Ratings Table-->
-
-        <TableLayout
-            android:id="@+id/holeTable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
-
-            <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal">
-
-                <com.shawnlin.numberpicker.NumberPicker
-                    android:id="@+id/scoreSelector"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_weight="1"
-                    app:np_dividerColor="@color/fDarkTeal"
-                    app:np_dividerDistance="55dp"
-                    app:np_max="10"
-                    app:np_min="1"
-                    app:np_orientation="horizontal"
-                    app:np_textColor="@color/fDarkPurple"
-                    app:np_textSize="22sp"
-                    app:np_wheelItemCount="6"
-                    app:np_wrapSelectorWheel="true">
-
-                </com.shawnlin.numberpicker.NumberPicker>
-
-                <!--<pl.polak.clicknumberpicker.ClickNumberPickerView-->
-                <!--android:id="@+id/parSelector"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="12dp"-->
-                <!--android:layout_marginRight="12dp"-->
-                <!--android:layout_marginTop="50dp"-->
-                <!--android:layout_weight="1"-->
-                <!--app:integer_priority="true"-->
-                <!--app:max_value="5"-->
-                <!--app:min_value="3"-->
-                <!--app:picker_corner_radius="35"-->
-                <!--app:pickers_background_color="@color/fDarkTeal"-->
-                <!--app:value="4"-->
-                <!--app:value_background_color="@color/white"-->
-                <!--app:value_max_text_size="2sp"-->
-                <!--app:value_min_text_size="2sp"-->
-                <!--app:value_text_color="@color/black"-->
-                <!--app:value_text_size="10sp"></pl.polak.clicknumberpicker.ClickNumberPickerView>-->
-
-            </TableRow>
-
-            <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="35dp"
-                android:gravity="center_horizontal">
-
-                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/parSegmentedGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal"
-                    segmentedgroup:sc_border_width="2dp"
-                    segmentedgroup:sc_checked_text_color="@color/white"
-                    segmentedgroup:sc_corner_radius="10dp"
-                    segmentedgroup:sc_tint_color="@color/fDarkTeal">
-
-                    <RadioButton
-                        android:id="@+id/par3"
-                        style="@style/RadioButton"
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="3" />
+                        android:text="Driver"
+                        android:textAlignment="center" />
 
-                    <RadioButton
-                        android:id="@+id/par4"
-                        style="@style/RadioButton"
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="4" />
+                        android:text="Iron"
+                        android:textAlignment="center" />
 
-                    <RadioButton
-                        android:id="@+id/par5"
-                        style="@style/RadioButton"
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="5" />
-                </info.hoang8f.android.segmented.SegmentedGroup>
-            </TableRow>
-            <!--Number Pickers-->
+                        android:text="Approach"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="20dp">
-
-                <TextView
-                    android:id="@+id/puttTv"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.puttTv}" />
-
-            </TableRow>
-            <!--Putt Tv-->
-
-            <TableRow android:gravity="center_horizontal">
-
-                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/puttSegmentedGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal"
-                    segmentedgroup:sc_border_width="2dp"
-                    segmentedgroup:sc_checked_text_color="@color/white"
-                    segmentedgroup:sc_corner_radius="10dp"
-                    segmentedgroup:sc_tint_color="@color/fDarkTeal">
-
-                    <RadioButton
-                        android:id="@+id/button21"
-                        style="@style/RadioButton"
-                        android:layout_width="115dp"
+                    <TextView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="One" />
+                        android:layout_weight="1"
+                        android:text="Putt"
+                        android:textAlignment="center" />
+                </TableRow>
+                <!--Clubs-->
 
-                    <RadioButton
-                        android:id="@+id/button22"
-                        style="@style/RadioButton"
-                        android:layout_width="115dp"
+                <TableRow android:gravity="center">
+
+                    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/DriverRadioGroup"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Two" />
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkedButton="@+id/driveNa"
+                        android:orientation="vertical"
+                        segmentedgroup:sc_border_width="2dp"
+                        segmentedgroup:sc_checked_text_color="@color/white"
+                        segmentedgroup:sc_corner_radius="20dp"
+                        segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
-                    <RadioButton
-                        android:id="@+id/button23"
-                        style="@style/RadioButton"
-                        android:layout_width="115dp"
+                        <RadioButton
+                            android:id="@+id/driveNa"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="N/A" />
+
+                        <RadioButton
+                            android:id="@+id/driveA"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="A" />
+
+                        <RadioButton
+                            android:id="@+id/driveB"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="B" />
+
+                        <RadioButton
+                            android:id="@+id/driveC"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="C" />
+
+                        <RadioButton
+                            android:id="@+id/driveD"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="D" />
+                    </info.hoang8f.android.segmented.SegmentedGroup>
+
+                    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/IronRadioGroup"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Three" />
-                </info.hoang8f.android.segmented.SegmentedGroup>
-            </TableRow>
-            <!--Segmented Putts Button-->
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkedButton="@+id/ironNa"
+                        android:orientation="vertical"
+                        segmentedgroup:sc_border_width="2dp"
+                        segmentedgroup:sc_checked_text_color="@color/white"
+                        segmentedgroup:sc_corner_radius="20dp"
+                        segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
-            <TableRow
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp">
+                        <RadioButton
+                            android:id="@+id/ironNa"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="N/A" />
 
-                <CheckBox
-                    android:id="@+id/greenCheck"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.greenCheck.getText()}" />
+                        <RadioButton
+                            android:id="@+id/ironA"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="A" />
 
-                <CheckBox
-                    android:id="@+id/fairwayCheck"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.fairwayCheck.getText()}" />
+                        <RadioButton
+                            android:id="@+id/ironB"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="B" />
 
-                <CheckBox
-                    android:id="@+id/upAndDownCheck"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.upAndDownCheck.getText()}" />
+                        <RadioButton
+                            android:id="@+id/ironC"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="C" />
 
-            </TableRow>
-            <!--Checkboxes-->
+                        <RadioButton
+                            android:id="@+id/ironD"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="D" />
+                    </info.hoang8f.android.segmented.SegmentedGroup>
 
-            <TableRow android:gravity="center">
+                    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/ApproachRadioGroup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkedButton="@+id/approachNa"
+                        android:orientation="vertical"
+                        segmentedgroup:sc_border_width="2dp"
+                        segmentedgroup:sc_checked_text_color="@color/white"
+                        segmentedgroup:sc_corner_radius="20dp"
+                        segmentedgroup:sc_tint_color="@color/fDarkTeal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </TableRow>
+                        <RadioButton
+                            android:id="@+id/approachNa"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="N/A" />
 
-        </TableLayout>
-        <!--Hole Statistics-->
+                        <RadioButton
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="A" />
+
+                        <RadioButton
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="B" />
+
+                        <RadioButton
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="C" />
+
+                        <RadioButton
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="D" />
+                    </info.hoang8f.android.segmented.SegmentedGroup>
+
+                    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/PuttRadioGroup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkedButton="@+id/puttNa"
+                        android:orientation="vertical"
+                        segmentedgroup:sc_border_width="2dp"
+                        segmentedgroup:sc_checked_text_color="@color/white"
+                        segmentedgroup:sc_corner_radius="20dp"
+                        segmentedgroup:sc_tint_color="@color/fDarkTeal">
+
+                        <RadioButton
+                            android:id="@+id/puttNa"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="N/A" />
+
+                        <RadioButton
+                            android:id="@+id/puttA"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="A" />
+
+                        <RadioButton
+                            android:id="@+id/puttB"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="B" />
+
+                        <RadioButton
+                            android:id="@+id/puttC"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="C" />
+
+                        <RadioButton
+                            android:id="@+id/puttD"
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="D" />
+                    </info.hoang8f.android.segmented.SegmentedGroup>
+                </TableRow>
+                <!--Radio Groups-->
+            </TableLayout>
+            <!--Ratings Table-->
+
+            <TableLayout
+                android:id="@+id/holeTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <TableRow
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_horizontal">
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/scoreSelector"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_weight="1"
+                        app:np_dividerColor="@color/fDarkTeal"
+                        app:np_dividerDistance="55dp"
+                        app:np_max="10"
+                        app:np_min="1"
+                        app:np_orientation="horizontal"
+                        app:np_textColor="@color/fDarkPurple"
+                        app:np_textSize="22sp"
+                        app:np_wheelItemCount="6"
+                        app:np_wrapSelectorWheel="true">
+
+                    </com.shawnlin.numberpicker.NumberPicker>
+
+                    <!--<pl.polak.clicknumberpicker.ClickNumberPickerView-->
+                    <!--android:id="@+id/parSelector"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="12dp"-->
+                    <!--android:layout_marginRight="12dp"-->
+                    <!--android:layout_marginTop="50dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--app:integer_priority="true"-->
+                    <!--app:max_value="5"-->
+                    <!--app:min_value="3"-->
+                    <!--app:picker_corner_radius="35"-->
+                    <!--app:pickers_background_color="@color/fDarkTeal"-->
+                    <!--app:value="4"-->
+                    <!--app:value_background_color="@color/white"-->
+                    <!--app:value_max_text_size="2sp"-->
+                    <!--app:value_min_text_size="2sp"-->
+                    <!--app:value_text_color="@color/black"-->
+                    <!--app:value_text_size="10sp"></pl.polak.clicknumberpicker.ClickNumberPickerView>-->
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center_horizontal">
+
+                    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/parSegmentedGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        segmentedgroup:sc_border_width="2dp"
+                        segmentedgroup:sc_checked_text_color="@color/white"
+                        segmentedgroup:sc_corner_radius="10dp"
+                        segmentedgroup:sc_tint_color="@color/fDarkTeal">
+
+                        <RadioButton
+                            android:id="@+id/par3"
+                            style="@style/RadioButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="3" />
+
+                        <RadioButton
+                            android:id="@+id/par4"
+                            style="@style/RadioButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="4" />
+
+                        <RadioButton
+                            android:id="@+id/par5"
+                            style="@style/RadioButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="5" />
+                    </info.hoang8f.android.segmented.SegmentedGroup>
+                </TableRow>
+                <!--Number Pickers-->
+
+                <TableRow
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="18dp">
+
+                    <TextView
+                        android:id="@+id/puttTv"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{viewModel.puttTv}" />
+
+                </TableRow>
+                <!--Putt Tv-->
+
+                <TableRow android:gravity="center_horizontal">
+
+                    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/puttSegmentedGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        segmentedgroup:sc_border_width="2dp"
+                        segmentedgroup:sc_checked_text_color="@color/white"
+                        segmentedgroup:sc_corner_radius="10dp"
+                        segmentedgroup:sc_tint_color="@color/fDarkTeal">
+
+                        <RadioButton
+                            android:id="@+id/button21"
+                            style="@style/RadioButton"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:text="One" />
+
+                        <RadioButton
+                            android:id="@+id/button22"
+                            style="@style/RadioButton"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:text="Two" />
+
+                        <RadioButton
+                            android:id="@+id/button23"
+                            style="@style/RadioButton"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:text="Three" />
+                    </info.hoang8f.android.segmented.SegmentedGroup>
+                </TableRow>
+                <!--Segmented Putts Button-->
+
+                <TableRow
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp">
+
+                    <CheckBox
+                        android:id="@+id/greenCheck"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{viewModel.greenCheck.getText()}" />
+
+                    <CheckBox
+                        android:id="@+id/fairwayCheck"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{viewModel.fairwayCheck.getText()}" />
+
+                    <CheckBox
+                        android:id="@+id/upAndDownCheck"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{viewModel.upAndDownCheck.getText()}" />
+
+                </TableRow>
+                <!--Checkboxes-->
+
+                <TableRow android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+            </TableLayout>
+            <!--Hole Statistics-->
+        </LinearLayout>
 
         <Switch
             android:id="@+id/theSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tableHolder"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="370dp"
+            android:layout_marginTop="10dp"
             android:text="Show Club Ratings" />
         <!--Show-Ratings Switch-->
 

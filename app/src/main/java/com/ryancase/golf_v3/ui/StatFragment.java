@@ -16,12 +16,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.ryancase.golf_v3.Hole;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.Round;
 import com.ryancase.golf_v3.RoundModel;
 import com.ryancase.golf_v3.ViewModels.StatViewModel;
 import com.ryancase.golf_v3.databinding.FragmentStatViewBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -43,6 +47,10 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
     private Button nextHole;
     private Button finishRound;
 
+    private List<Hole> scores;
+    private List<Hole> scoresB, scoresF;
+    private List<String> scoreInts;
+
     private FirebaseUser currentUser;
     private FirebaseAuth auth;
 
@@ -53,12 +61,15 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
 
     }
 
-    public StatFragment(boolean isNewCourse, int x) {
+    public StatFragment(boolean isNewCourse, List<Hole> scores) {
         this.isNewCourse = isNewCourse;
+        this.scores = scores;
     }
 
-    public StatFragment(boolean goToFinishRound) {
+    public StatFragment(boolean goToFinishRound, List<Hole> scoresFront, List<Hole> scoresBack) {
         this.goToFinishRound = goToFinishRound;
+        this.scoresF = scoresFront;
+        this.scoresB = scoresBack;
     }
 
     @Override
@@ -78,8 +89,10 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
         }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        reference = database.getReference("2A5wfxt9uScm8zlcxxkwj8J6rB42");
-        reference = database.getReference(currentUser.getUid());
+
+        reference = database.getReference("2A5wfxt9uScm8zlcxxkwj8J6rB42");
+//        reference = database.getReference(currentUser.getUid());
+
 
         binding = DataBindingUtil.bind(retval);
 
@@ -99,10 +112,31 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
     }
 
     private void bindViewModelElements() {
-        nextHole = new Button(getActivity());
-        finishRound = new Button(getActivity());
+        nextHole = binding.nextHole;
+        finishRound = binding.finishRound;
+        scoreInts = new ArrayList<>();
+
+        if(!goToFinishRound) {
+            for (int i = 0; i < 9; i++) {
+                scoreInts.add(i, String.valueOf(scores.get(i).getScore()));
+            }
+            for (int i = 9; i < 18; i++ ) {
+                scoreInts.add(i, String.valueOf(0));
+            }
+        } else {
+            for (int i = 0; i < 9; i++) {
+                scoreInts.add(i, String.valueOf(scoresF.get(i).getScore()));
+            }
+            for (int i = 9; i < 18; i++) {
+                scoreInts.add(i, String.valueOf(scoresB.get(i-9).getScore()));
+            }
+        }
+
+        viewModel.setScores(scoreInts);
 
         if (goToFinishRound) {
+            binding.holeScoresBackRow.setVisibility(View.VISIBLE);
+            binding.holeNumbersBackRow.setVisibility(View.VISIBLE);
             viewModel.setTitle(getActivity().getString(R.string.lastHole));
             viewModel.setScore(String.valueOf(Round.getScore()));
             viewModel.setPar(String.valueOf(Round.getPar()));
@@ -110,6 +144,7 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
             viewModel.setPutts(String.valueOf(Round.getPutts()));
             viewModel.setGreens(String.valueOf(Round.getGreens()));
             viewModel.setFairways(String.valueOf(Round.getFairways()));
+            viewModel.setScrambling(String.valueOf(Round.getScrambling()));
             viewModel.setDriverRating(String.valueOf(Round.getRating("Driver")));
             viewModel.setIronRating(String.valueOf(Round.getRating("Iron")));
             viewModel.setApproachRating(String.valueOf(Round.getRating("Approach")));
@@ -124,8 +159,23 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
             viewModel.setFairways(String.valueOf(Round.getFrontNine().getFairwayPercentage()));
             viewModel.setDriverRating(Round.getFrontNine().getAverageDriverRating());
             viewModel.setIronRating(Round.getFrontNine().getAverageIronRating());
+            viewModel.setScrambling(String.valueOf(Round.getFrontNine().getScrambling()));
             viewModel.setApproachRating(Round.getFrontNine().getAverageApproachRating());
             viewModel.setPuttRating(Round.getFrontNine().getAveragePuttRating());
+        }
+
+        int scoreToPar = Integer.valueOf(viewModel.getScoreToPar());
+
+        if(scoreToPar == 0) {
+            viewModel.setScoreToPar("E");
+            binding.relScoreTv.setTextColor(getResources().getColor(R.color.fTeal));
+        } else if(scoreToPar > 0) {
+            viewModel.setScoreToPar("+" + String.valueOf(scoreToPar));
+        } else {
+            viewModel.setScoreToPar(String.valueOf(scoreToPar));
+        }
+        if(scoreToPar < 0) {
+            binding.relScoreTv.setTextColor(getResources().getColor(R.color.red));
         }
 
         viewModel.setFinishHoleButton(finishRound);
@@ -134,12 +184,7 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
     }
 
     private void setViewModelElements() {
-        configureTableLayout();
-
-        viewModel.getNextHoleButton().setTextColor(getResources().getColor(R.color.white));
-        viewModel.getNextHoleButton().setBackgroundColor(getResources().getColor(R.color.fDarkTeal));
-        viewModel.getFinishHoleButton().setTextColor(getResources().getColor(R.color.white));
-        viewModel.getFinishHoleButton().setBackgroundColor(getResources().getColor(R.color.fDarkTeal));
+//        configureTableLayout();
 
         if (goToFinishRound) {
             viewModel.getFinishHoleButton().setVisibility(View.GONE);

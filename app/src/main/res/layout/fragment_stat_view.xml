@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -14,16 +15,469 @@
         android:background="@color/white"
         tools:context=".ViewModels.StatViewModel">
 
-        <!--Android:gravity sets the gravity of the content of the View its used on.
-            Android:layout_gravity sets the gravity of the View or Layout in its parent.-->
-
         <TableLayout
             android:id="@+id/table"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp">
+            android:layout_height="wrap_content">
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:weightSum="9">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="2" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="3" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="4" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="5" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="6" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="7" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="8" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="9" />
+
+            </TableRow>
+            <!--Hole Numbers Front-->
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@color/fDarkTeal"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:weightSum="9">
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(0)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(1)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(2)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(3)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(4)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(5)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(6)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(7)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(8)}" />
+
+            </TableRow>
+            <!--Scores Front-->
+
+            <TableRow
+                android:id="@+id/holeNumbersBackRow"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_10" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_11" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_12" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_13" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_14" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_15" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_17" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/_18" />
+
+            </TableRow>
+            <!--Hole Numbers Back-->
+
+            <TableRow
+                android:id="@+id/holeScoresBackRow"
+                android:layout_marginTop="10dp"
+                android:background="@color/fDarkTeal"
+                android:paddingEnd="0dp"
+                android:paddingStart="6dp"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(9)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(10)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:text="@{viewModel.scores.get(11)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(12)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(13)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(14)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(15)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(16)}" />
+
+                <TextView
+                    style="@style/ScorecardTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scores.get(17)}" />
+
+            </TableRow>
+            <!--Scores Back-->
+
+            <TableRow
+                android:layout_marginTop="20dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Score:"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Score To Par:"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Putts:"
+                    android:textAlignment="center" />
+
+            </TableRow>
+            <!--Stat titles row 1-->
+
+            <TableRow
+                android:layout_marginTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:weightSum="3">
+
+                <TextView
+                    style="@style/ScorecardTextNonTable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.score}" />
+
+                <TextView
+                    android:id="@+id/relScoreTv"
+                    style="@style/ScorecardTextNonTable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scoreToPar}" />
+
+                <TextView
+                    style="@style/ScorecardTextNonTable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.putts}" />
+            </TableRow>
+            <!--Stats row 1-->
+
+            <TableRow
+                android:layout_marginTop="20dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Greens:"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Fairways:"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Scrambling:"
+                    android:textAlignment="center" />
+
+            </TableRow>
+            <!--Stat titles row 2-->
+
+            <TableRow
+                android:layout_marginTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:weightSum="3">
+
+                <TextView
+                    style="@style/ScorecardTextNonTable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.greens}" />
+
+                <TextView
+                    style="@style/ScorecardTextNonTable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.fairways}" />
+
+                <TextView
+                    style="@style/ScorecardTextNonTable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scrambling}" />
+            </TableRow>
+            <!--Stats row 2-->
+
+            <TableRow android:layout_marginTop="100dp">
+
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/nextH2ole"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    fbutton:buttonColor="@color/fDarkTeal"
+                    fbutton:cornerRadius="15dp"
+                    fbutton:shadowColor="@color/white"
+                    fbutton:shadowHeight="1dp" />
+
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/finishR2ound"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    fbutton:buttonColor="@color/fDarkTeal"
+                    fbutton:cornerRadius="15dp"
+                    fbutton:shadowColor="@color/white"
+                    fbutton:shadowHeight="1dp" />
+            </TableRow>
+            <!--Buttons-->
         </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/table"
+            android:gravity="center_vertical">
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/nextHole"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                fbutton:buttonColor="@color/fDarkTeal"
+                fbutton:cornerRadius="15dp"
+                fbutton:shadowColor="@color/white"
+                fbutton:shadowHeight="1dp" />
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/finishRound"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                fbutton:buttonColor="@color/fDarkTeal"
+                fbutton:cornerRadius="15dp"
+                fbutton:shadowColor="@color/white"
+                fbutton:shadowHeight="1dp" />
+        </LinearLayout>
 
     </RelativeLayout>
 </layout>

@@ -295,16 +295,16 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
     private void loadAtTheTurn() {
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        StatFragment stat = new StatFragment(isNewCourse, 0);
-        fragmentTransaction.add(R.id.content_view, stat, "STAT");
+        StatFragment stat = new StatFragment(isNewCourse, Round.getFrontNine().getHoles());
+        fragmentTransaction.replace(R.id.content_view, stat, "STAT");
         fragmentTransaction.commit();
     }
 
     private void loadFinishRound() {
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        StatFragment stat = new StatFragment(true);
-        fragmentTransaction.add(R.id.content_view, stat, "STAT");
+        StatFragment stat = new StatFragment(true, Round.getFrontNine().getHoles(), Round.getBackNine().getHoles());
+        fragmentTransaction.replace(R.id.content_view, stat, "STAT");
         fragmentTransaction.commit();
     }
 
