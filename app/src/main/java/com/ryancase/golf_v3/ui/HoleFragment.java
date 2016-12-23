@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 
 import com.ryancase.golf_v3.Hole;
 import com.ryancase.golf_v3.HoleView;
@@ -41,6 +43,8 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
     private SegmentedGroup puttGroup;
 
     private int parToGet;
+
+    private RelativeLayout mRoot;
 
     private HoleViewModel viewModel;
 
@@ -126,6 +130,8 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
 
         getActivity().setTitle("Hole " + holeNum + "\t\t—\t\t" + Round.getCourse());
 
+        mRoot = (RelativeLayout) retval.findViewById(R.id.holeRelLayout);
+
         setHasOptionsMenu(true);
 
         binding = DataBindingUtil.bind(retval);
@@ -179,12 +185,28 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
             viewModel.getNextHoleButton().setText(R.string.next_hole);
         }
 
+//        if(viewModel.getParSelect().getVisibility() == View.VISIBLE) {
+//            Log.d("CheckedId", "" + viewModel.getParSelect().getCheckedRadioButtonId());
+//            if(viewModel.getParSelect().getCheckedRadioButtonId() == -1) {
+//                viewModel.getNextHoleButton().setEnabled(false);
+//
+//                View coordinatorLayout = getActivity().findViewById(R.id.snackbarPosition);
+//                Snackbar snackbar = Snackbar
+//                        .make(coordinatorLayout, "Please enter a par", Snackbar.LENGTH_LONG);
+//
+//                snackbar.show();
+//            } else {
+//                viewModel.getNextHoleButton().setEnabled(true);
+//            }
+//
+//        }
         viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setClubRatings();
 
-//                SegmentedGroup g = binding.puttSegmentedGroup;
+                boolean loadNextHole = true;
+
                 viewModel.setNumberOfPutts(puttGroup.indexOfChild(puttGroup.findViewById(puttGroup.getCheckedRadioButtonId())) + 1);
 
                 if (!isNewCourse && prevParPref.getInt("par" + parToGet, 0) != 0) {
@@ -192,8 +214,15 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
                     viewModel.setParForHole(prevParPref.getInt("par" + parToGet, 0));
                 } else {
                     viewModel.getParSelect().setVisibility(View.VISIBLE);
-                    viewModel.setParForHole(viewModel.getParSelect().indexOfChild(viewModel.getParSelect().findViewById(viewModel.getParSelect().getCheckedRadioButtonId())) + 3);
-                    Log.d("New Course", "");
+
+                    if(viewModel.getParSelect().getCheckedRadioButtonId() == -1) {
+                        loadNextHole = false;
+                        Snackbar snackbar = Snackbar.make(mRoot, "Please enter a Par for the hole", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    } else {
+                        viewModel.setParForHole(viewModel.getParSelect().indexOfChild(viewModel.getParSelect().findViewById(viewModel.getParSelect().getCheckedRadioButtonId())) + 3);
+                    }
+                        Log.d("New Course", "");
                 }
 
                 viewModel.setScoreRelativeToPar(viewModel.getScoreForHole() - viewModel.getParForHole());
@@ -201,30 +230,32 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
 
                 Log.d("REL-SCORE", "" + viewModel.getScoreRelativeToPar());
 
-                Hole hole = new Hole.Builder()
-                        .score(viewModel.getScoreForHole())
-                        .par(viewModel.getParForHole())
-                        .putts(viewModel.getNumberOfPutts())
-                        .green(viewModel.getGreenStat())
-                        .fairway(viewModel.getFairwayStat())
-                        .upAndDown(viewModel.getUpAndDownStat())
-                        .scoreToPar(viewModel.getScoreRelativeToPar())
-                        .driverRating(viewModel.getDriverRating())
-                        .ironRating(viewModel.getIronRating())
-                        .approachRating(viewModel.getApproachRating())
-                        .puttRating(viewModel.getPuttRating())
-                        .build();
+                if(loadNextHole) {
+                    Hole hole = new Hole.Builder()
+                            .score(viewModel.getScoreForHole())
+                            .par(viewModel.getParForHole())
+                            .putts(viewModel.getNumberOfPutts())
+                            .green(viewModel.getGreenStat())
+                            .fairway(viewModel.getFairwayStat())
+                            .upAndDown(viewModel.getUpAndDownStat())
+                            .scoreToPar(viewModel.getScoreRelativeToPar())
+                            .driverRating(viewModel.getDriverRating())
+                            .ironRating(viewModel.getIronRating())
+                            .approachRating(viewModel.getApproachRating())
+                            .puttRating(viewModel.getPuttRating())
+                            .build();
 
-                saveHole(hole);
+                    saveHole(hole);
 
-                int nextHole = holeNum + 1;
+                    int nextHole = holeNum + 1;
 
-                if (nextHole < 10 || (nextHole > 10 && nextHole < 19)) {
-                    loadNextHole(nextHole);
-                } else if (nextHole == 10) {
-                    loadAtTheTurn();
-                } else if (nextHole == 19) {
-                    loadFinishRound();
+                    if (nextHole < 10 || (nextHole > 10 && nextHole < 19)) {
+                        loadNextHole(nextHole);
+                    } else if (nextHole == 10) {
+                        loadAtTheTurn();
+                    } else if (nextHole == 19) {
+                        loadFinishRound();
+                    }
                 }
             }
         });
