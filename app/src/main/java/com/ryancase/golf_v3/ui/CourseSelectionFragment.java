@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.ryancase.golf_v3.HoleView;
@@ -47,6 +49,8 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
     private CourseSelectViewModel viewModel;
 
     private InputMethodManager mgr;
+
+    private RelativeLayout mRoot;
 
     private List<RoundThing> rounds;
 
@@ -134,6 +138,8 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
             viewModel = new CourseSelectViewModel();
         }
         binding.setViewModel(viewModel);
+
+        mRoot = (RelativeLayout) retval.findViewById(R.id.csRel);
 
         mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -258,9 +264,14 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         viewModel.getBeginRoundButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Round.setCourse(formatCourseString(binding.courseNameEt.getText().toString()));
-                mgr.hideSoftInputFromWindow(binding.courseNameEt.getWindowToken(), 0);
-                loadFirstHole(true);
+                if(!binding.courseNameEt.getText().toString().equals(" ") || binding.courseNameEt.getText().length() < 3) {
+                    Round.setCourse(formatCourseString(binding.courseNameEt.getText().toString()));
+                    mgr.hideSoftInputFromWindow(binding.courseNameEt.getWindowToken(), 0);
+                    loadFirstHole(true);
+                } else {
+                    Snackbar snackbar = Snackbar.make(mRoot, "Please enter a valid course name", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
         });
     }

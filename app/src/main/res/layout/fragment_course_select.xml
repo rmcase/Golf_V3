@@ -10,6 +10,7 @@
 
     <RelativeLayout xmlns:fbutton="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/csRel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ViewModels.CourseSelectViewModel">
@@ -65,20 +66,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingBottom="20dp">
 
                 <info.hoang8f.widget.FButton
                     android:id="@+id/beginRoundButton"
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:text="Begin Round"
                     android:textColor="@color/white"
                     android:visibility="gone"
                     fbutton:buttonColor="@color/fDarkTeal"
                     fbutton:cornerRadius="15dp"
-                    fbutton:shadowColor="@color/fTeal"
+                    fbutton:shadowColor="@color/white"
                     fbutton:shadowEnabled="true"
                     fbutton:shadowHeight="1dp" />
             </TableRow>

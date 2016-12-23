@@ -185,21 +185,6 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
             viewModel.getNextHoleButton().setText(R.string.next_hole);
         }
 
-//        if(viewModel.getParSelect().getVisibility() == View.VISIBLE) {
-//            Log.d("CheckedId", "" + viewModel.getParSelect().getCheckedRadioButtonId());
-//            if(viewModel.getParSelect().getCheckedRadioButtonId() == -1) {
-//                viewModel.getNextHoleButton().setEnabled(false);
-//
-//                View coordinatorLayout = getActivity().findViewById(R.id.snackbarPosition);
-//                Snackbar snackbar = Snackbar
-//                        .make(coordinatorLayout, "Please enter a par", Snackbar.LENGTH_LONG);
-//
-//                snackbar.show();
-//            } else {
-//                viewModel.getNextHoleButton().setEnabled(true);
-//            }
-//
-//        }
         viewModel.getNextHoleButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
