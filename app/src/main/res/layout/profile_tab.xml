@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fbutton="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -22,6 +21,7 @@
             android:padding="20dp">
 
             <TableRow android:layout_marginBottom="15dp">
+
                 <View
                     android:layout_width="345dp"
                     android:layout_height="1dp"
@@ -53,6 +53,7 @@
             <!--Profile picture / id-->
 
             <TableRow android:layout_marginBottom="50dp">
+
                 <View
                     android:layout_width="345dp"
                     android:layout_height="1dp"
@@ -61,6 +62,13 @@
             <!--Line below-->
 
             <TableRow android:layout_marginBottom="5dp">
+
+                <ProgressBar
+                    android:id="@+id/progressA"
+                    style="@android:style/Widget.ProgressBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -122,24 +130,6 @@
                     android:textStyle="bold" />
             </TableRow>
             <!--Scoring average-->
-
-            <TableRow
-                android:layout_marginTop="200dp"
-                android:gravity="center">
-
-                <info.hoang8f.widget.FButton
-                    android:id="@+id/logoutBtn"
-                    android:layout_width="160dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:text="LOGOUT"
-                    android:textColor="@color/white"
-                    fbutton:buttonColor="@color/fDarkTeal"
-                    fbutton:cornerRadius="15dp"
-                    fbutton:shadowEnabled="false" />
-
-            </TableRow>
-            <!--Logout(For now)-->
 
         </TableLayout>
     </LinearLayout>

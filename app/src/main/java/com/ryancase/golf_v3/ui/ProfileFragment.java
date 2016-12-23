@@ -6,9 +6,13 @@ import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -51,21 +55,44 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                // User chose the "Settings" item, show the app settings UI...
+                Log.d("LOGOUT", "");
+
+                binding.profileTable.setVisibility(View.GONE);
+                preferences.edit().clear();
+                preferences.edit().apply();
+                FirebaseAuth.getInstance().signOut();
+
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.options, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        getActivity().setTitle("Profile");
+        setHasOptionsMenu(true);
 
         if (getArguments() != null) {
         }
-
-        getActivity().getSupportFragmentManager().addOnBackStackChangedListener(
-                new FragmentManager.OnBackStackChangedListener() {
-                    public void onBackStackChanged() {
-                        // Update your UI here.
-//                        getActivity().setTitle("Profile");
-                    }
-                });
     }
 
     @Override
@@ -82,19 +109,9 @@ public class ProfileFragment extends Fragment {
 
         auth = FirebaseAuth.getInstance();
 
+        viewModel.setA(binding.progressA);
+
         preferences = getActivity().getSharedPreferences("PREF", Context.MODE_PRIVATE);
-
-        binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.profileTable.setVisibility(View.GONE);
-                preferences.edit().clear();
-                preferences.edit().apply();
-                FirebaseAuth.getInstance().signOut();
-
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-            }
-        });
 
         loadProfileData();
 
@@ -116,6 +133,23 @@ public class ProfileFragment extends Fragment {
         } else {
             binding.scoAvg.setText(String.valueOf(scoAvg));
         }
+
+        binding.roundsPl.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                viewModel.getA().setVisibility(View.GONE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         binding.golfer.setText(currentGolfer);
         binding.roundsPl.setText(String.valueOf(roundsPlayed));
         binding.strokesTk.setText(String.valueOf(totalStrokes));

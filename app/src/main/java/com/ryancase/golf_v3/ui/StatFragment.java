@@ -3,14 +3,10 @@ package com.ryancase.golf_v3.ui;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -83,7 +79,11 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_stat_view, container, false);
 
-        getActivity().setTitle("At The Turn");
+        if(goToFinishRound) {
+            getActivity().setTitle("19th Hole");
+        } else {
+            getActivity().setTitle("At The Turn");
+        }
 
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null) {
@@ -92,8 +92,9 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        reference = database.getReference("2A5wfxt9uScm8zlcxxkwj8J6rB42");
-//        reference = database.getReference(currentUser.getUid());
+        //TODO: change to UUID for app config
+//        reference = database.getReference("2A5wfxt9uScm8zlcxxkwj8J6rB42");
+        reference = database.getReference(currentUser.getUid());
 
 
         binding = DataBindingUtil.bind(retval);
@@ -186,7 +187,6 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
     }
 
     private void setViewModelElements() {
-//        configureTableLayout();
 
         if (goToFinishRound) {
             viewModel.getFinishHoleButton().setVisibility(View.GONE);
@@ -221,141 +221,6 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
         }
     }
 
-    public TableRow addTableRow(TextView data, TextView title) {
-        TableRow tr = new TableRow(getActivity());
-        tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tr.addView(title);
-        tr.addView(data);
-
-        return tr;
-    }
-
-    public void configureTableLayout() {
-        TableLayout.LayoutParams tableParam = new TableLayout.LayoutParams(
-                TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
-
-        TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1);
-
-        TextView score = new TextView(getActivity());
-        score.setLayoutParams(params);
-        score.setText(viewModel.getScore());
-        score.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-        TextView scoreTv = new TextView(getActivity());
-        scoreTv.setLayoutParams(params);
-        scoreTv.setText("Score:");
-        scoreTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-
-
-        TextView par = new TextView(getActivity());
-        par.setLayoutParams(params);
-        par.setText(viewModel.getPar());
-        par.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-        TextView parTv = new TextView(getActivity());
-        parTv.setLayoutParams(params);
-        parTv.setText("Par:");
-        parTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-
-        TextView scoreRelativeToPar = new TextView(getActivity());
-        scoreRelativeToPar.setLayoutParams(params);
-        scoreRelativeToPar.setText(formatScoreToPar());
-        scoreRelativeToPar.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-        TextView scoreRelativeToParTv = new TextView(getActivity());
-        scoreRelativeToParTv.setLayoutParams(params);
-        scoreRelativeToParTv.setText("Score To Par:");
-        scoreRelativeToParTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-
-        TextView putts = new TextView(getActivity());
-        putts.setLayoutParams(params);
-        putts.setText(viewModel.getPutts());
-        putts.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-        TextView puttsTv = new TextView(getActivity());
-        puttsTv.setLayoutParams(params);
-        puttsTv.setText("Putts:");
-        puttsTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-
-        TextView greens = new TextView(getActivity());
-        greens.setLayoutParams(params);
-        greens.setText(viewModel.getGreens());
-        greens.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-        TextView greensTv = new TextView(getActivity());
-        greensTv.setLayoutParams(params);
-        greensTv.setText("Greens:");
-        greensTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-
-        TextView fairways = new TextView(getActivity());
-        fairways.setLayoutParams(params);
-        fairways.setText(viewModel.getFairways());
-        fairways.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-        TextView fairwaysTv = new TextView(getActivity());
-        fairwaysTv.setLayoutParams(params);
-        fairwaysTv.setText("Fairways:");
-        fairwaysTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-
-        TextView driverRating = new TextView(getActivity());
-        driverRating.setLayoutParams(params);
-        driverRating.setText(viewModel.getDriverRating());
-        driverRating.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-        TextView driverRatingTv = new TextView(getActivity());
-        driverRatingTv.setLayoutParams(params);
-        driverRatingTv.setText("Driver Rating:");
-        driverRatingTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-
-        TextView ironRating = new TextView(getActivity());
-        ironRating.setLayoutParams(params);
-        ironRating.setText(viewModel.getIronRating());
-        ironRating.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-        TextView ironRatingTv = new TextView(getActivity());
-        ironRatingTv.setLayoutParams(params);
-        ironRatingTv.setText("Iron Rating:");
-        ironRatingTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-
-        TextView approachRating = new TextView(getActivity());
-        approachRating.setLayoutParams(params);
-        approachRating.setText(viewModel.getApproachRating());
-        approachRating.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-        TextView approachRatingTv = new TextView(getActivity());
-        approachRatingTv.setLayoutParams(params);
-        approachRatingTv.setText("Approach Rating:");
-        approachRatingTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-
-        TextView puttRating = new TextView(getActivity());
-        puttRating.setLayoutParams(params);
-        puttRating.setText(viewModel.getPuttRating());
-        puttRating.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-        TextView puttRatingTv = new TextView(getActivity());
-        puttRatingTv.setLayoutParams(params);
-        puttRatingTv.setText("Putt Rating:");
-        puttRatingTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTVIEW_TEXT_SIZE);
-
-        TableRow tr = new TableRow(getActivity());
-        tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-        nextHole.setLayoutParams(params);
-        finishRound.setLayoutParams(params);
-        tr.setPadding(40, 20, 40, 0);
-        tr.addView(nextHole);
-        tr.addView(finishRound);
-
-//        TableRow tRow = new TableRow(getActivity());
-//        tRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-//        finishRound.setLayoutParams(params);
-//        tRow.setPadding(40, 20, 40, 0);
-//        tRow.addView(finishRound);
-
-        viewModel.getTableLayout().addView(addTableRow(scoreRelativeToPar, scoreRelativeToParTv), tableParam);
-        viewModel.getTableLayout().addView(addTableRow(score, scoreTv), tableParam);
-        viewModel.getTableLayout().addView(addTableRow(par, parTv), tableParam);
-        viewModel.getTableLayout().addView(addTableRow(putts, puttsTv), tableParam);
-        viewModel.getTableLayout().addView(addTableRow(greens, greensTv), tableParam);
-        viewModel.getTableLayout().addView(addTableRow(fairways, fairwaysTv), tableParam);
-        viewModel.getTableLayout().addView(addTableRow(driverRating, driverRatingTv), tableParam);
-        viewModel.getTableLayout().addView(addTableRow(ironRating, ironRatingTv), tableParam);
-        viewModel.getTableLayout().addView(addTableRow(approachRating, approachRatingTv), tableParam);
-        viewModel.getTableLayout().addView(addTableRow(puttRating, puttRatingTv), tableParam);
-        viewModel.getTableLayout().addView(tr, tableParam);
-//        viewModel.getTableLayout().addView(tRow, tableParam);
-    }
-
     private void loadNextHole(int nextHoleNum, boolean isNewCourse) {
         binding.table.setVisibility(View.GONE);
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
@@ -363,18 +228,6 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
         HoleFragment hole = new HoleFragment(nextHoleNum, isNewCourse);
         fragmentTransaction.replace(R.id.content_view, hole, FRAGMENT_TAG);
         fragmentTransaction.commit();
-    }
-
-    private String formatScoreToPar() {
-        String retval = viewModel.getScoreToPar();
-
-        if (retval.equals(String.valueOf(0))) {
-            retval = "E";
-        } else if (Integer.parseInt(retval) > 0) {
-            retval = "+" + retval;
-        }
-
-        return retval;
     }
 
 }
