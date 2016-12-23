@@ -442,6 +442,41 @@ public class Nine {
         return avg;
     }
 
+    public int getBirdies() {
+        int retval = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getScoreToPar() == -1) {
+                retval++;
+            }
+        }
+
+        return retval;
+    }
+
+    public int getPars() {
+        int retval = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getScoreToPar() == 0) {
+                retval++;
+            }
+        }
+
+        return retval;
+    }
+
+    public int getBogeys() {
+        int retval = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getScoreToPar() == 1) {
+                retval++;
+            }
+        }
+
+        return retval;
+    }
 
 
 

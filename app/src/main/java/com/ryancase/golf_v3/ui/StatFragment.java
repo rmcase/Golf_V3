@@ -83,6 +83,8 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_stat_view, container, false);
 
+        getActivity().setTitle("At The Turn");
+
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null) {
             currentUser = auth.getCurrentUser();

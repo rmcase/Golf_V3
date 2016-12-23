@@ -2,7 +2,6 @@ package com.ryancase.golf_v3.ui;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,8 @@ import java.util.List;
 public class ScorecardFragment extends android.support.v4.app.DialogFragment {
 
     private int score, putts, scoreToPar;
+
+    private int birdies, pars, greens;
 
     private Nine front, back;
 
@@ -50,6 +51,10 @@ public class ScorecardFragment extends android.support.v4.app.DialogFragment {
         getDialog().show();
         getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
+        greens += front.getGreens();
+        birdies += front.getBirdies();
+        pars += front.getPars();
+
         List<String> scores = new ArrayList<>();
         for(int i=0; i<front.getHoles().size(); i++) {
             scores.add(i, String.valueOf(front.getHoles().get(i).getScore()));
@@ -63,6 +68,9 @@ public class ScorecardFragment extends android.support.v4.app.DialogFragment {
             for(int i=0; i<back.getHoles().size(); i++) {
                 scores.add(i+9, String.valueOf(back.getHoles().get(i).getScore()));
             }
+            greens += back.getGreens();
+            birdies += back.getBirdies();
+            pars += back.getPars();
         }
 
 
@@ -71,6 +79,9 @@ public class ScorecardFragment extends android.support.v4.app.DialogFragment {
         viewModel.setScores(scores);
         viewModel.setScore(String.valueOf(score));
         viewModel.setPutts(String.valueOf(putts));
+        viewModel.setGreens(String.valueOf(greens));
+        viewModel.setPars(String.valueOf(pars));
+        viewModel.setBirdies(String.valueOf(birdies));
 
         if(scoreToPar == 0) {
             viewModel.setScoreToPar("E");
