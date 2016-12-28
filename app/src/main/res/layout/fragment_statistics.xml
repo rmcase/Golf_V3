@@ -30,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/chart"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            android:layout_marginBottom="20dp">
 
             <TableRow>
 
@@ -48,7 +49,7 @@
                 <TableLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1">
 
                     <TableRow>
@@ -56,10 +57,11 @@
                         <TextView
                             android:id="@+id/averageTv"
                             android:layout_width="0dp"
-                            android:layout_height="55dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:gravity="left"
+                            android:gravity="start"
+                            android:padding="10dp"
                             android:text=""
                             android:textColor="@color/white"
                             android:textSize="14sp" />
@@ -70,10 +72,11 @@
                         <TextView
                             android:id="@+id/minTv"
                             android:layout_width="0dp"
-                            android:layout_height="55dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:gravity="left"
+                            android:gravity="start"
+                            android:padding="10dp"
                             android:text=""
                             android:textColor="@color/white"
                             android:textSize="14sp" />
@@ -84,10 +87,11 @@
                         <TextView
                             android:id="@+id/maxTv"
                             android:layout_width="0dp"
-                            android:layout_height="55dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:gravity="left"
+                            android:gravity="start"
+                            android:padding="10dp"
                             android:text=""
                             android:textColor="@color/white"
                             android:textSize="14sp" />

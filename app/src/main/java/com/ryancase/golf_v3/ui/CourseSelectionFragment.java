@@ -264,7 +264,7 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
         viewModel.getBeginRoundButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!binding.courseNameEt.getText().toString().equals(" ") || binding.courseNameEt.getText().length() < 3) {
+                if(binding.courseNameEt.getText().toString().trim().length() > 0 && !binding.courseNameEt.getText().toString().isEmpty() && binding.courseNameEt.getText().length() > 2) {
                     Round.setCourse(formatCourseString(binding.courseNameEt.getText().toString()));
                     mgr.hideSoftInputFromWindow(binding.courseNameEt.getWindowToken(), 0);
                     loadFirstHole(true);

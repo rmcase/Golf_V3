@@ -158,7 +158,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         }
 
         binding.golfer.setText(currentGolfer);
-        binding.roundsPl.setText(String.valueOf(fullRounds) + " | " + String.valueOf(halfRounds));
+        binding.roundsPl.setText(String.valueOf(fullRounds) + "  |  " + String.valueOf(halfRounds));
         binding.strokesTk.setText(String.valueOf(totalStrokes));
         binding.scoreToPar.setText(String.valueOf(allTimeScoreToPar));
     }

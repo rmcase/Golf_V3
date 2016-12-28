@@ -150,19 +150,23 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         }
 
         for(RoundThing round : previousRounds) {
-            int score = round.getBackNine().getScore() + round.getFrontNine().getScore();
-            int putt = round.getBackNine().getPutts() + round.getFrontNine().getPutts();
-            int green = round.getBackNine().getGreens() + round.getFrontNine().getGreens();
-            int fairway = round.getBackNine().getFairways() + round.getFrontNine().getFairways();
-            int relScore = round.getBackNine().getScoreToPar() + round.getFrontNine().getScoreToPar();
-            int scrmblng = round.getBackNine().getScrambling() + round.getFrontNine().getScrambling();
+            if(round.getBackNine().getScore() == 0 || round.getFrontNine().getScore() == 0) {
 
-            scoresToPar.add(relScore);
-            fairways.add(fairway);
-            greens.add(green);
-            putts.add(putt);
-            scores.add(score);
-            scrambling.add(scrmblng);
+            } else {
+                int score = round.getBackNine().getScore() + round.getFrontNine().getScore();
+                int putt = round.getBackNine().getPutts() + round.getFrontNine().getPutts();
+                int green = round.getBackNine().getGreens() + round.getFrontNine().getGreens();
+                int fairway = round.getBackNine().getFairways() + round.getFrontNine().getFairways();
+                int relScore = round.getBackNine().getScoreToPar() + round.getFrontNine().getScoreToPar();
+                int scrmblng = round.getBackNine().getScrambling() + round.getFrontNine().getScrambling();
+
+                scoresToPar.add(relScore);
+                fairways.add(fairway);
+                greens.add(green);
+                putts.add(putt);
+                scores.add(score);
+                scrambling.add(scrmblng);
+            }
         }
 
         createChart("Score");
