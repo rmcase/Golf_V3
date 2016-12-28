@@ -104,9 +104,12 @@ public class MainActivity extends AppCompatActivity {
                 rounds.add(round);
 
                 int totalStrokes = 0;
-                float scoAvg = 0;
+                float scoAvg, nineScoAvg;
                 float roundsPlayed = 0;
                 float fullRounds = 0;
+                int halfRounds = 0;
+                int allTimeScoreToPar = 0, allTimeScoreToParNine = 0;
+                int strokesFromHalfRounds = 0;
                 int strokesFromFullRounds = 0;
 
                 Gson gson = new Gson();
@@ -114,8 +117,12 @@ public class MainActivity extends AppCompatActivity {
                 for(int i=0; i< rounds.size(); i++) {
                     if(rounds.get(i).getBackNine().getScore() == 0 || rounds.get(i).getFrontNine().getScore() == 0) {
                         roundsPlayed += 0.5f;
+                        halfRounds++;
+                        allTimeScoreToParNine += (rounds.get(i).getBackNine().getScoreToPar() + rounds.get(i).getFrontNine().getScoreToPar());
+                        strokesFromHalfRounds += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
                     } else {
                         fullRounds++;
+                        allTimeScoreToPar += (rounds.get(i).getBackNine().getScoreToPar() + rounds.get(i).getFrontNine().getScoreToPar());
                         strokesFromFullRounds += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
                         roundsPlayed++;
                     }
@@ -126,10 +133,17 @@ public class MainActivity extends AppCompatActivity {
                     totalStrokes += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
                 }
 
+                int fullRoundsInt = (int) fullRounds;
+
+                nineScoAvg = (float) strokesFromHalfRounds / halfRounds;
                 scoAvg = (float) strokesFromFullRounds / fullRounds;
 
+                editor.putInt("allTimeScoreToPar", allTimeScoreToPar);
+                editor.putInt("allTimeScoreToParNine", allTimeScoreToParNine);
                 editor.putFloat("scoAvg", scoAvg);
-                editor.putFloat("profileRoundsPlayed", roundsPlayed);
+                editor.putFloat("nineScoAvg", nineScoAvg);
+                editor.putInt("fullRounds", fullRoundsInt);
+                editor.putInt("halfRounds", halfRounds);
                 editor.putInt("roundsPlayed", rounds.size());
                 editor.putInt("totalStrokes", totalStrokes);
 

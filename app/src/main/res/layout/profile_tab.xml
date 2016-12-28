@@ -61,22 +61,23 @@
             </TableRow>
             <!--Line below-->
 
-            <TableRow android:layout_marginBottom="5dp">
-
-                <ProgressBar
-                    android:id="@+id/progressA"
-                    style="@android:style/Widget.ProgressBar.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp" />
+            <TableRow android:layout_marginBottom="8dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="Total Rounds Played: "
+                    android:text="Rounds Played 18 | 9: "
                     android:textSize="16sp" />
+
+                <ProgressBar
+                    android:id="@+id/progressA"
+                    style="@android:style/Widget.ProgressBar.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/roundsPl"
@@ -89,7 +90,7 @@
             </TableRow>
             <!--Total rounds-->
 
-            <TableRow android:layout_marginBottom="5dp">
+            <TableRow android:layout_marginBottom="8dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -110,14 +111,16 @@
             </TableRow>
             <!--Total strokes-->
 
-            <TableRow android:layout_marginBottom="5dp">
+            <TableRow android:layout_marginBottom="8dp">
 
                 <TextView
+                    android:id="@+id/scoAvgTv"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
+                    android:clickable="true"
                     android:gravity="end"
-                    android:text="Scoring Average: "
+                    android:text="Scoring Average (18): "
                     android:textSize="16sp" />
 
                 <TextView
@@ -130,6 +133,29 @@
                     android:textStyle="bold" />
             </TableRow>
             <!--Scoring average-->
+
+            <TableRow android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/scoreToParTv"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:gravity="end"
+                    android:text="Score To Par (18): "
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/scoreToPar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </TableRow>
+            <!--Score To Par-->
 
         </TableLayout>
     </LinearLayout>

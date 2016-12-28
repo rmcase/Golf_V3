@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,7 +27,7 @@ import java.util.List;
  * Created by ryancase on 10/6/16.
  */
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     private ProfileTabBinding binding;
 
@@ -38,6 +36,12 @@ public class ProfileFragment extends Fragment {
     private List<RoundThing> rounds;
 
     private FirebaseAuth auth;
+
+    private float scoAvg, nineScoAvg;
+
+    private int allTimeScoreToPar, allTimeScoreToParNine;
+
+    private String allTimeScoreToParStr, allTimeScoreToParNineStr;
 
     private SharedPreferences preferences;
 
@@ -113,47 +117,69 @@ public class ProfileFragment extends Fragment {
 
         preferences = getActivity().getSharedPreferences("PREF", Context.MODE_PRIVATE);
 
+        binding.scoAvgTv.setOnClickListener(this);
+        binding.scoreToParTv.setOnClickListener(this);
+
         loadProfileData();
 
         return retval;
     }
 
     private void loadProfileData() {
-        Float scoAvg = preferences.getFloat("scoAvg", 0f);
+        scoAvg = preferences.getFloat("scoAvg", 0f);
+        nineScoAvg = preferences.getFloat("nineScoAvg", 0f);
+        allTimeScoreToPar = preferences.getInt("allTimeScoreToPar", 0);
+        allTimeScoreToParNine = preferences.getInt("allTimeScoreToParNine", 0);
         int totalStrokes = preferences.getInt("totalStrokes", 0);
-        float roundsPlayed = preferences.getFloat("profileRoundsPlayed", 0);
+        int fullRounds = preferences.getInt("fullRounds", 0);
+        int halfRounds = preferences.getInt("halfRounds", 0);
         String currentGolfer = "Tiger Woods";
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             currentGolfer = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         }
 
+        if(allTimeScoreToPar > 0) {
+            allTimeScoreToParStr = "+" + String.valueOf(allTimeScoreToPar);
+        } else {
+            allTimeScoreToParStr = String.valueOf(allTimeScoreToPar);
+        }
+
+        if(allTimeScoreToParNine > 0 ) {
+            allTimeScoreToParNineStr = "+" + String.valueOf(allTimeScoreToParNine);
+        } else {
+            allTimeScoreToParNineStr = String.valueOf(allTimeScoreToParNine);
+        }
+
         if(Float.isNaN(scoAvg)) {
-            binding.scoAvg.setText("No 18-Hole Rounds!");
+            binding.scoAvg.setText("No Rounds Played!");
         } else {
             binding.scoAvg.setText(String.valueOf(scoAvg));
         }
 
-        binding.roundsPl.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                viewModel.getA().setVisibility(View.GONE);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
         binding.golfer.setText(currentGolfer);
-        binding.roundsPl.setText(String.valueOf(roundsPlayed));
+        binding.roundsPl.setText(String.valueOf(fullRounds) + " | " + String.valueOf(halfRounds));
         binding.strokesTk.setText(String.valueOf(totalStrokes));
+        binding.scoreToPar.setText(String.valueOf(allTimeScoreToPar));
+    }
 
-        Log.d("roundsPlayed: ", "" + roundsPlayed);
+    public void onClick(View v) {
+        String otherScoringAverage = "Scoring Average (9):";
+        String otherScoreToPar = "Score To Par (9)";
+        if(binding.scoAvgTv.getText() != otherScoringAverage) {
+            binding.scoAvgTv.setText(otherScoringAverage);
+            binding.scoAvg.setText(String.valueOf(nineScoAvg));
+
+            binding.scoreToParTv.setText(otherScoreToPar);
+            binding.scoreToPar.setText(allTimeScoreToParNineStr);
+        } else {
+            otherScoringAverage = "Scoring Average (18):";
+            binding.scoAvgTv.setText(otherScoringAverage);
+            binding.scoAvg.setText(String.valueOf(scoAvg));
+
+            otherScoreToPar = "Score To Par (18):";
+            binding.scoreToParTv.setText(otherScoreToPar);
+            binding.scoreToPar.setText(allTimeScoreToParStr);
+        }
     }
 }

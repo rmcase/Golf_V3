@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
@@ -44,9 +46,9 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
     private List<Date> dateList;
 
-    private List<Integer> scores;
-
     private List<RoundThing> rounds;
+
+    private DatabaseReference reference;
 
     private SharedPreferences preferences;
 
@@ -111,9 +113,10 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
     private void populateViewModelElements() {
         dates = new ArrayList<>();
-        scores = new ArrayList<>();
         rounds = new ArrayList<>();
         dateList = new ArrayList<>();
+
+        reference = FirebaseDatabase.getInstance().getReference();
 
         progressBar.setVisibility(View.VISIBLE);
     }
@@ -144,7 +147,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
         for(int i=0; i < numberOfRoundsToLoad; i++) {
             String newDate = "";
-            SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yy");
+            SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
             try {
                 Date date = sd.parse(rounds.get(i).getDate());
 
