@@ -115,7 +115,7 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View retval = inflater.inflate(R.layout.fragment_history_round_click, container, false);
 
-        getActivity().setTitle(round.getCourse() + "\t" + round.getDate());
+        getActivity().setTitle(round.getCourse() + " \t " + round.getDate());
 
         binding = DataBindingUtil.bind(retval);
 

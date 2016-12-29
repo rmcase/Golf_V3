@@ -46,6 +46,25 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:text="Par: "
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.par}"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </TableRow>
+            <!-- ^ PAR ROW ^ -->
+
+            <TableRow android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:text="Front Nine: "
                     android:textSize="16sp" />
 
@@ -96,25 +115,6 @@
                     android:textStyle="bold" />
             </TableRow>
             <!-- ^ SCORE TO PAR ROW ^ -->
-
-            <TableRow android:layout_marginBottom="5dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Par: "
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.par}"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </TableRow>
-            <!-- ^ PAR ROW ^ -->
 
         </TableLayout>
     </LinearLayout>

@@ -442,6 +442,18 @@ public class Nine {
         return avg;
     }
 
+    public int getEagles() {
+        int retval = 0;
+
+        for(Hole hole : holes) {
+            if(hole.getScoreToPar() == -2) {
+                retval++;
+            }
+        }
+
+        return retval;
+    }
+
     public int getBirdies() {
         int retval = 0;
 
