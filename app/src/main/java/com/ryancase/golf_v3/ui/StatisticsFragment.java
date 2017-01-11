@@ -28,6 +28,7 @@ import com.ryancase.golf_v3.databinding.FragmentStatisticsBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * File description here...
@@ -52,7 +53,8 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
     private LineChart lineChart;
     private NumberPicker picker;
     private TextView averageTv, minTv, maxTv;
-    private List<Integer> scores, putts, greens, fairways, scoresToPar, scrambling;
+    private List<Integer> scores, putts, greens, fairways, scoresToPar,
+            scrambling, pars, birdies, eagles;
 
     public StatisticsFragment() {
     }
@@ -122,10 +124,13 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         fairways = new ArrayList<>();
         scoresToPar = new ArrayList<>();
         scrambling = new ArrayList<>();
+        eagles = new ArrayList<>();
+        birdies = new ArrayList<>();
+        pars = new ArrayList<>();
 
-        picker.setDisplayedValues(new String[]{"Score", "Score To Par", "Putts", "Greens", "Fairways", "Scrambling"});
+        picker.setDisplayedValues(new String[]{"Score", "Score To Par", "Putts", "Greens", "Fairways", "Scrambling", "Pars", "Birdies", "Eagles"});
         picker.setMinValue(0);
-        picker.setMaxValue(5);
+        picker.setMaxValue(8);
         picker.setValue(0);
 
     }
@@ -159,6 +164,9 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 int fairway = round.getBackNine().getFairways() + round.getFrontNine().getFairways();
                 int relScore = round.getBackNine().getScoreToPar() + round.getFrontNine().getScoreToPar();
                 int scrmblng = round.getBackNine().getScrambling() + round.getFrontNine().getScrambling();
+                int birdie = round.getBackNine().getBirdies() + round.getFrontNine().getBirdies();
+                int par = round.getBackNine().getPars() + round.getFrontNine().getPars();
+                int eagle = round.getBackNine().getEagles() + round.getFrontNine().getEagles();
 
                 scoresToPar.add(relScore);
                 fairways.add(fairway);
@@ -166,6 +174,9 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 putts.add(putt);
                 scores.add(score);
                 scrambling.add(scrmblng);
+                eagles.add(eagle);
+                birdies.add(birdie);
+                pars.add(par);
             }
         }
 
@@ -191,6 +202,15 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 }
                 if (newVal == 5) {
                     createChart("Scrambling");
+                }
+                if (newVal == 5) {
+                    createChart("Pars");
+                }
+                if (newVal == 5) {
+                    createChart("Birdies");
+                }
+                if (newVal == 5) {
+                    createChart("Eagles");
                 }
             }
         });
@@ -234,7 +254,9 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 average = average / (float) scores.size();
 
 
-                averageTv.setText(String.format("Avg:  %.2f", average));
+                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
+
+                averageTv.setText(getString(R.string.average) + averageStr);
                 minTv.setText(String.format(getString(R.string.min) + min));
                 maxTv.setText(String.format(getString(R.string.max) + max));
 
@@ -267,7 +289,9 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
                 average = average / (float) putts.size();
 
-                averageTv.setText(String.format("Avg:  %.2f", average));
+                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
+
+                averageTv.setText(getString(R.string.average) + averageStr);
                 minTv.setText(String.format(getString(R.string.min) + min));
                 maxTv.setText(String.format(getString(R.string.max) + max));
 
@@ -298,9 +322,11 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) putts.size();
+                average = average / (float) greens.size();
 
-                averageTv.setText(String.format("Avg:  %.2f", average));
+                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
+
+                averageTv.setText(getString(R.string.average) + averageStr);
                 minTv.setText(String.format(getString(R.string.min) + min));
                 maxTv.setText(String.format(getString(R.string.max) + max));
 
@@ -331,9 +357,11 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) putts.size();
+                average = average / (float) fairways.size();
 
-                averageTv.setText(String.format("Avg:  %.2f", average));
+                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
+
+                averageTv.setText(getString(R.string.average) + averageStr);
                 minTv.setText(String.format(getString(R.string.min) + min));
                 maxTv.setText(String.format(getString(R.string.max) + max));
 
@@ -364,11 +392,13 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) putts.size();
+                average = average / (float) scoresToPar.size();
 
-                averageTv.setText(String.format("Avg:  %.2f", average));
-                minTv.setText(String.format(getString(R.string.min) + min));
-                maxTv.setText(String.format(getString(R.string.max) + max));
+                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
+
+                averageTv.setText(getString(R.string.average) + averageStr);
+                minTv.setText(getString(R.string.min) + min);
+                maxTv.setText(getString(R.string.max) + max);
 
                 break;
             }
@@ -397,11 +427,118 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) putts.size();
+                average = average / (float) scrambling.size();
 
-                averageTv.setText(String.format("Avg:  %.2f", average));
-                minTv.setText(String.format(getString(R.string.min) + min));
-                maxTv.setText(String.format(getString(R.string.max) + max));
+                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
+
+                averageTv.setText(getString(R.string.average) + averageStr);
+                minTv.setText(getString(R.string.min) + min);
+                maxTv.setText(getString(R.string.max) + max);
+
+                break;
+            }
+
+            case "Pars": {
+                for (int i = 1; i <= pars.size(); i++) {
+                    if (pars.get(i - 1) > max) {
+                        max = pars.get(i - 1);
+                    }
+                    if (pars.get(i - 1) < min) {
+                        min = pars.get(i - 1);
+                    }
+                    average += pars.get(i - 1);
+                    entries.add(new Entry(i, pars.get(i - 1)));
+                }
+                LineDataSet dataSet = new LineDataSet(entries, value);
+                dataSet.setDrawValues(false);
+                dataSet.setLineWidth(lineWidth);
+                dataSet.setCircleRadius(circleRadius);
+                dataSet.setCircleHoleRadius(circleHoleRadius);
+                dataSet.setColor(lineColor);
+                dataSet.setCircleColor(circleOutlineColor);
+                dataSet.setCircleColorHole(circleColor);
+
+                LineData lineData = new LineData(dataSet);
+                lineChart.setData(lineData);
+                lineChart.invalidate();
+
+                average = average / (float) pars.size();
+
+                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
+
+                averageTv.setText(getString(R.string.average) + averageStr);
+                minTv.setText(getString(R.string.min) + min);
+                maxTv.setText(getString(R.string.max) + max);
+
+                break;
+            }
+
+            case "Birdies": {
+                for (int i = 1; i <= birdies.size(); i++) {
+                    if (birdies.get(i - 1) > max) {
+                        max = birdies.get(i - 1);
+                    }
+                    if (birdies.get(i - 1) < min) {
+                        min = birdies.get(i - 1);
+                    }
+                    average += birdies.get(i - 1);
+                    entries.add(new Entry(i, birdies.get(i - 1)));
+                }
+                LineDataSet dataSet = new LineDataSet(entries, value);
+                dataSet.setDrawValues(false);
+                dataSet.setLineWidth(lineWidth);
+                dataSet.setCircleRadius(circleRadius);
+                dataSet.setCircleHoleRadius(circleHoleRadius);
+                dataSet.setColor(lineColor);
+                dataSet.setCircleColor(circleOutlineColor);
+                dataSet.setCircleColorHole(circleColor);
+
+                LineData lineData = new LineData(dataSet);
+                lineChart.setData(lineData);
+                lineChart.invalidate();
+
+                average = average / (float) birdies.size();
+
+                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
+
+                averageTv.setText(getString(R.string.average) + averageStr);
+                minTv.setText(getString(R.string.min) + min);
+                maxTv.setText(getString(R.string.max) + max);
+
+                break;
+            }
+
+            case "Eagles": {
+                for (int i = 1; i <= eagles.size(); i++) {
+                    if (eagles.get(i - 1) > max) {
+                        max = eagles.get(i - 1);
+                    }
+                    if (eagles.get(i - 1) < min) {
+                        min = eagles.get(i - 1);
+                    }
+                    average += eagles.get(i - 1);
+                    entries.add(new Entry(i, eagles.get(i - 1)));
+                }
+                LineDataSet dataSet = new LineDataSet(entries, value);
+                dataSet.setDrawValues(false);
+                dataSet.setLineWidth(lineWidth);
+                dataSet.setCircleRadius(circleRadius);
+                dataSet.setCircleHoleRadius(circleHoleRadius);
+                dataSet.setColor(lineColor);
+                dataSet.setCircleColor(circleOutlineColor);
+                dataSet.setCircleColorHole(circleColor);
+
+                LineData lineData = new LineData(dataSet);
+                lineChart.setData(lineData);
+                lineChart.invalidate();
+
+                average = average / (float) eagles.size();
+
+                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
+
+                averageTv.setText(getString(R.string.average) + averageStr);
+                minTv.setText(getString(R.string.min) + min);
+                maxTv.setText(getString(R.string.max) + max);
 
                 break;
             }
