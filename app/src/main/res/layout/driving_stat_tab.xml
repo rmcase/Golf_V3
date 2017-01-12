@@ -40,7 +40,8 @@
             </TableRow>
             <!-- ^ DRIVER RATING ROW ^ -->
 
-            <TableRow>
+            <TableRow
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:layout_width="0dp"

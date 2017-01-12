@@ -1,6 +1,7 @@
 package com.ryancase.golf_v3.ui;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -56,6 +57,11 @@ public class OverviewTabFragment extends Fragment {
         viewModel.setBackScore(String.valueOf(backScore));
         viewModel.setPar(String.valueOf(par));
         viewModel.setScoreToPar(String.valueOf(scoreToPar));
+        if(scoreToPar == 0) {
+            viewModel.setTextColor(getResources().getColor(R.color.fTeal));
+        } else if(scoreToPar < 0) {
+            viewModel.setTextColor(getResources().getColor(R.color.red));
+        }
 
         return retval;
     }
