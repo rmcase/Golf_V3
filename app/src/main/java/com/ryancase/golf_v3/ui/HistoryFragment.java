@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
+import com.ryancase.golf_v3.Helpers.CustomAdapter;
 import com.ryancase.golf_v3.HoleView;
 import com.ryancase.golf_v3.R;
 import com.ryancase.golf_v3.RoundThing;
@@ -42,7 +43,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
 
     private HistoryViewModel viewModel;
 
-    private List<String> dates;
+    private List<String> dates, names;
 
     private List<Date> dateList;
 
@@ -114,6 +115,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
     private void populateViewModelElements() {
         dates = new ArrayList<>();
         rounds = new ArrayList<>();
+        names = new ArrayList<>();
         dateList = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference();
@@ -157,19 +159,22 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            dates.add(rounds.get(i).getCourse() + "\t\t\t\t\t" + newDate);
+            names.add(rounds.get(i).getCourse());
+//            dates.add(rounds.get(i).getCourse() + "\t\t\t\t\t" + newDate);
+            dates.add(newDate);
         }
 
         progressBar.setVisibility(View.GONE);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
+        CustomAdapter adap = new CustomAdapter(getContext(), dates, names);
 
         View view = getActivity().getLayoutInflater() .inflate(R.layout.empty_list_view, null);
         ViewGroup viewGroup= ( ViewGroup)viewModel.getHistoryList().getParent();
         viewGroup.addView(view);
         viewModel.getHistoryList().setEmptyView(view);
 
-        viewModel.getHistoryList().setAdapter(adapter);
+        viewModel.getHistoryList().setAdapter(adap);
 
         viewModel.getHistoryList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
