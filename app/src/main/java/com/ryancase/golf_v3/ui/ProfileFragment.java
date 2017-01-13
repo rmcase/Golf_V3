@@ -157,6 +157,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             binding.scoAvg.setText(String.valueOf(scoAvg));
         }
 
+        if(allTimeScoreToPar < 0) {
+            viewModel.setTextColor(getResources().getColor(R.color.red));
+        } else if(allTimeScoreToPar == 0) {
+            viewModel.setTextColor(getResources().getColor(R.color.fTeal));
+        }
+
         binding.golfer.setText(currentGolfer);
         binding.roundsPl.setText(String.valueOf(fullRounds) + "  |  " + String.valueOf(halfRounds));
         binding.strokesTk.setText(String.valueOf(totalStrokes));
