@@ -132,7 +132,10 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         int fairways = round.getBackNine().getFairways() + round.getFrontNine().getFairways();
         int greens = round.getBackNine().getGreens() + round.getFrontNine().getGreens();
         int putts = round.getBackNine().getPutts() + round.getFrontNine().getPutts();
-        int scrambling = round.getBackNine().getScrambling() + round.getBackNine().getScrambling();
+        int scrambling = round.getBackNine().getScrambling() + round.getFrontNine().getScrambling();
+        int birdies = round.getBackNine().getBirdies() + round.getFrontNine().getBirdies();
+        int eagles = round.getBackNine().getEagles() + round.getFrontNine().getEagles();
+        int pars = round.getBackNine().getPars() + round.getFrontNine().getPars();
 
         fairwayPercentage = findFairwayPercentage();
         greenPercentage = findGreenPercentage();
@@ -164,6 +167,9 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         overviewStats.putInt("backScore", backScore);
         overviewStats.putInt("scoreToPar", scoreToPar);
         overviewStats.putInt("par", par);
+        overviewStats.putInt("eagles", eagles);
+        overviewStats.putInt("birdies", birdies);
+        overviewStats.putInt("pars", pars);
         overviewStats.putString("course", round.getCourse());
         overviewStats.putString("date", round.getDate());
         tabHost.addTab(tabHost.newTabSpec("OverviewTab").setIndicator("Overview"), OverviewTabFragment.class, overviewStats);

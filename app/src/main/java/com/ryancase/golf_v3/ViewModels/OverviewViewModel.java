@@ -7,10 +7,35 @@ import android.graphics.Color;
 public class OverviewViewModel extends BaseObservable {
     private String score, scoreToPar, par;
     private String frontScore, backScore;
+    private String eagles, pars, birdies;
     private int textColor;
 
     public OverviewViewModel() {
 
+    }
+
+    public String getEagles() {
+        return eagles;
+    }
+
+    public void setEagles(String eagles) {
+        this.eagles = eagles;
+    }
+
+    public String getPars() {
+        return pars;
+    }
+
+    public void setPars(String pars) {
+        this.pars = pars;
+    }
+
+    public String getBirdies() {
+        return birdies;
+    }
+
+    public void setBirdies(String birdies) {
+        this.birdies = birdies;
     }
 
     public int getTextColor() {

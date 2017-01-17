@@ -11,7 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="-5dp">
 
 
         <TableLayout
@@ -19,104 +21,201 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:padding="20dp">
+            android:background="@color/fDarkTeal">
 
-            <TableRow android:layout_marginBottom="5dp">
+            <TableRow
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/white"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Score: "
+                    android:text="Score:"
+                    android:textAlignment="textStart"
                     android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.score}"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-            </TableRow>
-            <!-- ^ SCORE ROW ^ -->
-
-            <TableRow android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Score To Par: "
+                    android:textAlignment="center"
                     android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.scoreToPar}"
-                    android:textSize="16sp"
-                    android:textColor="@{viewModel.textColor}"
-                    android:textStyle="bold" />
-            </TableRow>
-            <!-- ^ SCORE TO PAR ROW ^ -->
-
-            <TableRow android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Par: "
+                    android:textAlignment="textEnd"
                     android:textSize="16sp" />
+
+            </TableRow>
+            <!-- ^ SCORES LABELS ROW ^ -->
+            <TableRow
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/white"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.score}"
+                    android:textAlignment="textStart"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scoreToPar}"
+                    android:textAlignment="center"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.par}"
-                    android:textSize="16sp"
+                    android:textAlignment="textEnd"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
-            </TableRow>
-            <!-- ^ PAR ROW ^ -->
 
-            <TableRow android:layout_marginBottom="5dp">
+            </TableRow>
+            <!-- ^ SCORES ROW ^ -->
+
+            <TableRow
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Front Nine: "
+                    android:text="Front Score:"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Back Score: "
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </TableRow>
+            <!-- ^ FRONT/BACK LABEL ROW ^ -->
+            <TableRow android:padding="20dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.frontScore}"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-            </TableRow>
-            <!-- ^ FRONT SCORE ROW ^ -->
-
-            <TableRow android:layout_marginBottom="5dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Back Nine: "
-                    android:textSize="16sp" />
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.backScore}"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
             </TableRow>
-            <!-- ^ BACK SCORE ROW ^ -->
+            <!-- ^ FRONT/BACK SCORE ROW ^ -->
 
+            <TableRow
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Pars:"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Birdies:"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Eagles:"
+                    android:textAlignment="textEnd"
+                    android:textSize="16sp" />
+
+            </TableRow>
+            <!-- ^ HOLE STATS LABEL ROW ^ -->
+            <TableRow
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/white"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.pars}"
+                    android:textAlignment="textStart"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.birdies}"
+                    android:textAlignment="center"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.eagles}"
+                    android:textAlignment="textEnd"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </TableRow>
+            <!-- ^ HOLE STATS ROW ^ -->
         </TableLayout>
     </LinearLayout>
 </layout>

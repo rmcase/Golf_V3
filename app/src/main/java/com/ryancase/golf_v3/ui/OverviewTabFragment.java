@@ -20,7 +20,8 @@ import com.ryancase.golf_v3.databinding.OverviewStatTabBinding;
 
 public class OverviewTabFragment extends Fragment {
 
-    private int score, scoreToPar, frontScore, backScore, par;
+    private int score, scoreToPar, frontScore, backScore, par
+            ,birdies, eagles, pars;
 
     private OverviewStatTabBinding binding;
 
@@ -39,6 +40,9 @@ public class OverviewTabFragment extends Fragment {
             backScore = getArguments().getInt("backScore");
             frontScore = getArguments().getInt("frontScore");
             par = getArguments().getInt("par");
+            birdies = getArguments().getInt("birdies");
+            pars = getArguments().getInt("pars");
+            eagles = getArguments().getInt("eagles");
         }
     }
 
@@ -57,6 +61,9 @@ public class OverviewTabFragment extends Fragment {
         viewModel.setBackScore(String.valueOf(backScore));
         viewModel.setPar(String.valueOf(par));
         viewModel.setScoreToPar(String.valueOf(scoreToPar));
+        viewModel.setBirdies(String.valueOf(birdies));
+        viewModel.setEagles(String.valueOf(eagles));
+        viewModel.setPars(String.valueOf(pars));
         if(scoreToPar == 0) {
             viewModel.setTextColor(getResources().getColor(R.color.fTeal));
         } else if(scoreToPar < 0) {
