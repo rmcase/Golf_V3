@@ -6,11 +6,17 @@ import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.NumberPicker;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -18,6 +24,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.gson.Gson;
 import com.ryancase.golf_v3.HoleView;
@@ -52,9 +59,14 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
     private List<RoundThing> previousRounds;
     private LineChart lineChart;
     private NumberPicker picker;
+    private String[] pickerStrings = {"Score", "Score To Par", "Putts", "Greens", "Fairways", "Scrambling", "Pars", "Birdies", "Eagles"};
+    private Switch theSwitch;
     private TextView averageTv, minTv, maxTv;
     private List<Integer> scores, putts, greens, fairways, scoresToPar,
             scrambling, pars, birdies, eagles;
+    private List<Integer> scores9, putts9, greens9, fairways9, scoresToPar9,
+            scrambling9, pars9, birdies9, eagles9;
+    private boolean checked;
 
     public StatisticsFragment() {
     }
@@ -128,11 +140,22 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         birdies = new ArrayList<>();
         pars = new ArrayList<>();
 
-        picker.setDisplayedValues(new String[]{"Score", "Score To Par", "Putts", "Greens", "Fairways", "Scrambling", "Pars", "Birdies", "Eagles"});
+        scores9 = new ArrayList<>();
+        putts9 = new ArrayList<>();
+        greens9 = new ArrayList<>();
+        fairways9 = new ArrayList<>();
+        scoresToPar9 = new ArrayList<>();
+        scrambling9 = new ArrayList<>();
+        eagles9 = new ArrayList<>();
+        birdies9 = new ArrayList<>();
+        pars9 = new ArrayList<>();
+
+        picker.setDisplayedValues(pickerStrings);
         picker.setMinValue(0);
         picker.setMaxValue(8);
         picker.setValue(0);
 
+        checked = false;
     }
 
     private void bindViewModelElements() {
@@ -141,6 +164,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         averageTv = binding.averageTv;
         minTv = binding.minTv;
         maxTv = binding.maxTv;
+        theSwitch = binding.theSwitch;
     }
 
     private void loadStatisticsData() {
@@ -156,7 +180,25 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
         for(RoundThing round : previousRounds) {
             if(round.getBackNine().getScore() == 0 || round.getFrontNine().getScore() == 0) {
+                int sc = round.getBackNine().getScore() + round.getFrontNine().getScore();
+                int pu = round.getBackNine().getPutts() + round.getFrontNine().getPutts();
+                int gr = round.getBackNine().getGreens() + round.getFrontNine().getGreens();
+                int fa = round.getBackNine().getFairways() + round.getFrontNine().getFairways();
+                int rs = round.getBackNine().getScoreToPar() + round.getFrontNine().getScoreToPar();
+                int scr = round.getBackNine().getScrambling() + round.getFrontNine().getScrambling();
+                int bi = round.getBackNine().getBirdies() + round.getFrontNine().getBirdies();
+                int pr = round.getBackNine().getPars() + round.getFrontNine().getPars();
+                int eag = round.getBackNine().getEagles() + round.getFrontNine().getEagles();
 
+                scoresToPar9.add(rs);
+                fairways9.add(fa);
+                greens9.add(gr);
+                putts9.add(pu);
+                scores9.add(sc);
+                scrambling9.add(scr);
+                eagles9.add(eag);
+                birdies9.add(bi);
+                pars9.add(pr);
             } else {
                 int score = round.getBackNine().getScore() + round.getFrontNine().getScore();
                 int putt = round.getBackNine().getPutts() + round.getFrontNine().getPutts();
@@ -180,38 +222,25 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
             }
         }
 
+        theSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    checked = true;
+                    createChart(pickerStrings[picker.getValue()]);
+                } else {
+                    checked = false;
+                    createChart(pickerStrings[picker.getValue()]);
+                }
+            }
+        });
+
         createChart("Score");
 
         picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                if (newVal == 0) {
-                    createChart("Score");
-                }
-                if (newVal == 1) {
-                    createChart("Relative Score");
-                }
-                if (newVal == 2) {
-                    createChart("Putts");
-                }
-                if (newVal == 3) {
-                    createChart("Greens");
-                }
-                if (newVal == 4) {
-                    createChart("Fairways");
-                }
-                if (newVal == 5) {
-                    createChart("Scrambling");
-                }
-                if (newVal == 5) {
-                    createChart("Pars");
-                }
-                if (newVal == 5) {
-                    createChart("Birdies");
-                }
-                if (newVal == 5) {
-                    createChart("Eagles");
-                }
+                createChart(pickerStrings[picker.getValue()]);
             }
         });
     }
@@ -228,15 +257,21 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
         switch (value) {
             case "Score": {
-                for (int i = 1; i <= scores.size(); i++) {
-                    if (scores.get(i - 1) > max) {
-                        max = scores.get(i - 1);
+                List<Integer> graphScores;
+                if(checked) {
+                    graphScores = scores9;
+                } else {
+                    graphScores = scores;
+                }
+                for (int i = 1; i <= graphScores.size(); i++) {
+                    if (graphScores.get(i - 1) > max) {
+                        max = graphScores.get(i - 1);
                     }
-                    if (scores.get(i - 1) < min) {
-                        min = scores.get(i - 1);
+                    if (graphScores.get(i - 1) < min) {
+                        min = graphScores.get(i - 1);
                     }
-                    average += scores.get(i - 1);
-                    entries.add(new Entry(i, scores.get(i - 1)));
+                    average += graphScores.get(i - 1);
+                    entries.add(new Entry(i, graphScores.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
@@ -251,7 +286,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) scores.size();
+                average = average / (float) graphScores.size();
 
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
@@ -263,16 +298,22 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 break;
             }
 
-            case "Putts": {
-                for (int i = 1; i <= putts.size(); i++) {
-                    if (putts.get(i - 1) > max) {
-                        max = putts.get(i - 1);
+            case "Score To Par": {
+                List<Integer> graphRelScores;
+                if(checked) {
+                    graphRelScores = scoresToPar9;
+                } else {
+                    graphRelScores = scoresToPar;
+                }
+                for (int i = 1; i <= graphRelScores.size(); i++) {
+                    if (graphRelScores.get(i - 1) > max) {
+                        max = graphRelScores.get(i - 1);
                     }
-                    if (putts.get(i - 1) < min) {
-                        min = putts.get(i - 1);
+                    if (graphRelScores.get(i - 1) < min) {
+                        min = graphRelScores.get(i - 1);
                     }
-                    average += putts.get(i - 1);
-                    entries.add(new Entry(i, putts.get(i - 1)));
+                    average += graphRelScores.get(i - 1);
+                    entries.add(new Entry(i, graphRelScores.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
@@ -287,7 +328,48 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) putts.size();
+                average = average / (float) graphRelScores.size();
+
+                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
+
+                averageTv.setText(getString(R.string.average) + averageStr);
+                minTv.setText(getString(R.string.min) + min);
+                maxTv.setText(getString(R.string.max) + max);
+
+                break;
+            }
+
+            case "Putts": {
+                List<Integer> graphPutts;
+                if(checked) {
+                    graphPutts = putts9;
+                } else {
+                    graphPutts = putts;
+                }
+                for (int i = 1; i <= graphPutts.size(); i++) {
+                    if (graphPutts.get(i - 1) > max) {
+                        max = graphPutts.get(i - 1);
+                    }
+                    if (graphPutts.get(i - 1) < min) {
+                        min = graphPutts.get(i - 1);
+                    }
+                    average += graphPutts.get(i - 1);
+                    entries.add(new Entry(i, graphPutts.get(i - 1)));
+                }
+                LineDataSet dataSet = new LineDataSet(entries, value);
+                dataSet.setDrawValues(false);
+                dataSet.setLineWidth(lineWidth);
+                dataSet.setCircleRadius(circleRadius);
+                dataSet.setCircleHoleRadius(circleHoleRadius);
+                dataSet.setColor(lineColor);
+                dataSet.setCircleColor(circleOutlineColor);
+                dataSet.setCircleColorHole(circleColor);
+
+                LineData lineData = new LineData(dataSet);
+                lineChart.setData(lineData);
+                lineChart.invalidate();
+
+                average = average / (float) graphPutts.size();
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
@@ -299,15 +381,21 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
             }
 
             case "Greens": {
-                for (int i = 1; i <= greens.size(); i++) {
-                    if (greens.get(i - 1) > max) {
-                        max = greens.get(i - 1);
+                List<Integer> graphGreens;
+                if(checked) {
+                    graphGreens = greens9;
+                } else {
+                    graphGreens = greens;
+                }
+                for (int i = 1; i <= graphGreens.size(); i++) {
+                    if (graphGreens.get(i - 1) > max) {
+                        max = graphGreens.get(i - 1);
                     }
-                    if (greens.get(i - 1) < min) {
-                        min = greens.get(i - 1);
+                    if (graphGreens.get(i - 1) < min) {
+                        min = graphGreens.get(i - 1);
                     }
-                    average += greens.get(i - 1);
-                    entries.add(new Entry(i, greens.get(i - 1)));
+                    average += graphGreens.get(i - 1);
+                    entries.add(new Entry(i, graphGreens.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
@@ -322,7 +410,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) greens.size();
+                average = average / (float) graphGreens.size();
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
@@ -334,15 +422,21 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
             }
 
             case "Fairways": {
-                for (int i = 1; i <= fairways.size(); i++) {
-                    if (fairways.get(i - 1) > max) {
-                        max = fairways.get(i - 1);
+                List<Integer> graphFairways;
+                if(checked) {
+                    graphFairways = fairways9;
+                } else {
+                    graphFairways = fairways;
+                }
+                for (int i = 1; i <= graphFairways.size(); i++) {
+                    if (graphFairways.get(i - 1) > max) {
+                        max = graphFairways.get(i - 1);
                     }
-                    if (fairways.get(i - 1) < min) {
-                        min = fairways.get(i - 1);
+                    if (graphFairways.get(i - 1) < min) {
+                        min = graphFairways.get(i - 1);
                     }
-                    average += fairways.get(i - 1);
-                    entries.add(new Entry(i, fairways.get(i - 1)));
+                    average += graphFairways.get(i - 1);
+                    entries.add(new Entry(i, graphFairways.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
@@ -357,7 +451,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) fairways.size();
+                average = average / (float) graphFairways.size();
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
@@ -368,51 +462,22 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 break;
             }
 
-            case "Relative Score": {
-                for (int i = 1; i <= scoresToPar.size(); i++) {
-                    if (scoresToPar.get(i - 1) > max) {
-                        max = scoresToPar.get(i - 1);
-                    }
-                    if (scoresToPar.get(i - 1) < min) {
-                        min = scoresToPar.get(i - 1);
-                    }
-                    average += scoresToPar.get(i - 1);
-                    entries.add(new Entry(i, scoresToPar.get(i - 1)));
-                }
-                LineDataSet dataSet = new LineDataSet(entries, value);
-                dataSet.setDrawValues(false);
-                dataSet.setLineWidth(lineWidth);
-                dataSet.setCircleRadius(circleRadius);
-                dataSet.setCircleHoleRadius(circleHoleRadius);
-                dataSet.setColor(lineColor);
-                dataSet.setCircleColor(circleOutlineColor);
-                dataSet.setCircleColorHole(circleColor);
-
-                LineData lineData = new LineData(dataSet);
-                lineChart.setData(lineData);
-                lineChart.invalidate();
-
-                average = average / (float) scoresToPar.size();
-
-                String averageStr = String.format(Locale.getDefault(), "%.2f", average);
-
-                averageTv.setText(getString(R.string.average) + averageStr);
-                minTv.setText(getString(R.string.min) + min);
-                maxTv.setText(getString(R.string.max) + max);
-
-                break;
-            }
-
             case "Scrambling": {
-                for (int i = 1; i <= scrambling.size(); i++) {
-                    if (scrambling.get(i - 1) > max) {
-                        max = scrambling.get(i - 1);
+                List<Integer> graphScrambling;
+                if(checked) {
+                    graphScrambling = scrambling9;
+                } else {
+                    graphScrambling = scrambling;
+                }
+                for (int i = 1; i <= graphScrambling.size(); i++) {
+                    if (graphScrambling.get(i - 1) > max) {
+                        max = graphScrambling.get(i - 1);
                     }
-                    if (scrambling.get(i - 1) < min) {
-                        min = scrambling.get(i - 1);
+                    if (graphScrambling.get(i - 1) < min) {
+                        min = graphScrambling.get(i - 1);
                     }
-                    average += scrambling.get(i - 1);
-                    entries.add(new Entry(i, scrambling.get(i - 1)));
+                    average += graphScrambling.get(i - 1);
+                    entries.add(new Entry(i, graphScrambling.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
@@ -427,7 +492,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) scrambling.size();
+                average = average / (float) graphScrambling.size();
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
@@ -439,15 +504,21 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
             }
 
             case "Pars": {
-                for (int i = 1; i <= pars.size(); i++) {
-                    if (pars.get(i - 1) > max) {
-                        max = pars.get(i - 1);
+                List<Integer> graphPars;
+                if(checked) {
+                    graphPars = pars9;
+                } else {
+                    graphPars = pars;
+                }
+                for (int i = 1; i <= graphPars.size(); i++) {
+                    if (graphPars.get(i - 1) > max) {
+                        max = graphPars.get(i - 1);
                     }
-                    if (pars.get(i - 1) < min) {
-                        min = pars.get(i - 1);
+                    if (graphPars.get(i - 1) < min) {
+                        min = graphPars.get(i - 1);
                     }
-                    average += pars.get(i - 1);
-                    entries.add(new Entry(i, pars.get(i - 1)));
+                    average += graphPars.get(i - 1);
+                    entries.add(new Entry(i, graphPars.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
@@ -462,7 +533,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) pars.size();
+                average = average / (float) graphPars.size();
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
@@ -474,15 +545,21 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
             }
 
             case "Birdies": {
-                for (int i = 1; i <= birdies.size(); i++) {
-                    if (birdies.get(i - 1) > max) {
-                        max = birdies.get(i - 1);
+                List<Integer> graphBirdies;
+                if(checked) {
+                    graphBirdies = birdies9;
+                } else {
+                    graphBirdies = birdies;
+                }
+                for (int i = 1; i <= graphBirdies.size(); i++) {
+                    if (graphBirdies.get(i - 1) > max) {
+                        max = graphBirdies.get(i - 1);
                     }
-                    if (birdies.get(i - 1) < min) {
-                        min = birdies.get(i - 1);
+                    if (graphBirdies.get(i - 1) < min) {
+                        min = graphBirdies.get(i - 1);
                     }
-                    average += birdies.get(i - 1);
-                    entries.add(new Entry(i, birdies.get(i - 1)));
+                    average += graphBirdies.get(i - 1);
+                    entries.add(new Entry(i, graphBirdies.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
@@ -497,7 +574,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) birdies.size();
+                average = average / (float) graphBirdies.size();
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
@@ -509,15 +586,21 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
             }
 
             case "Eagles": {
-                for (int i = 1; i <= eagles.size(); i++) {
-                    if (eagles.get(i - 1) > max) {
-                        max = eagles.get(i - 1);
+                List<Integer> graphEagles;
+                if(checked) {
+                    graphEagles = eagles9;
+                } else {
+                    graphEagles = eagles;
+                }
+                for (int i = 1; i <= graphEagles.size(); i++) {
+                    if (graphEagles.get(i - 1) > max) {
+                        max = graphEagles.get(i - 1);
                     }
-                    if (eagles.get(i - 1) < min) {
-                        min = eagles.get(i - 1);
+                    if (graphEagles.get(i - 1) < min) {
+                        min = graphEagles.get(i - 1);
                     }
-                    average += eagles.get(i - 1);
-                    entries.add(new Entry(i, eagles.get(i - 1)));
+                    average += graphEagles.get(i - 1);
+                    entries.add(new Entry(i, graphEagles.get(i - 1)));
                 }
                 LineDataSet dataSet = new LineDataSet(entries, value);
                 dataSet.setDrawValues(false);
@@ -532,7 +615,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 lineChart.setData(lineData);
                 lineChart.invalidate();
 
-                average = average / (float) eagles.size();
+                average = average / (float) graphEagles.size();
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 

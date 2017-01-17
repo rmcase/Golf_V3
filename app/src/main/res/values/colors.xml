@@ -7,6 +7,7 @@ Teal = #0ACC70
 -->
 <resources>
     <item name="fPurple" type="color">#58007F</item>
+    <item name="fPurple55" type="color">#8C58007F</item>
     <item name="fDarkPurple" type="color">#250533</item>
     <item name="fDarkTeal" type="color">#084C2C</item>
     <item name="fDarkTeal55" type="color">#8C084C2C</item>
