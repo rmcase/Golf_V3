@@ -119,6 +119,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         binding.scoAvgTv.setOnClickListener(this);
         binding.scoreToParTv.setOnClickListener(this);
+        binding.scoAvg.setOnClickListener(this);
+        binding.scoreToPar.setOnClickListener(this);
 
         loadProfileData();
 

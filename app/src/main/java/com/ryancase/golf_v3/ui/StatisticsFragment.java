@@ -6,12 +6,8 @@ import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -24,7 +20,6 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.gson.Gson;
 import com.ryancase.golf_v3.HoleView;
@@ -154,6 +149,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         picker.setMinValue(0);
         picker.setMaxValue(8);
         picker.setValue(0);
+        picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
         checked = false;
     }

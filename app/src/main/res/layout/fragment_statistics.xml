@@ -54,11 +54,7 @@
                     android:rotation="90"
                     android:layout_marginLeft="5dp"
                     app:theme="@style/SCBSwitch"
-                    android:layout_marginTop="20dp"/>
-                <!--<TextView-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1" />-->
+                    android:layout_marginTop="30dp"/>
 
                 <TableLayout
                     android:layout_width="0dp"

@@ -45,12 +45,6 @@
         <item name="android:textViewStyle">@style/ScorecardTextView</item>
     </style>
 
-    <style name="Tabhost" parent="android:Widget">
-        <item name="tabBackground">@drawable/tab_background</item>
-        <item name="tabIndicatorColor">@color/fPurple</item>
-        <item name="tabIndicatorHeight">2dp</item>
-    </style>
-
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
         <item name="colorControlActivated">@color/fTeal</item>
