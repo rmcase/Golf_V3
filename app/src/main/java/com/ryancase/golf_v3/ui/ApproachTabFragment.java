@@ -75,7 +75,7 @@ public class ApproachTabFragment extends Fragment {
         pieChart.setDescription("");
         pieChart.getLegend().setEnabled(true);
         pieChart.getLegend().setCustom(new int[] {Color.GREEN, Color.DKGRAY}, new String[] {"% Hit", "% Missed"});
-        pieChart.getLegend().setPosition(Legend.LegendPosition.LEFT_OF_CHART_CENTER);
+        pieChart.getLegend().setPosition(Legend.LegendPosition.RIGHT_OF_CHART_CENTER);
         pieChart.invalidate();
 
         viewModel.setApproachRating(approachRating);

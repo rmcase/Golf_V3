@@ -11,24 +11,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:paddingTop="10dp" />
+            <!-- ^ CHART ROW ^ -->
+
+        </RelativeLayout>
 
         <TableLayout
-            android:id="@+id/overviewTable"
+            android:id="@+id/approachTable"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
             android:layout_gravity="center_vertical"
-            android:padding="20dp">
+            android:background="@color/fDarkPurple">
 
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="5dp"
+                android:background="@color/fDarkTeal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:text="Approach Rating: "
-                    android:textSize="14sp" />
+                    android:theme="@style/StatTabTextView" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -40,20 +62,24 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:text="GIRs: "
-                    android:textSize="14sp" />
+                    android:theme="@style/StatTabTextView" />
 
             </TableRow>
-            <!-- ^ APPROACH RATING ROW ^ -->
 
             <TableRow
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
+                android:background="@color/fDarkTeal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="@{viewModel.approachRating}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
                     android:textSize="30sp" />
 
                 <TextView
@@ -66,18 +92,26 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="@{viewModel.greens}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
                     android:textSize="30sp" />
             </TableRow>
-            <!-- ^ IRON RATING ROW ^ -->
+            <!-- ^ APPROACH RATING ROW ^ -->
 
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="5dp"
+                android:background="@color/fDarkTeal"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:text="Iron Rating: "
-                    android:textSize="14sp" />
+                    android:theme="@style/StatTabTextView" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -89,16 +123,24 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:text="Scrambling: "
-                    android:textSize="14sp" />
+                    android:theme="@style/StatTabTextView" />
             </TableRow>
 
-            <TableRow android:layout_marginBottom="10dp">
+            <TableRow
+                android:layout_marginBottom="2dp"
+                android:background="@color/fDarkTeal"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="5dp">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="@{viewModel.ironRating}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
                     android:textSize="30sp" />
 
                 <TextView
@@ -111,18 +153,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="@{viewModel.scrambling}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
                     android:textSize="30sp" />
             </TableRow>
-            <!-- ^ GREENS ROW ^ -->
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/chart"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp" />
-            <!-- ^ CHART ROW ^ -->
-
+            <!-- ^ IRON RATING ROW ^ -->
         </TableLayout>
     </LinearLayout>
 </layout>

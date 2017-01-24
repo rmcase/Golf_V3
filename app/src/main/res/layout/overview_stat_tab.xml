@@ -12,90 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="-5dp">
-
 
         <TableLayout
             android:id="@+id/overviewTable"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background="@color/fDarkTeal">
+            android:background="@color/fDarkPurple">
 
             <TableRow
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="15dp"
                 android:background="@color/white"
-                android:paddingBottom="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Score:"
-                    android:textAlignment="textStart"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Score To Par: "
-                    android:textAlignment="center"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Par: "
-                    android:textAlignment="textEnd"
-                    android:textSize="16sp" />
-
-            </TableRow>
-            <!-- ^ SCORES LABELS ROW ^ -->
-            <TableRow
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/white"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.score}"
-                    android:textAlignment="textStart"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.scoreToPar}"
-                    android:textAlignment="center"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{viewModel.par}"
-                    android:textAlignment="textEnd"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-            </TableRow>
-            <!-- ^ SCORES ROW ^ -->
-
-            <TableRow
                 android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
@@ -106,8 +33,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Front Score:"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Par: "
                     android:textAlignment="center"
-                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <TextView
@@ -115,21 +49,30 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Back Score: "
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
+                    android:textAlignment="textEnd"
                     android:textSize="16sp" />
-
             </TableRow>
-            <!-- ^ FRONT/BACK LABEL ROW ^ -->
-            <TableRow android:padding="20dp">
+            <!-- ^ SCORES LABELS ROW ^ -->
+            <TableRow
+                android:background="@color/white"
+                android:padding="20dp"
+                android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.frontScore}"
+                    android:textAlignment="textStart"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.par}"
                     android:textAlignment="center"
-                    android:textColor="@color/white"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -138,6 +81,58 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@{viewModel.backScore}"
+                    android:textAlignment="textEnd"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+            <!-- ^ SCORES ROW ^ -->
+
+            <TableRow
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:background="@color/fDarkTeal"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Score:"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Score To Par: "
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </TableRow>
+            <!-- ^ FRONT/BACK LABEL ROW ^ -->
+            <TableRow android:padding="20dp"
+                android:background="@color/fDarkTeal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.score}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.scoreToPar}"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="22sp"
@@ -146,8 +141,6 @@
             <!-- ^ FRONT/BACK SCORE ROW ^ -->
 
             <TableRow
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/white"
                 android:paddingBottom="5dp"
@@ -182,8 +175,6 @@
             </TableRow>
             <!-- ^ HOLE STATS LABEL ROW ^ -->
             <TableRow
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@color/white"
                 android:padding="20dp">

@@ -19,6 +19,12 @@
         <item name="android:background">@color/whiteOP</item>
     </style>
 
+    <style name="StatTabTextView" parent="AppTheme">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
@@ -37,6 +43,12 @@
 
     <style name="TextViewStyling" parent="TextAppearance.AppCompat">
         <item name="android:textViewStyle">@style/ScorecardTextView</item>
+    </style>
+
+    <style name="Tabhost" parent="android:Widget">
+        <item name="tabBackground">@drawable/tab_background</item>
+        <item name="tabIndicatorColor">@color/fPurple</item>
+        <item name="tabIndicatorHeight">2dp</item>
     </style>
 
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
