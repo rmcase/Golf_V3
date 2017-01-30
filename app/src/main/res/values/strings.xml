@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Golfaholic</string>
+    <string name="app_name">Stat Caddy</string>
     <string name="start_round">Start Round</string>
     <string name="next_hole">Next Hole</string>
     <string name="at_the_turn">At The Turn</string>
