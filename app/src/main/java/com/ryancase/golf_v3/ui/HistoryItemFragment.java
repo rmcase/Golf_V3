@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.ryancase.golf_v3.HoleView;
@@ -205,6 +206,7 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         for(int i=0; i<4; i++) {
             TextView x = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
             x.setTextSize(10);
+            x.setMaxLines(1);
         }
 
         return retval;
