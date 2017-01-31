@@ -6,7 +6,7 @@
         android:id="@+id/menu_item_action_parameters"
         android:icon="@drawable/menu_circles"
         android:title="options"
-        app:showAsAction="ifRoom|withText">
+        app:showAsAction="ifRoom">
         <menu>
             <item
                 android:id="@+id/action_logout"
