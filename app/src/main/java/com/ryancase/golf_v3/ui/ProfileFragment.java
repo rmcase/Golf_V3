@@ -113,8 +113,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         auth = FirebaseAuth.getInstance();
 
-        viewModel.setA(binding.progressA);
-
         preferences = getActivity().getSharedPreferences("PREF", Context.MODE_PRIVATE);
 
         binding.scoAvgTv.setOnClickListener(this);

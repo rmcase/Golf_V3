@@ -9,8 +9,6 @@ public class ProfileViewModel extends BaseObservable {
 
     private int textColor;
 
-    private ProgressBar a, b, c;
-
     public ProfileViewModel() {
 
     }
@@ -21,30 +19,6 @@ public class ProfileViewModel extends BaseObservable {
 
     public void setTextColor(int textColor) {
         this.textColor = textColor;
-    }
-
-    public ProgressBar getA() {
-        return a;
-    }
-
-    public void setA(ProgressBar a) {
-        this.a = a;
-    }
-
-    public ProgressBar getB() {
-        return b;
-    }
-
-    public void setB(ProgressBar b) {
-        this.b = b;
-    }
-
-    public ProgressBar getC() {
-        return c;
-    }
-
-    public void setC(ProgressBar c) {
-        this.c = c;
     }
 
     public String getTotalStrokes() {

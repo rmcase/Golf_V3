@@ -26,8 +26,8 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="1dp"
+                    android:layout_weight="1"
                     android:background="@color/fDarkPurple" />
             </TableRow>
             <!--Line above-->
@@ -36,7 +36,7 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:layout_weight="1"
                     android:src="@drawable/tiger" />
 
@@ -50,7 +50,7 @@
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </TableRow>
             <!--Profile picture / id-->
@@ -61,8 +61,8 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="1dp"
+                    android:layout_weight="1"
                     android:background="@color/fDarkPurple" />
             </TableRow>
             <!--Line below-->
@@ -72,24 +72,17 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:layout_weight="1"
+                    android:layout_weight="5"
                     android:gravity="end"
                     android:text="Rounds Played 18 | 9: "
-                    android:textSize="16sp" />
-
-                <ProgressBar
-                    android:id="@+id/progressA"
-                    style="@android:style/Widget.ProgressBar.Small"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:visibility="gone" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/roundsPl"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -101,16 +94,17 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:layout_weight="1"
+                    android:layout_weight="5"
                     android:gravity="end"
                     android:text="Strokes Taken: "
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/strokesTk"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -123,17 +117,18 @@
                     android:id="@+id/scoAvgTv"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:layout_weight="1"
+                    android:layout_weight="5"
                     android:clickable="true"
                     android:gravity="end"
                     android:text="Scoring Average (18): "
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/scoAvg"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:clickable="true"
                     android:textAlignment="center"
                     android:textSize="16sp"
@@ -147,17 +142,18 @@
                     android:id="@+id/scoreToParTv"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:layout_weight="1"
+                    android:layout_weight="5"
                     android:clickable="true"
                     android:gravity="end"
                     android:text="Score To Par (18): "
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/scoreToPar"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:clickable="true"
                     android:textAlignment="center"
                     android:textColor="@{viewModel.textColor}"
