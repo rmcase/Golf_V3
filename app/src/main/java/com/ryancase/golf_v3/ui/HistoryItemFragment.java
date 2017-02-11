@@ -142,12 +142,12 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         greenPercentage = findGreenPercentage();
         puttPercentage = findPuttPercentage();
 
-        if(round.getBackNine().getScore() == 0) {
+        if (round.getBackNine().getScore() == 0) {
             driverRating = getLetterGrade(round.getFrontNine().getAverageDriverRatingAsFloat());
             ironRating = getLetterGrade(round.getFrontNine().getAverageIronRatingAsFloat());
             approachRating = getLetterGrade(round.getFrontNine().getAverageApproachRatingAsFloat());
             puttRating = getLetterGrade(round.getFrontNine().getAveragePuttRatingAsFloat());
-        } else if(round.getFrontNine().getScore() == 0) {
+        } else if (round.getFrontNine().getScore() == 0) {
             driverRating = getLetterGrade(round.getBackNine().getAverageDriverRatingAsFloat());
             ironRating = getLetterGrade(round.getBackNine().getAverageIronRatingAsFloat());
             approachRating = getLetterGrade(round.getBackNine().getAverageApproachRatingAsFloat());
@@ -203,10 +203,12 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         tabHost.addTab(tabHost.newTabSpec("PuttTab").setIndicator("Putt"), PuttTabFragment.class, puttStats);
         //---------------
 
-        for(int i=0; i<4; i++) {
+        tabHost.getTabWidget().setBackgroundColor(getResources().getColor(R.color.dgray));
+        for (int i = 0; i < 4; i++) {
             TextView x = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
             x.setTextSize(10);
             x.setMaxLines(1);
+            x.setTextColor(getResources().getColor(R.color.white));
         }
 
         return retval;
@@ -215,23 +217,23 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
     private float findPuttPercentage() {
         float retval;
 
-        String frontNinePuttPercent = round.getFrontNine().madePuttsPercentage().substring(0, round.getFrontNine().madePuttsPercentage().length()-1);
-        String backNinePuttPercent = round.getBackNine().madePuttsPercentage().substring(0, round.getBackNine().madePuttsPercentage().length()-1);
+        String frontNinePuttPercent = round.getFrontNine().madePuttsPercentage().substring(0, round.getFrontNine().madePuttsPercentage().length() - 1);
+        String backNinePuttPercent = round.getBackNine().madePuttsPercentage().substring(0, round.getBackNine().madePuttsPercentage().length() - 1);
 
-        if(round.getBackNine().getScore() == 0) {
+        if (round.getBackNine().getScore() == 0) {
             return Float.valueOf(frontNinePuttPercent);
-        } else if(round.getFrontNine().getScore() == 0) {
+        } else if (round.getFrontNine().getScore() == 0) {
             return Float.valueOf(backNinePuttPercent);
         }
 
-        if(round.getBackNine().madePuttsPercentage().equals("NaN%")) {
-            if(!round.getFrontNine().madePuttsPercentage().equals("NaN%")) {
+        if (round.getBackNine().madePuttsPercentage().equals("NaN%")) {
+            if (!round.getFrontNine().madePuttsPercentage().equals("NaN%")) {
                 retval = Float.valueOf(frontNinePuttPercent);
             } else {
                 retval = 0f;
             }
         } else {
-            if(round.getFrontNine().madePuttsPercentage().equals("NaN%")) {
+            if (round.getFrontNine().madePuttsPercentage().equals("NaN%")) {
                 retval = Float.valueOf(backNinePuttPercent);
             } else {
                 retval = (Float.valueOf(frontNinePuttPercent) + Float.valueOf(backNinePuttPercent)) / 2f;
@@ -244,23 +246,23 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
     private float findGreenPercentage() {
         float retval;
 
-        String frontNineGreenPercent = round.getFrontNine().getGreenPercentage().substring(0, round.getFrontNine().getGreenPercentage().length()-1);
-        String backNineGreenPercent = round.getBackNine().getGreenPercentage().substring(0, round.getBackNine().getGreenPercentage().length()-1);
+        String frontNineGreenPercent = round.getFrontNine().getGreenPercentage().substring(0, round.getFrontNine().getGreenPercentage().length() - 1);
+        String backNineGreenPercent = round.getBackNine().getGreenPercentage().substring(0, round.getBackNine().getGreenPercentage().length() - 1);
 
-        if(round.getBackNine().getScore() == 0) {
+        if (round.getBackNine().getScore() == 0) {
             return Float.valueOf(frontNineGreenPercent);
-        } else if(round.getFrontNine().getScore() == 0) {
+        } else if (round.getFrontNine().getScore() == 0) {
             return Float.valueOf(backNineGreenPercent);
         }
 
-        if(round.getBackNine().getGreenPercentage().equals("NaN%")) {
-            if(!round.getFrontNine().getGreenPercentage().equals("NaN%")) {
+        if (round.getBackNine().getGreenPercentage().equals("NaN%")) {
+            if (!round.getFrontNine().getGreenPercentage().equals("NaN%")) {
                 retval = Float.valueOf(frontNineGreenPercent);
             } else {
                 retval = 0f;
             }
         } else {
-            if(round.getFrontNine().getGreenPercentage().equals("NaN%")) {
+            if (round.getFrontNine().getGreenPercentage().equals("NaN%")) {
                 retval = Float.valueOf(backNineGreenPercent);
             } else {
                 retval = (Float.valueOf(frontNineGreenPercent) + Float.valueOf(backNineGreenPercent)) / 2f;
@@ -273,23 +275,23 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
     private float findFairwayPercentage() {
         float retval;
 
-        String frontNineFairwayPercent = round.getFrontNine().getFairwayPercentage().substring(0, round.getFrontNine().getFairwayPercentage().length()-1);
-        String backNineFairwayPercent = round.getBackNine().getFairwayPercentage().substring(0, round.getBackNine().getFairwayPercentage().length()-1);
+        String frontNineFairwayPercent = round.getFrontNine().getFairwayPercentage().substring(0, round.getFrontNine().getFairwayPercentage().length() - 1);
+        String backNineFairwayPercent = round.getBackNine().getFairwayPercentage().substring(0, round.getBackNine().getFairwayPercentage().length() - 1);
 
-        if(round.getBackNine().getScore() == 0) {
+        if (round.getBackNine().getScore() == 0) {
             return Float.valueOf(frontNineFairwayPercent);
-        } else if(round.getFrontNine().getScore() == 0) {
+        } else if (round.getFrontNine().getScore() == 0) {
             return Float.valueOf(backNineFairwayPercent);
         }
 
-        if(round.getBackNine().getFairwayPercentage().equals("NaN%")) {
-            if(!round.getFrontNine().getFairwayPercentage().equals("NaN%")) {
+        if (round.getBackNine().getFairwayPercentage().equals("NaN%")) {
+            if (!round.getFrontNine().getFairwayPercentage().equals("NaN%")) {
                 retval = Float.valueOf(frontNineFairwayPercent);
             } else {
                 retval = 0f;
             }
         } else {
-            if(round.getFrontNine().equals("NaN%")) {
+            if (round.getFrontNine().equals("NaN%")) {
                 retval = Float.valueOf(backNineFairwayPercent);
             } else {
                 retval = (Float.valueOf(frontNineFairwayPercent) + Float.valueOf(backNineFairwayPercent)) / 2f;
@@ -299,39 +301,26 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
         return retval;
     }
 
-    private String formatDate(String fuckedUpDate) {
-        String correctDate = "";
-
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("M/D/yy");
-            correctDate = format.format(format.parse(fuckedUpDate));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return correctDate;
-    }
-
     private String getLetterGrade(float average) {
         String retval;
 
-        if(average == 0) {
+        if (average == 0) {
             retval = "N/A";
-        } else if(average <= 1) {
+        } else if (average <= 1) {
             retval = "A";
-        } else if(average > 1 && average <= 1.30) {
+        } else if (average > 1 && average <= 1.30) {
             retval = "A-";
-        } else if(average > 1.30 && average <= 1.75) {
+        } else if (average > 1.30 && average <= 1.75) {
             retval = "B+";
-        } else if(average > 1.75 && average <= 2) {
+        } else if (average > 1.75 && average <= 2) {
             retval = "B";
-        } else if(average > 2  && average <= 2.30) {
+        } else if (average > 2 && average <= 2.30) {
             retval = "B-";
-        } else if(average > 2.30 && average <= 2.75) {
+        } else if (average > 2.30 && average <= 2.75) {
             retval = "C+";
-        } else if(average > 2.75 && average <= 3) {
+        } else if (average > 2.75 && average <= 3) {
             retval = "C";
-        } else if(average > 3 && average <= 3.30) {
+        } else if (average > 3 && average <= 3.30) {
             retval = "C-";
         } else {
             retval = "D";
