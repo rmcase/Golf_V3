@@ -56,7 +56,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
     private NumberPicker picker;
     private String[] pickerStrings = {"Score", "Score To Par", "Putts", "Greens", "Fairways", "Scrambling", "Pars", "Birdies", "Eagles"};
     private Switch theSwitch;
-    private TextView averageTv, minTv, maxTv;
+    private TextView averageTv, minTv, maxTv, statsShown;
     private List<Integer> scores, putts, greens, fairways, scoresToPar,
             scrambling, pars, birdies, eagles;
     private List<Integer> scores9, putts9, greens9, fairways9, scoresToPar9,
@@ -161,6 +161,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         minTv = binding.minTv;
         maxTv = binding.maxTv;
         theSwitch = binding.theSwitch;
+        statsShown = binding.statsShown;
     }
 
     private void loadStatisticsData() {
@@ -224,9 +225,13 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
                 if(isChecked) {
                     checked = true;
                     createChart(pickerStrings[picker.getValue()]);
+                    statsShown.setTextColor(getResources().getColor(R.color.fTeal));
+                    statsShown.setText(" 9");
                 } else {
                     checked = false;
                     createChart(pickerStrings[picker.getValue()]);
+                    statsShown.setTextColor(getResources().getColor(R.color.white));
+                    statsShown.setText("18");
                 }
             }
         });
