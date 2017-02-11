@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.ryancase.golf_v3.Round;
 import com.ryancase.golf_v3.RoundThing;
@@ -52,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
             Log.d("USER IS NULL:", "");
         }
 
-        Log.d("USREMAIL:", "" + email);
+        Log.d("USERMAIL:", "" + email);
 
         preferences = getSharedPreferences("PREF", MODE_PRIVATE);
         editor = preferences.edit();
@@ -68,89 +69,95 @@ public class SplashActivity extends AppCompatActivity {
 
         Query roundQue;
 
-        if(currentUser == null) {
-            roundQue = database.child("2A5wfxt9uScm8zlcxxkwj8J6rB42");
+        if (currentUser == null) {
+            loadLoginActivity();
         } else {
             roundQue = database.child(currentUser.getUid());
-        }
 
-        roundQue.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                RoundThing round = dataSnapshot.getValue(RoundThing.class);
-                rounds.add(round);
+            roundQue.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    RoundThing round = dataSnapshot.getValue(RoundThing.class);
+                    rounds.add(round);
 
-                int totalStrokes = 0;
-                float scoAvg, nineScoAvg;
-                float roundsPlayed = 0;
-                float fullRounds = 0;
-                int halfRounds = 0;
-                int allTimeScoreToPar = 0, allTimeScoreToParNine = 0;
-                int strokesFromHalfRounds = 0;
-                int strokesFromFullRounds = 0;
+                    int totalStrokes = 0;
+                    float scoAvg, nineScoAvg;
+                    float roundsPlayed = 0;
+                    float fullRounds = 0;
+                    int halfRounds = 0;
+                    int allTimeScoreToPar = 0, allTimeScoreToParNine = 0;
+                    int strokesFromHalfRounds = 0;
+                    int strokesFromFullRounds = 0;
 
-                Gson gson = new Gson();
+                    Gson gson = new Gson();
 
-                for(int i=0; i< rounds.size(); i++) {
-                    if(rounds.get(i).getBackNine().getScore() == 0 || rounds.get(i).getFrontNine().getScore() == 0) {
-                        roundsPlayed += 0.5f;
-                        halfRounds++;
-                        allTimeScoreToParNine += (rounds.get(i).getBackNine().getScoreToPar() + rounds.get(i).getFrontNine().getScoreToPar());
-                        strokesFromHalfRounds += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
-                    } else {
-                        fullRounds++;
-                        allTimeScoreToPar += (rounds.get(i).getBackNine().getScoreToPar() + rounds.get(i).getFrontNine().getScoreToPar());
-                        strokesFromFullRounds += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
-                        roundsPlayed++;
+                    for (int i = 0; i < rounds.size(); i++) {
+                        if (rounds.get(i).getBackNine().getScore() == 0 || rounds.get(i).getFrontNine().getScore() == 0) {
+                            roundsPlayed += 0.5f;
+                            halfRounds++;
+                            allTimeScoreToParNine += (rounds.get(i).getBackNine().getScoreToPar() + rounds.get(i).getFrontNine().getScoreToPar());
+                            strokesFromHalfRounds += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
+                        } else {
+                            fullRounds++;
+                            allTimeScoreToPar += (rounds.get(i).getBackNine().getScoreToPar() + rounds.get(i).getFrontNine().getScoreToPar());
+                            strokesFromFullRounds += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
+                            roundsPlayed++;
+                        }
+
+                        String str = gson.toJson(rounds.get(i));
+                        roundStrings.add(str);
+                        editor.putString("round" + i, str);
+                        totalStrokes += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
                     }
 
-                    String str = gson.toJson(rounds.get(i));
-                    roundStrings.add(str);
-                    editor.putString("round"+i, str);
-                    totalStrokes += (rounds.get(i).getBackNine().getScore() + rounds.get(i).getFrontNine().getScore());
+                    int fullRoundsInt = (int) fullRounds;
+
+                    nineScoAvg = (float) strokesFromHalfRounds / halfRounds;
+                    scoAvg = (float) strokesFromFullRounds / fullRounds;
+
+                    editor.putInt("allTimeScoreToPar", allTimeScoreToPar);
+                    editor.putInt("allTimeScoreToParNine", allTimeScoreToParNine);
+                    editor.putFloat("scoAvg", scoAvg);
+                    editor.putFloat("nineScoAvg", nineScoAvg);
+                    editor.putInt("fullRounds", fullRoundsInt);
+                    editor.putInt("halfRounds", halfRounds);
+                    editor.putInt("roundsPlayed", rounds.size());
+                    editor.putInt("totalStrokes", totalStrokes);
+
+                    editor.commit();
+
+
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
 
-                int fullRoundsInt = (int) fullRounds;
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                nineScoAvg = (float) strokesFromHalfRounds / halfRounds;
-                scoAvg = (float) strokesFromFullRounds / fullRounds;
+                }
 
-                editor.putInt("allTimeScoreToPar", allTimeScoreToPar);
-                editor.putInt("allTimeScoreToParNine", allTimeScoreToParNine);
-                editor.putFloat("scoAvg", scoAvg);
-                editor.putFloat("nineScoAvg", nineScoAvg);
-                editor.putInt("fullRounds", fullRoundsInt);
-                editor.putInt("halfRounds", halfRounds);
-                editor.putInt("roundsPlayed", rounds.size());
-                editor.putInt("totalStrokes", totalStrokes);
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                editor.commit();
+                }
 
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                }
 
-            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
+            });
+        }
+    }
 
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+    private void loadLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -45,6 +45,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     private SharedPreferences preferences;
 
+    private boolean eighteenShowing;
+
     public ProfileFragment() {
 
     }
@@ -70,7 +72,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 preferences.edit().apply();
                 FirebaseAuth.getInstance().signOut();
 
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                startActivity(new Intent(getActivity(), SplashActivity.class));
                 return true;
 
             default:
@@ -114,6 +116,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         auth = FirebaseAuth.getInstance();
 
         preferences = getActivity().getSharedPreferences("PREF", Context.MODE_PRIVATE);
+
+        eighteenShowing = true;
 
         binding.scoAvgTv.setOnClickListener(this);
         binding.scoreToParTv.setOnClickListener(this);
@@ -173,12 +177,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         String otherScoringAverage = "Scoring Average (9):";
         String otherScoreToPar = "Score To Par (9)";
         if(binding.scoAvgTv.getText() != otherScoringAverage) {
+            eighteenShowing = false;
             binding.scoAvgTv.setText(otherScoringAverage);
             binding.scoAvg.setText(String.valueOf(nineScoAvg));
 
             binding.scoreToParTv.setText(otherScoreToPar);
             binding.scoreToPar.setText(allTimeScoreToParNineStr);
         } else {
+            eighteenShowing = true;
             otherScoringAverage = "Scoring Average (18):";
             binding.scoAvgTv.setText(otherScoringAverage);
             binding.scoAvg.setText(String.valueOf(scoAvg));

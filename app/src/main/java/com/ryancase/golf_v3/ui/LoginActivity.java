@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -81,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (user != null) {
                     //Logged in
-                    loadMainActivity();
+                    loadSplashActivity();
                     Log.d("Already logged in", "");
                 } else {
                     //Not logged in
@@ -162,8 +161,8 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void loadMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void loadSplashActivity() {
+        Intent intent = new Intent(this, SplashActivity.class);
         startActivity(intent);
     }
 
