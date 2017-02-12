@@ -94,7 +94,7 @@
                             android:id="@+id/driveNa"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="N/A" />
@@ -103,7 +103,7 @@
                             android:id="@+id/driveA"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="A" />
@@ -112,7 +112,7 @@
                             android:id="@+id/driveB"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="B" />
@@ -121,7 +121,7 @@
                             android:id="@+id/driveC"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="C" />
@@ -130,7 +130,7 @@
                             android:id="@+id/driveD"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="D" />
@@ -153,7 +153,7 @@
                             android:id="@+id/ironNa"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="N/A" />
@@ -162,7 +162,7 @@
                             android:id="@+id/ironA"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="A" />
@@ -171,7 +171,7 @@
                             android:id="@+id/ironB"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="B" />
@@ -180,7 +180,7 @@
                             android:id="@+id/ironC"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="C" />
@@ -189,7 +189,7 @@
                             android:id="@+id/ironD"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="D" />
@@ -212,7 +212,7 @@
                             android:id="@+id/approachNa"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="N/A" />
@@ -220,7 +220,7 @@
                         <RadioButton
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="A" />
@@ -228,7 +228,7 @@
                         <RadioButton
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="B" />
@@ -236,7 +236,7 @@
                         <RadioButton
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="C" />
@@ -244,7 +244,7 @@
                         <RadioButton
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="D" />
@@ -267,7 +267,7 @@
                             android:id="@+id/puttNa"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="N/A" />
@@ -276,7 +276,7 @@
                             android:id="@+id/puttA"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="A" />
@@ -285,7 +285,7 @@
                             android:id="@+id/puttB"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="B" />
@@ -294,7 +294,7 @@
                             android:id="@+id/puttC"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="C" />
@@ -303,7 +303,7 @@
                             android:id="@+id/puttD"
                             style="@style/RadioButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="42dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="D" />
@@ -350,7 +350,7 @@
                     <!--android:layout_height="wrap_content"-->
                     <!--android:layout_marginLeft="12dp"-->
                     <!--android:layout_marginRight="12dp"-->
-                    <!--android:layout_marginTop="50dp"-->
+                    <!--android:layout_marginTop="42dp"-->
                     <!--android:layout_weight="1"-->
                     <!--app:integer_priority="true"-->
                     <!--app:max_value="5"-->
