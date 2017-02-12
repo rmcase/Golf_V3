@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -149,6 +150,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             allTimeScoreToParStr = String.valueOf(allTimeScoreToPar);
         }
 
+        if(allTimeScoreToPar == 0) {
+            allTimeScoreToParStr = "Even";
+        }
+
+        if(allTimeScoreToParNine == 0) {
+            allTimeScoreToParNineStr = "Even";
+        }
+
         if(allTimeScoreToParNine > 0 ) {
             allTimeScoreToParNineStr = "+" + String.valueOf(allTimeScoreToParNine);
         } else {
@@ -156,21 +165,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         }
 
         if(Float.isNaN(scoAvg)) {
-            binding.scoAvg.setText("No Rounds Played!");
+            binding.scoAvg.setText("No Rounds!");
         } else {
             binding.scoAvg.setText(String.valueOf(scoAvg));
+            binding.scoAvg.setTextColor(getScoreToParTextColor(eighteenShowing));
         }
 
-        if(allTimeScoreToPar < 0) {
-            viewModel.setTextColor(getResources().getColor(R.color.red));
-        } else if(allTimeScoreToPar == 0) {
-            viewModel.setTextColor(getResources().getColor(R.color.fTeal));
-        }
+        binding.scoreToPar.setTextColor(getScoreToParTextColor(eighteenShowing));
 
         binding.golfer.setText(currentGolfer);
         binding.roundsPl.setText(String.valueOf(fullRounds) + "  |  " + String.valueOf(halfRounds));
         binding.strokesTk.setText(String.valueOf(totalStrokes));
-        binding.scoreToPar.setText(String.valueOf(allTimeScoreToPar));
+        binding.scoreToPar.setText(allTimeScoreToParStr);
     }
 
     public void onClick(View v) {
@@ -178,20 +184,57 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         String otherScoreToPar = "Score To Par (9)";
         if(binding.scoAvgTv.getText() != otherScoringAverage) {
             eighteenShowing = false;
+            binding.scoreToPar.setTextColor(getScoreToParTextColor(eighteenShowing));
+
             binding.scoAvgTv.setText(otherScoringAverage);
-            binding.scoAvg.setText(String.valueOf(nineScoAvg));
+            if(Float.isNaN(nineScoAvg)) {
+                binding.scoAvg.setText("No Rounds!");
+            } else {
+                binding.scoAvg.setTextColor(getScoreToParTextColor(eighteenShowing));
+                binding.scoAvg.setText(String.valueOf(nineScoAvg));
+            }
 
             binding.scoreToParTv.setText(otherScoreToPar);
             binding.scoreToPar.setText(allTimeScoreToParNineStr);
         } else {
             eighteenShowing = true;
+            binding.scoreToPar.setTextColor(getScoreToParTextColor(eighteenShowing));
+
             otherScoringAverage = "Scoring Average (18):";
             binding.scoAvgTv.setText(otherScoringAverage);
-            binding.scoAvg.setText(String.valueOf(scoAvg));
+            if(Float.isNaN(scoAvg)) {
+                binding.scoAvg.setText("No Rounds!");
+            } else {
+                binding.scoAvg.setTextColor(getScoreToParTextColor(eighteenShowing));
+                binding.scoAvg.setText(String.valueOf(scoAvg));
+            }
 
             otherScoreToPar = "Score To Par (18):";
             binding.scoreToParTv.setText(otherScoreToPar);
             binding.scoreToPar.setText(allTimeScoreToParStr);
         }
+    }
+
+    private int getScoreToParTextColor(boolean eighteenShowing) {
+        int retval = Color.GRAY;
+
+        if(eighteenShowing) {
+            if (allTimeScoreToPar < 0) {
+                retval = getResources().getColor(R.color.red);
+            } else if (allTimeScoreToPar == 0) {
+                retval = getResources().getColor(R.color.fTeal);
+            } else if (allTimeScoreToPar > 0) {
+                retval = Color.GRAY;
+            }
+        } else {
+            if (allTimeScoreToParNine < 0) {
+                retval = getResources().getColor(R.color.red);
+            } else if (allTimeScoreToParNine == 0) {
+                retval = getResources().getColor(R.color.fTeal);
+            } else if (allTimeScoreToParNine > 0) {
+                retval = Color.GRAY;
+            }
+        }
+        return retval;
     }
 }

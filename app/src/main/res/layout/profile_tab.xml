@@ -36,7 +36,7 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="68dp"
                     android:layout_weight="1"
                     android:src="@drawable/tiger" />
 
@@ -49,8 +49,10 @@
                     android:gravity="center"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </TableRow>
             <!--Profile picture / id-->
@@ -75,8 +77,8 @@
                     android:layout_weight="5"
                     android:gravity="end"
                     android:text="Rounds Played 18 | 9: "
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/roundsPl"
@@ -97,8 +99,8 @@
                     android:layout_weight="5"
                     android:gravity="end"
                     android:text="Strokes Taken: "
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/strokesTk"
@@ -121,8 +123,8 @@
                     android:clickable="true"
                     android:gravity="end"
                     android:text="Scoring Average (18): "
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/scoAvg"
@@ -146,8 +148,8 @@
                     android:clickable="true"
                     android:gravity="end"
                     android:text="Score To Par (18): "
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/scoreToPar"
@@ -156,7 +158,6 @@
                     android:layout_weight="4"
                     android:clickable="true"
                     android:textAlignment="center"
-                    android:textColor="@{viewModel.textColor}"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </TableRow>

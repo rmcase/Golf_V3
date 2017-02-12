@@ -7,18 +7,8 @@ import android.widget.ProgressBar;
 public class ProfileViewModel extends BaseObservable {
     private String totalStrokes, roundsPlayed, scoringAverage;
 
-    private int textColor;
-
     public ProfileViewModel() {
 
-    }
-
-    public int getTextColor() {
-        return textColor;
-    }
-
-    public void setTextColor(int textColor) {
-        this.textColor = textColor;
     }
 
     public String getTotalStrokes() {
