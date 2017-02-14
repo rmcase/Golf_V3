@@ -164,14 +164,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             allTimeScoreToParNineStr = String.valueOf(allTimeScoreToParNine);
         }
 
-        if(Float.isNaN(scoAvg)) {
+        if(Float.isNaN(scoAvg) || scoAvg < 10.0f) {
             binding.scoAvg.setText("No Rounds!");
         } else {
             binding.scoAvg.setText(String.valueOf(scoAvg));
-            binding.scoAvg.setTextColor(getScoreToParTextColor(eighteenShowing));
         }
-
-        binding.scoreToPar.setTextColor(getScoreToParTextColor(eighteenShowing));
 
         binding.golfer.setText(currentGolfer);
         binding.roundsPl.setText(String.valueOf(fullRounds) + "  |  " + String.valueOf(halfRounds));
@@ -184,28 +181,27 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         String otherScoreToPar = "Score To Par (9)";
         if(binding.scoAvgTv.getText() != otherScoringAverage) {
             eighteenShowing = false;
-            binding.scoreToPar.setTextColor(getScoreToParTextColor(eighteenShowing));
 
             binding.scoAvgTv.setText(otherScoringAverage);
-            if(Float.isNaN(nineScoAvg)) {
+            if(Float.isNaN(nineScoAvg) || scoAvg < 10.0f) {
                 binding.scoAvg.setText("No Rounds!");
             } else {
-                binding.scoAvg.setTextColor(getScoreToParTextColor(eighteenShowing));
                 binding.scoAvg.setText(String.valueOf(nineScoAvg));
             }
 
+            if(nineScoAvg == 0) {
+                allTimeScoreToParNineStr = "Even";
+            }
             binding.scoreToParTv.setText(otherScoreToPar);
             binding.scoreToPar.setText(allTimeScoreToParNineStr);
         } else {
             eighteenShowing = true;
-            binding.scoreToPar.setTextColor(getScoreToParTextColor(eighteenShowing));
 
             otherScoringAverage = "Scoring Average (18):";
             binding.scoAvgTv.setText(otherScoringAverage);
-            if(Float.isNaN(scoAvg)) {
+            if(Float.isNaN(scoAvg) || scoAvg < 10.0f) {
                 binding.scoAvg.setText("No Rounds!");
             } else {
-                binding.scoAvg.setTextColor(getScoreToParTextColor(eighteenShowing));
                 binding.scoAvg.setText(String.valueOf(scoAvg));
             }
 
