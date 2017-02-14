@@ -14,7 +14,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.ryancase.golf_v3.Round;
 import com.ryancase.golf_v3.RoundThing;
@@ -152,6 +151,9 @@ public class SplashActivity extends AppCompatActivity {
 
                 }
             });
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
