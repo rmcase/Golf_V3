@@ -28,6 +28,8 @@ public class SplashActivity extends AppCompatActivity {
 
     private DatabaseReference database;
 
+    private Boolean fromLogin;
+
     private List<RoundThing> rounds;
     private List<String> roundStrings;
 
@@ -39,6 +41,14 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle b = this.getIntent().getExtras();
+
+        if(b != null) {
+            fromLogin = b.getBoolean("fromLogin");
+        } else {
+            fromLogin = false;
+        }
 
         auth = FirebaseAuth.getInstance();
 
@@ -151,9 +161,11 @@ public class SplashActivity extends AppCompatActivity {
 
                 }
             });
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            if(fromLogin) {
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 
