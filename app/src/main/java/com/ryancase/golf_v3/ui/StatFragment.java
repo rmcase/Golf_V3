@@ -196,7 +196,7 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
                 public void onClick(View v) {
                     reference.push().setValue(roundModel);
 
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    Intent intent = new Intent(getActivity(), SplashActivity.class);
                     startActivity(intent);
                 }
             });
@@ -207,7 +207,7 @@ public class StatFragment extends android.support.v4.app.Fragment implements Hol
                 public void onClick(View v) {
                     reference.push().setValue(roundModel);
 
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    Intent intent = new Intent(getActivity(), SplashActivity.class);
                     startActivity(intent);
                 }
             });
