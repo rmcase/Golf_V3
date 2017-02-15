@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private FButton signUpButton, signInButton;
     private TextInputEditText passwordText, emailText;
+    private ProgressBar progressBar;
 
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -88,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         passwordText = (TextInputEditText) findViewById(R.id.passwordText);
         emailText = (TextInputEditText) findViewById(R.id.emailText);
 
@@ -98,6 +101,9 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                signInButton.setVisibility(View.GONE);
+                signUpButton.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
                 login(emailText.getText().toString(), passwordText.getText().toString());
             }
         });
@@ -109,6 +115,9 @@ public class LoginActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                signInButton.setVisibility(View.GONE);
+                signUpButton.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
                 signUp(emailText.getText().toString(), passwordText.getText().toString());
             }
         });
@@ -131,6 +140,9 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (!task.isSuccessful()) {
                             Log.w("", "signInWithEmail:failed", task.getException());
+                            signInButton.setVisibility(View.VISIBLE);
+                            signUpButton.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(LoginActivity.this, "Login Failed",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -153,7 +165,10 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (!task.isSuccessful()) {
                             Log.w("", "createWithEmail:failed", task.getException());
-                            Toast.makeText(LoginActivity.this, "Login Failed",
+                            signInButton.setVisibility(View.VISIBLE);
+                            signUpButton.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(LoginActivity.this, "Sign Up Failed",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -162,7 +177,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loadSplashActivity() {
+        Bundle b = new Bundle();
+        b.putBoolean("fromLogin", true);
         Intent intent = new Intent(this, SplashActivity.class);
+        intent.putExtras(b);
         startActivity(intent);
     }
 
