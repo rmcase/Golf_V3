@@ -11,8 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginBottom="-5dp">
+        android:layout_marginBottom="-5dp"
+        android:orientation="horizontal">
 
         <TableLayout
             android:id="@+id/overviewTable"
@@ -23,7 +23,6 @@
 
             <TableRow
                 android:background="@color/white"
-                android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingTop="20dp">
@@ -52,11 +51,11 @@
                     android:textAlignment="textEnd"
                     android:textSize="16sp" />
             </TableRow>
-            <!-- ^ SCORES LABELS ROW ^ -->
+            <!-- ^ FRONT/BACK LABEL ROW ^ -->
             <TableRow
+                android:layout_marginBottom="5dp"
                 android:background="@color/white"
-                android:padding="20dp"
-                android:layout_marginBottom="5dp">
+                android:padding="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -86,12 +85,13 @@
                     android:textStyle="bold" />
 
             </TableRow>
-            <!-- ^ SCORES ROW ^ -->
+            <!-- ^ FRONT/BACK SCORE ROW ^ -->
+
 
             <TableRow
+                android:background="@color/fDarkTeal"
                 android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
-                android:background="@color/fDarkTeal"
                 android:paddingRight="20dp"
                 android:paddingTop="20dp">
 
@@ -114,9 +114,13 @@
                     android:textSize="16sp" />
 
             </TableRow>
-            <!-- ^ FRONT/BACK LABEL ROW ^ -->
-            <TableRow android:padding="20dp"
-                android:background="@color/fDarkTeal">
+            <!-- ^ SCORES LABELS ROW ^ -->
+            <TableRow
+                android:background="@color/fDarkTeal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="20dp"
+                android:paddingTop="10dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -138,12 +142,10 @@
                     android:textSize="22sp"
                     android:textStyle="bold" />
             </TableRow>
-            <!-- ^ FRONT/BACK SCORE ROW ^ -->
+            <!-- ^ SCORES ROW ^ -->
 
             <TableRow
-                android:layout_marginTop="5dp"
                 android:background="@color/white"
-                android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingTop="20dp">
