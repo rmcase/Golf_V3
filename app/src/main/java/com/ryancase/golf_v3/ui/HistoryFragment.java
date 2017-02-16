@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.ryancase.golf_v3.Helpers.CustomAdapter;
 import com.ryancase.golf_v3.HoleView;
@@ -160,14 +169,16 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
                 e.printStackTrace();
             }
             names.add(rounds.get(i).getCourse());
-//            dates.add(rounds.get(i).getCourse() + "\t\t\t\t\t" + newDate);
             dates.add(newDate);
+        }
+
+        if(dates.size() == 1) {
+            addBlankRows();
         }
 
         progressBar.setVisibility(View.GONE);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.history_list_item, dates);
-        CustomAdapter adap = new CustomAdapter(getContext(), dates, names);
+        final CustomAdapter adap = new CustomAdapter(getContext(), dates, names);
 
         View view = getActivity().getLayoutInflater() .inflate(R.layout.empty_list_view, null);
         ViewGroup viewGroup= ( ViewGroup)viewModel.getHistoryList().getParent();
@@ -179,16 +190,39 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
         viewModel.getHistoryList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RoundThing roundSelected = rounds.get(position);
+                if(position < rounds.size()) {
+                    RoundThing roundSelected = rounds.get(position);
 
-                viewModel.getHistoryList().setVisibility(View.GONE);
+                    viewModel.getHistoryList().setVisibility(View.GONE);
 
-                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                HistoryItemFragment stat = new HistoryItemFragment(roundSelected);
-                fragmentTransaction.add(R.id.content_view_history, stat, "STAT");
-                fragmentTransaction.commit();
+                    android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    HistoryItemFragment stat = new HistoryItemFragment(roundSelected);
+                    fragmentTransaction.add(R.id.content_view_history, stat, "STAT");
+                    fragmentTransaction.commit();
+                }
             }
         });
+
+        viewModel.getHistoryList().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Snackbar snackbar = Snackbar.make(getView(), "Round Removed", Snackbar.LENGTH_LONG);
+                snackbar.show();
+                dates.remove(position);
+                names.remove(position);
+                adap.notifyDataSetChanged();
+                return false;
+            }
+        });
+    }
+
+    private void addBlankRows() {
+            dates.add("");
+            dates.add("");
+            dates.add("");
+            names.add("");
+            names.add("");
+            names.add("");
     }
 }
