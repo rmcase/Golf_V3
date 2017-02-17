@@ -208,7 +208,6 @@ public class CourseSelectionFragment extends android.support.v4.app.Fragment imp
                 for(int i=0; i<numberOfHoles; i++) {
                     if(i<9) {
                         prevParEditor.putInt("par"+i, roundSelected.getFrontNine().getHoles().get(i).getPar());
-                        Log.d("CSPar" + i, "" + roundSelected.getFrontNine().getHoles().get(i).getPar());
                     } else {
                         prevParEditor.putInt("par"+i, roundSelected.getBackNine().getHoles().get(i-9).getPar());
                     }
