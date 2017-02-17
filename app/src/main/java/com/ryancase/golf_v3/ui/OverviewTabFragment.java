@@ -22,6 +22,7 @@ public class OverviewTabFragment extends Fragment {
 
     private int score, scoreToPar, frontScore, backScore, par
             ,birdies, eagles, pars;
+    private String scoreToParString;
 
     private OverviewStatTabBinding binding;
 
@@ -60,7 +61,12 @@ public class OverviewTabFragment extends Fragment {
         viewModel.setFrontScore(String.valueOf(frontScore));
         viewModel.setBackScore(String.valueOf(backScore));
         viewModel.setPar(String.valueOf(par));
-        viewModel.setScoreToPar(String.valueOf(scoreToPar));
+        if(scoreToPar > 0) {
+            scoreToParString = "+" + scoreToPar;
+        } else {
+            scoreToParString = String.valueOf(scoreToPar);
+        }
+        viewModel.setScoreToPar(scoreToParString);
         viewModel.setBirdies(String.valueOf(birdies));
         viewModel.setEagles(String.valueOf(eagles));
         viewModel.setPars(String.valueOf(pars));
