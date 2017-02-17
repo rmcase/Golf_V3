@@ -175,8 +175,8 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
             previousRounds.add(gson.fromJson(objectToLoad, RoundThing.class));
         }
 
-        for(RoundThing round : previousRounds) {
-            if(round.getBackNine().getScore() == 0 || round.getFrontNine().getScore() == 0) {
+        for (RoundThing round : previousRounds) {
+            if (round.getBackNine().getScore() == 0 || round.getFrontNine().getScore() == 0) {
                 int sc = round.getBackNine().getScore() + round.getFrontNine().getScore();
                 int pu = round.getBackNine().getPutts() + round.getFrontNine().getPutts();
                 int gr = round.getBackNine().getGreens() + round.getFrontNine().getGreens();
@@ -222,7 +222,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         theSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     checked = true;
                     createChart(pickerStrings[picker.getValue()]);
                     statsShown.setTextColor(getResources().getColor(R.color.fTeal));
@@ -259,7 +259,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
         switch (value) {
             case "Score": {
                 List<Integer> graphScores;
-                if(checked) {
+                if (checked) {
                     graphScores = scores9;
                 } else {
                     graphScores = scores;
@@ -292,8 +292,16 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
-                averageTv.setText(getString(R.string.average) + averageStr);
-                minTv.setText(String.format(getString(R.string.min) + min));
+                if(Float.isNaN(average)) {
+                    averageTv.setText(getString(R.string.average) + 0.0);
+                } else {
+                    averageTv.setText(getString(R.string.average) + averageStr);
+                }
+                if (min == 100) {
+                    minTv.setText(getString(R.string.min) + 0.0);
+                } else {
+                    minTv.setText(String.format(getString(R.string.min) + min));
+                }
                 maxTv.setText(String.format(getString(R.string.max) + max));
 
                 break;
@@ -301,7 +309,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Score To Par": {
                 List<Integer> graphRelScores;
-                if(checked) {
+                if (checked) {
                     graphRelScores = scoresToPar9;
                 } else {
                     graphRelScores = scoresToPar;
@@ -333,8 +341,16 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
-                averageTv.setText(getString(R.string.average) + averageStr);
-                minTv.setText(getString(R.string.min) + min);
+                if(Float.isNaN(average)) {
+                    averageTv.setText(getString(R.string.average) + 0.0);
+                } else {
+                    averageTv.setText(getString(R.string.average) + averageStr);
+                }
+                if (min == 100) {
+                    minTv.setText(getString(R.string.min) + 0.0);
+                } else {
+                    minTv.setText(String.format(getString(R.string.min) + min));
+                }
                 maxTv.setText(getString(R.string.max) + max);
 
                 break;
@@ -342,7 +358,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Putts": {
                 List<Integer> graphPutts;
-                if(checked) {
+                if (checked) {
                     graphPutts = putts9;
                 } else {
                     graphPutts = putts;
@@ -374,8 +390,16 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
-                averageTv.setText(getString(R.string.average) + averageStr);
-                minTv.setText(String.format(getString(R.string.min) + min));
+                if(Float.isNaN(average)) {
+                    averageTv.setText(getString(R.string.average) + 0.0);
+                } else {
+                    averageTv.setText(getString(R.string.average) + averageStr);
+                }
+                if (min == 100) {
+                    minTv.setText(getString(R.string.min) + 0.0);
+                } else {
+                    minTv.setText(String.format(getString(R.string.min) + min));
+                }
                 maxTv.setText(String.format(getString(R.string.max) + max));
 
                 break;
@@ -383,7 +407,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Greens": {
                 List<Integer> graphGreens;
-                if(checked) {
+                if (checked) {
                     graphGreens = greens9;
                 } else {
                     graphGreens = greens;
@@ -415,8 +439,16 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
-                averageTv.setText(getString(R.string.average) + averageStr);
-                minTv.setText(String.format(getString(R.string.min) + min));
+                if(Float.isNaN(average)) {
+                    averageTv.setText(getString(R.string.average) + 0.0);
+                } else {
+                    averageTv.setText(getString(R.string.average) + averageStr);
+                }
+                if (min == 100) {
+                    minTv.setText(getString(R.string.min) + 0.0);
+                } else {
+                    minTv.setText(String.format(getString(R.string.min) + min));
+                }
                 maxTv.setText(String.format(getString(R.string.max) + max));
 
                 break;
@@ -424,7 +456,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Fairways": {
                 List<Integer> graphFairways;
-                if(checked) {
+                if (checked) {
                     graphFairways = fairways9;
                 } else {
                     graphFairways = fairways;
@@ -456,8 +488,16 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
-                averageTv.setText(getString(R.string.average) + averageStr);
-                minTv.setText(String.format(getString(R.string.min) + min));
+                if(Float.isNaN(average)) {
+                    averageTv.setText(getString(R.string.average) + 0.0);
+                } else {
+                    averageTv.setText(getString(R.string.average) + averageStr);
+                }
+                if (min == 100) {
+                    minTv.setText(getString(R.string.min) + 0.0);
+                } else {
+                    minTv.setText(String.format(getString(R.string.min) + min));
+                }
                 maxTv.setText(String.format(getString(R.string.max) + max));
 
                 break;
@@ -465,7 +505,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Scrambling": {
                 List<Integer> graphScrambling;
-                if(checked) {
+                if (checked) {
                     graphScrambling = scrambling9;
                 } else {
                     graphScrambling = scrambling;
@@ -497,8 +537,16 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
-                averageTv.setText(getString(R.string.average) + averageStr);
-                minTv.setText(getString(R.string.min) + min);
+                if(Float.isNaN(average)) {
+                    averageTv.setText(getString(R.string.average) + 0.0);
+                } else {
+                    averageTv.setText(getString(R.string.average) + averageStr);
+                }
+                if (min == 100) {
+                    minTv.setText(getString(R.string.min) + 0.0);
+                } else {
+                    minTv.setText(String.format(getString(R.string.min) + min));
+                }
                 maxTv.setText(getString(R.string.max) + max);
 
                 break;
@@ -506,7 +554,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Pars": {
                 List<Integer> graphPars;
-                if(checked) {
+                if (checked) {
                     graphPars = pars9;
                 } else {
                     graphPars = pars;
@@ -538,8 +586,16 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
-                averageTv.setText(getString(R.string.average) + averageStr);
-                minTv.setText(getString(R.string.min) + min);
+                if(Float.isNaN(average)) {
+                    averageTv.setText(getString(R.string.average) + 0.0);
+                } else {
+                    averageTv.setText(getString(R.string.average) + averageStr);
+                }
+                if (min == 100) {
+                    minTv.setText(getString(R.string.min) + 0.0);
+                } else {
+                    minTv.setText(String.format(getString(R.string.min) + min));
+                }
                 maxTv.setText(getString(R.string.max) + max);
 
                 break;
@@ -547,7 +603,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Birdies": {
                 List<Integer> graphBirdies;
-                if(checked) {
+                if (checked) {
                     graphBirdies = birdies9;
                 } else {
                     graphBirdies = birdies;
@@ -579,8 +635,16 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
-                averageTv.setText(getString(R.string.average) + averageStr);
-                minTv.setText(getString(R.string.min) + min);
+                if(Float.isNaN(average)) {
+                    averageTv.setText(getString(R.string.average) + 0.0);
+                } else {
+                    averageTv.setText(getString(R.string.average) + averageStr);
+                }
+                if (min == 100) {
+                    minTv.setText(getString(R.string.min) + 0.0);
+                } else {
+                    minTv.setText(String.format(getString(R.string.min) + min));
+                }
                 maxTv.setText(getString(R.string.max) + max);
 
                 break;
@@ -588,7 +652,7 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
             case "Eagles": {
                 List<Integer> graphEagles;
-                if(checked) {
+                if (checked) {
                     graphEagles = eagles9;
                 } else {
                     graphEagles = eagles;
@@ -620,8 +684,16 @@ public class StatisticsFragment extends android.support.v4.app.Fragment implemen
 
                 String averageStr = String.format(Locale.getDefault(), "%.2f", average);
 
-                averageTv.setText(getString(R.string.average) + averageStr);
-                minTv.setText(getString(R.string.min) + min);
+                if(Float.isNaN(average)) {
+                    averageTv.setText(getString(R.string.average) + 0.0);
+                } else {
+                    averageTv.setText(getString(R.string.average) + averageStr);
+                }
+                if (min == 100) {
+                    minTv.setText(getString(R.string.min) + 0.0);
+                } else {
+                    minTv.setText(String.format(getString(R.string.min) + min));
+                }
                 maxTv.setText(getString(R.string.max) + max);
 
                 break;
