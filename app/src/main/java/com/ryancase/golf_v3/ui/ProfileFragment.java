@@ -154,14 +154,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             allTimeScoreToParStr = "Even";
         }
 
-        if(allTimeScoreToParNine == 0) {
-            allTimeScoreToParNineStr = "Even";
-        }
-
         if(allTimeScoreToParNine > 0 ) {
             allTimeScoreToParNineStr = "+" + String.valueOf(allTimeScoreToParNine);
         } else {
             allTimeScoreToParNineStr = String.valueOf(allTimeScoreToParNine);
+        }
+
+        if(allTimeScoreToParNine == 0) {
+            allTimeScoreToParNineStr = "Even";
         }
 
         if(Float.isNaN(scoAvg) || scoAvg < 10.0f) {
