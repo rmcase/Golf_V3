@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.ryancase.golf_v3.Hole;
@@ -154,12 +155,37 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
                 if (isChecked) {
                     binding.holeTable.setVisibility(GONE);
                     binding.ratingTable.setVisibility(View.VISIBLE);
+                    binding.nextHole.setVisibility(GONE);
                 } else {
                     binding.holeTable.setVisibility(View.VISIBLE);
                     binding.ratingTable.setVisibility(GONE);
+                    binding.nextHole.setVisibility(View.VISIBLE);
                 }
             }
         });
+
+        binding.puttSegmentedGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int par;
+                int numPutts = puttGroup.indexOfChild(puttGroup.findViewById(puttGroup.getCheckedRadioButtonId())) + 1;
+                if (!isNewCourse && prevParPref.getInt("par" + parToGet, 0) != 0) {
+                    par = prevParPref.getInt("par" + parToGet, 0);
+                } else {
+                    par = viewModel.getParSelect().indexOfChild(viewModel.getParSelect().findViewById(viewModel.getParSelect().getCheckedRadioButtonId())) + 3;
+                }
+                int relativeScore = viewModel.getScoreForHole() - par;
+                if((relativeScore == 0 && numPutts == 2) || (relativeScore == 0 && par == 5 && numPutts == 3)
+                        || (relativeScore == 1 && numPutts == 3 && par == 4) || (relativeScore == -1 && par == 5 && numPutts == 2)
+                        || (relativeScore == -1 && par == 5 && numPutts == 1) || (relativeScore == -1 && par == 4 && numPutts == 1)
+                        || (relativeScore == -1 && par == 3 && numPutts == 1)) {
+                    viewModel.getGreenCheck().setChecked(true);
+                } else {
+                    viewModel.getGreenCheck().setChecked(false);
+                }
+            }
+        });
+
 
         return retval;
     }
@@ -195,7 +221,6 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
                 viewModel.setNumberOfPutts(puttGroup.indexOfChild(puttGroup.findViewById(puttGroup.getCheckedRadioButtonId())) + 1);
 
                 if (!isNewCourse && prevParPref.getInt("par" + parToGet, 0) != 0) {
-                    Log.d("PARLOAD:", "" + prevParPref.getInt("par" + parToGet, 0));
                     viewModel.setParForHole(prevParPref.getInt("par" + parToGet, 0));
                 } else {
                     viewModel.getParSelect().setVisibility(View.VISIBLE);
@@ -284,15 +309,6 @@ public class HoleFragment extends android.support.v4.app.Fragment implements Hol
         viewModel.setIronRg(binding.IronRadioGroup);
 
         puttGroup = binding.puttSegmentedGroup;
-        //New Putt Listener
-//        binding.puttSegmentedGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton rb = (RadioButton) group.findViewById(checkedId);
-//                int index = group.indexOfChild(rb);
-//                Log.d("RBID", "" + checkedId);
-//            }
-//        });
     }
 
     private void loadNextHole(int nextHoleNum) {
