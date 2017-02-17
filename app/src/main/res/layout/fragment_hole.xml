@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginBottom="20dp"
                 android:visibility="gone">
 
                 <TableRow>
@@ -43,7 +44,7 @@
                 </TableRow>
                 <!--Header-->
 
-                <TableRow android:layout_marginTop="15dp">
+                <TableRow android:layout_marginTop="25dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -344,32 +345,12 @@
 
                     </com.shawnlin.numberpicker.NumberPicker>
 
-                    <!--<pl.polak.clicknumberpicker.ClickNumberPickerView-->
-                    <!--android:id="@+id/parSelector"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="12dp"-->
-                    <!--android:layout_marginRight="12dp"-->
-                    <!--android:layout_marginTop="42dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--app:integer_priority="true"-->
-                    <!--app:max_value="5"-->
-                    <!--app:min_value="3"-->
-                    <!--app:picker_corner_radius="35"-->
-                    <!--app:pickers_background_color="@color/fDarkTeal"-->
-                    <!--app:value="4"-->
-                    <!--app:value_background_color="@color/white"-->
-                    <!--app:value_max_text_size="2sp"-->
-                    <!--app:value_min_text_size="2sp"-->
-                    <!--app:value_text_color="@color/black"-->
-                    <!--app:value_text_size="10sp"></pl.polak.clicknumberpicker.ClickNumberPickerView>-->
-
                 </TableRow>
 
                 <TableRow
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="12.5dp"
                     android:gravity="center_horizontal">
 
                     <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
@@ -508,7 +489,7 @@
             android:layout_below="@id/tableHolder"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop=".5dp"
             android:text="Show Club Ratings" />
         <!--Show-Ratings Switch-->
 
@@ -521,7 +502,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:textColor="@color/white"
             fbutton:buttonColor="@color/fDarkTeal"
             fbutton:cornerRadius="15dp"
