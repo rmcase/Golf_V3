@@ -149,16 +149,11 @@ public class HistoryFragment extends android.support.v4.app.Fragment implements 
             rounds.add(gson.fromJson(objectToLoad, RoundThing.class));
         }
 
-        Collections.sort(rounds, new Comparator<RoundThing>() {
-            @Override
-            public int compare(RoundThing lhs, RoundThing rhs) {
-                return lhs.getDate().compareTo(rhs.getDate());
-            }
-        });
+        Collections.reverse(rounds);
 
         for(int i=0; i < numberOfRoundsToLoad; i++) {
             String newDate = "";
-            SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
+            SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yy");
             try {
                 Date date = sd.parse(rounds.get(i).getDate());
 
