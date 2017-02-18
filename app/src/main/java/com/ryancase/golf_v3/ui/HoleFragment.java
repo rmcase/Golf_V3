@@ -1,5 +1,6 @@
 package com.ryancase.golf_v3.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
@@ -32,6 +33,7 @@ import static android.view.View.GONE;
  * File description here...
  */
 
+@SuppressLint("ValidFragment")
 public class HoleFragment extends android.support.v4.app.Fragment implements HoleView {
 
     private final String FRAGMENT_TAG = "HOLE";

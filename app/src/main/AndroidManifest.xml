@@ -25,6 +25,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.HelpActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".ui.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>

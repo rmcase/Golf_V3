@@ -65,7 +65,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_logout:
-                // User chose the "Settings" item, show the app settings UI...
+                // User chose the "Logout" item, show the app settings UI...
                 Log.d("LOGOUT", "");
 
                 binding.profileTable.setVisibility(View.GONE);
@@ -74,6 +74,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 FirebaseAuth.getInstance().signOut();
 
                 startActivity(new Intent(getActivity(), SplashActivity.class));
+                return true;
+
+            case R.id.action_help:
+
+                startActivity(new Intent(getActivity(), HelpActivity.class));
                 return true;
 
             default:

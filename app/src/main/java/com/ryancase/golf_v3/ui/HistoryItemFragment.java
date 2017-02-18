@@ -1,5 +1,6 @@
 package com.ryancase.golf_v3.ui;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
@@ -44,6 +45,7 @@ public class HistoryItemFragment extends android.support.v4.app.Fragment impleme
 
     }
 
+    @SuppressLint("ValidFragment")
     public HistoryItemFragment(RoundThing round) {
         this.round = round;
     }

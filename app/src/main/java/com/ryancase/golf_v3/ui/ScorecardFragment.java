@@ -1,5 +1,6 @@
 package com.ryancase.golf_v3.ui;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import java.util.List;
 /**
  * Created by ryancase on 10/12/16.
  */
+
+@SuppressLint("ValidFragment")
 public class ScorecardFragment extends android.support.v4.app.DialogFragment {
 
     private int score, putts, scoreToPar;
@@ -28,6 +31,10 @@ public class ScorecardFragment extends android.support.v4.app.DialogFragment {
     private ScorecardViewModel viewModel;
 
     private ScorecardDialogBinding binding;
+
+    public ScorecardFragment() {
+
+    }
 
     public ScorecardFragment(int score, int putts, Nine front, Nine back) {
         this.score = score;
